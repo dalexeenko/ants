@@ -1,0 +1,20 @@
+# Navigate into a session, then go back to home
+appId: host.exp.Exponent
+---
+- launchApp
+- assertVisible:
+    id: "openmgr-home-screen"
+# Navigate to a different screen first
+- tapOn:
+    id: "openmgr-drawer-toggle"
+- tapOn:
+    id: "openmgr-drawer-settings"
+- assertVisible:
+    id: "openmgr-settings-screen"
+# Navigate back to home via drawer
+- tapOn:
+    id: "openmgr-drawer-toggle"
+- tapOn:
+    id: "openmgr-drawer-home"
+- assertVisible:
+    id: "openmgr-home-screen"

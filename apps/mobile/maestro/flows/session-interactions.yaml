@@ -1,0 +1,23 @@
+# Verify chat interactions in a session
+appId: host.exp.Exponent
+---
+- launchApp
+- tapOn:
+    id: "openmgr-project-new-session"
+- assertVisible:
+    id: "openmgr-session-screen"
+- assertVisible:
+    id: "openmgr-chat-input"
+- assertVisible:
+    id: "openmgr-chat-send"
+- tapOn:
+    id: "openmgr-chat-input-field"
+- inputText: "Test interaction message"
+- assertVisible:
+    text: "Test interaction message"
+# Verify cancel/clear behavior
+- tapOn:
+    id: "openmgr-chat-input-field"
+- clearText
+- assertNotVisible:
+    text: "Test interaction message"

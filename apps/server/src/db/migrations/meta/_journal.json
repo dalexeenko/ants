@@ -1,0 +1,55 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1770948331956,
+      "tag": "0000_peaceful_wild_child",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1770959896301,
+      "tag": "0001_curly_phil_sheldon",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1771104028171,
+      "tag": "0002_brave_lilandra",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1771274507807,
+      "tag": "0003_fast_prowler",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1771361438033,
+      "tag": "0004_legal_sage",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1771368281140,
+      "tag": "0005_strong_talon",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "6",
+      "when": 1771454400000,
+      "tag": "0006_add_worktree_enabled",
+      "breakpoints": true
+    }
+  ]
+}

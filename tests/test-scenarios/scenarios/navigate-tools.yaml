@@ -1,0 +1,14 @@
+name: Navigate to Tools
+description: Navigate to the tools screen via the drawer (mobile only)
+preconditions: []
+steps:
+  # Mobile only: open drawer and tap Tools
+  - tap:
+      mobile: true
+      testId: openmgr-drawer-toggle
+  - tap:
+      mobile: true
+      testId: openmgr-drawer-tools
+  - assertVisible:
+      mobile: true
+      testId: openmgr-screen-tools

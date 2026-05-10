@@ -1,0 +1,36 @@
+module.exports = {
+  root: true,
+  parser: '@typescript-eslint/parser',
+  plugins: ['@typescript-eslint', 'react-hooks'],
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:react-hooks/recommended',
+  ],
+  env: {
+    browser: true,
+    es2022: true,
+  },
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+    ecmaFeatures: { jsx: true },
+  },
+  noInlineConfig: false,
+  reportUnusedDisableDirectives: false,
+  rules: {
+    '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/ban-ts-comment': 'warn',
+    '@typescript-eslint/ban-types': 'warn',
+    '@typescript-eslint/no-var-requires': 'warn',
+    '@typescript-eslint/triple-slash-reference': 'warn',
+    'no-empty': 'warn',
+    'no-control-regex': 'warn',
+    'no-useless-escape': 'warn',
+    'no-constant-condition': 'warn',
+    'no-case-declarations': 'warn',
+    'react-hooks/rules-of-hooks': 'warn',
+  },
+};

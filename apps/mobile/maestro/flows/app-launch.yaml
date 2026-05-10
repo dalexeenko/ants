@@ -1,0 +1,13 @@
+# Verify the app launches and shows the home screen.
+appId: host.exp.Exponent
+---
+- launchApp
+- assertVisible:
+    id: "openmgr-app"
+- assertVisible:
+    id: "openmgr-screen-home"
+- assertVisible:
+    id: "openmgr-home-screen"
+# The drawer toggle (hamburger menu) should be visible in the header
+- assertVisible:
+    id: "openmgr-drawer-toggle"

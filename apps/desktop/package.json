@@ -1,0 +1,136 @@
+{
+  "name": "@openmgr/app-electron",
+  "version": "0.1.0",
+  "private": true,
+  "main": "dist/main/index.js",
+  "scripts": {
+    "dev": "electron-rebuild -f -w better-sqlite3,keytar,node-pty && electron-vite dev",
+    "build": "electron-vite build",
+    "preview": "electron-vite preview",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src --ext .ts,.tsx",
+    "clean": "rm -rf dist out",
+    "package": "electron-rebuild -f -w better-sqlite3,keytar,node-pty && electron-builder",
+    "package:mac": "electron-rebuild -f -w better-sqlite3,keytar,node-pty && electron-builder --mac",
+    "package:win": "electron-rebuild -f -w better-sqlite3,keytar,node-pty && electron-builder --win",
+    "package:linux": "electron-rebuild -f -w better-sqlite3,keytar,node-pty && electron-builder --linux",
+    "test:e2e": "playwright test",
+    "test:e2e:debug": "playwright test --debug",
+    "test:e2e:ui": "playwright test --ui",
+    "launch:mcp": "npx tsx e2e/launch-for-mcp.ts",
+    "launch:mcp:dev": "OPENMGR_CDP_PORT=9222 electron-vite dev"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.6.2",
+    "drizzle-orm": "^0.45.1",
+    "electron-updater": "^6.8.3",
+    "keytar": "^7.9.0",
+    "node-pty": "^1.0.0",
+    "uuid": "^9.0.0",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@electron/notarize": "^3.1.1",
+    "@electron/rebuild": "^4.0.3",
+    "@openmgr/agent": "workspace:*",
+    "@openmgr/agent-auth-anthropic": "workspace:*",
+    "@openmgr/agent-browser-core": "workspace:*",
+    "@openmgr/agent-browser-sandbox": "workspace:*",
+    "@openmgr/agent-core": "workspace:*",
+    "@openmgr/agent-database": "workspace:*",
+    "@openmgr/agent-database-core": "workspace:*",
+    "@openmgr/agent-docker": "workspace:*",
+    "@openmgr/agent-mcp-stdio": "workspace:*",
+    "@openmgr/agent-memory": "workspace:*",
+    "@openmgr/agent-node": "workspace:*",
+    "@openmgr/agent-providers": "workspace:*",
+    "@openmgr/agent-skills-loader": "workspace:*",
+    "@openmgr/agent-storage": "workspace:*",
+    "@openmgr/agent-tools": "workspace:*",
+    "@openmgr/agent-tools-director": "workspace:*",
+    "@openmgr/agent-tools-terminal": "workspace:*",
+    "@openmgr/agent-worktree": "workspace:*",
+    "@openmgr/ui": "workspace:*",
+    "@playwright/test": "^1.58.1",
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "@types/uuid": "^9.0.7",
+    "@types/ws": "^8.5.10",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "electron": "^33.4.11",
+    "electron-builder": "^26.8.0",
+    "electron-vite": "^3.1.0",
+    "eslint": "^8.57.0",
+    "playwright": "^1.58.1",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-native-web": "^0.19.10",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.11"
+  },
+  "build": {
+    "appId": "com.openmgr.app",
+    "productName": "OpenMgr",
+    "directories": {
+      "output": "out"
+    },
+    "files": [
+      "dist/**/*",
+      "package.json"
+    ],
+    "asarUnpack": [
+      "node_modules/better-sqlite3/**",
+      "node_modules/keytar/**",
+      "node_modules/node-pty/**"
+    ],
+    "protocols": [
+      {
+        "name": "OpenMgr",
+        "schemes": [
+          "openmgr"
+        ]
+      }
+    ],
+    "publish": {
+      "provider": "github",
+      "owner": "openmgr",
+      "repo": "openmgr"
+    },
+    "mac": {
+      "category": "public.app-category.developer-tools",
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "resources/entitlements.mac.plist",
+      "entitlementsInherit": "resources/entitlements.mac.plist",
+      "notarize": true
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "zip"
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "category": "Development",
+      "mimeTypes": [
+        "x-scheme-handler/openmgr"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}

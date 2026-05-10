@@ -1,0 +1,46 @@
+{
+  "name": "@openmgr/agent-lsp",
+  "version": "0.1.0",
+  "description": "Language Server Protocol integration for @openmgr/agent",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@openmgr/agent-core": "workspace:*",
+    "eventemitter3": "^5.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.7",
+    "typescript": "^5.8.3",
+    "vitest": "^4.0.0"
+  },
+  "keywords": [
+    "openmgr",
+    "agent",
+    "lsp",
+    "language-server-protocol"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/openmgr/agent.git",
+    "directory": "packages/lsp"
+  }
+}

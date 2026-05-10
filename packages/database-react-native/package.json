@@ -1,0 +1,46 @@
+{
+  "name": "@openmgr/agent-database-react-native",
+  "version": "0.1.0",
+  "description": "React Native SQLite database implementation for OpenMgr Agent using expo-sqlite",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@openmgr/agent-database-core": "workspace:*"
+  },
+  "peerDependencies": {
+    "drizzle-orm": "^0.45.1",
+    "expo-sqlite": ">=14.0.0"
+  },
+  "peerDependenciesMeta": {
+    "expo-sqlite": {
+      "optional": false
+    }
+  },
+  "devDependencies": {
+    "drizzle-orm": "^0.45.1",
+    "expo-sqlite": "^15.0.3",
+    "typescript": "^5.6.0",
+    "vitest": "^4.0.18"
+  },
+  "keywords": ["openmgr", "agent", "database", "react-native", "expo", "sqlite"],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/openmgr/agent.git",
+    "directory": "packages/database-react-native"
+  }
+}

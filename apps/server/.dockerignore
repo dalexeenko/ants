@@ -1,0 +1,15 @@
+node_modules
+src
+*.ts
+!dist/**/*.js
+.git
+.gitignore
+*.md
+.eslintrc.*
+tsconfig.json
+vitest.config.ts
+coverage
+.env*
+
+# Include tarballs for docker build
+!.tarballs/

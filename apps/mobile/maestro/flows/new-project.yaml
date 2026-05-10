@@ -1,0 +1,8 @@
+# Navigate to new project creation and verify form elements
+appId: host.exp.Exponent
+---
+- launchApp
+- assertVisible:
+    id: "openmgr-home-screen"
+- tapOn:
+    id: "openmgr-welcome-new-project"

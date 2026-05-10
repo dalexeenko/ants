@@ -1,0 +1,91 @@
+# =============================================================================
+# OpenMgr Server — Example Terraform Variables
+# =============================================================================
+# Copy this file to terraform.tfvars and edit to match your environment.
+#
+#   cp terraform.tfvars.example terraform.tfvars
+#
+# terraform.tfvars is gitignored — it will NOT be committed.
+# =============================================================================
+
+# -- General ------------------------------------------------------------------
+
+project_name = "openmgr"
+environment  = "production"
+aws_region   = "us-east-1"
+
+# -- Container ----------------------------------------------------------------
+
+image         = "openmgr/server:latest"  # Ignored when enable_ecr = true
+cpu           = 256   # 0.25 vCPU  (ARM64 Graviton)
+memory        = 512   # 512 MiB
+desired_count = 1
+
+# -- Private ECR registry (optional) -----------------------------------------
+# Uncomment to create a private ECR repository and deploy from it.
+# After `terraform apply`, use the outputted push commands to upload your image.
+
+# enable_ecr           = true
+# ecr_repository_name  = "openmgr/server"
+# image_tag            = "latest"
+# ecr_scan_on_push     = true
+# ecr_lifecycle_max_images = 30
+
+# -- Networking ---------------------------------------------------------------
+# By default, Fargate tasks run in public subnets (no NAT Gateway) to save
+# ~$32/mo. Enable the NAT Gateway for private-subnet deployment.
+
+# enable_nat_gateway = true
+
+# -- Storage ------------------------------------------------------------------
+
+enable_efs = true
+
+# -- Encryption key (required) ------------------------------------------------
+# Generate with: openssl rand -base64 32
+# This is REQUIRED — the server will not start without it.
+
+openmgr_encryption_key = ""  # FILL THIS IN: openssl rand -base64 32
+
+# -- Authentication mode (pick exactly one) ------------------------------------
+#
+# You must choose ONE of the two modes below. You cannot set both, and you
+# must set at least one.
+#
+# Option 1: Bearer token (single-user)
+#   Set a shared API token. All clients authenticate with this token.
+#
+# Option 2: Multi-user mode
+#   Individual user accounts with RBAC (admin, operator, viewer).
+#   Requires a one-time setup token to create the initial admin account.
+
+# --- Option 1: Bearer token --------------------------------------------------
+# openmgr_secret = ""  # openssl rand -base64 32
+
+# --- Option 2: Multi-user mode -----------------------------------------------
+# openmgr_multi_user  = true
+# openmgr_setup_token = ""  # openssl rand -base64 32
+
+# -- Domain & HTTPS (recommended) ---------------------------------------------
+# Without a domain, the server is HTTP-only and all traffic is unencrypted.
+# This is NOT suitable for production. Set domain_name and hosted_zone_name
+# to enable HTTPS with automatic ACM certificate creation.
+# The hosted zone must already exist in your AWS account.
+
+# domain_name      = "openmgr.example.com"
+# hosted_zone_name = "example.com"
+
+# Or, if you already have an ACM certificate:
+# certificate_arn = "arn:aws:acm:us-east-1:123456789012:certificate/abc-123"
+
+# -- Web App UI (optional) ----------------------------------------------------
+# Enable the full web app UI at /app. This is a richer interface than the
+# default server UI at /ui. Disabled by default.
+
+# openmgr_web_app = true
+
+# -- Extra environment variables (optional) -----------------------------------
+
+# openmgr_env = {
+#   LOG_LEVEL = "debug"
+# }

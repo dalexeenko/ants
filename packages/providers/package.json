@@ -1,0 +1,77 @@
+{
+  "name": "@openmgr/agent-providers",
+  "version": "0.1.0",
+  "description": "LLM providers for @openmgr/agent (Anthropic, OpenAI, Google, OpenRouter, Groq, xAI)",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./anthropic": {
+      "types": "./dist/anthropic.d.ts",
+      "import": "./dist/anthropic.js",
+      "require": "./dist/anthropic.js",
+      "default": "./dist/anthropic.js"
+    },
+    "./openai": {
+      "types": "./dist/openai.d.ts",
+      "import": "./dist/openai.js",
+      "require": "./dist/openai.js",
+      "default": "./dist/openai.js"
+    },
+    "./google": {
+      "types": "./dist/google.d.ts",
+      "import": "./dist/google.js",
+      "require": "./dist/google.js",
+      "default": "./dist/google.js"
+    },
+    "./openrouter": {
+      "types": "./dist/openrouter.d.ts",
+      "import": "./dist/openrouter.js",
+      "require": "./dist/openrouter.js",
+      "default": "./dist/openrouter.js"
+    },
+    "./groq": {
+      "types": "./dist/groq.d.ts",
+      "import": "./dist/groq.js",
+      "require": "./dist/groq.js",
+      "default": "./dist/groq.js"
+    },
+    "./xai": {
+      "types": "./dist/xai.d.ts",
+      "import": "./dist/xai.js",
+      "require": "./dist/xai.js",
+      "default": "./dist/xai.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@openmgr/agent-auth-core": "workspace:*",
+    "@openmgr/agent-core": "workspace:*",
+    "zod": "^3.23.0",
+    "zod-to-json-schema": "^3.24.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.7",
+    "typescript": "^5.6.0",
+    "vitest": "^4.0.18"
+  },
+  "peerDependencies": {
+    "@openmgr/agent-core": "workspace:*"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

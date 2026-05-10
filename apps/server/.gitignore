@@ -1,0 +1,42 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Environment
+.env
+.env.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Test coverage
+coverage/
+
+# Runtime data
+pids/
+*.pid
+*.seed
+
+.worktrees
+
+# Local dev data directories
+.data
+.data-*
+
+# Docker build artifacts
+.tarballs/
+package.docker.json
+package-lock.docker.json

@@ -1,0 +1,59 @@
+{
+  "name": "@openmgr/agent-storage",
+  "version": "0.1.0",
+  "description": "Session and message management layer for @openmgr/agent",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./portable": {
+      "types": "./dist/sessions-portable.d.ts",
+      "import": "./dist/sessions-portable.js",
+      "require": "./dist/sessions-portable.js",
+      "default": "./dist/sessions-portable.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@openmgr/agent-core": "workspace:*",
+    "@openmgr/agent-database": "workspace:*",
+    "@openmgr/agent-database-core": "workspace:*",
+    "@openmgr/agent-providers": "workspace:*"
+  },
+  "peerDependencies": {
+    "drizzle-orm": "^0.45.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3",
+    "vitest": "^4.0.0"
+  },
+  "keywords": [
+    "openmgr",
+    "agent",
+    "storage",
+    "sqlite",
+    "drizzle"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/openmgr/agent.git",
+    "directory": "packages/storage"
+  }
+}

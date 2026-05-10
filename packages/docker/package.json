@@ -1,0 +1,43 @@
+{
+  "name": "@openmgr/agent-docker",
+  "version": "0.1.0",
+  "description": "Docker container management for OpenMgr agents",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.8.3",
+    "vitest": "^4.0.0"
+  },
+  "keywords": [
+    "openmgr",
+    "agent",
+    "docker",
+    "container"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/openmgr/openmgr.git",
+    "directory": "packages/docker"
+  }
+}

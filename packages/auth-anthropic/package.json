@@ -1,0 +1,46 @@
+{
+  "name": "@openmgr/agent-auth-anthropic",
+  "version": "0.1.0",
+  "description": "Anthropic OAuth flow utilities for @openmgr/agent",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@openmgr/agent-auth-core": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3",
+    "vitest": "^4.0.0"
+  },
+  "keywords": [
+    "openmgr",
+    "agent",
+    "anthropic",
+    "oauth",
+    "authentication"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/openmgr/agent.git",
+    "directory": "packages/auth-anthropic"
+  }
+}

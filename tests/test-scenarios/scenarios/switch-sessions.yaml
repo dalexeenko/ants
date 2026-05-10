@@ -1,0 +1,27 @@
+name: Switch between sessions
+description: Create two sessions and switch between them
+preconditions:
+  - projectExists: true
+steps:
+  # Create first session
+  - tap:
+      testId: openmgr-project-new-session
+  - assertVisible:
+      testId: openmgr-chat-input
+
+  # Type a message in the first session to identify it
+  - tap:
+      testId: openmgr-chat-input-field
+  - type:
+      testId: openmgr-chat-input-field
+      text: "First session message"
+  - tap:
+      testId: openmgr-chat-send
+  - waitForVisible:
+      text: "First session message"
+
+  # Create second session
+  - tap:
+      testId: openmgr-project-new-session
+  - assertVisible:
+      testId: openmgr-chat-input

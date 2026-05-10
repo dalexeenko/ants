@@ -1,0 +1,26 @@
+# Navigate away from Home, then back to Home via the drawer.
+appId: host.exp.Exponent
+---
+- launchApp
+- assertVisible:
+    id: "openmgr-home-screen"
+
+# Navigate to Settings first
+- tapOn:
+    id: "openmgr-drawer-toggle"
+- tapOn:
+    id: "openmgr-drawer-settings"
+- assertVisible:
+    id: "openmgr-settings-screen"
+
+# Now navigate back to Home via drawer
+- tapOn:
+    id: "openmgr-drawer-toggle"
+- tapOn:
+    id: "openmgr-drawer-home"
+
+# Verify we're back on home
+- assertVisible:
+    id: "openmgr-screen-home"
+- assertVisible:
+    id: "openmgr-home-screen"

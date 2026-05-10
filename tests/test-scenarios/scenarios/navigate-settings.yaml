@@ -1,0 +1,22 @@
+name: Navigate to Settings
+description: Navigate to the settings screen from the initial state
+preconditions: []
+steps:
+  # Desktop: click icon rail settings button
+  - tap:
+      testId: openmgr-icon-rail-settings
+      desktop: true
+  - assertVisible:
+      testId: openmgr-settings-panel
+      desktop: true
+
+  # Mobile: open drawer, tap settings
+  - tap:
+      testId: openmgr-drawer-toggle
+      mobile: true
+  - tap:
+      testId: openmgr-drawer-settings
+      mobile: true
+  - assertVisible:
+      testId: openmgr-settings-screen
+      mobile: true

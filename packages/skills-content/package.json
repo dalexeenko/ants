@@ -1,0 +1,33 @@
+{
+  "name": "@openmgr/agent-skills-content",
+  "version": "0.1.0",
+  "description": "Default skill content for OpenMgr Agent - platform agnostic",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^5.6.0",
+    "vitest": "^4.0.18"
+  },
+  "keywords": ["openmgr", "agent", "skills", "content"],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/openmgr/agent.git",
+    "directory": "packages/skills-content"
+  }
+}

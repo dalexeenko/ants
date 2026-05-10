@@ -1,0 +1,57 @@
+{
+  "name": "openmgr",
+  "private": true,
+  "description": "OpenMgr - AI Agent Management Platform",
+  "type": "module",
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "test": "turbo test",
+    "test:watch": "turbo test:watch",
+    "lint": "turbo lint",
+    "typecheck": "turbo typecheck",
+    "clean": "turbo clean && rm -rf node_modules",
+    "dev:server": "pnpm --filter @openmgr/server dev",
+    "dev:desktop": "pnpm --filter @openmgr/app-electron dev",
+    "dev:mobile": "pnpm --filter @openmgr/app-react-native start",
+    "dev:mobile:ios": "pnpm --filter @openmgr/app-react-native ios",
+    "dev:mobile:android": "pnpm --filter @openmgr/app-react-native android",
+    "docker:build": "docker build -f apps/server/Dockerfile --build-arg IMAGE_TAG=openmgr/server:local --build-arg OPENMGR_SERVER_VERSION=$(git rev-parse --short HEAD) -t openmgr/server:local .",
+    "docker:build:lite": "docker build -f apps/server/Dockerfile --build-arg VARIANT=lite --build-arg IMAGE_TAG=openmgr/server:local-lite --build-arg OPENMGR_SERVER_VERSION=$(git rev-parse --short HEAD) -t openmgr/server:local-lite .",
+    "docker:run": "docker run --rm -p 6647:6647 -v openmgr-data:/data -v openmgr-workspaces:/workspaces openmgr/server:local",
+    "docker:run:lite": "docker run --rm -p 6647:6647 -v openmgr-data:/data -v openmgr-workspaces:/workspaces openmgr/server:local-lite",
+    "compose:up": "OPENMGR_SERVER_VERSION=$(git rev-parse --short HEAD) docker compose -f apps/server/docker-compose.yml up --build",
+    "compose:up:detached": "OPENMGR_SERVER_VERSION=$(git rev-parse --short HEAD) docker compose -f apps/server/docker-compose.yml up --build -d",
+    "compose:up:lite": "OPENMGR_SERVER_VERSION=$(git rev-parse --short HEAD) docker compose -f apps/server/docker-compose.yml -f apps/server/docker-compose.lite.yml up --build",
+    "compose:up:lite:detached": "OPENMGR_SERVER_VERSION=$(git rev-parse --short HEAD) docker compose -f apps/server/docker-compose.yml -f apps/server/docker-compose.lite.yml up --build -d",
+    "compose:down": "docker compose -f apps/server/docker-compose.yml down",
+    "compose:logs": "docker compose -f apps/server/docker-compose.yml logs -f",
+    "release": "bash scripts/release.sh",
+    "release:electron": "bash scripts/build-electron.sh",
+    "release:docker": "bash scripts/build-docker.sh",
+    "release:upload": "bash scripts/upload-release-assets.sh"
+  },
+  "devDependencies": {
+    "turbo": "^2.5.0",
+    "typescript": "^5.6.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "react": "19.1.0",
+      "react-dom": "19.1.0",
+      "react-native": "0.81.5",
+      "@types/react": "~19.1.10"
+    },
+    "onlyBuiltDependencies": [
+      "better-sqlite3",
+      "electron",
+      "node-pty",
+      "onnxruntime-node",
+      "sharp"
+    ]
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "packageManager": "pnpm@9.0.0"
+}

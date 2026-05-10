@@ -1,0 +1,45 @@
+{
+  "name": "@openmgr/agent-node",
+  "version": "0.1.0",
+  "description": "OpenMgr Agent for Node.js environments with full filesystem access",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "clean": "rm -rf dist coverage"
+  },
+  "dependencies": {
+    "@openmgr/agent-core": "workspace:*",
+    "@openmgr/agent-config-xdg": "workspace:*",
+    "@openmgr/agent-providers": "workspace:*",
+    "@openmgr/agent-skills-loader": "workspace:*",
+    "@openmgr/agent-mcp-stdio": "workspace:*",
+    "@openmgr/agent-tools": "workspace:*",
+    "@openmgr/agent-tools-terminal": "workspace:*",
+    "@openmgr/agent-browser-core": "workspace:*",
+    "@openmgr/agent-browser-sandbox": "workspace:*",
+    "@openmgr/agent-auth-anthropic": "workspace:*",
+    "@openmgr/agent-worktree": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.7",
+    "typescript": "^5.6.0",
+    "vitest": "^4.0.18"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

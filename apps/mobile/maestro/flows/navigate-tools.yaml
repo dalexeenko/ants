@@ -1,0 +1,14 @@
+# Open drawer, tap Tools, assert tools screen
+appId: host.exp.Exponent
+---
+- launchApp
+- tapOn:
+    id: "openmgr-drawer-toggle"
+- assertVisible:
+    id: "openmgr-drawer"
+- tapOn:
+    id: "openmgr-drawer-tools"
+- assertVisible:
+    id: "openmgr-screen-tools"
+- assertVisible:
+    id: "openmgr-tools-screen"

@@ -1,0 +1,59 @@
+{
+  "name": "@openmgr/agent-auth-react-native",
+  "version": "0.1.0",
+  "description": "React Native OAuth authentication for OpenMgr Agent using Expo",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@openmgr/agent-auth-core": "workspace:*"
+  },
+  "peerDependencies": {
+    "expo-auth-session": ">=5.0.0",
+    "expo-crypto": ">=12.0.0",
+    "expo-secure-store": ">=12.0.0",
+    "expo-web-browser": ">=12.0.0"
+  },
+  "peerDependenciesMeta": {
+    "expo-auth-session": {
+      "optional": false
+    },
+    "expo-crypto": {
+      "optional": false
+    },
+    "expo-secure-store": {
+      "optional": false
+    },
+    "expo-web-browser": {
+      "optional": false
+    }
+  },
+  "devDependencies": {
+    "expo-auth-session": "^6.0.3",
+    "expo-crypto": "^14.1.0",
+    "expo-secure-store": "^14.0.1",
+    "expo-web-browser": "^14.0.2",
+    "typescript": "^5.6.0",
+    "vitest": "^4.0.18"
+  },
+  "keywords": ["openmgr", "agent", "auth", "oauth", "react-native", "expo"],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/openmgr/agent.git",
+    "directory": "packages/auth-react-native"
+  }
+}
