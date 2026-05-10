@@ -66,8 +66,8 @@ describe('WelcomeScreen', () => {
 
   it('renders welcome text', () => {
     render(<WelcomeScreen />);
-    expect(screen.getByText('Welcome to Ants')).toBeInTheDocument();
-    expect(screen.getByText('Your AI-powered project assistant')).toBeInTheDocument();
+    expect(screen.getByText('What should we work on?')).toBeInTheDocument();
+    expect(screen.getByText(/Agents write code/)).toBeInTheDocument();
   });
 
   it('renders the New Project button', () => {
