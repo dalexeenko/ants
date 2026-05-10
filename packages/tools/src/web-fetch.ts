@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { defineTool } from "@openmgr/agent-core";
+import { defineTool } from "@ants/agent-core";
 
 const MAX_CONTENT_LENGTH = 100_000;
 const DEFAULT_TIMEOUT_MS = 30000;
@@ -44,7 +44,7 @@ export const webFetchTool = defineTool({
       const response = await fetch(url, {
         signal: AbortSignal.any(signals),
         headers: {
-          "User-Agent": "OpenMgr-Agent/1.0 (compatible; fetch tool)",
+          "User-Agent": "Ants-Agent/1.0 (compatible; fetch tool)",
           Accept: "text/html,application/xhtml+xml,text/plain,*/*",
         },
       });

@@ -2,7 +2,7 @@ import { Hono } from 'hono';
 import type { TaskScheduler } from '../services/task-scheduler.js';
 import type { ServerTaskMetadata } from '../services/project-task-storage.js';
 import type { ScheduledTask as LegacyScheduledTask } from '../models/task.js';
-import type { ScheduledTask, TaskRun } from '@openmgr/agent-scheduler';
+import type { ScheduledTask, TaskRun } from '@ants/agent-scheduler';
 import type { AuthUser } from '../auth/provider.js';
 import { getErrorMessage } from '../utils/errors.js';
 import { parseBody } from '../utils/validation.js';

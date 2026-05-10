@@ -1,6 +1,6 @@
 {
-  "name": "OpenMgr",
-  "short_name": "OpenMgr",
+  "name": "Ants",
+  "short_name": "Ants",
   "description": "AI agent management server",
   "start_url": "/",
   "display": "standalone",

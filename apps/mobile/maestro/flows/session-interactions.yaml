@@ -3,21 +3,21 @@ appId: host.exp.Exponent
 ---
 - launchApp
 - tapOn:
-    id: "openmgr-project-new-session"
+    id: "ants-project-new-session"
 - assertVisible:
-    id: "openmgr-session-screen"
+    id: "ants-session-screen"
 - assertVisible:
-    id: "openmgr-chat-input"
+    id: "ants-chat-input"
 - assertVisible:
-    id: "openmgr-chat-send"
+    id: "ants-chat-send"
 - tapOn:
-    id: "openmgr-chat-input-field"
+    id: "ants-chat-input-field"
 - inputText: "Test interaction message"
 - assertVisible:
     text: "Test interaction message"
 # Verify cancel/clear behavior
 - tapOn:
-    id: "openmgr-chat-input-field"
+    id: "ants-chat-input-field"
 - clearText
 - assertNotVisible:
     text: "Test interaction message"

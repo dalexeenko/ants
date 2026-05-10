@@ -1,6 +1,6 @@
 import type { Command } from "commander";
 import chalk from "chalk";
-import { FilesystemSkillManager, getBundledSkillsDir } from "@openmgr/agent-skills-loader";
+import { FilesystemSkillManager, getBundledSkillsDir } from "@ants/agent-skills-loader";
 
 export function registerSkillCommands(program: Command): void {
   const skillCmd = program
@@ -59,8 +59,8 @@ export function registerSkillCommands(program: Command): void {
       }
 
       const sourceLabels = {
-        local: "Project Skills (.openmgr/skills/)",
-        global: "Global Skills (~/.config/openmgr/skills/)",
+        local: "Project Skills (.ants/skills/)",
+        global: "Global Skills (~/.config/ants/skills/)",
         bundled: "Bundled Skills",
       };
 

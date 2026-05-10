@@ -2,7 +2,7 @@
  * Push Notification Service
  * Implements Web Push (RFC 8030) with VAPID for self-hosted push notifications.
  * 
- * Notifications open the app via deeplinks (openmgr://) so users can
+ * Notifications open the app via deeplinks (ants://) so users can
  * directly interact with the relevant project/session.
  * 
  * VAPID keys are auto-generated on first run and stored in the data directory.
@@ -32,7 +32,7 @@ interface PushPayload {
   badge?: string;
   tag?: string;
   data?: {
-    deeplink?: string; // openmgr://projects/:id/sessions/:sid
+    deeplink?: string; // ants://projects/:id/sessions/:sid
     type?: string;
     projectId?: string;
     sessionId?: string;
@@ -56,7 +56,7 @@ export class PushNotificationService {
     this.dataDir = dataDir;
     // VAPID requires a valid mailto: or https: URL as the "sub" claim.
     // Apple's push service rejects localhost domains with BadJwtToken.
-    this.contactEmail = contactEmail || 'mailto:webpush@openmgr.dev';
+    this.contactEmail = contactEmail || 'mailto:webpush@ants.dev';
     this.vapidKeys = this.loadOrGenerateVAPIDKeys();
   }
 
@@ -284,7 +284,7 @@ export class PushNotificationService {
       body: `${taskName} has ${success ? 'completed successfully' : 'failed'}`,
       tag: `task-${taskName}`,
       data: {
-        deeplink: `openmgr://project/${projectId}/session/${sessionId}`,
+        deeplink: `ants://project/${projectId}/session/${sessionId}`,
         type: eventType,
         projectId,
         sessionId,
@@ -299,8 +299,8 @@ export class PushNotificationService {
     // Deep link into the session where the approval is needed (if known),
     // otherwise fall back to the project view
     const deeplink = sessionId
-      ? `openmgr://project/${projectId}/session/${sessionId}`
-      : `openmgr://project/${projectId}`;
+      ? `ants://project/${projectId}/session/${sessionId}`
+      : `ants://project/${projectId}`;
 
     await this.notify('approval_needed', {
       title: 'Approval Required',
@@ -325,7 +325,7 @@ export class PushNotificationService {
       body: summary ? summary.substring(0, 200) : 'Session finished',
       tag: `session-${sessionId}`,
       data: {
-        deeplink: `openmgr://project/${projectId}/session/${sessionId}`,
+        deeplink: `ants://project/${projectId}/session/${sessionId}`,
         type: 'session_completed',
         projectId,
         sessionId,
@@ -343,8 +343,8 @@ export class PushNotificationService {
       tag: `error-${projectId}`,
       data: {
         deeplink: sessionId 
-          ? `openmgr://project/${projectId}/session/${sessionId}`
-          : `openmgr://project/${projectId}`,
+          ? `ants://project/${projectId}/session/${sessionId}`
+          : `ants://project/${projectId}`,
         type: 'agent_error',
         projectId,
         sessionId,

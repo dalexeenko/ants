@@ -6,8 +6,8 @@
  */
 
 import { Paths, Directory } from 'expo-file-system';
-import type { FilesystemProvider, DirectoryEntry } from '@openmgr/ui';
-import { createLogger } from '@openmgr/ui';
+import type { FilesystemProvider, DirectoryEntry } from '@ants/ui';
+import { createLogger } from '@ants/ui';
 
 const log = createLogger('LocalFilesystemProvider');
 
@@ -22,11 +22,11 @@ function getDocumentDirectory(): string {
 
 /**
  * Get the default projects directory.
- * Creates an "OpenMgr Projects" folder in the document directory.
+ * Creates an "Ants Projects" folder in the document directory.
  */
 export function getDefaultProjectsDirectory(): string {
   const docDir = getDocumentDirectory();
-  return `${docDir}/OpenMgr Projects`;
+  return `${docDir}/Ants Projects`;
 }
 
 /**

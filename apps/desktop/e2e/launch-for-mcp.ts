@@ -1,6 +1,6 @@
 #!/usr/bin/env npx tsx
 /**
- * Launch the OpenMgr Electron app with CDP remote debugging enabled.
+ * Launch the Ants Electron app with CDP remote debugging enabled.
  *
  * This script starts the built app and keeps it running so that an AI agent
  * can connect via the @playwright/mcp server (or any other CDP client).
@@ -46,12 +46,12 @@ function parsePort(): number {
 async function main() {
   const port = parsePort();
 
-  console.log(`Launching OpenMgr with CDP remote debugging on port ${port}...`);
+  console.log(`Launching Ants with CDP remote debugging on port ${port}...`);
   console.log('The app must be built first (pnpm build).\n');
 
   const { app } = await launchApp({ cdpPort: port });
 
-  console.log(`OpenMgr is running.`);
+  console.log(`Ants is running.`);
   console.log(`CDP endpoint: http://localhost:${port}`);
   console.log(`\nConnect an AI agent with:`);
   console.log(`  npx @playwright/mcp@latest --cdp-endpoint http://localhost:${port}\n`);

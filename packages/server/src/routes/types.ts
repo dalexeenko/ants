@@ -1,5 +1,5 @@
-import type { Message, AgentEvent, PermissionResponse, ToolResult } from "@openmgr/agent-core";
-import type { SessionManager, ToolCallData, ToolResultData, MessageRow } from "@openmgr/agent-storage";
+import type { Message, AgentEvent, PermissionResponse, ToolResult } from "@ants/agent-core";
+import type { SessionManager, ToolCallData, ToolResultData, MessageRow } from "@ants/agent-storage";
 import type { ServerAgent, ServerState } from "../index.js";
 
 /**

@@ -47,14 +47,14 @@ describe('ChatInput', () => {
 
   it('should show cancel button when isProcessing is true', () => {
     render(<ChatInput {...defaultProps} isProcessing />);
-    expect(screen.getByTestId('openmgr-chat-cancel')).toBeInTheDocument();
+    expect(screen.getByTestId('ants-chat-cancel')).toBeInTheDocument();
   });
 
   it('should call onCancel when cancel button is clicked during processing', () => {
     const onCancel = vi.fn();
     render(<ChatInput {...defaultProps} isProcessing onCancel={onCancel} />);
     
-    fireEvent.click(screen.getByTestId('openmgr-chat-cancel'));
+    fireEvent.click(screen.getByTestId('ants-chat-cancel'));
     expect(onCancel).toHaveBeenCalled();
   });
 

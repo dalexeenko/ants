@@ -15,7 +15,7 @@ import {
   type RemoteServerConfig,
   createLogger,
   type AgentBridge,
-} from '@openmgr/ui';
+} from '@ants/ui';
 
 const log = createLogger('SettingsScreen');
 
@@ -136,10 +136,10 @@ export function SettingsScreen({ bridge, onOpenDrawer, onNavigateToServerSetting
   };
 
   return (
-    <View testID="openmgr-settings-screen" style={[styles.container, { backgroundColor: colors.bg.primary }]}>
+    <View testID="ants-settings-screen" style={[styles.container, { backgroundColor: colors.bg.primary }]}>
       {/* Header */}
       <View style={[styles.header, { borderBottomColor: colors.border.light }]}>
-        <IconButton testID="openmgr-drawer-toggle" icon="menu" size="md" onPress={onOpenDrawer} />
+        <IconButton testID="ants-drawer-toggle" icon="menu" size="md" onPress={onOpenDrawer} />
         <Text variant="heading" style={styles.headerTitle}>
           Settings
         </Text>
@@ -163,7 +163,7 @@ export function SettingsScreen({ bridge, onOpenDrawer, onNavigateToServerSetting
             </Button>
           </View>
           <Text color="secondary" style={styles.sectionDescription}>
-            Connect to OpenMgr servers to access your projects
+            Connect to Ants servers to access your projects
           </Text>
 
           {servers.length === 0 ? (

@@ -1,7 +1,7 @@
 {
-  "name": "@openmgr/agent-lsp",
+  "name": "@ants/agent-lsp",
   "version": "0.1.0",
-  "description": "Language Server Protocol integration for @openmgr/agent",
+  "description": "Language Server Protocol integration for @ants/agent",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -23,7 +23,7 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@openmgr/agent-core": "workspace:*",
+    "@ants/agent-core": "workspace:*",
     "eventemitter3": "^5.0.1"
   },
   "devDependencies": {
@@ -32,7 +32,7 @@
     "vitest": "^4.0.0"
   },
   "keywords": [
-    "openmgr",
+    "ants",
     "agent",
     "lsp",
     "language-server-protocol"
@@ -40,7 +40,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/openmgr/agent.git",
+    "url": "git+https://github.com/ants/agent.git",
     "directory": "packages/lsp"
   }
 }

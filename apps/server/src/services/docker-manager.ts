@@ -1,8 +1,8 @@
 /**
- * Re-exports from @openmgr/agent-docker.
+ * Re-exports from @ants/agent-docker.
  *
  * The DockerManager implementation has been extracted into the shared
- * @openmgr/agent-docker package so it can be used by both the server
+ * @ants/agent-docker package so it can be used by both the server
  * and the desktop app. This file re-exports everything for backwards
  * compatibility with existing server imports.
  */
@@ -12,7 +12,7 @@ export {
   DEFAULT_AGENT_IMAGE,
   CONTAINER_WORKSPACE_PATH,
   CONTAINER_AGENT_PORT,
-} from '@openmgr/agent-docker';
+} from '@ants/agent-docker';
 
 export type {
   DockerConfig,
@@ -22,4 +22,4 @@ export type {
   AgentImageInfo,
   PullProgress,
   DockerLogger,
-} from '@openmgr/agent-docker';
+} from '@ants/agent-docker';

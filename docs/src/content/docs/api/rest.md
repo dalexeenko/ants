@@ -1,6 +1,6 @@
 ---
 title: REST API
-description: Complete REST API reference for the OpenMgr server.
+description: Complete REST API reference for the Ants server.
 sidebar:
   order: 1
 ---

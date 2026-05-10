@@ -21,7 +21,7 @@ import type {
   AuthStatus,
   SearchOptions,
   SearchResult,
-} from '@openmgr/ui';
+} from '@ants/ui';
 
 const bridge: AgentBridge = {
   // ============ Project Management ============

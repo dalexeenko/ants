@@ -5,23 +5,23 @@ preconditions:
 steps:
   # Create first session
   - tap:
-      testId: openmgr-project-new-session
+      testId: ants-project-new-session
   - assertVisible:
-      testId: openmgr-chat-input
+      testId: ants-chat-input
 
   # Type a message in the first session to identify it
   - tap:
-      testId: openmgr-chat-input-field
+      testId: ants-chat-input-field
   - type:
-      testId: openmgr-chat-input-field
+      testId: ants-chat-input-field
       text: "First session message"
   - tap:
-      testId: openmgr-chat-send
+      testId: ants-chat-send
   - waitForVisible:
       text: "First session message"
 
   # Create second session
   - tap:
-      testId: openmgr-project-new-session
+      testId: ants-project-new-session
   - assertVisible:
-      testId: openmgr-chat-input
+      testId: ants-chat-input

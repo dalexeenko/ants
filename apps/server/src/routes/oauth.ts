@@ -22,7 +22,7 @@ import { isSecure, getServerUrl } from '../utils/request.js';
 
 const log = createLogger('oauth-routes');
 
-const SESSION_COOKIE = 'openmgr_session';
+const SESSION_COOKIE = 'ants_session';
 const SESSION_MAX_AGE = 7 * 24 * 60 * 60; // 7 days in seconds
 
 interface OAuthRouteDeps {

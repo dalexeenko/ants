@@ -3,44 +3,44 @@ appId: host.exp.Exponent
 ---
 - launchApp
 - assertVisible:
-    id: "openmgr-home-screen"
+    id: "ants-home-screen"
 
 # Navigate to Director
 - tapOn:
-    id: "openmgr-drawer-toggle"
+    id: "ants-drawer-toggle"
 - tapOn:
-    id: "openmgr-drawer-director"
+    id: "ants-drawer-director"
 - assertVisible:
-    id: "openmgr-screen-director"
+    id: "ants-screen-director"
 
 # Navigate to Agents
 - tapOn:
-    id: "openmgr-drawer-toggle"
+    id: "ants-drawer-toggle"
 - tapOn:
-    id: "openmgr-drawer-agents"
+    id: "ants-drawer-agents"
 - assertVisible:
-    id: "openmgr-screen-agents"
+    id: "ants-screen-agents"
 
 # Navigate to Tools
 - tapOn:
-    id: "openmgr-drawer-toggle"
+    id: "ants-drawer-toggle"
 - tapOn:
-    id: "openmgr-drawer-tools"
+    id: "ants-drawer-tools"
 - assertVisible:
-    id: "openmgr-screen-tools"
+    id: "ants-screen-tools"
 
 # Navigate to Settings
 - tapOn:
-    id: "openmgr-drawer-toggle"
+    id: "ants-drawer-toggle"
 - tapOn:
-    id: "openmgr-drawer-settings"
+    id: "ants-drawer-settings"
 - assertVisible:
-    id: "openmgr-screen-settings"
+    id: "ants-screen-settings"
 
 # Navigate back to Home
 - tapOn:
-    id: "openmgr-drawer-toggle"
+    id: "ants-drawer-toggle"
 - tapOn:
-    id: "openmgr-drawer-home"
+    id: "ants-drawer-home"
 - assertVisible:
-    id: "openmgr-home-screen"
+    id: "ants-home-screen"

@@ -1,19 +1,19 @@
 /**
  * LocalDockerService — manages Docker containers for local desktop projects.
  *
- * Uses the shared @openmgr/agent-docker DockerManager to:
+ * Uses the shared @ants/agent-docker DockerManager to:
  * - Check Docker availability
  * - Auto-pull the agent image (with progress reporting)
  * - Start/stop containers for local project agents
  *
  * Containers use HTTP/SSE to communicate with the desktop, same protocol
- * as remote agents. Each container runs `openmgr-agent serve` and
+ * as remote agents. Each container runs `ants-agent serve` and
  * mounts the project directory at /workspace.
  */
 
-import { DockerManager } from '@openmgr/agent-docker';
-import type { DockerStatus, DockerContainerInfo, DockerConfig, PullProgress } from '@openmgr/agent-docker';
-import { createLogger } from '@openmgr/ui';
+import { DockerManager } from '@ants/agent-docker';
+import type { DockerStatus, DockerContainerInfo, DockerConfig, PullProgress } from '@ants/agent-docker';
+import { createLogger } from '@ants/ui';
 
 const log = createLogger('LocalDocker');
 

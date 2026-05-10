@@ -1,5 +1,5 @@
 {
-  "name": "@openmgr/server-ui",
+  "name": "@ants/server-ui",
   "private": true,
   "version": "0.1.0",
   "type": "module",

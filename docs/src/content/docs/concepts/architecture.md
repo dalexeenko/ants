@@ -1,13 +1,13 @@
 ---
 title: Architecture
-description: How OpenMgr is structured — server, agent framework, apps, and how they fit together.
+description: How Ants is structured — server, agent framework, apps, and how they fit together.
 sidebar:
   order: 1
 ---
 
 ## System Overview
 
-OpenMgr is a monorepo with three main layers:
+Ants is a monorepo with three main layers:
 
 ```
 ┌─────────────────────────────────────────────────────┐
@@ -20,7 +20,7 @@ OpenMgr is a monorepo with three main layers:
 │        └──────────────┼──────────────┘               │
 │                       │ REST API + SSE               │
 ├───────────────────────┼─────────────────────────────┤
-│                 OpenMgr Server                       │
+│                 Ants Server                       │
 │  ┌────────────────────┼────────────────────────┐    │
 │  │  Hono HTTP Server  │  SQLite + Drizzle ORM  │    │
 │  │  Routes  Services  │  23 tables             │    │

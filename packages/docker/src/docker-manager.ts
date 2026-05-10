@@ -4,14 +4,14 @@
  * Handles Docker availability detection, agent image resolution, container
  * lifecycle (create/start/stop/remove), volume mounting, and port forwarding.
  *
- * The server Docker image includes the openmgr-agent CLI, so agent containers
- * run the same image with a different entrypoint (`openmgr-agent serve`).
+ * The server Docker image includes the ants-agent CLI, so agent containers
+ * run the same image with a different entrypoint (`ants-agent serve`).
  * No separate agent image build step is needed.
  *
  * Image resolution order:
- *   1. OPENMGR_IMAGE env var (set via Dockerfile IMAGE_TAG build arg)
+ *   1. ANTS_IMAGE env var (set via Dockerfile IMAGE_TAG build arg)
  *   2. Docker socket self-introspection (when running inside Docker)
- *   3. Fallback to "openmgr/server:latest" (bare-metal / local dev)
+ *   3. Fallback to "ants/server:latest" (bare-metal / local dev)
  *      TODO: in the future, default to the matching release version
  */
 
@@ -49,7 +49,7 @@ async function pathExists(filePath: string): Promise<boolean> {
   }
 }
 
-export const DEFAULT_AGENT_IMAGE = 'openmgr/server:latest';
+export const DEFAULT_AGENT_IMAGE = 'ants/server:latest';
 export const CONTAINER_WORKSPACE_PATH = '/workspace';
 export const CONTAINER_AGENT_PORT = 3000;
 
@@ -165,9 +165,9 @@ export class DockerManager {
    * Resolve the Docker image to use for agent containers.
    *
    * Resolution order:
-   *   1. OPENMGR_IMAGE env var (set by Dockerfile IMAGE_TAG build arg, or at runtime)
+   *   1. ANTS_IMAGE env var (set by Dockerfile IMAGE_TAG build arg, or at runtime)
    *   2. Docker self-introspection (when running inside Docker with socket access)
-   *   3. Fallback to "openmgr/server:latest" (bare-metal / local dev)
+   *   3. Fallback to "ants/server:latest" (bare-metal / local dev)
    *
    * Results are cached after the first call.
    */
@@ -176,10 +176,10 @@ export class DockerManager {
       return this.resolvedImage;
     }
 
-    // 1. Check OPENMGR_IMAGE env var
-    const envImage = process.env.OPENMGR_IMAGE;
+    // 1. Check ANTS_IMAGE env var
+    const envImage = process.env.ANTS_IMAGE;
     if (envImage) {
-      this.log.info(`Agent image resolved from OPENMGR_IMAGE env var: ${envImage}`);
+      this.log.info(`Agent image resolved from ANTS_IMAGE env var: ${envImage}`);
       this.resolvedImage = { image: envImage, source: 'env' };
       return this.resolvedImage;
     }
@@ -195,7 +195,7 @@ export class DockerManager {
     }
 
     // 3. Fallback to default
-    // TODO: In the future, default to the matching release version (e.g. openmgr/server:v0.1.0)
+    // TODO: In the future, default to the matching release version (e.g. ants/server:v0.1.0)
     this.log.info(`Agent image using default: ${DEFAULT_AGENT_IMAGE}`);
     this.resolvedImage = { image: DEFAULT_AGENT_IMAGE, source: 'default' };
     return this.resolvedImage;
@@ -296,7 +296,7 @@ export class DockerManager {
    * Start an agent container for a project.
    *
    * Uses the resolved server image with an overridden entrypoint to run
-   * `openmgr-agent serve` instead of the server.
+   * `ants-agent serve` instead of the server.
    *
    * @returns The container info including the host port that maps to the agent.
    */
@@ -321,7 +321,7 @@ export class DockerManager {
       ? { image: config.image }
       : await this.resolveAgentImage();
 
-    const containerName = `openmgr-agent-${hostPort}`;
+    const containerName = `ants-agent-${hostPort}`;
 
     // Build docker run arguments
     const args: string[] = [
@@ -330,7 +330,7 @@ export class DockerManager {
       '-p', `${hostPort}:${CONTAINER_AGENT_PORT}`,
       '-v', `${workingDirectory}:${CONTAINER_WORKSPACE_PATH}`,
       // Override the entrypoint to run the agent instead of the server
-      '--entrypoint', 'openmgr-agent',
+      '--entrypoint', 'ants-agent',
     ];
 
     // Add extra volumes

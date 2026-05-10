@@ -52,42 +52,42 @@ describe('DockerManager', () => {
   });
 
   describe('resolveAgentImage', () => {
-    it('should use OPENMGR_IMAGE env var when set', async () => {
-      process.env.OPENMGR_IMAGE = 'openmgr/server:v1.2.3';
+    it('should use ANTS_IMAGE env var when set', async () => {
+      process.env.ANTS_IMAGE = 'ants/server:v1.2.3';
 
       const result = await manager.resolveAgentImage();
 
       expect(result).toEqual({
-        image: 'openmgr/server:v1.2.3',
+        image: 'ants/server:v1.2.3',
         source: 'env',
       });
     });
 
-    it('should use OPENMGR_IMAGE with SHA digest', async () => {
-      process.env.OPENMGR_IMAGE = 'openmgr/server@sha256:abc123def456';
+    it('should use ANTS_IMAGE with SHA digest', async () => {
+      process.env.ANTS_IMAGE = 'ants/server@sha256:abc123def456';
 
       const result = await manager.resolveAgentImage();
 
       expect(result).toEqual({
-        image: 'openmgr/server@sha256:abc123def456',
+        image: 'ants/server@sha256:abc123def456',
         source: 'env',
       });
     });
 
     it('should cache the resolved image', async () => {
-      process.env.OPENMGR_IMAGE = 'openmgr/server:v1.0.0';
+      process.env.ANTS_IMAGE = 'ants/server:v1.0.0';
 
       const first = await manager.resolveAgentImage();
       // Change the env var — should still return cached value
-      process.env.OPENMGR_IMAGE = 'openmgr/server:v2.0.0';
+      process.env.ANTS_IMAGE = 'ants/server:v2.0.0';
       const second = await manager.resolveAgentImage();
 
       expect(first).toEqual(second);
-      expect(second.image).toBe('openmgr/server:v1.0.0');
+      expect(second.image).toBe('ants/server:v1.0.0');
     });
 
     it('should fall back to default when not in Docker and no env var', async () => {
-      delete process.env.OPENMGR_IMAGE;
+      delete process.env.ANTS_IMAGE;
 
       // Not in Docker: /.dockerenv doesn't exist, /proc files don't exist
       mockPathExists(() => false);
@@ -96,13 +96,13 @@ describe('DockerManager', () => {
       const result = await manager.resolveAgentImage();
 
       expect(result).toEqual({
-        image: 'openmgr/server:latest',
+        image: 'ants/server:latest',
         source: 'default',
       });
     });
 
     it('should try introspection when inside Docker via .dockerenv', async () => {
-      delete process.env.OPENMGR_IMAGE;
+      delete process.env.ANTS_IMAGE;
 
       // Inside Docker: /.dockerenv exists
       mockPathExists((path: string) => path === '/.dockerenv');
@@ -122,7 +122,7 @@ describe('DockerManager', () => {
         const cmdArgs = args[1] as string[];
         const key = cmdArgs.join(' ');
         if (key.includes('inspect') && key.includes(containerId)) {
-          callback(null, { stdout: 'openmgr/server:v3.0.0\n', stderr: '' });
+          callback(null, { stdout: 'ants/server:v3.0.0\n', stderr: '' });
         } else {
           callback(new Error('not found'));
         }
@@ -131,13 +131,13 @@ describe('DockerManager', () => {
       const result = await manager.resolveAgentImage();
 
       expect(result).toEqual({
-        image: 'openmgr/server:v3.0.0',
+        image: 'ants/server:v3.0.0',
         source: 'introspection',
       });
     });
 
     it('should try cgroup v2 mountinfo when cgroup v1 has no docker references', async () => {
-      delete process.env.OPENMGR_IMAGE;
+      delete process.env.ANTS_IMAGE;
 
       const containerId = 'deadbeef1234567890deadbeef1234567890deadbeef1234567890deadbeef12';
 
@@ -163,7 +163,7 @@ describe('DockerManager', () => {
         const cmdArgs = args[1] as string[];
         const key = cmdArgs.join(' ');
         if (key.includes('inspect') && key.includes(containerId)) {
-          callback(null, { stdout: 'openmgr/server:v4.0.0\n', stderr: '' });
+          callback(null, { stdout: 'ants/server:v4.0.0\n', stderr: '' });
         } else {
           callback(new Error('not found'));
         }
@@ -172,13 +172,13 @@ describe('DockerManager', () => {
       const result = await manager.resolveAgentImage();
 
       expect(result).toEqual({
-        image: 'openmgr/server:v4.0.0',
+        image: 'ants/server:v4.0.0',
         source: 'introspection',
       });
     });
 
     it('should fall back to default when introspection fails', async () => {
-      delete process.env.OPENMGR_IMAGE;
+      delete process.env.ANTS_IMAGE;
 
       // Inside Docker (/.dockerenv exists)
       mockPathExists((path: string) => path === '/.dockerenv');
@@ -193,7 +193,7 @@ describe('DockerManager', () => {
       const result = await manager.resolveAgentImage();
 
       expect(result).toEqual({
-        image: 'openmgr/server:latest',
+        image: 'ants/server:latest',
         source: 'default',
       });
     });
@@ -265,7 +265,7 @@ describe('DockerManager', () => {
         callback(null, { stdout: '{}', stderr: '' });
       });
 
-      const result = await manager.imageExists('openmgr/server:v1.0.0');
+      const result = await manager.imageExists('ants/server:v1.0.0');
       expect(result).toBe(true);
     });
 
@@ -275,17 +275,17 @@ describe('DockerManager', () => {
         callback(new Error('No such image'));
       });
 
-      const result = await manager.imageExists('openmgr/server:v1.0.0');
+      const result = await manager.imageExists('ants/server:v1.0.0');
       expect(result).toBe(false);
     });
 
     it('should use resolved image when no image specified', async () => {
-      process.env.OPENMGR_IMAGE = 'openmgr/server:resolved';
+      process.env.ANTS_IMAGE = 'ants/server:resolved';
 
       mockExecFile.mockImplementation((...args: unknown[]) => {
         const callback = args[args.length - 1] as Function;
         const cmdArgs = args[1] as string[];
-        if (cmdArgs.includes('openmgr/server:resolved')) {
+        if (cmdArgs.includes('ants/server:resolved')) {
           callback(null, { stdout: '{}', stderr: '' });
         } else {
           callback(new Error('wrong image'));
@@ -331,7 +331,7 @@ describe('DockerManager', () => {
       });
 
       const progress: Array<{ status: string; complete: boolean }> = [];
-      const result = await manager.pullImage('openmgr/server:latest', (p) => {
+      const result = await manager.pullImage('ants/server:latest', (p) => {
         progress.push({ status: p.status, complete: p.complete });
       });
 
@@ -351,7 +351,7 @@ describe('DockerManager', () => {
         };
       });
 
-      const result = await manager.pullImage('openmgr/server:latest');
+      const result = await manager.pullImage('ants/server:latest');
       expect(result).toBe(false);
     });
   });

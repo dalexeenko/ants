@@ -23,7 +23,7 @@ export function SettingsPanel() {
   const pluginSettings = usePluginSettingsSections('global');
 
   return (
-    <View testID="openmgr-settings-panel" style={[styles.settingsContainer, { backgroundColor: colors.bg.primary }]}>
+    <View testID="ants-settings-panel" style={[styles.settingsContainer, { backgroundColor: colors.bg.primary }]}>
       <View style={[styles.settingsHeader, { borderBottomColor: colors.border.light }]}>
         <Text variant="heading">Settings</Text>
       </View>

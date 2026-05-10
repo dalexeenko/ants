@@ -3,18 +3,18 @@ appId: host.exp.Exponent
 ---
 - launchApp
 - assertVisible:
-    id: "openmgr-home-screen"
+    id: "ants-home-screen"
 
 # Open the drawer
 - tapOn:
-    id: "openmgr-drawer-toggle"
+    id: "ants-drawer-toggle"
 - assertVisible:
-    id: "openmgr-drawer"
+    id: "ants-drawer"
 
 # Close the drawer via X button
 - tapOn:
-    id: "openmgr-drawer-close"
+    id: "ants-drawer-close"
 
 # Verify we're back on the home screen (drawer dismissed)
 - assertVisible:
-    id: "openmgr-home-screen"
+    id: "ants-home-screen"

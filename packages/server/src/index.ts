@@ -1,8 +1,8 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
-import type { AgentPlugin, Message, AgentEvent, ConversationTree, QuestionResponse, PermissionResponse, ToolResult, InstalledPluginInfo } from "@openmgr/agent-core";
-import type { PluginManager } from "@openmgr/agent-core";
-import type { SessionManager, ToolCallData, ToolResultData, SearchSessionsOptions, SearchMessagesOptions, MessageRow } from "@openmgr/agent-storage";
+import type { AgentPlugin, Message, AgentEvent, ConversationTree, QuestionResponse, PermissionResponse, ToolResult, InstalledPluginInfo } from "@ants/agent-core";
+import type { PluginManager } from "@ants/agent-core";
+import type { SessionManager, ToolCallData, ToolResultData, SearchSessionsOptions, SearchMessagesOptions, MessageRow } from "@ants/agent-storage";
 
 import type { RouteContext, SessionState } from "./routes/types.js";
 import { toAgentMessages } from "./routes/types.js";
@@ -96,7 +96,7 @@ export interface ServerAgent {
   getPhases?(): Array<{ id: string; content: string; status: string }>;
 
   // Browser controller access (for screencast streaming)
-  getBrowserController?(): import("@openmgr/agent-browser-core").BrowserController | undefined;
+  getBrowserController?(): import("@ants/agent-browser-core").BrowserController | undefined;
 
   // Agent types (subagent presets)
   getAgentTypes?(): Array<{

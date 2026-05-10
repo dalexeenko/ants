@@ -109,7 +109,7 @@ export function TodosPanel({ sessionId }: TodosPanelProps) {
   }
 
   return (
-    <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer} testID="openmgr-todos-panel">
+    <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer} testID="ants-todos-panel">
       {/* Todos Section */}
       {hasTodos && (
         <View style={styles.section}>

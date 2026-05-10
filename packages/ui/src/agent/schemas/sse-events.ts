@@ -2,7 +2,7 @@
  * Zod schemas for the SSE wire event protocol.
  *
  * These describe the shapes that arrive over the wire from the agent-server
- * (via the openmgr server proxy).  They are intentionally permissive — every
+ * (via the ants server proxy).  They are intentionally permissive — every
  * field beyond the event type is optional with sensible defaults, because
  * older agent versions may not send every field.
  */

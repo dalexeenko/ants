@@ -8,22 +8,22 @@ appId: host.exp.Exponent
 ---
 - launchApp
 - assertVisible:
-    id: "openmgr-home-screen"
+    id: "ants-home-screen"
 
 # Create a new session
 - tapOn:
-    id: "openmgr-project-new-session"
+    id: "ants-project-new-session"
 - assertVisible:
-    id: "openmgr-chat-input"
+    id: "ants-chat-input"
 
 # Type a message
 - tapOn:
-    id: "openmgr-chat-input-field"
+    id: "ants-chat-input-field"
 - inputText: "Hello from Maestro E2E test"
 
 # Send the message
 - tapOn:
-    id: "openmgr-chat-send"
+    id: "ants-chat-send"
 
 # The message should appear in the chat (as text content)
 - assertVisible:

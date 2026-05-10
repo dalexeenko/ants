@@ -31,10 +31,10 @@ export function WelcomeScreen() {
   };
 
   return (
-    <View testID="openmgr-welcome-screen" style={[styles.welcomeContainer, { backgroundColor: colors.bg.primary }]}>
+    <View testID="ants-welcome-screen" style={[styles.welcomeContainer, { backgroundColor: colors.bg.primary }]}>
       <View style={styles.welcomeContent}>
         <Text variant="title" style={styles.welcomeTitle}>
-          Welcome to OpenMgr
+          Welcome to Ants
         </Text>
         <Text color="secondary" style={styles.welcomeSubtitle}>
           Your AI-powered project assistant
@@ -54,7 +54,7 @@ export function WelcomeScreen() {
           <Text color="secondary" style={styles.cardDescription}>
             Create a new project to start working with the AI agent.
           </Text>
-          <Button testID="openmgr-welcome-new-project" onPress={() => setShowProjectSetup(true)} style={styles.openButton}>
+          <Button testID="ants-welcome-new-project" onPress={() => setShowProjectSetup(true)} style={styles.openButton}>
             New Project
           </Button>
         </Card>
@@ -69,7 +69,7 @@ export function WelcomeScreen() {
           openNativeDirectoryPicker={() =>
             platform.openDirectoryDialog?.() ?? Promise.resolve(null)
           }
-          getDefaultProjectsDirectory={documentsPath ? () => `${documentsPath}/OpenMgr Projects` : undefined}
+          getDefaultProjectsDirectory={documentsPath ? () => `${documentsPath}/Ants Projects` : undefined}
           ensureDirectoryExists={async (p) => {
             await platform.ensureDirectoryExists?.(p);
           }}

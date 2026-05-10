@@ -14,7 +14,7 @@ import type {
  *
  * The full ProjectWorktreeManager logic (create, list, remove, diff, merge,
  * discard, rename, associateSession, etc.) is tested in the
- * @openmgr/agent-worktree package (62 tests). These tests verify the server
+ * @ants/agent-worktree package (62 tests). These tests verify the server
  * adapter layer: singleton creation, class re-export, and type re-exports.
  */
 describe('worktree-manager adapter', () => {

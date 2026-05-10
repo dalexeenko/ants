@@ -1,7 +1,7 @@
 {
-  "name": "@openmgr/agent-auth-core",
+  "name": "@ants/agent-auth-core",
   "version": "0.1.0",
-  "description": "Platform-agnostic OAuth types and utilities for OpenMgr Agent",
+  "description": "Platform-agnostic OAuth types and utilities for Ants Agent",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -23,11 +23,11 @@
     "typescript": "^5.6.0",
     "vitest": "^4.0.18"
   },
-  "keywords": ["openmgr", "agent", "auth", "oauth", "react-native"],
+  "keywords": ["ants", "agent", "auth", "oauth", "react-native"],
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/openmgr/agent.git",
+    "url": "git+https://github.com/ants/agent.git",
     "directory": "packages/auth-core"
   }
 }

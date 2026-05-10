@@ -73,7 +73,7 @@ const mockAgentInstance = {
   shutdown: jest.fn().mockResolvedValue(undefined),
 };
 
-jest.mock('@openmgr/agent-react-native', () => ({
+jest.mock('@ants/agent-react-native', () => ({
   Agent: jest.fn().mockImplementation(() => mockAgentInstance),
   providersPlugin: { name: 'mock-providers-plugin' },
   toolsPlugin: { name: 'mock-tools-plugin' },
@@ -260,7 +260,7 @@ describe('ReactNativeAgentFactory', () => {
 
   describe('subagent support', () => {
     it('should create SubagentManager and register subagent capability during agent creation', async () => {
-      const { SubagentManager, capabilityRegistry } = require('@openmgr/agent-react-native');
+      const { SubagentManager, capabilityRegistry } = require('@ants/agent-react-native');
 
       await createAdapter();
 
@@ -277,7 +277,7 @@ describe('ReactNativeAgentFactory', () => {
 
       // subagent capability should be registered
       expect(capabilityRegistry.register).toHaveBeenCalledWith('subagent', {
-        providedBy: '@openmgr/app-mobile',
+        providedBy: '@ants/app-mobile',
         version: '0.1.0',
       });
 
@@ -481,7 +481,7 @@ describe('ReactNativeAgentFactory', () => {
   describe('generateSessionTitle', () => {
     // Access the mocked generateTitle via require so we can inspect/configure it
     function getMockGenerateTitle(): jest.Mock {
-      const mod = require('@openmgr/agent-react-native');
+      const mod = require('@ants/agent-react-native');
       return mod.generateTitle;
     }
 

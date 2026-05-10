@@ -1,9 +1,9 @@
 /**
- * OpenMgr Mobile App
+ * Ants Mobile App
  * 
  * This is a placeholder for the React Native mobile app.
- * The mobile app will share UI components from @openmgr/ui
- * and use @openmgr/agent-react-native for local agent support.
+ * The mobile app will share UI components from @ants/ui
+ * and use @ants/agent-react-native for local agent support.
  * 
  * Key features planned:
  * - Mobile-optimized chat interface

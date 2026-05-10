@@ -1,5 +1,5 @@
 /**
- * Git command utilities for @openmgr/server.
+ * Git command utilities for @ants/server.
  * 
  * Provides helper functions for common git operations including:
  * - Repository status checks

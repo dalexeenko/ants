@@ -13,7 +13,7 @@ import {
   TEST_WRITING_SKILL,
 } from "../index.js";
 
-describe("@openmgr/agent-skills-content", () => {
+describe("@ants/agent-skills-content", () => {
   describe("defaultSkills", () => {
     it("should contain all 8 default skills", () => {
       expect(defaultSkills).toHaveLength(8);

@@ -90,7 +90,7 @@ export function RemoteServersSection({ bridge, onServerSettings }: RemoteServers
     return (
       <SettingsSection
         title="Remote Servers"
-        description="Connect to remote @openmgr/server instances"
+        description="Connect to remote @ants/server instances"
       >
         <View style={styles.loading}>
           <Text style={{ color: colors.text.muted }}>Loading...</Text>
@@ -102,7 +102,7 @@ export function RemoteServersSection({ bridge, onServerSettings }: RemoteServers
   return (
     <SettingsSection
       title="Remote Servers"
-      description="Connect to remote @openmgr/server instances"
+      description="Connect to remote @ants/server instances"
     >
       {servers.length === 0 ? (
         <View style={[styles.empty, { backgroundColor: colors.bg.secondary }]}>

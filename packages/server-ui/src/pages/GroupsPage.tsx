@@ -103,7 +103,7 @@ export function GroupsPage() {
         <div className="empty-state">
           <p>Single-user mode</p>
           <p className="empty-hint">
-            Enable multi-user mode (OPENMGR_MULTI_USER=true) to manage groups.
+            Enable multi-user mode (ANTS_MULTI_USER=true) to manage groups.
           </p>
         </div>
       </>

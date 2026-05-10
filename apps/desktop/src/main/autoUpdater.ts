@@ -1,6 +1,6 @@
 import { autoUpdater, type UpdateInfo, type ProgressInfo } from 'electron-updater';
 import { BrowserWindow, ipcMain } from 'electron';
-import { createLogger } from '@openmgr/ui';
+import { createLogger } from '@ants/ui';
 
 const log = createLogger('AutoUpdater');
 

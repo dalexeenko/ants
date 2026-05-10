@@ -29,4 +29,4 @@ export {
 } from "./types.js";
 
 // Note: StdioMcpClient is no longer exported from core.
-// For stdio MCP transport, use @openmgr/agent-mcp-stdio or @openmgr/agent-node.
+// For stdio MCP transport, use @ants/agent-mcp-stdio or @ants/agent-node.

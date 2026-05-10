@@ -1,5 +1,5 @@
 import { randomUUID } from 'crypto';
-import type { IAgentClient, ToolInfo, SearchSessionsParams, SearchMessagesParams, SearchResult } from './openmgr-agent-manager.js';
+import type { IAgentClient, ToolInfo, SearchSessionsParams, SearchMessagesParams, SearchResult } from './ants-agent-manager.js';
 
 interface MockSession {
   id: string;
@@ -46,7 +46,7 @@ export interface MockToolCall {
  * Configure responses via:
  * - Constructor: `new MockAgentClient(responses)`
  * - Method: `client.setMockResponses(responses)`
- * - Environment: `OPENMGR_MOCK_RESPONSES` JSON env var
+ * - Environment: `ANTS_MOCK_RESPONSES` JSON env var
  */
 export class MockAgentClient implements IAgentClient {
   private sessions: Map<string, MockSession> = new Map();
@@ -61,7 +61,7 @@ export class MockAgentClient implements IAgentClient {
       this.responseQueue = [...responses];
     } else {
       // Try loading from environment
-      const envResponses = process.env.OPENMGR_MOCK_RESPONSES;
+      const envResponses = process.env.ANTS_MOCK_RESPONSES;
       if (envResponses) {
         try {
           this.responseQueue = JSON.parse(envResponses);

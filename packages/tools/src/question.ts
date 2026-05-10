@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { defineTool, generateId } from "@openmgr/agent-core";
-import type { QuestionResponse } from "@openmgr/agent-core";
+import { defineTool, generateId } from "@ants/agent-core";
+import type { QuestionResponse } from "@ants/agent-core";
 
 const DESCRIPTION = `Present a question to the user with selectable options.
 

@@ -14,7 +14,7 @@ export interface McpServerConfig {
 export interface ProjectDockerConfig {
   /** Enable Docker for this project's agent sessions */
   enabled: boolean;
-  /** Custom Docker image (defaults to openmgr-agent:latest) */
+  /** Custom Docker image (defaults to ants-agent:latest) */
   image?: string;
   /** Extra volume mounts (host:container) */
   volumes?: string[];
@@ -62,7 +62,7 @@ export interface ProjectConfig {
   serverPort?: number;
   serverPid?: number;
   
-  // Agent config (written to workingDirectory/.openmgr.json)
+  // Agent config (written to workingDirectory/.ants.json)
   agentConfig?: AgentConfig;
 }
 

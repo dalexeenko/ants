@@ -574,8 +574,8 @@ export interface DirectoryEntry {
  * (Node.js, React Native, browser, etc.).
  * 
  * Implementations:
- * - Node.js: @openmgr/agent-tools-terminal provides a Node.js implementation
- * - React Native: @openmgr/agent-react-native provides an expo-file-system implementation
+ * - Node.js: @ants/agent-tools-terminal provides a Node.js implementation
+ * - React Native: @ants/agent-react-native provides an expo-file-system implementation
  */
 export interface Filesystem {
   /**

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { defineTool } from "@openmgr/agent-core";
+import { defineTool } from "@ants/agent-core";
 
 const DESCRIPTION = `Use this tool to manage future phases of work - larger scope items that will be broken down into tasks later.
 

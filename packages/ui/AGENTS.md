@@ -104,7 +104,7 @@ The dark theme uses a **gray-green** tinge (not pure gray, not Tailwind slate/bl
 ```bash
 # UI source is consumed directly by bundlers (Vite/Metro) — no build step needed for dev.
 # For production:
-pnpm turbo build --filter=@openmgr/ui
+pnpm turbo build --filter=@ants/ui
 ```
 
 ## Testing

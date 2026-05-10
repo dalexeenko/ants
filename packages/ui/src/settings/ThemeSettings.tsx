@@ -84,7 +84,7 @@ export function ThemeSettings() {
   return (
     <SettingsSection
       title="Appearance"
-      description="Choose how OpenMgr looks on your device"
+      description="Choose how Ants looks on your device"
     >
       <View style={styles.options}>
         {options.map((option) => (

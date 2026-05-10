@@ -1,7 +1,7 @@
 {
-  "name": "@openmgr/agent-config-xdg",
+  "name": "@ants/agent-config-xdg",
   "version": "0.1.0",
-  "description": "XDG-compliant file-based configuration for OpenMgr Agent (Node.js)",
+  "description": "XDG-compliant file-based configuration for Ants Agent (Node.js)",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -20,7 +20,7 @@
     "clean": "rm -rf dist coverage"
   },
   "dependencies": {
-    "@openmgr/agent-core": "workspace:*",
+    "@ants/agent-core": "workspace:*",
     "zod": "^3.23.0"
   },
   "devDependencies": {

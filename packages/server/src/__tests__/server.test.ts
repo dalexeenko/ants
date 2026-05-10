@@ -1,8 +1,8 @@
 import { describe, it, expect, vi } from 'vitest';
 import { createServer, serverPlugin } from '../index.js';
 import type { ServerAgent, ServerState } from '../index.js';
-import type { AgentInterface, AgentConfig, QuestionResponse, Message, ConversationTree, AgentPlugin, PluginManager, InstalledPluginInfo } from '@openmgr/agent-core';
-import type { SessionManager } from '@openmgr/agent-storage';
+import type { AgentInterface, AgentConfig, QuestionResponse, Message, ConversationTree, AgentPlugin, PluginManager, InstalledPluginInfo } from '@ants/agent-core';
+import type { SessionManager } from '@ants/agent-storage';
 
 // Create a minimal mock agent (used by original tests)
 function createMockAgent(): AgentInterface {

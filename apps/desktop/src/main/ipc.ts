@@ -10,7 +10,7 @@ import type {
   McpServerConfig,
   AgentBridge,
   Project,
-} from '@openmgr/ui';
+} from '@ants/ui';
 
 export function setupIpcHandlers(
   ipcMain: IpcMain,

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { defineTool } from "@openmgr/agent-core";
+import { defineTool } from "@ants/agent-core";
 
 const DESCRIPTION = `Use this tool to read your phase list.
 

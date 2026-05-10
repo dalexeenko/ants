@@ -1,6 +1,6 @@
 // Configure zustand persistence for React Native BEFORE any stores are imported
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { setPersistStorage } from '@openmgr/ui';
+import { setPersistStorage } from '@ants/ui';
 
 setPersistStorage({
   getItem: async (name: string) => {
@@ -26,9 +26,9 @@ import {
   useUIStore,
   type DeeplinkRoute,
   createLogger,
-} from '@openmgr/ui';
+} from '@ants/ui';
 import { HomeScreen, SessionScreen, SettingsScreen, SessionSettingsScreen, ProjectSettingsScreen, ServerSettingsScreen, NewProjectScreen, AgentsScreen, DirectorScreen, SearchScreen } from './screens';
-import type { RemoteServerConfig } from '@openmgr/ui';
+import type { RemoteServerConfig } from '@ants/ui';
 import { DrawerNavigation } from './components';
 
 const log = createLogger('App');
@@ -151,7 +151,7 @@ export function App() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                   code: route.code,
-                  redirect_uri: 'openmgr://connect',
+                  redirect_uri: 'ants://connect',
                 }),
               });
               if (!tokenRes.ok) {
@@ -215,7 +215,7 @@ export function App() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                   code: route.code,
-                  redirect_uri: 'openmgr://auth/callback',
+                  redirect_uri: 'ants://auth/callback',
                 }),
               });
               if (!tokenRes.ok) {
@@ -414,14 +414,14 @@ export function App() {
       <ThemeContext.Provider value={theme}>
         <SafeAreaProvider>
           <SafeAreaView
-            testID="openmgr-app"
+            testID="ants-app"
             edges={['top', 'left', 'right']}
             style={[styles.container, { backgroundColor: theme.colors.bg.primary }]}
           >
             <StatusBar
               barStyle={theme.resolvedMode === 'dark' ? 'light-content' : 'dark-content'}
             />
-            <View testID={`openmgr-screen-${screen.name}`} style={styles.content}>
+            <View testID={`ants-screen-${screen.name}`} style={styles.content}>
               {renderScreen()}
             </View>
 

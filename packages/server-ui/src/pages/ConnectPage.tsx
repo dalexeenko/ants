@@ -63,12 +63,12 @@ export function ConnectPage() {
       <div className="login-card">
         <h1>Authorize App</h1>
         <p className="subtitle">
-          An application is requesting access to your OpenMgr account.
+          An application is requesting access to your Ants account.
         </p>
 
         {!redirectUri ? (
           <div className="status-banner error">
-            Missing redirect URI. This page should be opened from the OpenMgr app.
+            Missing redirect URI. This page should be opened from the Ants app.
           </div>
         ) : !user ? (
           <>

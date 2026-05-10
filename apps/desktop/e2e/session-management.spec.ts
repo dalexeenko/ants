@@ -25,12 +25,12 @@ test.describe.skip('Session Management', () => {
 
   test('should create a session and show it in the sidebar', async () => {
     // The new session button is hidden (opacity: 0) until hovered — use force click
-    await page.getByTestId('openmgr-project-new-session').click({ force: true });
-    await expect(page.getByTestId('openmgr-session-list')).toBeVisible({ timeout: 10000 });
-    await expect(page.getByTestId('openmgr-chat-input')).toBeVisible();
+    await page.getByTestId('ants-project-new-session').click({ force: true });
+    await expect(page.getByTestId('ants-session-list')).toBeVisible({ timeout: 10000 });
+    await expect(page.getByTestId('ants-chat-input')).toBeVisible();
   });
 
   test('should show the chat view for the active session', async () => {
-    await expect(page.getByTestId('openmgr-chat-view')).toBeVisible();
+    await expect(page.getByTestId('ants-chat-view')).toBeVisible();
   });
 });

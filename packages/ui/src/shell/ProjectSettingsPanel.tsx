@@ -505,7 +505,7 @@ export function ProjectSettingsPanel({ projectId }: { projectId: string }) {
             <View style={{ height: 1, backgroundColor: colors.border.light }} />
             <View>
               <Text color="secondary" style={{ marginBottom: 8 }}>
-                Remove this project from OpenMgr. Project files will not be deleted.
+                Remove this project from Ants. Project files will not be deleted.
               </Text>
               <Button
                 variant="danger"
@@ -550,7 +550,7 @@ export function ProjectSettingsPanel({ projectId }: { projectId: string }) {
       <ConfirmDialog
         visible={showDeleteConfirm}
         title="Remove Project"
-        message={`Are you sure you want to remove "${project.name}" from OpenMgr? The project files will not be deleted.`}
+        message={`Are you sure you want to remove "${project.name}" from Ants? The project files will not be deleted.`}
         confirmText="Remove"
         cancelText="Cancel"
         destructive

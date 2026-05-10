@@ -1,21 +1,21 @@
 ---
 title: CLI
-description: The OpenMgr command-line interface for interacting with agents from the terminal.
+description: The Ants command-line interface for interacting with agents from the terminal.
 sidebar:
   order: 4
 ---
 
-The OpenMgr CLI (`@openmgr/cli`) provides a command-line interface for running and interacting with agents.
+The Ants CLI (`@ants/cli`) provides a command-line interface for running and interacting with agents.
 
 ## Installation
 
 The CLI is included when you install the agent package:
 
 ```bash
-npm install -g @openmgr/cli
+npm install -g @ants/cli
 ```
 
-The CLI is also available as `openmgr-agent` or `oa` after global installation.
+The CLI is also available as `ants-agent` or `oa` after global installation.
 
 ## Overview
 

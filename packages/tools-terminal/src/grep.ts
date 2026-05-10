@@ -1,6 +1,6 @@
 import { glob } from "glob";
 import { z } from "zod";
-import { defineTool } from "@openmgr/agent-core";
+import { defineTool } from "@ants/agent-core";
 import { getFilesystem } from "./filesystem.js";
 
 const MAX_RESULTS = 50;

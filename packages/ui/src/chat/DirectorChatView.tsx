@@ -233,7 +233,7 @@ export function DirectorChatView({ bridge, keyboardOffset }: DirectorChatViewPro
       placeholder={showApiKeyBanner ? "Add an API key to use the Director..." : "Ask the Director..."}
       headerComponent={header}
       emptyComponent={emptyComponent}
-      testID="openmgr-director-chat"
+      testID="ants-director-chat"
       inputDisabled={showApiKeyBanner}
       keyboardOffset={keyboardOffset}
     />

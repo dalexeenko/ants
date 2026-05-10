@@ -6,9 +6,9 @@
  */
 
 import { z } from "zod";
-import type { ToolDefinition, ToolContext } from "@openmgr/agent-core";
-import type { SubagentManagerInterface } from "@openmgr/agent-core";
-import { agentTypeRegistry as globalAgentTypeRegistry } from "@openmgr/agent-core";
+import type { ToolDefinition, ToolContext } from "@ants/agent-core";
+import type { SubagentManagerInterface } from "@ants/agent-core";
+import { agentTypeRegistry as globalAgentTypeRegistry } from "@ants/agent-core";
 
 const BASE_DESCRIPTION = `Launch a new agent to handle complex, multistep tasks autonomously.
 

@@ -1,8 +1,8 @@
 {
-  "name": "@openmgr/agent-e2e-tests",
+  "name": "@ants/agent-e2e-tests",
   "version": "0.1.0",
   "private": true,
-  "description": "End-to-end tests for @openmgr/agent CLI and HTTP server",
+  "description": "End-to-end tests for @ants/agent CLI and HTTP server",
   "type": "module",
   "scripts": {
     "test": "vitest run",
@@ -10,9 +10,9 @@
     "test:coverage": "vitest run --coverage"
   },
   "devDependencies": {
-    "@openmgr/agent-core": "workspace:*",
-    "@openmgr/agent-server": "workspace:*",
-    "@openmgr/agent-storage": "workspace:*",
+    "@ants/agent-core": "workspace:*",
+    "@ants/agent-server": "workspace:*",
+    "@ants/agent-storage": "workspace:*",
     "@types/node": "^20.10.0",
     "typescript": "^5.3.0",
     "vitest": "^4.0.0",

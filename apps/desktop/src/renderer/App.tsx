@@ -1,6 +1,6 @@
 /**
  * Desktop App — thin wrapper that provides the Electron platform adapter
- * and renders the shared AppShell from @openmgr/ui.
+ * and renders the shared AppShell from @ants/ui.
  *
  * All UI logic now lives in the AppShell. This file only provides
  * the platform-specific adapter that maps window.electron APIs to the
@@ -8,8 +8,8 @@
  */
 
 import React, { useMemo } from 'react';
-import { PlatformProvider, type PlatformAdapter } from '@openmgr/ui/platform';
-import { AppShell } from '@openmgr/ui/shell';
+import { PlatformProvider, type PlatformAdapter } from '@ants/ui/platform';
+import { AppShell } from '@ants/ui/shell';
 
 // Extend window type for electron API
 declare global {

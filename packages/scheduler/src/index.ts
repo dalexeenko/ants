@@ -1,5 +1,5 @@
 /**
- * @openmgr/agent-scheduler
+ * @ants/agent-scheduler
  *
  * Generic task scheduler with cron support.
  * Platform-agnostic and can be used with any storage backend.

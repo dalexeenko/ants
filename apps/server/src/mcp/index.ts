@@ -10,13 +10,13 @@ import {
 import { writeFile } from 'fs/promises';
 import { homedir } from 'os';
 import { join } from 'path';
-import { OpenMgrServerClient } from './client.js';
+import { AntsServerClient } from './client.js';
 import { ensureDirectoryAsync, readJsonFileAsync } from '../utils/fs.js';
 import { createLogger } from '../utils/logger.js';
 
 const log = createLogger('mcp');
 
-const CONFIG_DIR = join(homedir(), '.config', 'openmgr-mcp');
+const CONFIG_DIR = join(homedir(), '.config', 'ants-mcp');
 const CONFIG_FILE = join(CONFIG_DIR, 'config.json');
 
 interface McpConfig {
@@ -33,12 +33,12 @@ export async function saveMcpConfig(config: McpConfig): Promise<void> {
   await writeFile(CONFIG_FILE, JSON.stringify(config, null, 2));
 }
 
-async function getClient(): Promise<OpenMgrServerClient | null> {
+async function getClient(): Promise<AntsServerClient | null> {
   const config = await loadMcpConfig();
   if (!config) {
     return null;
   }
-  return new OpenMgrServerClient({
+  return new AntsServerClient({
     baseUrl: config.serverUrl,
     secret: config.secret,
   });
@@ -46,14 +46,14 @@ async function getClient(): Promise<OpenMgrServerClient | null> {
 
 const tools: Tool[] = [
   {
-    name: 'openmgr_server_configure',
-    description: 'Configure connection to @openmgr/server. Must be called first before using other tools.',
+    name: 'ants_server_configure',
+    description: 'Configure connection to @ants/server. Must be called first before using other tools.',
     inputSchema: {
       type: 'object',
       properties: {
         serverUrl: {
           type: 'string',
-          description: 'URL of the @openmgr/server (e.g., http://localhost:6647)',
+          description: 'URL of the @ants/server (e.g., http://localhost:6647)',
         },
         secret: {
           type: 'string',
@@ -64,8 +64,8 @@ const tools: Tool[] = [
     },
   },
   {
-    name: 'openmgr_server_status',
-    description: 'Get @openmgr/server status and info',
+    name: 'ants_server_status',
+    description: 'Get @ants/server status and info',
     inputSchema: {
       type: 'object',
       properties: {},
@@ -73,7 +73,7 @@ const tools: Tool[] = [
     },
   },
   {
-    name: 'openmgr_server_get_config',
+    name: 'ants_server_get_config',
     description: 'Get current MCP configuration (server URL)',
     inputSchema: {
       type: 'object',
@@ -82,7 +82,7 @@ const tools: Tool[] = [
     },
   },
   {
-    name: 'openmgr_projects_list',
+    name: 'ants_projects_list',
     description: 'List all agents on the server',
     inputSchema: {
       type: 'object',
@@ -91,7 +91,7 @@ const tools: Tool[] = [
     },
   },
   {
-    name: 'openmgr_projects_get',
+    name: 'ants_projects_get',
     description: 'Get details of a specific project',
     inputSchema: {
       type: 'object',
@@ -105,7 +105,7 @@ const tools: Tool[] = [
     },
   },
   {
-    name: 'openmgr_projects_create',
+    name: 'ants_projects_create',
     description: 'Create a new project',
     inputSchema: {
       type: 'object',
@@ -131,7 +131,7 @@ const tools: Tool[] = [
     },
   },
   {
-    name: 'openmgr_projects_update',
+    name: 'ants_projects_update',
     description: 'Update an existing project',
     inputSchema: {
       type: 'object',
@@ -157,7 +157,7 @@ const tools: Tool[] = [
     },
   },
   {
-    name: 'openmgr_projects_delete',
+    name: 'ants_projects_delete',
     description: 'Delete an project',
     inputSchema: {
       type: 'object',
@@ -171,7 +171,7 @@ const tools: Tool[] = [
     },
   },
   {
-    name: 'openmgr_projects_restart',
+    name: 'ants_projects_restart',
     description: 'Restart a project agent server',
     inputSchema: {
       type: 'object',
@@ -185,7 +185,7 @@ const tools: Tool[] = [
     },
   },
   {
-    name: 'openmgr_tasks_list',
+    name: 'ants_tasks_list',
     description: 'List scheduled tasks for an project',
     inputSchema: {
       type: 'object',
@@ -199,7 +199,7 @@ const tools: Tool[] = [
     },
   },
   {
-    name: 'openmgr_tasks_get',
+    name: 'ants_tasks_get',
     description: 'Get details of a scheduled task',
     inputSchema: {
       type: 'object',
@@ -217,7 +217,7 @@ const tools: Tool[] = [
     },
   },
   {
-    name: 'openmgr_tasks_create',
+    name: 'ants_tasks_create',
     description: 'Create a new scheduled task for an project',
     inputSchema: {
       type: 'object',
@@ -256,7 +256,7 @@ const tools: Tool[] = [
     },
   },
   {
-    name: 'openmgr_tasks_update',
+    name: 'ants_tasks_update',
     description: 'Update a scheduled task',
     inputSchema: {
       type: 'object',
@@ -299,7 +299,7 @@ const tools: Tool[] = [
     },
   },
   {
-    name: 'openmgr_tasks_delete',
+    name: 'ants_tasks_delete',
     description: 'Delete a scheduled task',
     inputSchema: {
       type: 'object',
@@ -317,7 +317,7 @@ const tools: Tool[] = [
     },
   },
   {
-    name: 'openmgr_tasks_run',
+    name: 'ants_tasks_run',
     description: 'Run a scheduled task immediately (for testing)',
     inputSchema: {
       type: 'object',
@@ -335,7 +335,7 @@ const tools: Tool[] = [
     },
   },
   {
-    name: 'openmgr_tasks_history',
+    name: 'ants_tasks_history',
     description: 'Get run history for a scheduled task',
     inputSchema: {
       type: 'object',
@@ -353,7 +353,7 @@ const tools: Tool[] = [
     },
   },
   {
-    name: 'openmgr_providers_list',
+    name: 'ants_providers_list',
     description: 'List all AI providers and their API key status',
     inputSchema: {
       type: 'object',
@@ -362,7 +362,7 @@ const tools: Tool[] = [
     },
   },
   {
-    name: 'openmgr_providers_get',
+    name: 'ants_providers_get',
     description: 'Get details of a specific provider',
     inputSchema: {
       type: 'object',
@@ -376,7 +376,7 @@ const tools: Tool[] = [
     },
   },
   {
-    name: 'openmgr_providers_set_api_key',
+    name: 'ants_providers_set_api_key',
     description: 'Set or update API key for a provider. The key will be injected into the agent when it starts.',
     inputSchema: {
       type: 'object',
@@ -394,7 +394,7 @@ const tools: Tool[] = [
     },
   },
   {
-    name: 'openmgr_providers_remove_api_key',
+    name: 'ants_providers_remove_api_key',
     description: 'Remove API key for a provider',
     inputSchema: {
       type: 'object',
@@ -408,8 +408,8 @@ const tools: Tool[] = [
     },
   },
   {
-    name: 'openmgr_config_get',
-    description: 'Get agent configuration for a project (.openmgr.json)',
+    name: 'ants_config_get',
+    description: 'Get agent configuration for a project (.ants.json)',
     inputSchema: {
       type: 'object',
       properties: {
@@ -422,8 +422,8 @@ const tools: Tool[] = [
     },
   },
   {
-    name: 'openmgr_config_set',
-    description: 'Update agent configuration for a project. Writes to .openmgr.json in the project working directory.',
+    name: 'ants_config_set',
+    description: 'Update agent configuration for a project. Writes to .ants.json in the project working directory.',
     inputSchema: {
       type: 'object',
       properties: {
@@ -454,7 +454,7 @@ const tools: Tool[] = [
     },
   },
   {
-    name: 'openmgr_system_disk',
+    name: 'ants_system_disk',
     description: 'Get disk usage for data and workspaces directories',
     inputSchema: {
       type: 'object',
@@ -463,7 +463,7 @@ const tools: Tool[] = [
     },
   },
   {
-    name: 'openmgr_system_info',
+    name: 'ants_system_info',
     description: 'Get server system info (uptime, memory usage, node version)',
     inputSchema: {
       type: 'object',
@@ -472,7 +472,7 @@ const tools: Tool[] = [
     },
   },
   {
-    name: 'openmgr_system_cleanup',
+    name: 'ants_system_cleanup',
     description: 'Clean up old agent sessions to free disk space',
     inputSchema: {
       type: 'object',
@@ -486,7 +486,7 @@ const tools: Tool[] = [
     },
   },
   {
-    name: 'openmgr_agent_status',
+    name: 'ants_agent_status',
     description: 'Check if the agent CLI is installed on the server and get its version',
     inputSchema: {
       type: 'object',
@@ -495,7 +495,7 @@ const tools: Tool[] = [
     },
   },
   {
-    name: 'openmgr_agent_install',
+    name: 'ants_agent_install',
     description: 'Install or update the agent CLI on the server. Required for projects to function.',
     inputSchema: {
       type: 'object',
@@ -504,7 +504,7 @@ const tools: Tool[] = [
     },
   },
   {
-    name: 'openmgr_files_list',
+    name: 'ants_files_list',
     description: 'List files and directories in a project\'s working directory',
     inputSchema: {
       type: 'object',
@@ -526,7 +526,7 @@ const tools: Tool[] = [
     },
   },
   {
-    name: 'openmgr_files_read',
+    name: 'ants_files_read',
     description: 'Read the contents of a file in a project\'s working directory',
     inputSchema: {
       type: 'object',
@@ -544,7 +544,7 @@ const tools: Tool[] = [
     },
   },
   {
-    name: 'openmgr_files_write',
+    name: 'ants_files_write',
     description: 'Write content to a file in a project\'s working directory',
     inputSchema: {
       type: 'object',
@@ -566,7 +566,7 @@ const tools: Tool[] = [
     },
   },
   {
-    name: 'openmgr_files_delete',
+    name: 'ants_files_delete',
     description: 'Delete a file or directory in a project\'s working directory',
     inputSchema: {
       type: 'object',
@@ -588,7 +588,7 @@ const tools: Tool[] = [
     },
   },
   {
-    name: 'openmgr_files_mkdir',
+    name: 'ants_files_mkdir',
     description: 'Create a directory in a project\'s working directory',
     inputSchema: {
       type: 'object',
@@ -610,7 +610,7 @@ const tools: Tool[] = [
     },
   },
   {
-    name: 'openmgr_files_stat',
+    name: 'ants_files_stat',
     description: 'Get file or directory metadata in a project\'s working directory',
     inputSchema: {
       type: 'object',
@@ -628,7 +628,7 @@ const tools: Tool[] = [
     },
   },
   {
-    name: 'openmgr_terminals_list',
+    name: 'ants_terminals_list',
     description: 'List all terminal sessions for an project',
     inputSchema: {
       type: 'object',
@@ -642,7 +642,7 @@ const tools: Tool[] = [
     },
   },
   {
-    name: 'openmgr_terminals_create',
+    name: 'ants_terminals_create',
     description: 'Create a new terminal session for an project',
     inputSchema: {
       type: 'object',
@@ -664,7 +664,7 @@ const tools: Tool[] = [
     },
   },
   {
-    name: 'openmgr_terminals_get',
+    name: 'ants_terminals_get',
     description: 'Get information about a specific terminal session',
     inputSchema: {
       type: 'object',
@@ -682,7 +682,7 @@ const tools: Tool[] = [
     },
   },
   {
-    name: 'openmgr_terminals_delete',
+    name: 'ants_terminals_delete',
     description: 'Delete/kill a terminal session',
     inputSchema: {
       type: 'object',
@@ -700,7 +700,7 @@ const tools: Tool[] = [
     },
   },
   {
-    name: 'openmgr_terminals_resize',
+    name: 'ants_terminals_resize',
     description: 'Resize a terminal session',
     inputSchema: {
       type: 'object',
@@ -730,11 +730,11 @@ const tools: Tool[] = [
 type ToolArgs = Record<string, unknown>;
 
 export async function handleTool(name: string, args: ToolArgs): Promise<string> {
-  if (name === 'openmgr_server_configure') {
+  if (name === 'ants_server_configure') {
     const serverUrl = args.serverUrl as string;
     const secret = args.secret as string;
     
-    const tempClient = new OpenMgrServerClient({ baseUrl: serverUrl, secret });
+    const tempClient = new AntsServerClient({ baseUrl: serverUrl, secret });
     try {
       await tempClient.health();
     } catch (e) {
@@ -746,36 +746,36 @@ export async function handleTool(name: string, args: ToolArgs): Promise<string> 
     return JSON.stringify({ success: true, message: 'Configuration saved and connection verified' });
   }
   
-  if (name === 'openmgr_server_get_config') {
+  if (name === 'ants_server_get_config') {
     const config = await loadMcpConfig();
     if (!config) {
-      return JSON.stringify({ configured: false, message: 'Not configured. Use openmgr_server_configure first.' });
+      return JSON.stringify({ configured: false, message: 'Not configured. Use ants_server_configure first.' });
     }
     return JSON.stringify({ configured: true, serverUrl: config.serverUrl });
   }
   
   const client = await getClient();
   if (!client) {
-    throw new Error('Server not configured. Use openmgr_server_configure first.');
+    throw new Error('Server not configured. Use ants_server_configure first.');
   }
   
   switch (name) {
-    case 'openmgr_server_status': {
+    case 'ants_server_status': {
       const info = await client.info();
       return JSON.stringify(info, null, 2);
     }
     
-    case 'openmgr_projects_list': {
+    case 'ants_projects_list': {
       const result = await client.listProjects();
       return JSON.stringify(result, null, 2);
     }
     
-    case 'openmgr_projects_get': {
+    case 'ants_projects_get': {
       const result = await client.getProject(args.projectId as string);
       return JSON.stringify(result, null, 2);
     }
     
-    case 'openmgr_projects_create': {
+    case 'ants_projects_create': {
       const result = await client.createProject({
         name: args.name as string,
         workingDirectory: args.workingDirectory as string | undefined,
@@ -785,7 +785,7 @@ export async function handleTool(name: string, args: ToolArgs): Promise<string> 
       return JSON.stringify(result, null, 2);
     }
     
-    case 'openmgr_projects_update': {
+    case 'ants_projects_update': {
       const result = await client.updateProject(args.projectId as string, {
         name: args.name as string | undefined,
         model: args.model as string | undefined,
@@ -794,27 +794,27 @@ export async function handleTool(name: string, args: ToolArgs): Promise<string> 
       return JSON.stringify(result, null, 2);
     }
     
-    case 'openmgr_projects_delete': {
+    case 'ants_projects_delete': {
       const result = await client.deleteProject(args.projectId as string);
       return JSON.stringify(result, null, 2);
     }
     
-    case 'openmgr_projects_restart': {
+    case 'ants_projects_restart': {
       const result = await client.restartProject(args.projectId as string);
       return JSON.stringify(result, null, 2);
     }
     
-    case 'openmgr_tasks_list': {
+    case 'ants_tasks_list': {
       const result = await client.listTasks(args.projectId as string);
       return JSON.stringify(result, null, 2);
     }
     
-    case 'openmgr_tasks_get': {
+    case 'ants_tasks_get': {
       const result = await client.getTask(args.projectId as string, args.taskId as string);
       return JSON.stringify(result, null, 2);
     }
     
-    case 'openmgr_tasks_create': {
+    case 'ants_tasks_create': {
       const result = await client.createTask(args.projectId as string, {
         name: args.name as string,
         prompt: args.prompt as string,
@@ -826,7 +826,7 @@ export async function handleTool(name: string, args: ToolArgs): Promise<string> 
       return JSON.stringify(result, null, 2);
     }
     
-    case 'openmgr_tasks_update': {
+    case 'ants_tasks_update': {
       const result = await client.updateTask(args.projectId as string, args.taskId as string, {
         name: args.name as string | undefined,
         prompt: args.prompt as string | undefined,
@@ -838,47 +838,47 @@ export async function handleTool(name: string, args: ToolArgs): Promise<string> 
       return JSON.stringify(result, null, 2);
     }
     
-    case 'openmgr_tasks_delete': {
+    case 'ants_tasks_delete': {
       const result = await client.deleteTask(args.projectId as string, args.taskId as string);
       return JSON.stringify(result, null, 2);
     }
     
-    case 'openmgr_tasks_run': {
+    case 'ants_tasks_run': {
       const result = await client.runTask(args.projectId as string, args.taskId as string);
       return JSON.stringify(result, null, 2);
     }
     
-    case 'openmgr_tasks_history': {
+    case 'ants_tasks_history': {
       const result = await client.getTaskHistory(args.projectId as string, args.taskId as string);
       return JSON.stringify(result, null, 2);
     }
     
-    case 'openmgr_providers_list': {
+    case 'ants_providers_list': {
       const result = await client.listProviders();
       return JSON.stringify(result, null, 2);
     }
     
-    case 'openmgr_providers_get': {
+    case 'ants_providers_get': {
       const result = await client.getProvider(args.providerId as string);
       return JSON.stringify(result, null, 2);
     }
     
-    case 'openmgr_providers_set_api_key': {
+    case 'ants_providers_set_api_key': {
       const result = await client.setProviderApiKey(args.providerId as string, args.apiKey as string);
       return JSON.stringify(result, null, 2);
     }
     
-    case 'openmgr_providers_remove_api_key': {
+    case 'ants_providers_remove_api_key': {
       const result = await client.removeProviderApiKey(args.providerId as string);
       return JSON.stringify(result, null, 2);
     }
     
-    case 'openmgr_config_get': {
+    case 'ants_config_get': {
       const result = await client.getProjectConfig(args.projectId as string);
       return JSON.stringify(result, null, 2);
     }
     
-    case 'openmgr_config_set': {
+    case 'ants_config_set': {
       const config: Record<string, unknown> = {};
       if (args.model !== undefined) {
         config.model = args.model;
@@ -890,32 +890,32 @@ export async function handleTool(name: string, args: ToolArgs): Promise<string> 
       return JSON.stringify(result, null, 2);
     }
     
-    case 'openmgr_system_disk': {
+    case 'ants_system_disk': {
       const result = await client.getDiskUsage();
       return JSON.stringify(result, null, 2);
     }
     
-    case 'openmgr_system_info': {
+    case 'ants_system_info': {
       const result = await client.getSystemInfo();
       return JSON.stringify(result, null, 2);
     }
     
-    case 'openmgr_system_cleanup': {
+    case 'ants_system_cleanup': {
       const result = await client.cleanupSessions(args.olderThanDays as number | undefined);
       return JSON.stringify(result, null, 2);
     }
     
-    case 'openmgr_agent_status': {
+    case 'ants_agent_status': {
       const result = await client.getAgentStatus();
       return JSON.stringify(result, null, 2);
     }
     
-    case 'openmgr_agent_install': {
+    case 'ants_agent_install': {
       const result = await client.installAgent();
       return JSON.stringify(result, null, 2);
     }
     
-    case 'openmgr_files_list': {
+    case 'ants_files_list': {
       const result = await client.listFiles(
         args.projectId as string,
         args.path as string | undefined,
@@ -924,12 +924,12 @@ export async function handleTool(name: string, args: ToolArgs): Promise<string> 
       return JSON.stringify(result, null, 2);
     }
     
-    case 'openmgr_files_read': {
+    case 'ants_files_read': {
       const result = await client.readFile(args.projectId as string, args.path as string);
       return JSON.stringify(result, null, 2);
     }
     
-    case 'openmgr_files_write': {
+    case 'ants_files_write': {
       const result = await client.writeFile(
         args.projectId as string,
         args.path as string,
@@ -938,7 +938,7 @@ export async function handleTool(name: string, args: ToolArgs): Promise<string> 
       return JSON.stringify(result, null, 2);
     }
     
-    case 'openmgr_files_delete': {
+    case 'ants_files_delete': {
       const result = await client.deleteFile(
         args.projectId as string,
         args.path as string,
@@ -947,7 +947,7 @@ export async function handleTool(name: string, args: ToolArgs): Promise<string> 
       return JSON.stringify(result, null, 2);
     }
     
-    case 'openmgr_files_mkdir': {
+    case 'ants_files_mkdir': {
       const result = await client.createDirectory(
         args.projectId as string,
         args.path as string,
@@ -956,17 +956,17 @@ export async function handleTool(name: string, args: ToolArgs): Promise<string> 
       return JSON.stringify(result, null, 2);
     }
     
-    case 'openmgr_files_stat': {
+    case 'ants_files_stat': {
       const result = await client.getFileStat(args.projectId as string, args.path as string);
       return JSON.stringify(result, null, 2);
     }
     
-    case 'openmgr_terminals_list': {
+    case 'ants_terminals_list': {
       const result = await client.listTerminals(args.projectId as string);
       return JSON.stringify(result, null, 2);
     }
     
-    case 'openmgr_terminals_create': {
+    case 'ants_terminals_create': {
       const result = await client.createTerminal(
         args.projectId as string,
         args.shell as string | undefined,
@@ -975,17 +975,17 @@ export async function handleTool(name: string, args: ToolArgs): Promise<string> 
       return JSON.stringify(result, null, 2);
     }
     
-    case 'openmgr_terminals_get': {
+    case 'ants_terminals_get': {
       const result = await client.getTerminal(args.projectId as string, args.sessionId as string);
       return JSON.stringify(result, null, 2);
     }
     
-    case 'openmgr_terminals_delete': {
+    case 'ants_terminals_delete': {
       const result = await client.deleteTerminal(args.projectId as string, args.sessionId as string);
       return JSON.stringify(result, null, 2);
     }
     
-    case 'openmgr_terminals_resize': {
+    case 'ants_terminals_resize': {
       const result = await client.resizeTerminal(
         args.projectId as string,
         args.sessionId as string,
@@ -1003,7 +1003,7 @@ export async function handleTool(name: string, args: ToolArgs): Promise<string> 
 async function main(): Promise<void> {
   const server = new Server(
     {
-      name: 'openmgr-mcp',
+      name: 'ants-mcp',
       version: '0.1.0',
     },
     {
@@ -1036,7 +1036,7 @@ async function main(): Promise<void> {
 
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  log.info('openmgr-mcp started');
+  log.info('ants-mcp started');
 }
 
 main().catch((error) => {

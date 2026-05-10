@@ -7,7 +7,7 @@
 
 import { Hono } from 'hono';
 import { platform } from 'os';
-import type { OpenMgrAgentManager } from '../services/openmgr-agent-manager.js';
+import type { AntsAgentManager } from '../services/ants-agent-manager.js';
 import type { ProjectManager } from '../services/project-manager.js';
 import { getErrorMessage } from '../utils/errors.js';
 import { createLogger } from '../utils/logger.js';
@@ -15,7 +15,7 @@ import { createLogger } from '../utils/logger.js';
 const log = createLogger('docker-routes');
 
 export function createDockerRoutes(
-  agentManager: OpenMgrAgentManager,
+  agentManager: AntsAgentManager,
   projectManager: ProjectManager,
 ) {
   const app = new Hono();

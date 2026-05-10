@@ -255,7 +255,7 @@ export class McpOAuthManager {
     if (!this.callbackHandler) {
       throw new Error(
         "OAuth callback handler not configured. " +
-        "In Node.js, use @openmgr/agent-node which provides a local HTTP server handler. " +
+        "In Node.js, use @ants/agent-node which provides a local HTTP server handler. " +
         "In React Native, configure a deep linking handler."
       );
     }

@@ -39,7 +39,7 @@ export const useAuthStore = create<AuthState>()(
       setFullAuthStatus: (status) => set({ status }),
     }),
     {
-      name: 'openmgr-auth-store',
+      name: 'ants-auth-store',
       storage: getPersistStorage(),
       partialize: (state) => ({ status: state.status }),
     }

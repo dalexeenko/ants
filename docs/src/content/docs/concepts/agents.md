@@ -1,6 +1,6 @@
 ---
 title: Agents & Sessions
-description: How agents work in OpenMgr — the orchestrator, sessions, tools, and conversation management.
+description: How agents work in Ants — the orchestrator, sessions, tools, and conversation management.
 sidebar:
   order: 2
 ---

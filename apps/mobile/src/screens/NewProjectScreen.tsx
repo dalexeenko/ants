@@ -11,8 +11,8 @@
 
 import React from 'react';
 import { View, StyleSheet, Pressable } from 'react-native';
-import { Text, Icon, ProjectSetupForm, useTheme, spacing } from '@openmgr/ui';
-import type { AgentBridge } from '@openmgr/ui';
+import { Text, Icon, ProjectSetupForm, useTheme, spacing } from '@ants/ui';
+import type { AgentBridge } from '@ants/ui';
 import { File } from 'expo-file-system';
 import {
   createLocalFilesystemProvider,

@@ -39,7 +39,7 @@ describe('ProjectSection', () => {
         />
       );
 
-      expect(screen.getByTestId('openmgr-project-new-worktree-session')).toBeInTheDocument();
+      expect(screen.getByTestId('ants-project-new-worktree-session')).toBeInTheDocument();
     });
 
     it('should NOT show worktree button when isGitRepo is false', () => {
@@ -55,7 +55,7 @@ describe('ProjectSection', () => {
         />
       );
 
-      expect(screen.queryByTestId('openmgr-project-new-worktree-session')).not.toBeInTheDocument();
+      expect(screen.queryByTestId('ants-project-new-worktree-session')).not.toBeInTheDocument();
     });
 
     it('should NOT show worktree button when worktreeEnabled is false', () => {
@@ -71,7 +71,7 @@ describe('ProjectSection', () => {
         />
       );
 
-      expect(screen.queryByTestId('openmgr-project-new-worktree-session')).not.toBeInTheDocument();
+      expect(screen.queryByTestId('ants-project-new-worktree-session')).not.toBeInTheDocument();
     });
 
     it('should NOT show worktree button when worktreeEnabled is undefined', () => {
@@ -87,7 +87,7 @@ describe('ProjectSection', () => {
         />
       );
 
-      expect(screen.queryByTestId('openmgr-project-new-worktree-session')).not.toBeInTheDocument();
+      expect(screen.queryByTestId('ants-project-new-worktree-session')).not.toBeInTheDocument();
     });
 
     it('should NOT show worktree button when isGitRepo is undefined', () => {
@@ -103,7 +103,7 @@ describe('ProjectSection', () => {
         />
       );
 
-      expect(screen.queryByTestId('openmgr-project-new-worktree-session')).not.toBeInTheDocument();
+      expect(screen.queryByTestId('ants-project-new-worktree-session')).not.toBeInTheDocument();
     });
 
     it('should NOT show worktree button when callback is not provided', () => {
@@ -118,7 +118,7 @@ describe('ProjectSection', () => {
         />
       );
 
-      expect(screen.queryByTestId('openmgr-project-new-worktree-session')).not.toBeInTheDocument();
+      expect(screen.queryByTestId('ants-project-new-worktree-session')).not.toBeInTheDocument();
     });
   });
 });

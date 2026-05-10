@@ -2,7 +2,7 @@ import { _electron as electron, type ElectronApplication, type Page } from 'play
 import path from 'path';
 
 /**
- * Helper for launching and controlling the OpenMgr Electron app with Playwright.
+ * Helper for launching and controlling the Ants Electron app with Playwright.
  * 
  * @example
  * ```typescript
@@ -20,7 +20,7 @@ import path from 'path';
  * });
  * 
  * test('example test', async () => {
- *   await expect(page.locator('text=OpenMgr')).toBeVisible();
+ *   await expect(page.locator('text=Ants')).toBeVisible();
  * });
  * ```
  */
@@ -52,7 +52,7 @@ export async function launchApp(options: LaunchOptions = {}): Promise<AppContext
 
   // Enable CDP remote debugging if requested
   if (options.cdpPort) {
-    env.OPENMGR_CDP_PORT = String(options.cdpPort);
+    env.ANTS_CDP_PORT = String(options.cdpPort);
   }
 
   const app = await electron.launch({
@@ -123,8 +123,8 @@ export async function ensureProject(page: Page): Promise<void> {
   // Wait for the app to settle. Check for an existing project's session list
   // (which only appears when a project has been expanded) or the welcome
   // screen's "New Project" button.
-  const sidebar = page.getByTestId('openmgr-project-sidebar');
-  const newProjectBtn = page.getByTestId('openmgr-welcome-new-project');
+  const sidebar = page.getByTestId('ants-project-sidebar');
+  const newProjectBtn = page.getByTestId('ants-welcome-new-project');
 
   // Wait for the app to fully load by checking for the sidebar header
   await expect(sidebar).toBeVisible({ timeout: 15000 });
@@ -138,7 +138,7 @@ export async function ensureProject(page: Page): Promise<void> {
 
   // No project — create one via the setup modal
   await newProjectBtn.click();
-  const createBtn = page.getByTestId('openmgr-create-project');
+  const createBtn = page.getByTestId('ants-create-project');
   await expect(createBtn).toBeVisible({ timeout: 5000 });
   await createBtn.click();
   // Wait for the modal to close and the project sidebar to appear
@@ -155,6 +155,6 @@ export async function ensureSession(page: Page): Promise<void> {
   await ensureProject(page);
   // The new session button is hidden (opacity: 0) until hovered.
   // Use force: true to click it regardless of visibility.
-  await page.getByTestId('openmgr-project-new-session').click({ force: true });
-  await expect(page.getByTestId('openmgr-chat-input')).toBeVisible({ timeout: 10000 });
+  await page.getByTestId('ants-project-new-session').click({ force: true });
+  await expect(page.getByTestId('ants-chat-input')).toBeVisible({ timeout: 10000 });
 }

@@ -1,10 +1,10 @@
 # Messaging Channels
 
-This document describes the messaging channels feature, which enables bidirectional communication between OpenMgr projects and external messaging platforms (Slack, Discord, Twitter, etc.).
+This document describes the messaging channels feature, which enables bidirectional communication between Ants projects and external messaging platforms (Slack, Discord, Twitter, etc.).
 
 ## Overview
 
-Channels allow users to interact with OpenMgr agents through familiar messaging platforms. The system supports:
+Channels allow users to interact with Ants agents through familiar messaging platforms. The system supports:
 
 - **Inbound messages**: Users trigger agents via @mentions, DMs, etc.
 - **Outbound messages**: Agents can proactively send messages to channels
@@ -15,7 +15,7 @@ Channels allow users to interact with OpenMgr agents through familiar messaging 
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                              OPENMGR SERVER                                  │
+│                              ANTS SERVER                                  │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                              │
 │  ┌──────────────────┐    ┌───────────────────────────────────────────────┐  │
@@ -333,7 +333,7 @@ The following prompt can be used to generate the UI for channel management in th
 
 **Prompt for UI Implementation:**
 
-Create a Channels management UI for the OpenMgr app with the following features:
+Create a Channels management UI for the Ants app with the following features:
 
 1. **Channels List Page** (`/channels`)
    - Display all configured channels in a list/grid

@@ -1,7 +1,7 @@
 /**
- * @openmgr/agent
+ * @ants/agent
  *
- * OpenMgr Agent - AI coding assistant with batteries included
+ * Ants Agent - AI coding assistant with batteries included
  *
  * This is the main meta-package that re-exports all functionality from
  * the individual packages for convenience.
@@ -107,7 +107,7 @@ export {
 
   // Built-in commands
   registerBuiltinCommands,
-} from "@openmgr/agent-core";
+} from "@ants/agent-core";
 
 // Providers
 export {
@@ -120,7 +120,7 @@ export {
   GroqProvider,
   XAIProvider,
   type ProviderName as LLMProviderName,
-} from "@openmgr/agent-providers";
+} from "@ants/agent-providers";
 
 // Tools (pure code)
 export {
@@ -132,7 +132,7 @@ export {
   webSearchTool,
   skillTool,
   toolsPlugin,
-} from "@openmgr/agent-tools";
+} from "@ants/agent-tools";
 
 // Tools (terminal/filesystem)
 export {
@@ -143,7 +143,7 @@ export {
   globTool,
   grepTool,
   toolsTerminalPlugin,
-} from "@openmgr/agent-tools-terminal";
+} from "@ants/agent-tools-terminal";
 
 // Database
 export {
@@ -184,7 +184,7 @@ export {
   type MemoryEntryInsert,
   type AnthropicTokenRow,
   type AnthropicTokenInsert,
-} from "@openmgr/agent-database";
+} from "@ants/agent-database";
 
 // Storage (session management)
 export {
@@ -194,22 +194,22 @@ export {
   type CreateMessageOptions,
   type UpdateSessionOptions,
   type StoragePluginOptions,
-} from "@openmgr/agent-storage";
+} from "@ants/agent-storage";
 
 // Memory — re-exported as type-only. Runtime values must be accessed via the
-// loadMemoryModule() helper or by importing @openmgr/agent-memory directly.
+// loadMemoryModule() helper or by importing @ants/agent-memory directly.
 // The memory package depends on @huggingface/transformers which may not be
 // installed (e.g. lite Docker image), so static re-exports would crash.
-export type { MemoryItem, MemorySearchResult } from "@openmgr/agent-memory";
+export type { MemoryItem, MemorySearchResult } from "@ants/agent-memory";
 
 /**
- * Lazily load the @openmgr/agent-memory module.
+ * Lazily load the @ants/agent-memory module.
  * Returns null if the module or its native dependencies are unavailable
  * (e.g. in the lite Docker image where onnxruntime is stripped).
  */
-export async function loadMemoryModule(): Promise<typeof import("@openmgr/agent-memory") | null> {
+export async function loadMemoryModule(): Promise<typeof import("@ants/agent-memory") | null> {
   try {
-    return await import("@openmgr/agent-memory");
+    return await import("@ants/agent-memory");
   } catch {
     return null;
   }
@@ -220,7 +220,7 @@ export {
   AnthropicOAuthProvider,
   createAnthropicOAuthProvider,
   type AnthropicOAuthProviderOptions,
-} from "@openmgr/agent-providers";
+} from "@ants/agent-providers";
 
 // Auth (OAuth flow utilities)
 export {
@@ -239,7 +239,7 @@ export {
   // Types
   type LoginResult,
   type AuthorizationInfo,
-} from "@openmgr/agent-auth-anthropic";
+} from "@ants/agent-auth-anthropic";
 
 // Re-exports from auth-core
 export {
@@ -252,7 +252,7 @@ export {
   type OAuthTokenStore,
   type PKCEUtils,
   type OAuthFlowHandler,
-} from "@openmgr/agent-auth-core";
+} from "@ants/agent-auth-core";
 
 // Skills (from skills-loader which now includes bundled skills)
 export {
@@ -263,7 +263,7 @@ export {
   getBundledSkillsDir,
   FilesystemSkillManager,
   type BundledSkillInfo,
-} from "@openmgr/agent-skills-loader";
+} from "@ants/agent-skills-loader";
 
 // LSP
 export {
@@ -277,7 +277,7 @@ export {
   type LspManagerOptions,
   type Diagnostic,
   type Position,
-} from "@openmgr/agent-lsp";
+} from "@ants/agent-lsp";
 
 // Server
 export {
@@ -286,7 +286,7 @@ export {
   serverPlugin,
   type ServerConfig,
   type ServerState,
-} from "@openmgr/agent-server";
+} from "@ants/agent-server";
 
 // CLI
 export {
@@ -294,4 +294,4 @@ export {
   Spinner,
   DebugLogger,
   debug,
-} from "@openmgr/agent-cli";
+} from "@ants/agent-cli";

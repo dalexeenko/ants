@@ -36,19 +36,19 @@ rm -rf apps/desktop/out
 
 # Rebuild native modules for Electron
 echo "==> Rebuilding native modules for Electron..."
-pnpm --filter @openmgr/app-electron exec electron-rebuild -f -w better-sqlite3,keytar,node-pty
+pnpm --filter @ants/app-electron exec electron-rebuild -f -w better-sqlite3,keytar,node-pty
 
 # --- macOS ---
 echo "==> Packaging Electron app for macOS..."
-pnpm --filter @openmgr/app-electron exec electron-builder --mac
+pnpm --filter @ants/app-electron exec electron-builder --mac
 
 # --- Linux ---
 echo "==> Packaging Electron app for Linux..."
-pnpm --filter @openmgr/app-electron exec electron-builder --linux
+pnpm --filter @ants/app-electron exec electron-builder --linux
 
 # --- Windows ---
 echo "==> Packaging Electron app for Windows..."
-pnpm --filter @openmgr/app-electron exec electron-builder --win
+pnpm --filter @ants/app-electron exec electron-builder --win
 
 echo "==> Electron builds complete. Output in apps/desktop/out/"
 ls -lh apps/desktop/out/

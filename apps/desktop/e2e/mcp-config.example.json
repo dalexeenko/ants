@@ -1,6 +1,6 @@
 {
   "mcpServers": {
-    "openmgr-desktop": {
+    "ants-desktop": {
       "command": "npx",
       "args": [
         "@playwright/mcp@latest",

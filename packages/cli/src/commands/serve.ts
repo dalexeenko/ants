@@ -11,11 +11,11 @@ export function registerServeCommand(program: Command): void {
     .option("--model <model>", "Model name")
     .action(async (options) => {
       // Dynamic imports to avoid loading heavy modules unless needed
-      const { createServer, startServer } = await import("@openmgr/agent-server");
-      const { providerRegistry, PluginManager, SubagentManager, capabilityRegistry } = await import("@openmgr/agent-core");
-      const { createNodeAgent } = await import("@openmgr/agent-node");
-      const { getDb, SessionManager, storagePlugin, initializeDatabase } = await import("@openmgr/agent-storage");
-      const { AnthropicOAuthProvider } = await import("@openmgr/agent-providers");
+      const { createServer, startServer } = await import("@ants/agent-server");
+      const { providerRegistry, PluginManager, SubagentManager, capabilityRegistry } = await import("@ants/agent-core");
+      const { createNodeAgent } = await import("@ants/agent-node");
+      const { getDb, SessionManager, storagePlugin, initializeDatabase } = await import("@ants/agent-storage");
+      const { AnthropicOAuthProvider } = await import("@ants/agent-providers");
       const { join } = await import("node:path");
       const { homedir } = await import("node:os");
 
@@ -68,7 +68,7 @@ export function registerServeCommand(program: Command): void {
         provider: useOAuth ? "anthropic-oauth" : (options.provider || undefined),
         model: options.model,
         // Allow all tools by default when running as a server.
-        // The openmgr server handles its own approval/permission layer;
+        // The ants server handles its own approval/permission layer;
         // the agent-server itself should not block on tool permissions.
         permissions: { allowAll: true } as const,
       };
@@ -77,12 +77,12 @@ export function registerServeCommand(program: Command): void {
       const agent = await createNodeAgent(agentOptions);
       
       // Register memory plugin for semantic memory/knowledge base tools.
-      // Loaded dynamically because @openmgr/agent-memory depends on
+      // Loaded dynamically because @ants/agent-memory depends on
       // @huggingface/transformers + onnxruntime-node which may not be
       // installed (e.g. lite Docker image). Falls back to keyword-only search.
       let memoryPlugin: (() => any) | null = null;
       try {
-        const mod = await import("@openmgr/agent-memory");
+        const mod = await import("@ants/agent-memory");
         memoryPlugin = mod.memoryPlugin;
       } catch {
         console.log(chalk.gray("Memory plugin unavailable (embeddings dependencies not installed). Keyword-only memory search will be used."));
@@ -97,7 +97,7 @@ export function registerServeCommand(program: Command): void {
       const subagentManager = new SubagentManager(agent);
       agent.setExtension('subagentManager', subagentManager);
       capabilityRegistry.register('subagent', {
-        providedBy: '@openmgr/agent-server',
+        providedBy: '@ants/agent-server',
         version: '0.1.0',
       });
       agent.getToolRegistry().reevaluateDeferred();
@@ -152,14 +152,14 @@ export function registerServeCommand(program: Command): void {
       };
 
       // Create plugin manager for runtime plugin installation
-      const pluginDir = join(homedir(), ".config", "openmgr", "plugins");
+      const pluginDir = join(homedir(), ".config", "ants", "plugins");
       const pluginManager = new PluginManager({ pluginDir });
 
       // Install server-managed plugins from config before starting
-      // The server writes a `plugins` array to .openmgr.json with package
+      // The server writes a `plugins` array to .ants.json with package
       // specs that should be installed.
       const { existsSync, readFileSync } = await import("node:fs");
-      const configPath = join(options.directory, ".openmgr.json");
+      const configPath = join(options.directory, ".ants.json");
       if (existsSync(configPath)) {
         try {
           const rawConfig = JSON.parse(readFileSync(configPath, "utf-8"));

@@ -3,8 +3,8 @@
  */
 
 import { z } from "zod";
-import type { ToolDefinition, ToolContext } from "@openmgr/agent-core";
-import type { SubagentManagerInterface } from "@openmgr/agent-core";
+import type { ToolDefinition, ToolContext } from "@ants/agent-core";
+import type { SubagentManagerInterface } from "@ants/agent-core";
 
 const DESCRIPTION = `Check the status of a subagent task.
 

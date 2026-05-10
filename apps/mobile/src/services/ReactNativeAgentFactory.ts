@@ -1,12 +1,12 @@
 /**
  * React Native Agent Factory
  * 
- * Creates agents using @openmgr/agent-react-native for on-device AI processing.
+ * Creates agents using @ants/agent-react-native for on-device AI processing.
  * Sessions and messages are persisted to SQLite using expo-sqlite.
  */
 
-import type { PlatformAgentFactory, PlatformAgent, PlatformSessionManager, AgentEvent, PermissionResponse, ToolPermissionConfig, ToolInfo } from '@openmgr/ui';
-import { createLogger } from '@openmgr/ui';
+import type { PlatformAgentFactory, PlatformAgent, PlatformSessionManager, AgentEvent, PermissionResponse, ToolPermissionConfig, ToolInfo } from '@ants/ui';
+import { createLogger } from '@ants/ui';
 import {
   Agent,
   providersPlugin,
@@ -24,7 +24,7 @@ import {
   type GenericAgentDatabase,
   type SessionRow,
   type MessageRow,
-} from '@openmgr/agent-react-native';
+} from '@ants/agent-react-native';
 import { fetch as expoFetch } from 'expo/fetch';
 import * as Crypto from 'expo-crypto';
 import * as FileSystem from 'expo-file-system';
@@ -693,7 +693,7 @@ export class ReactNativeAgentFactory implements PlatformAgentFactory {
       });
       agent.setExtension('subagentManager', subagentManager);
       capabilityRegistry.register('subagent', {
-        providedBy: '@openmgr/app-mobile',
+        providedBy: '@ants/app-mobile',
         version: '0.1.0',
       });
       agent.getToolRegistry().reevaluateDeferred();

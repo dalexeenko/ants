@@ -6,9 +6,9 @@ import {
   saveLocalConfig,
   getGlobalConfigPath,
   getLocalConfigPath,
-} from "@openmgr/agent-config-xdg";
-import { isLoggedIn } from "@openmgr/agent-auth-anthropic";
-import { FileTokenStore } from "@openmgr/agent-node";
+} from "@ants/agent-config-xdg";
+import { isLoggedIn } from "@ants/agent-auth-anthropic";
+import { FileTokenStore } from "@ants/agent-node";
 
 // Shared token store instance
 const tokenStore = new FileTokenStore();

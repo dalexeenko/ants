@@ -2,7 +2,7 @@
 
 ## Overview
 
-OpenMgr is a pnpm + Turborepo monorepo. All packages compile TypeScript to `dist/` directories.
+Ants is a pnpm + Turborepo monorepo. All packages compile TypeScript to `dist/` directories.
 
 ## Repository Layout
 
@@ -33,12 +33,12 @@ All packages must be built before runtime use. Source changes are not picked up 
 
 ```bash
 pnpm build                                    # Build everything (via Turborepo)
-pnpm turbo build --filter=@openmgr/server     # Build one package + its deps
+pnpm turbo build --filter=@ants/server     # Build one package + its deps
 ```
 
 The `apps/server/` build script uses `;` (not `&&`) because tsc has pre-existing type errors but still emits JS. The server has its own standalone tsconfig (not extending the base).
 
-UI packages (`@openmgr/ui`, `@openmgr/server-ui`) export TypeScript source directly and are consumed by bundlers (Vite/Metro) — they do not need a separate build step for dev.
+UI packages (`@ants/ui`, `@ants/server-ui`) export TypeScript source directly and are consumed by bundlers (Vite/Metro) — they do not need a separate build step for dev.
 
 ## Testing
 
@@ -66,13 +66,13 @@ Hono HTTP server with SQLite (better-sqlite3) + Drizzle ORM. Service container p
 
 ### Cross-Platform UI (`packages/ui/`)
 
-React components shared between desktop (react-dom via react-native-web) and mobile (React Native). Uses react-native-web for cross-platform primitives. Path aliases in desktop (`electron.vite.config.ts`) and mobile (`jest.config.js`) point `@openmgr/ui` to the source directory.
+React components shared between desktop (react-dom via react-native-web) and mobile (React Native). Uses react-native-web for cross-platform primitives. Path aliases in desktop (`electron.vite.config.ts`) and mobile (`jest.config.js`) point `@ants/ui` to the source directory.
 
 **Color palette**: `packages/ui/src/styles/tokens.ts` is the single source of truth for all colors across every UI surface (desktop, mobile, server-ui). See `packages/ui/AGENTS.md` for the full palette reference. Never hardcode hex color values in UI components.
 
 ### Server UI (`packages/server-ui/`)
 
-Separate React + Vite SPA for the server's web interface. Built to `dist/` and consumed by `apps/server/` — the server copies the built UI during its own build (`cp -r node_modules/@openmgr/server-ui/dist dist/ui`). Colors are CSS custom properties mirrored from `packages/ui/src/styles/tokens.ts` — see `packages/server-ui/AGENTS.md`.
+Separate React + Vite SPA for the server's web interface. Built to `dist/` and consumed by `apps/server/` — the server copies the built UI during its own build (`cp -r node_modules/@ants/server-ui/dist dist/ui`). Colors are CSS custom properties mirrored from `packages/ui/src/styles/tokens.ts` — see `packages/server-ui/AGENTS.md`.
 
 ### Module Resolution
 
@@ -83,7 +83,7 @@ Separate React + Vite SPA for the server's web interface. Built to `dist/` and c
 
 ### Dependencies
 
-- All `@openmgr/*` deps use `workspace:*`
+- All `@ants/*` deps use `workspace:*`
 - pnpm strict mode — packages must declare all their direct dependencies
 - React versions pinned via pnpm overrides in root `package.json`
 
@@ -154,8 +154,8 @@ The Dockerfile (`apps/server/Dockerfile`) supports a `VARIANT` build arg (`full`
 ### Local commands
 
 ```bash
-pnpm docker:build                  # Build full image (openmgr/server:local)
-pnpm docker:build:lite             # Build lite image (openmgr/server:local-lite)
+pnpm docker:build                  # Build full image (ants/server:local)
+pnpm docker:build:lite             # Build lite image (ants/server:local-lite)
 pnpm docker:run                    # Run full image
 pnpm docker:run:lite               # Run lite image
 pnpm compose:up:lite               # Compose up with lite variant
@@ -172,15 +172,15 @@ Code that depends on stripped dependencies uses dynamic `import()` with try/catc
 
 ## TODOs
 
-- **App store URLs**: The "Connect App" section on the server settings page (`packages/server-ui/src/pages/SettingsPage.tsx`) uses placeholder app store URLs (`https://apps.apple.com/app/openmgr`, `https://play.google.com/store/apps/details?id=com.openmgr`). Replace these with real URLs once the apps are published.
-- **Docker agent spawning**: `DockerManager` has been extracted to `packages/docker/` (`@openmgr/agent-docker`). The server re-exports it from `apps/server/src/services/docker-manager.ts`. The desktop has `LocalDockerService` for local Docker support. Agent processes are currently spawned as local Node.js child processes; Docker-based spawning works per-project (one container per project). Per-worktree Docker containers are a future enhancement — the lifecycle hooks in `ProjectWorktreeManager.setHooks()` provide the integration point. When running outside Docker, the agent image defaults to `openmgr/server:latest` — in the future this should default to the matching release version.
+- **App store URLs**: The "Connect App" section on the server settings page (`packages/server-ui/src/pages/SettingsPage.tsx`) uses placeholder app store URLs (`https://apps.apple.com/app/ants`, `https://play.google.com/store/apps/details?id=com.ants`). Replace these with real URLs once the apps are published.
+- **Docker agent spawning**: `DockerManager` has been extracted to `packages/docker/` (`@ants/agent-docker`). The server re-exports it from `apps/server/src/services/docker-manager.ts`. The desktop has `LocalDockerService` for local Docker support. Agent processes are currently spawned as local Node.js child processes; Docker-based spawning works per-project (one container per project). Per-worktree Docker containers are a future enhancement — the lifecycle hooks in `ProjectWorktreeManager.setHooks()` provide the integration point. When running outside Docker, the agent image defaults to `ants/server:latest` — in the future this should default to the matching release version.
 - **Dead `buildDockerImage` code**: `AgentBridge.buildDockerImage`, the desktop bridge implementation, and the "Build Agent Image" button in `DockerSettings.tsx` are dead code — no server endpoint exists. Remove from `AgentBridge` type, `desktopBridge.ts`, `ipc.ts`, `preload/index.ts`, and `DockerSettings.tsx`.
 - **projectTemplates unused columns**: Five columns in the `projectTemplates` schema (`setupCommands`, `fileTemplates`, `rootAgentType`, `agentTypes`, `hubTemplateId`) are defined but not yet implemented. See comments in `apps/server/src/db/schema.ts`.
 
 ## Common Pitfalls
 
-- **Cyclic deps**: `@openmgr/agent-core` cannot depend on `@openmgr/agent-providers` (even as devDep). Tests in core use mocks.
+- **Cyclic deps**: `@ants/agent-core` cannot depend on `@ants/agent-providers` (even as devDep). Tests in core use mocks.
 - **Missing direct deps**: pnpm strict mode does not hoist. If a package imports something, it must be in its own `package.json`.
 - **Test files in builds**: tsconfig `include: ["src/**/*"]` without excluding `__tests__/` will cause build failures when test files import vitest. Add `"exclude": ["src/**/__tests__/**"]`.
 - **Server tsconfig**: Do not extend `tsconfig.base.json` — the base config enables `noUncheckedIndexedAccess` and `verbatimModuleSyntax` which surface many pre-existing server type errors.
-- **Rebuilt before runtime**: The server spawns agent processes from `packages/cli/dist/bin.js`. Source changes to any `@openmgr/*` package require `pnpm build` and restarting the server.
+- **Rebuilt before runtime**: The server spawns agent processes from `packages/cli/dist/bin.js`. Source changes to any `@ants/*` package require `pnpm build` and restarting the server.

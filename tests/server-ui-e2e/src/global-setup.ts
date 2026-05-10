@@ -1,7 +1,7 @@
 /**
  * Playwright global setup for server-ui E2E tests.
  *
- * Starts the OpenMgr server in mock mode, runs initial admin setup,
+ * Starts the Ants server in mock mode, runs initial admin setup,
  * authenticates via the login page, and saves the browser storage state
  * so all subsequent tests share the same session.
  */

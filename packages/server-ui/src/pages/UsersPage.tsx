@@ -75,7 +75,7 @@ export function UsersPage() {
         <div className="empty-state">
           <p>Single-user mode</p>
           <p className="empty-hint">
-            Enable multi-user mode (OPENMGR_MULTI_USER=true) to manage users.
+            Enable multi-user mode (ANTS_MULTI_USER=true) to manage users.
           </p>
         </div>
       </>

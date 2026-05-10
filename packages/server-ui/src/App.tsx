@@ -57,7 +57,7 @@ export function App() {
       <aside className={`sidebar ${sidebarOpen ? 'open' : ''}`} data-testid="server-ui-sidebar">
         <div className="sidebar-header">
           <NavLink to="/" className="sidebar-logo" onClick={closeSidebar}>
-            OpenMgr
+            Ants
           </NavLink>
         </div>
         <nav className="sidebar-nav">
@@ -86,7 +86,7 @@ export function App() {
               )}
             </div>
           )}
-          <span className="text-sm text-muted">OpenMgr Server{serverVersion ? ` v${serverVersion}` : ''}</span>
+          <span className="text-sm text-muted">Ants Server{serverVersion ? ` v${serverVersion}` : ''}</span>
         </div>
       </aside>
 

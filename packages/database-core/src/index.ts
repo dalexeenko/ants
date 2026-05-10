@@ -1,12 +1,12 @@
 /**
- * @openmgr/agent-database-core
+ * @ants/agent-database-core
  * 
- * Core database schema, types, and interfaces for OpenMgr Agent.
+ * Core database schema, types, and interfaces for Ants Agent.
  * This package is React Native compatible and contains no Node.js-specific code.
  * 
  * Platform-specific implementations:
- * - Node.js: @openmgr/agent-database (better-sqlite3)
- * - React Native: @openmgr/agent-database-expo (expo-sqlite)
+ * - Node.js: @ants/agent-database (better-sqlite3)
+ * - React Native: @ants/agent-database-expo (expo-sqlite)
  */
 
 // Schema and table definitions

@@ -1,7 +1,7 @@
 /**
- * @openmgr/agent-tools-director
+ * @ants/agent-tools-director
  *
- * Director agent tools for configuring and managing OpenMgr.
+ * Director agent tools for configuring and managing Ants.
  * These tools let the Director agent interact with the app's configuration
  * layer: projects, sessions, remote servers, auth, Docker, settings, and navigation.
  *
@@ -10,7 +10,7 @@
  *   agent.setExtension('director.context', myDirectorContextImpl)
  */
 
-import type { AgentPlugin } from "@openmgr/agent-core";
+import type { AgentPlugin } from "@ants/agent-core";
 import { projectTools } from "./tools/projects.js";
 import { sessionTools } from "./tools/sessions.js";
 import { serverTools } from "./tools/servers.js";
@@ -66,7 +66,7 @@ export const directorTools = [
  *   agent.setExtension('director.context', myImpl)
  */
 export const directorToolsPlugin: AgentPlugin = {
-  name: "@openmgr/agent-tools-director",
+  name: "@ants/agent-tools-director",
   version: "0.1.0",
   tools: directorTools as AgentPlugin["tools"],
 };
@@ -79,7 +79,7 @@ export const directorAgentType = {
   name: "director",
   version: "1.0.0",
   description:
-    "The Director — a dedicated agent for configuring and managing the OpenMgr app. Handles projects, sessions, servers, auth, Docker, and settings.",
+    "The Director — a dedicated agent for configuring and managing the Ants app. Handles projects, sessions, servers, auth, Docker, and settings.",
   systemPrompt: DIRECTOR_SYSTEM_PROMPT,
   allowedTools: directorTools.map((t) => t.name),
   deniedTools: [] as string[],

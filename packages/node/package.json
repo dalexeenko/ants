@@ -1,7 +1,7 @@
 {
-  "name": "@openmgr/agent-node",
+  "name": "@ants/agent-node",
   "version": "0.1.0",
-  "description": "OpenMgr Agent for Node.js environments with full filesystem access",
+  "description": "Ants Agent for Node.js environments with full filesystem access",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -22,17 +22,17 @@
     "clean": "rm -rf dist coverage"
   },
   "dependencies": {
-    "@openmgr/agent-core": "workspace:*",
-    "@openmgr/agent-config-xdg": "workspace:*",
-    "@openmgr/agent-providers": "workspace:*",
-    "@openmgr/agent-skills-loader": "workspace:*",
-    "@openmgr/agent-mcp-stdio": "workspace:*",
-    "@openmgr/agent-tools": "workspace:*",
-    "@openmgr/agent-tools-terminal": "workspace:*",
-    "@openmgr/agent-browser-core": "workspace:*",
-    "@openmgr/agent-browser-sandbox": "workspace:*",
-    "@openmgr/agent-auth-anthropic": "workspace:*",
-    "@openmgr/agent-worktree": "workspace:*"
+    "@ants/agent-core": "workspace:*",
+    "@ants/agent-config-xdg": "workspace:*",
+    "@ants/agent-providers": "workspace:*",
+    "@ants/agent-skills-loader": "workspace:*",
+    "@ants/agent-mcp-stdio": "workspace:*",
+    "@ants/agent-tools": "workspace:*",
+    "@ants/agent-tools-terminal": "workspace:*",
+    "@ants/agent-browser-core": "workspace:*",
+    "@ants/agent-browser-sandbox": "workspace:*",
+    "@ants/agent-auth-anthropic": "workspace:*",
+    "@ants/agent-worktree": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^22.19.7",

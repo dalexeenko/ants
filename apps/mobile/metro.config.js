@@ -50,7 +50,7 @@ config.resolver.resolveRequest = (context, moduleName, platform) => {
     };
   }
   
-  // Stub out Node.js-only modules from @openmgr/agent-core that use
+  // Stub out Node.js-only modules from @ants/agent-core that use
   // unsupported features like dynamic import(variable) or node:url
   if (
     moduleName === './plugins/manager.js' &&
@@ -100,8 +100,8 @@ config.resolver.resolveRequest = (context, moduleName, platform) => {
     }
   }
   
-  // Force @openmgr/agent-core to use the native entry point
-  if (moduleName === '@openmgr/agent-core') {
+  // Force @ants/agent-core to use the native entry point
+  if (moduleName === '@ants/agent-core') {
     const nativePath = path.resolve(workspaceRoot, 'packages/core/dist/index.native.js');
     // Only use native path if it exists
     try {

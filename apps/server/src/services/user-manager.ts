@@ -4,7 +4,7 @@
  *
  * Design principles for self-hosted:
  * - Works alongside the existing bearer token auth (backwards compatible)
- * - Multi-user mode is opt-in via OPENMGR_MULTI_USER=true
+ * - Multi-user mode is opt-in via ANTS_MULTI_USER=true
  * - Auto-creates initial admin user on first run
  * - No external auth dependencies (simple password-based using crypto.scrypt)
  * - Roles: admin (full access), operator (manage projects), viewer (read-only)

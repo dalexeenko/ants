@@ -14,7 +14,7 @@ import {
   Platform,
   Keyboard,
 } from 'react-native';
-import { ThemeContext, Text, Divider, spacing, palette } from '@openmgr/ui';
+import { ThemeContext, Text, Divider, spacing, palette } from '@ants/ui';
 import { Home, Settings, Sparkles, Users, X } from 'lucide-react-native';
 
 const DRAWER_WIDTH = 280;
@@ -117,7 +117,7 @@ export function Drawer({ isOpen, onClose, items, activeItemId }: DrawerProps) {
 
       {/* Drawer */}
       <Animated.View
-        testID="openmgr-drawer"
+        testID="ants-drawer"
         {...panResponder.panHandlers}
         style={[
           styles.drawer,
@@ -130,9 +130,9 @@ export function Drawer({ isOpen, onClose, items, activeItemId }: DrawerProps) {
       >
         {/* Header */}
         <View style={[styles.header, { borderBottomColor: colors.border.light }]}>
-          <Text variant="title">OpenMgr</Text>
+          <Text variant="title">Ants</Text>
           <Pressable
-            testID="openmgr-drawer-close"
+            testID="ants-drawer-close"
             onPress={onClose}
             style={({ pressed }) => [
               styles.closeButton,
@@ -149,7 +149,7 @@ export function Drawer({ isOpen, onClose, items, activeItemId }: DrawerProps) {
             const isActive = item.id === activeItemId;
             return (
               <Pressable
-                testID={`openmgr-drawer-${item.id}`}
+                testID={`ants-drawer-${item.id}`}
                 key={item.id}
                 onPress={() => {
                   item.onPress();

@@ -2,7 +2,7 @@ import { defineConfig } from "drizzle-kit";
 import { join } from "path";
 import { homedir } from "os";
 
-const DB_PATH = join(homedir(), ".config", "openmgr", "agent.db");
+const DB_PATH = join(homedir(), ".config", "ants", "agent.db");
 
 export default defineConfig({
   schema: "./src/schema.ts",

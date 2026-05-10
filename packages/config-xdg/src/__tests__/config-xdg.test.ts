@@ -5,19 +5,19 @@ import { join } from "path";
 import { tmpdir } from "os";
 
 // Test the core logic using an isolated HOME directory so tests don't
-// read the real ~/.config/openmgr/agent.json on the host machine.
-const TEST_DIR = join(tmpdir(), "openmgr-config-xdg-test-" + Date.now() + "-" + Math.random().toString(36).slice(2));
+// read the real ~/.config/ants/agent.json on the host machine.
+const TEST_DIR = join(tmpdir(), "ants-config-xdg-test-" + Date.now() + "-" + Math.random().toString(36).slice(2));
 const TEST_PROJECT_DIR = join(TEST_DIR, "project");
 const ORIGINAL_HOME = process.env.HOME;
 
-describe("@openmgr/agent-config-xdg", () => {
+describe("@ants/agent-config-xdg", () => {
   // Import dynamically so we can test without side effects
   let configXdg: typeof import("../index.js");
 
   beforeEach(async () => {
     await mkdir(TEST_PROJECT_DIR, { recursive: true });
     // Point HOME to the test directory so loadGlobalConfig() reads from
-    // TEST_DIR/.config/openmgr/agent.json (which doesn't exist) instead
+    // TEST_DIR/.config/ants/agent.json (which doesn't exist) instead
     // of the real user config.
     process.env.HOME = TEST_DIR;
     // Re-import for fresh module state (picks up new HOME via homedir())
@@ -37,7 +37,7 @@ describe("@openmgr/agent-config-xdg", () => {
     it("should return path to global config", () => {
       const path = configXdg.getGlobalConfigPath();
       expect(path).toContain(".config");
-      expect(path).toContain("openmgr");
+      expect(path).toContain("ants");
       expect(path).toContain("agent.json");
     });
   });
@@ -45,7 +45,7 @@ describe("@openmgr/agent-config-xdg", () => {
   describe("getLocalConfigPath", () => {
     it("should return path to local config in working directory", () => {
       const path = configXdg.getLocalConfigPath("/some/project");
-      expect(path).toBe("/some/project/.openmgr.json");
+      expect(path).toBe("/some/project/.ants.json");
     });
   });
 
@@ -56,7 +56,7 @@ describe("@openmgr/agent-config-xdg", () => {
     });
 
     it("should load config from working directory", async () => {
-      const configPath = join(TEST_PROJECT_DIR, ".openmgr.json");
+      const configPath = join(TEST_PROJECT_DIR, ".ants.json");
       await writeFile(
         configPath,
         JSON.stringify({
@@ -76,7 +76,7 @@ describe("@openmgr/agent-config-xdg", () => {
       const subDir = join(TEST_PROJECT_DIR, "src", "components");
       await mkdir(subDir, { recursive: true });
 
-      const configPath = join(TEST_PROJECT_DIR, ".openmgr.json");
+      const configPath = join(TEST_PROJECT_DIR, ".ants.json");
       await writeFile(
         configPath,
         JSON.stringify({
@@ -91,7 +91,7 @@ describe("@openmgr/agent-config-xdg", () => {
     });
 
     it("should return null for invalid JSON", async () => {
-      const configPath = join(TEST_PROJECT_DIR, ".openmgr.json");
+      const configPath = join(TEST_PROJECT_DIR, ".ants.json");
       await writeFile(configPath, "not valid json");
 
       const config = await configXdg.loadLocalConfig(TEST_PROJECT_DIR);
@@ -128,7 +128,7 @@ describe("@openmgr/agent-config-xdg", () => {
 
     it("should merge local config with overrides", async () => {
       await writeFile(
-        join(TEST_PROJECT_DIR, ".openmgr.json"),
+        join(TEST_PROJECT_DIR, ".ants.json"),
         JSON.stringify({
           provider: "openai",
           model: "gpt-4",
@@ -153,7 +153,7 @@ describe("@openmgr/agent-config-xdg", () => {
         model: "gpt-4",
       });
 
-      const configPath = join(TEST_PROJECT_DIR, ".openmgr.json");
+      const configPath = join(TEST_PROJECT_DIR, ".ants.json");
       expect(existsSync(configPath)).toBe(true);
 
       const content = await readFile(configPath, "utf-8");
@@ -163,7 +163,7 @@ describe("@openmgr/agent-config-xdg", () => {
     });
 
     it("should merge with existing config", async () => {
-      const configPath = join(TEST_PROJECT_DIR, ".openmgr.json");
+      const configPath = join(TEST_PROJECT_DIR, ".ants.json");
       await writeFile(
         configPath,
         JSON.stringify({
@@ -234,7 +234,7 @@ describe("@openmgr/agent-config-xdg", () => {
 
     it("should work as a ConfigLoader for local config", async () => {
       await writeFile(
-        join(TEST_PROJECT_DIR, ".openmgr.json"),
+        join(TEST_PROJECT_DIR, ".ants.json"),
         JSON.stringify({
           provider: "openai",
           model: "gpt-4",
@@ -250,7 +250,7 @@ describe("@openmgr/agent-config-xdg", () => {
   describe("auth resolution", () => {
     it("should prefer config API key over defaults", async () => {
       await writeFile(
-        join(TEST_PROJECT_DIR, ".openmgr.json"),
+        join(TEST_PROJECT_DIR, ".ants.json"),
         JSON.stringify({
           apiKeys: {
             anthropic: { type: "api-key", apiKey: "sk-config-key" },
@@ -265,7 +265,7 @@ describe("@openmgr/agent-config-xdg", () => {
 
     it("should prefer override API key over config", async () => {
       await writeFile(
-        join(TEST_PROJECT_DIR, ".openmgr.json"),
+        join(TEST_PROJECT_DIR, ".ants.json"),
         JSON.stringify({
           apiKeys: {
             anthropic: { type: "api-key", apiKey: "sk-config-key" },
@@ -282,7 +282,7 @@ describe("@openmgr/agent-config-xdg", () => {
 
     it("should handle oauth auth type from config", async () => {
       await writeFile(
-        join(TEST_PROJECT_DIR, ".openmgr.json"),
+        join(TEST_PROJECT_DIR, ".ants.json"),
         JSON.stringify({
           apiKeys: {
             anthropic: { type: "oauth" },
@@ -297,7 +297,7 @@ describe("@openmgr/agent-config-xdg", () => {
 
     it("should handle string API key in config", async () => {
       await writeFile(
-        join(TEST_PROJECT_DIR, ".openmgr.json"),
+        join(TEST_PROJECT_DIR, ".ants.json"),
         JSON.stringify({
           apiKeys: {
             anthropic: "sk-string-key",

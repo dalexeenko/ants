@@ -29,7 +29,7 @@ describe('ProjectManager', () => {
   let sqlite: Database.Database;
 
   beforeEach(() => {
-    testDir = join(tmpdir(), `openmgr-test-${Date.now()}`);
+    testDir = join(tmpdir(), `ants-test-${Date.now()}`);
     mkdirSync(testDir, { recursive: true });
     
     config = {

@@ -5,7 +5,7 @@ sidebar:
   order: 6
 ---
 
-Channels enable bidirectional communication between OpenMgr projects and external messaging platforms.
+Channels enable bidirectional communication between Ants projects and external messaging platforms.
 
 ## Overview
 
@@ -20,7 +20,7 @@ The channels system supports:
 
 ```
 ┌───────────────────────────────────────────────────────┐
-│                    OPENMGR SERVER                       │
+│                    ANTS SERVER                       │
 │                                                         │
 │  Platform Webhook ──► Channel Router                    │
 │  POST /channels/       - Validates signatures           │

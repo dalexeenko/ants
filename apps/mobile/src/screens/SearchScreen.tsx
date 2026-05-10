@@ -7,7 +7,7 @@ import {
   spacing,
   type AgentBridge,
   type SearchResult,
-} from '@openmgr/ui';
+} from '@ants/ui';
 
 interface SearchScreenProps {
   bridge: AgentBridge;

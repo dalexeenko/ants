@@ -12,7 +12,7 @@ import {
   type ToolCallData,
   type ToolResultData,
   type Schema,
-} from "@openmgr/agent-database-core";
+} from "@ants/agent-database-core";
 import type { BaseSQLiteDatabase } from "drizzle-orm/sqlite-core";
 
 /**

@@ -13,7 +13,7 @@ import {
   CREATE_SCHEMA_SQL,
 } from "../index.js";
 
-describe("@openmgr/agent-database-core", () => {
+describe("@ants/agent-database-core", () => {
   describe("schema exports", () => {
     it("should export projects table", () => {
       expect(projects).toBeDefined();

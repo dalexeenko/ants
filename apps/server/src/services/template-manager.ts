@@ -350,21 +350,21 @@ export class TemplateManager {
       agentConfig = JSON.parse(template.agentConfig);
     }
 
-    // Write .openmgr.json config with rootAgentType and agentTypes if specified
-    const openmgrConfig: Record<string, unknown> = {};
+    // Write .ants.json config with rootAgentType and agentTypes if specified
+    const antsConfig: Record<string, unknown> = {};
     if (template.rootAgentType) {
-      openmgrConfig.rootAgentType = template.rootAgentType;
+      antsConfig.rootAgentType = template.rootAgentType;
     }
     if (template.agentTypes) {
       const agentTypeNames = typeof template.agentTypes === 'string'
         ? JSON.parse(template.agentTypes) as string[]
         : template.agentTypes;
       if (agentTypeNames.length > 0) {
-        openmgrConfig.agentTypes = agentTypeNames;
+        antsConfig.agentTypes = agentTypeNames;
       }
     }
-    if (Object.keys(openmgrConfig).length > 0) {
-      const configPath = join(workingDirectory, '.openmgr.json');
+    if (Object.keys(antsConfig).length > 0) {
+      const configPath = join(workingDirectory, '.ants.json');
       // Merge with existing config if present
       let existingConfig: Record<string, unknown> = {};
       try {
@@ -374,9 +374,9 @@ export class TemplateManager {
       } catch {
         // Ignore parse errors
       }
-      const mergedConfig = { ...existingConfig, ...openmgrConfig };
+      const mergedConfig = { ...existingConfig, ...antsConfig };
       await writeFile(configPath, JSON.stringify(mergedConfig, null, 2) + '\n');
-      setupLog.push(`Wrote .openmgr.json with rootAgentType=${openmgrConfig.rootAgentType ?? 'default'}, agentTypes=${(openmgrConfig.agentTypes as string[] || []).join(', ')}`);
+      setupLog.push(`Wrote .ants.json with rootAgentType=${antsConfig.rootAgentType ?? 'default'}, agentTypes=${(antsConfig.agentTypes as string[] || []).join(', ')}`);
     }
 
     // Create the project

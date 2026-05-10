@@ -1,5 +1,5 @@
 {
-  "name": "@openmgr/test-scenarios",
+  "name": "@ants/test-scenarios",
   "version": "0.1.0",
   "private": true,
   "description": "Platform-agnostic E2E test scenarios that generate Playwright specs and Maestro flows",

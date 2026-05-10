@@ -2,13 +2,13 @@
 
 ## Overview
 
-Electron desktop app. The renderer process uses `@openmgr/ui` for all UI components. The main process manages windows, the local agent bridge, native dialogs, and IPC.
+Electron desktop app. The renderer process uses `@ants/ui` for all UI components. The main process manages windows, the local agent bridge, native dialogs, and IPC.
 
 ## Architecture
 
 ### Renderer
 
-The renderer is a thin wrapper around the shared `AppShell` from `@openmgr/ui`:
+The renderer is a thin wrapper around the shared `AppShell` from `@ants/ui`:
 
 - `src/renderer/App.tsx` — creates a `PlatformAdapter` that maps `window.electron` (exposed by the preload script) to the platform interface, then renders `<PlatformProvider><AppShell /></PlatformProvider>`
 - `src/renderer/main.tsx` — React entry point, mounts `<App />`
@@ -39,7 +39,7 @@ The desktop `PlatformAdapter` (defined in `src/renderer/App.tsx`) maps Electron 
 
 ## Colors
 
-The desktop app has **no local color definitions**. All colors come from `@openmgr/ui` via the `ThemeContext`. See `packages/ui/AGENTS.md` for the canonical palette reference and usage guidelines. Never hardcode hex color values in renderer code.
+The desktop app has **no local color definitions**. All colors come from `@ants/ui` via the `ThemeContext`. See `packages/ui/AGENTS.md` for the canonical palette reference and usage guidelines. Never hardcode hex color values in renderer code.
 
 ## Building
 
@@ -51,15 +51,15 @@ pnpm turbo build --filter=desktop
 cd apps/desktop && pnpm dev
 ```
 
-The desktop build uses `electron-vite` which bundles the renderer with Vite. The `@openmgr/ui` source is consumed directly via path aliases (not built separately).
+The desktop build uses `electron-vite` which bundles the renderer with Vite. The `@ants/ui` source is consumed directly via path aliases (not built separately).
 
 ## Future Work
 
-### Extract local-only UI into a `@openmgr/ui-local` plugin
+### Extract local-only UI into a `@ants/ui-local` plugin
 
-Currently, local-only UI code (e.g. `AuthenticationSection` for on-device API key/OAuth management) still lives inline in `@openmgr/ui` and is conditionally hidden on web via `platform.platform !== 'web'` guards. A cleaner architecture would extract all local-only concerns into a dedicated UI plugin package:
+Currently, local-only UI code (e.g. `AuthenticationSection` for on-device API key/OAuth management) still lives inline in `@ants/ui` and is conditionally hidden on web via `platform.platform !== 'web'` guards. A cleaner architecture would extract all local-only concerns into a dedicated UI plugin package:
 
-1. **Create `packages/ui-local/`** — a `@openmgr/ui-local` package that registers local-only UI contributions via the existing `UIPluginRegistry` system.
+1. **Create `packages/ui-local/`** — a `@ants/ui-local` package that registers local-only UI contributions via the existing `UIPluginRegistry` system.
 
 2. **Move local-only settings sections** — `AuthenticationSection` (API key + OAuth management for the on-device agent) would be registered as a plugin settings section with `scope: 'global'` instead of being hardcoded in `SettingsPanel.tsx` and `WelcomeScreen.tsx`.
 

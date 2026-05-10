@@ -1,7 +1,7 @@
 /**
- * @openmgr/agent-auth-core
+ * @ants/agent-auth-core
  *
- * Platform-agnostic OAuth types and utilities for OpenMgr Agent.
+ * Platform-agnostic OAuth types and utilities for Ants Agent.
  *
  * This package provides:
  * - OAuth types and interfaces
@@ -10,8 +10,8 @@
  * - Anthropic OAuth configuration
  *
  * Platform-specific implementations:
- * - Node.js: @openmgr/agent-auth-anthropic
- * - React Native: @openmgr/agent-auth-react-native
+ * - Node.js: @ants/agent-auth-anthropic
+ * - React Native: @ants/agent-auth-react-native
  */
 
 /**

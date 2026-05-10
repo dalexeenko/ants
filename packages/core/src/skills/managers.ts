@@ -1,12 +1,12 @@
 /**
- * Platform-agnostic skill managers for OpenMgr Agent.
+ * Platform-agnostic skill managers for Ants Agent.
  *
  * These managers work without filesystem access, making them suitable for:
  * - React Native
  * - Browser environments
  * - Any environment where skills are pre-bundled or loaded remotely
  *
- * For filesystem-based skill loading, use @openmgr/agent-skills-loader.
+ * For filesystem-based skill loading, use @ants/agent-skills-loader.
  */
 
 import { parse as parseYaml } from "yaml";
@@ -100,8 +100,8 @@ export interface BundledSkillManagerOptions {
  *
  * @example
  * ```typescript
- * import { BundledSkillManager } from "@openmgr/agent-core";
- * import { defaultSkills } from "@openmgr/agent-skills-content";
+ * import { BundledSkillManager } from "@ants/agent-core";
+ * import { defaultSkills } from "@ants/agent-skills-content";
  *
  * // Convert skills-content format to BundledSkill format
  * const bundledSkills = defaultSkills.map(s => ({ name: s.name, content: s.content }));
@@ -543,8 +543,8 @@ export interface HybridSkillManagerOptions {
  *
  * @example
  * ```typescript
- * import { HybridSkillManager } from "@openmgr/agent-core";
- * import { defaultSkills } from "@openmgr/agent-skills-content";
+ * import { HybridSkillManager } from "@ants/agent-core";
+ * import { defaultSkills } from "@ants/agent-skills-content";
  *
  * const skillManager = new HybridSkillManager({
  *   bundledSkills: defaultSkills.map(s => ({ name: s.name, content: s.content })),

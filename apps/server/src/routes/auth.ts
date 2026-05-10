@@ -21,9 +21,9 @@ import { isSecure, getServerUrl } from '../utils/request.js';
 
 const log = createLogger('auth-routes');
 
-const serverVersion = process.env.OPENMGR_SERVER_VERSION || undefined;
+const serverVersion = process.env.ANTS_SERVER_VERSION || undefined;
 
-const SESSION_COOKIE = 'openmgr_session';
+const SESSION_COOKIE = 'ants_session';
 const SESSION_MAX_AGE = 7 * 24 * 60 * 60; // 7 days in seconds
 
 interface AuthRouteDeps {
@@ -301,7 +301,7 @@ export function createAuthRoutes(deps: AuthRouteDeps) {
       return c.json({ error: 'Authentication required' }, 401);
     }
 
-    const code = authCodeService.createCode(userId, 'openmgr://connect');
+    const code = authCodeService.createCode(userId, 'ants://connect');
 
     // Determine protocol: proxy headers first, then client hint as fallback.
     // The client sends { secure: true } when it loaded the page over HTTPS,
@@ -315,7 +315,7 @@ export function createAuthRoutes(deps: AuthRouteDeps) {
       log.info('connect-token: proxy headers indicate HTTP but client reports HTTPS — using client hint');
     }
 
-    const serverName = c.req.header('host')?.replace(/:\d+$/, '') || 'OpenMgr Server';
+    const serverName = c.req.header('host')?.replace(/:\d+$/, '') || 'Ants Server';
 
     log.debug('connect-token: serverUrl=%s secure=%s x-forwarded-proto=%s x-forwarded-scheme=%s forwarded=%s clientSecure=%s',
       serverUrl, isSecure(c),

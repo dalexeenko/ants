@@ -3,7 +3,7 @@ import { worktreeCreateTool } from "../tools/create.js";
 import { worktreeListTool } from "../tools/list.js";
 import { worktreeSwitchTool } from "../tools/switch.js";
 import { worktreeRemoveTool } from "../tools/remove.js";
-import type { ToolContext } from "@openmgr/agent-core";
+import type { ToolContext } from "@ants/agent-core";
 import type { WorktreeInfo } from "../types.js";
 
 // ---------------------------------------------------------------------------

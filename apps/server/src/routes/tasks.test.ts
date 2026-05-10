@@ -3,7 +3,7 @@ import { Hono } from 'hono';
 import { createTaskRoutes } from './tasks.js';
 import type { TaskScheduler } from '../services/task-scheduler.js';
 import type { ProjectTaskStorage, ServerTaskMetadata } from '../services/project-task-storage.js';
-import type { ScheduledTask, TaskRun } from '@openmgr/agent-scheduler';
+import type { ScheduledTask, TaskRun } from '@ants/agent-scheduler';
 
 describe('tasks routes', () => {
   let app: Hono;

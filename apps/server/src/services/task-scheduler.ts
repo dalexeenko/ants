@@ -6,7 +6,7 @@ import {
   type ScheduledTask,
   type TaskRun,
   type TaskExecutor,
-} from '@openmgr/agent-scheduler';
+} from '@ants/agent-scheduler';
 import type { ProjectManager } from './project-manager.js';
 import { ProjectTaskStorage, type ServerTaskMetadata } from './project-task-storage.js';
 import type { DrizzleDB } from '../db/index.js';
@@ -20,7 +20,7 @@ export { parseNextRun, describeCron };
 
 /**
  * Server-specific task scheduler that manages schedulers for each project.
- * Uses the generic @openmgr/agent-scheduler under the hood.
+ * Uses the generic @ants/agent-scheduler under the hood.
  */
 export class TaskScheduler {
   private projectManager: ProjectManager;

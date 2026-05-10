@@ -1,7 +1,7 @@
 import type { Command } from "commander";
 import chalk from "chalk";
-import { SessionManager, getDb, closeDb } from "@openmgr/agent-storage";
-import type { SessionRow } from "@openmgr/agent-storage";
+import { SessionManager, getDb, closeDb } from "@ants/agent-storage";
+import type { SessionRow } from "@ants/agent-storage";
 
 export function registerCompactionCommands(program: Command): void {
   const compactionCmd = program

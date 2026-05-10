@@ -1,20 +1,20 @@
 /**
- * @openmgr/agent-react-native
+ * @ants/agent-react-native
  *
- * React Native bundle package for OpenMgr Agent.
+ * React Native bundle package for Ants Agent.
  *
  * This package re-exports all React Native compatible components,
- * making it easy to use OpenMgr Agent in a React Native/Expo app.
+ * making it easy to use Ants Agent in a React Native/Expo app.
  *
  * ## Included Packages
  *
- * - `@openmgr/agent-core` - Core agent functionality (includes skill managers)
- * - `@openmgr/agent-providers` - LLM provider integrations
- * - `@openmgr/agent-database-core` - Database schema and types
- * - `@openmgr/agent-database-react-native` - SQLite database for RN
- * - `@openmgr/agent-auth-core` - OAuth types and utilities
- * - `@openmgr/agent-auth-react-native` - OAuth for RN with Expo
- * - `@openmgr/agent-tools` - Platform-agnostic tools
+ * - `@ants/agent-core` - Core agent functionality (includes skill managers)
+ * - `@ants/agent-providers` - LLM provider integrations
+ * - `@ants/agent-database-core` - Database schema and types
+ * - `@ants/agent-database-react-native` - SQLite database for RN
+ * - `@ants/agent-auth-core` - OAuth types and utilities
+ * - `@ants/agent-auth-react-native` - OAuth for RN with Expo
+ * - `@ants/agent-tools` - Platform-agnostic tools
  *
  * ## Quick Start
  *
@@ -24,7 +24,7 @@
  *   createReactNativeDatabase,
  *   BundledSkillManager,
  *   createExpoOAuthHandler,
- * } from "@openmgr/agent-react-native";
+ * } from "@ants/agent-react-native";
  * import * as SQLite from "expo-sqlite";
  * import * as AuthSession from "expo-auth-session";
  * import * as Crypto from "expo-crypto";
@@ -111,7 +111,7 @@ export {
   // Title generation
   generateTitle,
   isDefaultTitle,
-} from "@openmgr/agent-core";
+} from "@ants/agent-core";
 
 // ============================================================================
 // Providers
@@ -138,7 +138,7 @@ export {
   AnthropicClient,
   OpenAIClient,
   GoogleClient,
-} from "@openmgr/agent-providers";
+} from "@ants/agent-providers";
 
 // ============================================================================
 // Database
@@ -153,7 +153,7 @@ export {
   type DatabaseAdapter,
   type MigrationResult,
   getSchemaStatements,
-} from "@openmgr/agent-database-core";
+} from "@ants/agent-database-core";
 
 export {
   // React Native database implementation
@@ -165,7 +165,7 @@ export {
   type ExpoSQLiteModule,
   type ReactNativeDatabaseConnection,
   DEFAULT_DB_NAME,
-} from "@openmgr/agent-database-react-native";
+} from "@ants/agent-database-react-native";
 
 // ============================================================================
 // Storage (Session Management)
@@ -202,7 +202,7 @@ export {
   type CompactionHistoryInsert,
   type ToolCallData,
   type ToolResultData,
-} from "@openmgr/agent-storage/portable";
+} from "@ants/agent-storage/portable";
 
 // Re-export drizzle-orm utilities for type-compatible usage in apps
 export { eq, desc, and, or, like, isNull, asc, sql } from "drizzle-orm";
@@ -229,10 +229,10 @@ export {
   // Hybrid manager
   HybridSkillManager,
   type HybridSkillManagerOptions,
-} from "@openmgr/agent-core";
+} from "@ants/agent-core";
 
 // Re-export BundledSkillManager as SkillManager for convenience
-export { BundledSkillManager as SkillManager } from "@openmgr/agent-core";
+export { BundledSkillManager as SkillManager } from "@ants/agent-core";
 
 // ============================================================================
 // Auth
@@ -259,7 +259,7 @@ export {
   base64UrlEncode,
   base64ToBase64Url,
   createOAuthFlowHandler,
-} from "@openmgr/agent-auth-core";
+} from "@ants/agent-auth-core";
 
 export {
   // React Native auth implementation
@@ -272,17 +272,17 @@ export {
   type ExpoCrypto,
   type ExpoWebBrowser,
   type ExpoAuthSession,
-} from "@openmgr/agent-auth-react-native";
+} from "@ants/agent-auth-react-native";
 
 export {
   // Anthropic OAuth Provider for React Native
   AnthropicOAuthProvider,
   createAnthropicOAuthProvider,
   type AnthropicOAuthProviderOptions,
-} from "@openmgr/agent-providers";
+} from "@ants/agent-providers";
 
 // Re-export OAuth types from auth-core
-export { type OAuthTokens as AnthropicOAuthTokens } from "@openmgr/agent-auth-core";
+export { type OAuthTokens as AnthropicOAuthTokens } from "@ants/agent-auth-core";
 
 // ============================================================================
 // Tools (platform-agnostic only)
@@ -306,7 +306,7 @@ export {
 
   // Plugin
   toolsPlugin,
-} from "@openmgr/agent-tools";
+} from "@ants/agent-tools";
 
 // ============================================================================
 // Filesystem
@@ -324,7 +324,7 @@ export type {
   Filesystem,
   FileStat,
   DirectoryEntry,
-} from "@openmgr/agent-core";
+} from "@ants/agent-core";
 
 // ============================================================================
 // File Tools (platform-agnostic, require filesystem extension)

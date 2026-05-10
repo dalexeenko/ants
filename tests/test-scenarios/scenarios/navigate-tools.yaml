@@ -5,10 +5,10 @@ steps:
   # Mobile only: open drawer and tap Tools
   - tap:
       mobile: true
-      testId: openmgr-drawer-toggle
+      testId: ants-drawer-toggle
   - tap:
       mobile: true
-      testId: openmgr-drawer-tools
+      testId: ants-drawer-tools
   - assertVisible:
       mobile: true
-      testId: openmgr-screen-tools
+      testId: ants-screen-tools

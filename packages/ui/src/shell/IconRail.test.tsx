@@ -42,21 +42,21 @@ describe('IconRail', () => {
 
   it('renders the icon rail with testID', () => {
     render(<IconRail />);
-    expect(screen.getByTestId('openmgr-icon-rail')).toBeInTheDocument();
+    expect(screen.getByTestId('ants-icon-rail')).toBeInTheDocument();
   });
 
   it('renders project, director, agents, and settings icons', () => {
     render(<IconRail />);
-    expect(screen.getByTestId('openmgr-icon-rail-projects')).toBeInTheDocument();
-    expect(screen.getByTestId('openmgr-icon-rail-director')).toBeInTheDocument();
-    expect(screen.getByTestId('openmgr-icon-rail-agents')).toBeInTheDocument();
-    expect(screen.getByTestId('openmgr-icon-rail-settings')).toBeInTheDocument();
+    expect(screen.getByTestId('ants-icon-rail-projects')).toBeInTheDocument();
+    expect(screen.getByTestId('ants-icon-rail-director')).toBeInTheDocument();
+    expect(screen.getByTestId('ants-icon-rail-agents')).toBeInTheDocument();
+    expect(screen.getByTestId('ants-icon-rail-settings')).toBeInTheDocument();
   });
 
   it('switches active screen when clicking a different icon', () => {
     render(<IconRail />);
 
-    fireEvent.click(screen.getByTestId('openmgr-icon-rail-settings'));
+    fireEvent.click(screen.getByTestId('ants-icon-rail-settings'));
     expect(useUIStore.getState().activeScreen).toBe('settings');
   });
 
@@ -65,7 +65,7 @@ describe('IconRail', () => {
 
     render(<IconRail />);
 
-    fireEvent.click(screen.getByTestId('openmgr-icon-rail-projects'));
+    fireEvent.click(screen.getByTestId('ants-icon-rail-projects'));
     expect(useUIStore.getState().leftSidebarCollapsed).toBe(true);
   });
 
@@ -74,7 +74,7 @@ describe('IconRail', () => {
 
     render(<IconRail />);
 
-    fireEvent.click(screen.getByTestId('openmgr-icon-rail-director'));
+    fireEvent.click(screen.getByTestId('ants-icon-rail-director'));
     expect(useUIStore.getState().activeScreen).toBe('director');
     expect(useUIStore.getState().leftSidebarCollapsed).toBe(false);
   });

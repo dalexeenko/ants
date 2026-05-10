@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { defineTool } from "@openmgr/agent-core";
+import { defineTool } from "@ants/agent-core";
 
 const API_CONFIG = {
   BASE_URL: "https://mcp.exa.ai",

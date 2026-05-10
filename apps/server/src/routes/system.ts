@@ -5,10 +5,10 @@ import { promisify } from 'util';
 import { readdir, stat, rm, readFile } from 'fs/promises';
 import { join } from 'path';
 import type { ServerConfig } from '../config.js';
-import type { OpenMgrAgentManager } from '../services/openmgr-agent-manager.js';
+import type { AntsAgentManager } from '../services/ants-agent-manager.js';
 import type { ApiKeyManager } from '../services/api-key-manager.js';
 import type { PluginRegistry } from '../services/plugin-registry.js';
-import { generateAuthorizationUrl, exchangeCodeForTokens } from '@openmgr/agent-auth-anthropic';
+import { generateAuthorizationUrl, exchangeCodeForTokens } from '@ants/agent-auth-anthropic';
 import { getErrorMessage } from '../utils/errors.js';
 import { parseBody, parseBodyOptional } from '../utils/validation.js';
 import { pathExists } from '../utils/fs.js';
@@ -98,7 +98,7 @@ async function getDirectorySize(dirPath: string): Promise<number> {
 
 export function createSystemRoutes(
   config: ServerConfig, 
-  agentManager: OpenMgrAgentManager,
+  agentManager: AntsAgentManager,
   apiKeyManager: ApiKeyManager,
   pluginRegistry: PluginRegistry,
 ) {
@@ -121,7 +121,7 @@ export function createSystemRoutes(
       const version = await agentManager.getVersion();
       return c.json({ 
         success: true, 
-        message: 'OpenMgr Agent is already installed',
+        message: 'Ants Agent is already installed',
         version,
       });
     }
@@ -131,7 +131,7 @@ export function createSystemRoutes(
       const version = await agentManager.getVersion();
       return c.json({ 
         success: true, 
-        message: 'OpenMgr Agent installed successfully',
+        message: 'Ants Agent installed successfully',
         version,
       });
     } catch (error) {
@@ -435,7 +435,7 @@ export function createSystemRoutes(
           continue;
         }
         
-        const agentDir = join(project.workingDirectory, '.openmgr');
+        const agentDir = join(project.workingDirectory, '.ants');
         const sessionsDir = join(agentDir, 'sessions');
         
         if (!await pathExists(sessionsDir)) {

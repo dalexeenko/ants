@@ -185,7 +185,7 @@ export const PromptSections = {
   Skills: "skills.available",
   /** Environment-specific instructions */
   Environment: "env.context",
-  /** Project-specific instructions (from .openmgr.json or similar) */
+  /** Project-specific instructions (from .ants.json or similar) */
   ProjectContext: "project.context",
   /** User customizations */
   UserCustom: "user.custom",

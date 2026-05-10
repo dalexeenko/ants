@@ -4,15 +4,15 @@ preconditions:
   - projectExists: true
 steps:
   - tap:
-      testId: openmgr-project-new-session
+      testId: ants-project-new-session
   - assertVisible:
-      testId: openmgr-chat-input
+      testId: ants-chat-input
   - tap:
-      testId: openmgr-chat-input-field
+      testId: ants-chat-input-field
   - type:
-      testId: openmgr-chat-input-field
+      testId: ants-chat-input-field
       text: "Hello from E2E test"
   - tap:
-      testId: openmgr-chat-send
+      testId: ants-chat-send
   - assertVisible:
       text: "Hello from E2E test"

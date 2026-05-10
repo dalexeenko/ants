@@ -1,5 +1,5 @@
 /**
- * DockerManager tests have been moved to @openmgr/agent-docker.
+ * DockerManager tests have been moved to @ants/agent-docker.
  *
  * Run them with:
  *   cd packages/docker && pnpm test
@@ -11,7 +11,7 @@ import { describe, it, expect } from 'vitest';
 import { DockerManager } from './docker-manager.js';
 
 describe('DockerManager re-export', () => {
-  it('should re-export DockerManager from @openmgr/agent-docker', () => {
+  it('should re-export DockerManager from @ants/agent-docker', () => {
     expect(DockerManager).toBeDefined();
     expect(typeof DockerManager).toBe('function');
   });

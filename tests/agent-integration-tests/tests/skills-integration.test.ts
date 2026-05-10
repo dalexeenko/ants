@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { FilesystemSkillManager, getBundledSkillsDir, getBundledSkillNames } from "@openmgr/agent-skills-loader";
+import { FilesystemSkillManager, getBundledSkillsDir, getBundledSkillNames } from "@ants/agent-skills-loader";
 
 describe("Skills Integration", () => {
   describe("Bundled skills discovery", () => {

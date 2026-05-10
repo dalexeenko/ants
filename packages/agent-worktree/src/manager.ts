@@ -1,5 +1,5 @@
-import type { AgentInterface } from "@openmgr/agent-core";
-import type { SessionManager } from "@openmgr/agent-storage";
+import type { AgentInterface } from "@ants/agent-core";
+import type { SessionManager } from "@ants/agent-storage";
 import { ProjectWorktreeManager } from "./project-worktree-manager.js";
 import type {
   WorktreeInfo,

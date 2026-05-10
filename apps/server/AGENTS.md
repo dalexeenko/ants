@@ -1,8 +1,8 @@
-# Agent Instructions for @openmgr/server
+# Agent Instructions for @ants/server
 
 ## Overview
 
-Hono HTTP server with SQLite (better-sqlite3) + Drizzle ORM. Lives at `apps/server/` in the OpenMgr monorepo.
+Hono HTTP server with SQLite (better-sqlite3) + Drizzle ORM. Lives at `apps/server/` in the Ants monorepo.
 
 ## Architecture
 
@@ -99,7 +99,7 @@ pnpm test
 
 ## Local Development Setup
 
-This server depends on several `@openmgr/agent-*` packages that live in `packages/` within the same monorepo. pnpm workspace linking handles all dependency resolution automatically — no linking scripts needed.
+This server depends on several `@ants/agent-*` packages that live in `packages/` within the same monorepo. pnpm workspace linking handles all dependency resolution automatically — no linking scripts needed.
 
 ## Build After Modifications
 
@@ -107,15 +107,15 @@ The server compiles TypeScript to `dist/`. You must rebuild after modifying any 
 
 ```bash
 # From the monorepo root
-pnpm turbo build --filter=@openmgr/server
+pnpm turbo build --filter=@ants/server
 
 # Or rebuild everything
 pnpm turbo build --force
 ```
 
-If you modify any `@openmgr/agent-*` package source, Turborepo will rebuild dependencies automatically when you build the server.
+If you modify any `@ants/agent-*` package source, Turborepo will rebuild dependencies automatically when you build the server.
 
-After rebuilding, restart the openmgr server and kill any running agent-server child processes so they pick up the new code.
+After rebuilding, restart the ants server and kill any running agent-server child processes so they pick up the new code.
 
 ## Key Conventions
 

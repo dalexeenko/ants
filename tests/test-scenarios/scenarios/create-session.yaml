@@ -4,14 +4,14 @@ preconditions:
   - projectExists: true
 steps:
   - tap:
-      testId: openmgr-project-new-session
+      testId: ants-project-new-session
   - assertVisible:
-      testId: openmgr-chat-input
+      testId: ants-chat-input
   # Desktop: chat view visible
   - assertVisible:
-      testId: openmgr-chat-view
+      testId: ants-chat-view
       desktop: true
   # Mobile: session screen visible
   - assertVisible:
-      testId: openmgr-session-screen
+      testId: ants-session-screen
       mobile: true

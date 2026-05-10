@@ -43,7 +43,7 @@ export interface PluginManagerOptions {
   /**
    * Directory where plugins are installed.
    * A node_modules subdirectory will be created here.
-   * Defaults to ~/.config/openmgr/plugins/
+   * Defaults to ~/.config/ants/plugins/
    */
   pluginDir: string;
 
@@ -180,7 +180,7 @@ export class PluginManager {
       await exec(`test -f package.json`, this.pluginDir);
     } catch {
       await exec(
-        `echo '${JSON.stringify({ name: "openmgr-plugins", version: "1.0.0", private: true, type: "module" })}' > package.json`,
+        `echo '${JSON.stringify({ name: "ants-plugins", version: "1.0.0", private: true, type: "module" })}' > package.json`,
         this.pluginDir
       );
     }

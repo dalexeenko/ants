@@ -1,19 +1,19 @@
 /**
- * @openmgr/agent-auth-anthropic
+ * @ants/agent-auth-anthropic
  * 
- * Anthropic OAuth authentication utilities for OpenMgr Agent.
+ * Anthropic OAuth authentication utilities for Ants Agent.
  * 
  * This package provides OAuth flow utilities for the PKCE flow:
  * - PKCE utilities (code verifier/challenge generation)
  * - Login, token exchange, and refresh functions
  * - Token storage abstraction
  * 
- * For the OAuth provider, use `AnthropicOAuthProvider` from `@openmgr/agent-providers`.
+ * For the OAuth provider, use `AnthropicOAuthProvider` from `@ants/agent-providers`.
  * 
  * @example
  * ```typescript
- * import { login, isLoggedIn, WebCryptoPKCEUtils } from "@openmgr/agent-auth-anthropic";
- * import { AnthropicOAuthProvider } from "@openmgr/agent-providers";
+ * import { login, isLoggedIn, WebCryptoPKCEUtils } from "@ants/agent-auth-anthropic";
+ * import { AnthropicOAuthProvider } from "@ants/agent-providers";
  * 
  * // Check if logged in
  * if (!await isLoggedIn(tokenStore)) {

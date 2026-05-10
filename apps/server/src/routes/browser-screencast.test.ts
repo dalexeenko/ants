@@ -2,12 +2,12 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { Hono } from 'hono';
 import { createBrowserScreencastRoutes } from './browser-screencast.js';
 import type { ProjectManager } from '../services/project-manager.js';
-import type { OpenMgrAgentManager } from '../services/openmgr-agent-manager.js';
+import type { AntsAgentManager } from '../services/ants-agent-manager.js';
 
 describe('browser-screencast routes', () => {
   let app: Hono;
   let mockProjectManager: Partial<ProjectManager>;
-  let mockAgentManager: Partial<OpenMgrAgentManager>;
+  let mockAgentManager: Partial<AntsAgentManager>;
   let mockFetch: ReturnType<typeof vi.fn>;
 
   const testBrowsers = [
@@ -36,7 +36,7 @@ describe('browser-screencast routes', () => {
     app = new Hono();
     const routes = createBrowserScreencastRoutes({
       projectManager: mockProjectManager as ProjectManager,
-      agentManager: mockAgentManager as OpenMgrAgentManager,
+      agentManager: mockAgentManager as AntsAgentManager,
       upgradeWebSocket: vi.fn(),
       secret: 'test-secret',
     });

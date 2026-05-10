@@ -3,11 +3,11 @@ appId: host.exp.Exponent
 ---
 - launchApp
 - assertVisible:
-    id: "openmgr-app"
+    id: "ants-app"
 - assertVisible:
-    id: "openmgr-screen-home"
+    id: "ants-screen-home"
 - assertVisible:
-    id: "openmgr-home-screen"
+    id: "ants-home-screen"
 # The drawer toggle (hamburger menu) should be visible in the header
 - assertVisible:
-    id: "openmgr-drawer-toggle"
+    id: "ants-drawer-toggle"

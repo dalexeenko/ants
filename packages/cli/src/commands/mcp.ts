@@ -1,7 +1,7 @@
 import type { Command } from "commander";
 import chalk from "chalk";
-import { McpManager, type McpServerConfig } from "@openmgr/agent-core";
-import { loadConfig } from "@openmgr/agent-config-xdg";
+import { McpManager, type McpServerConfig } from "@ants/agent-core";
+import { loadConfig } from "@ants/agent-config-xdg";
 
 export function registerMcpCommands(program: Command): void {
   const mcpCmd = program

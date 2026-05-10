@@ -1,7 +1,7 @@
 {
-  "name": "@openmgr/agent-auth-anthropic",
+  "name": "@ants/agent-auth-anthropic",
   "version": "0.1.0",
-  "description": "Anthropic OAuth flow utilities for @openmgr/agent",
+  "description": "Anthropic OAuth flow utilities for @ants/agent",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -24,14 +24,14 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@openmgr/agent-auth-core": "workspace:*"
+    "@ants/agent-auth-core": "workspace:*"
   },
   "devDependencies": {
     "typescript": "^5.8.3",
     "vitest": "^4.0.0"
   },
   "keywords": [
-    "openmgr",
+    "ants",
     "agent",
     "anthropic",
     "oauth",
@@ -40,7 +40,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/openmgr/agent.git",
+    "url": "git+https://github.com/ants/agent.git",
     "directory": "packages/auth-anthropic"
   }
 }

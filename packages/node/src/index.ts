@@ -1,7 +1,7 @@
 /**
- * @openmgr/agent-node
+ * @ants/agent-node
  *
- * OpenMgr Agent for Node.js environments.
+ * Ants Agent for Node.js environments.
  * This package bundles the core agent with Node.js-specific implementations:
  * - XDG filesystem configuration
  * - Filesystem-based skill loading
@@ -10,11 +10,11 @@
  * - Environment variable support for API keys
  *
  * Use this package when running in Node.js. For React Native or browser environments,
- * use @openmgr/agent-core directly with custom implementations.
+ * use @ants/agent-core directly with custom implementations.
  */
 
 // Re-export everything from core
-export * from "@openmgr/agent-core";
+export * from "@ants/agent-core";
 
 // Re-export FileTokenStore for Node.js OAuth
 export { FileTokenStore, getDefaultAuthPaths } from "./file-token-store.js";
@@ -22,15 +22,15 @@ export { FileTokenStore, getDefaultAuthPaths } from "./file-token-store.js";
 // Re-export browser sandbox types for callers that need to create controllers directly.
 // Runtime values (createSandboxController, etc.) are loaded lazily via dynamic import
 // so the module doesn't crash when playwright is not installed (e.g. lite Docker image).
-export type { SandboxControllerOptions } from "@openmgr/agent-browser-sandbox";
-export type { BrowserController } from "@openmgr/agent-browser-core";
+export type { SandboxControllerOptions } from "@ants/agent-browser-sandbox";
+export type { BrowserController } from "@ants/agent-browser-core";
 
 // Lazy loader for the browser sandbox module — returns null if playwright is unavailable.
-let _browserSandbox: typeof import("@openmgr/agent-browser-sandbox") | null | undefined;
-async function loadBrowserSandbox(): Promise<typeof import("@openmgr/agent-browser-sandbox") | null> {
+let _browserSandbox: typeof import("@ants/agent-browser-sandbox") | null | undefined;
+async function loadBrowserSandbox(): Promise<typeof import("@ants/agent-browser-sandbox") | null> {
   if (_browserSandbox !== undefined) return _browserSandbox;
   try {
-    _browserSandbox = await import("@openmgr/agent-browser-sandbox");
+    _browserSandbox = await import("@ants/agent-browser-sandbox");
     return _browserSandbox;
   } catch {
     _browserSandbox = null;
@@ -43,7 +43,7 @@ async function loadBrowserSandbox(): Promise<typeof import("@openmgr/agent-brows
  * Returns null if playwright / browser-sandbox is not available.
  */
 export async function createSandboxController(
-  options?: import("@openmgr/agent-browser-sandbox").SandboxControllerOptions,
+  options?: import("@ants/agent-browser-sandbox").SandboxControllerOptions,
 ) {
   const mod = await loadBrowserSandbox();
   if (!mod) return null;
@@ -55,7 +55,7 @@ export async function createSandboxController(
  * Returns null if playwright / browser-sandbox is not available.
  */
 export async function createSandboxBrowserPlugin(
-  controller: import("@openmgr/agent-browser-core").BrowserController,
+  controller: import("@ants/agent-browser-core").BrowserController,
 ) {
   const mod = await loadBrowserSandbox();
   if (!mod) return null;
@@ -74,7 +74,7 @@ export {
   providersPlugin,
   getSmallModel,
   SMALL_MODELS,
-} from "@openmgr/agent-providers";
+} from "@ants/agent-providers";
 
 // Re-export Node.js-specific implementations
 export {
@@ -89,7 +89,7 @@ export {
   getGlobalConfigPath,
   getLocalConfigPath,
   xdgConfigLoader,
-} from "@openmgr/agent-config-xdg";
+} from "@ants/agent-config-xdg";
 
 export {
   // Skills loader
@@ -102,12 +102,12 @@ export {
   getSkillPaths,
   type SkillPaths,
   type SkillManagerOptions,
-} from "@openmgr/agent-skills-loader";
+} from "@ants/agent-skills-loader";
 
 export {
   // MCP stdio client
   StdioMcpClient,
-} from "@openmgr/agent-mcp-stdio";
+} from "@ants/agent-mcp-stdio";
 
 export {
   // Worktree management
@@ -118,7 +118,7 @@ export {
   type WorktreeInfo as AgentWorktreeInfo,
   type WorktreeCreateOptions,
   type WorktreeRemoveOptions,
-} from "@openmgr/agent-worktree";
+} from "@ants/agent-worktree";
 
 import {
   Agent,
@@ -131,8 +131,8 @@ import {
   type McpClientFactory,
   type McpSseConfig,
   type McpStdioConfig,
-} from "@openmgr/agent-core";
-import { loadConfig } from "@openmgr/agent-config-xdg";
+} from "@ants/agent-core";
+import { loadConfig } from "@ants/agent-config-xdg";
 import {
   AnthropicProvider,
   AnthropicOAuthProvider,
@@ -143,14 +143,14 @@ import {
   XAIProvider,
   type ProviderOptions,
   type ProviderName,
-} from "@openmgr/agent-providers";
-import { FilesystemSkillManager } from "@openmgr/agent-skills-loader";
-import { StdioMcpClient } from "@openmgr/agent-mcp-stdio";
-import { toolsPlugin } from "@openmgr/agent-tools";
-import { toolsTerminalPlugin } from "@openmgr/agent-tools-terminal";
-import { worktreePlugin } from "@openmgr/agent-worktree";
-import type { SandboxControllerOptions } from "@openmgr/agent-browser-sandbox";
-import type { BrowserController } from "@openmgr/agent-browser-core";
+} from "@ants/agent-providers";
+import { FilesystemSkillManager } from "@ants/agent-skills-loader";
+import { StdioMcpClient } from "@ants/agent-mcp-stdio";
+import { toolsPlugin } from "@ants/agent-tools";
+import { toolsTerminalPlugin } from "@ants/agent-tools-terminal";
+import { worktreePlugin } from "@ants/agent-worktree";
+import type { SandboxControllerOptions } from "@ants/agent-browser-sandbox";
+import type { BrowserController } from "@ants/agent-browser-core";
 import { FileTokenStore } from "./file-token-store.js";
 
 // =============================================================================
@@ -248,11 +248,11 @@ export function createNodeProvider(
 /**
  * Plugin that registers all LLM providers with Node.js environment variable support.
  * 
- * Use this plugin instead of providersPlugin from @openmgr/agent-providers
+ * Use this plugin instead of providersPlugin from @ants/agent-providers
  * to get automatic API key resolution from environment variables.
  */
 export const nodeProvidersPlugin: AgentPlugin = {
-  name: "@openmgr/agent-node/providers",
+  name: "@ants/agent-node/providers",
   version: "0.1.0",
   providers: [
     {
@@ -348,13 +348,13 @@ export interface NodeAgentOptions extends AgentOptions {
  * Create an Agent configured for Node.js environments.
  *
  * This function:
- * - Loads configuration from XDG paths (~/.config/openmgr/)
+ * - Loads configuration from XDG paths (~/.config/ants/)
  * - Sets up filesystem-based skill discovery
  * - Configures stdio MCP client support
  *
  * @example
  * ```typescript
- * import { createNodeAgent } from "@openmgr/agent-node";
+ * import { createNodeAgent } from "@ants/agent-node";
  *
  * const agent = await createNodeAgent({
  *   workingDirectory: process.cwd(),
@@ -450,4 +450,4 @@ export function getSkillManager(agent: Agent): FilesystemSkillManager | undefine
 /**
  * Create a StdioMcpClient for a given server configuration
  */
-export { StdioMcpClient as createStdioMcpClient } from "@openmgr/agent-mcp-stdio";
+export { StdioMcpClient as createStdioMcpClient } from "@ants/agent-mcp-stdio";

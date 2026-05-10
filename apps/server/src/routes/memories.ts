@@ -2,7 +2,7 @@
  * Memory/Knowledge Base routes.
  *
  * Proxies memory operations to the project's MemoryStorage instance.
- * The @openmgr/agent-memory package provides the storage backend.
+ * The @ants/agent-memory package provides the storage backend.
  */
 
 import { Hono } from 'hono';
@@ -15,13 +15,13 @@ import { z } from 'zod';
 const log = createLogger('memories');
 
 // Lazy import of agent-memory to avoid hard dependency
-let MemoryStorage: typeof import('@openmgr/agent-memory').MemoryStorage | null = null;
-const storageInstances = new Map<string, InstanceType<typeof import('@openmgr/agent-memory').MemoryStorage>>();
+let MemoryStorage: typeof import('@ants/agent-memory').MemoryStorage | null = null;
+const storageInstances = new Map<string, InstanceType<typeof import('@ants/agent-memory').MemoryStorage>>();
 
 async function getMemoryStorage(projectDir: string) {
   if (!MemoryStorage) {
     try {
-      const mod = await import('@openmgr/agent-memory');
+      const mod = await import('@ants/agent-memory');
       MemoryStorage = mod.MemoryStorage;
     } catch {
       throw new Error('agent-memory package not available');

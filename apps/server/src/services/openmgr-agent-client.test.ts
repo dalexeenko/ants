@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { OpenMgrAgentClient } from './openmgr-agent-client.js';
+import { AntsAgentClient } from './ants-agent-client.js';
 
 const BASE_URL = 'http://127.0.0.1:9999';
 
@@ -25,12 +25,12 @@ function mockFetchNetworkError() {
   return vi.fn().mockRejectedValue(new TypeError('fetch failed'));
 }
 
-describe('OpenMgrAgentClient', () => {
-  let client: OpenMgrAgentClient;
+describe('AntsAgentClient', () => {
+  let client: AntsAgentClient;
   const originalFetch = globalThis.fetch;
 
   beforeEach(() => {
-    client = new OpenMgrAgentClient(BASE_URL);
+    client = new AntsAgentClient(BASE_URL);
   });
 
   afterEach(() => {
@@ -43,7 +43,7 @@ describe('OpenMgrAgentClient', () => {
   describe('construction', () => {
     it('should store the base URL and use it in requests', async () => {
       const customUrl = 'http://localhost:1234';
-      const c = new OpenMgrAgentClient(customUrl);
+      const c = new AntsAgentClient(customUrl);
       globalThis.fetch = mockFetchOk({ data: [] });
 
       await c.listSessions();
@@ -576,13 +576,13 @@ describe('OpenMgrAgentClient', () => {
     it('should call POST /plugins/install with packageSpec', async () => {
       globalThis.fetch = mockFetchOk({ success: true });
 
-      await client.installPlugin('@openmgr/plugin-git');
+      await client.installPlugin('@ants/plugin-git');
 
       expect(globalThis.fetch).toHaveBeenCalledWith(
         `${BASE_URL}/plugins/install`,
         expect.objectContaining({
           method: 'POST',
-          body: JSON.stringify({ packageSpec: '@openmgr/plugin-git' }),
+          body: JSON.stringify({ packageSpec: '@ants/plugin-git' }),
         }),
       );
     });
@@ -592,13 +592,13 @@ describe('OpenMgrAgentClient', () => {
     it('should call POST /plugins/uninstall with packageName', async () => {
       globalThis.fetch = mockFetchOk({ success: true });
 
-      await client.uninstallPlugin('@openmgr/plugin-git');
+      await client.uninstallPlugin('@ants/plugin-git');
 
       expect(globalThis.fetch).toHaveBeenCalledWith(
         `${BASE_URL}/plugins/uninstall`,
         expect.objectContaining({
           method: 'POST',
-          body: JSON.stringify({ packageName: '@openmgr/plugin-git' }),
+          body: JSON.stringify({ packageName: '@ants/plugin-git' }),
         }),
       );
     });

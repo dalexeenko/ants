@@ -3,18 +3,18 @@
  * 
  * This bridge provides the AgentBridge interface for the mobile app.
  * It supports:
- * - Local on-device agent execution via @openmgr/agent-react-native
+ * - Local on-device agent execution via @ants/agent-react-native
  * - Remote server connections via HTTP/SSE
  * - Persistent storage via SQLite database
  * 
- * For local projects, it uses BridgeCore from @openmgr/ui with:
+ * For local projects, it uses BridgeCore from @ants/ui with:
  * - ReactNativeAgentFactory for agent creation
  * - ReactNativeStorage for API key storage (expo-secure-store)
  * - ReactNativeFilesystem for file operations (expo-file-system)
  */
 
-import type { AgentBridge, AgentEvent, Project, RemoteServerConfig, PlatformSSEHandler, SSEEvent } from '@openmgr/ui';
-import { createBridgeCore, createLogger } from '@openmgr/ui';
+import type { AgentBridge, AgentEvent, Project, RemoteServerConfig, PlatformSSEHandler, SSEEvent } from '@ants/ui';
+import { createBridgeCore, createLogger } from '@ants/ui';
 import { createReactNativeAgentFactory } from './ReactNativeAgentFactory';
 import { createReactNativeStorage } from './ReactNativeStorage';
 import { createReactNativeFilesystem } from './ReactNativeFilesystem';
@@ -26,7 +26,7 @@ import {
   type RemoteServerRow,
   eq,
   desc,
-} from '@openmgr/agent-react-native';
+} from '@ants/agent-react-native';
 import EventSource from 'react-native-sse';
 import {
   Agent,
@@ -41,14 +41,14 @@ import {
   type GenericAgentDatabase,
   type AgentDatabase,
   type ExpoSQLiteModule,
-} from '@openmgr/agent-react-native';
+} from '@ants/agent-react-native';
 import * as SQLite from 'expo-sqlite';
 import {
   directorToolsPlugin,
   DIRECTOR_CONTEXT_KEY,
   DIRECTOR_SYSTEM_PROMPT,
   type DirectorContext,
-} from '@openmgr/agent-tools-director';
+} from '@ants/agent-tools-director';
 import * as Crypto from 'expo-crypto';
 import { Directory as ExpoDirectory } from 'expo-file-system';
 import { fetch as expoFetch } from 'expo/fetch';
@@ -361,8 +361,8 @@ export async function deleteRemoteServer(serverId: string): Promise<void> {
  * Create a mobile agent bridge instance.
  * 
  * This bridge supports both local and remote agent execution:
- * - Local projects use on-device AI processing via @openmgr/agent-react-native
- * - Remote projects connect to @openmgr/server instances via HTTP/SSE
+ * - Local projects use on-device AI processing via @ants/agent-react-native
+ * - Remote projects connect to @ants/server instances via HTTP/SSE
  */
 export function createMobileBridge(): AgentBridge {
   // Eagerly register built-in agent types on the global registry so they're
@@ -828,7 +828,7 @@ export function createMobileBridge(): AgentBridge {
       async getDefaultProjectsDirectory() {
         try {
           const dataDir = filesystem.getDataDirectory();
-          return `${dataDir}/OpenMgr Projects`;
+          return `${dataDir}/Ants Projects`;
         } catch {
           return null;
         }

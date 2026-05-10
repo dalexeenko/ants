@@ -7,7 +7,7 @@ import {
   ThemeContext,
   type AgentBridge,
   spacing,
-} from '@openmgr/ui';
+} from '@ants/ui';
 
 interface AgentsScreenProps {
   bridge: AgentBridge;
@@ -19,11 +19,11 @@ export function AgentsScreen({ bridge, onNavigateBack, onOpenDrawer }: AgentsScr
   const { colors } = React.useContext(ThemeContext);
 
   return (
-    <View testID="openmgr-agents-screen" style={[styles.container, { backgroundColor: colors.bg.primary }]}>
+    <View testID="ants-agents-screen" style={[styles.container, { backgroundColor: colors.bg.primary }]}>
       {/* Header with drawer toggle */}
       <View style={[styles.header, { borderBottomColor: colors.border.light }]}>
         {onOpenDrawer ? (
-          <IconButton testID="openmgr-drawer-toggle" icon="menu" size="md" onPress={onOpenDrawer} />
+          <IconButton testID="ants-drawer-toggle" icon="menu" size="md" onPress={onOpenDrawer} />
         ) : (
           <IconButton icon="arrow-left" size="md" onPress={onNavigateBack} />
         )}

@@ -105,7 +105,7 @@ export function createRemoteMethods(deps: BridgeDeps): RemoteMethods {
               if (statusRes.ok) {
                 const status = await statusRes.json() as { multiUser?: boolean; authMethods?: string[] };
                 if (status.multiUser) {
-                  const connectUrl = `${serverConfig.url}/api/beta/auth/connect?redirect_uri=${encodeURIComponent('openmgr://connect')}`;
+                  const connectUrl = `${serverConfig.url}/api/beta/auth/connect?redirect_uri=${encodeURIComponent('ants://connect')}`;
                   return {
                     success: false,
                     error: 'This server requires authentication. Sign in to connect.',
@@ -123,7 +123,7 @@ export function createRemoteMethods(deps: BridgeDeps): RemoteMethods {
             return { success: false, error: 'Access denied. The token does not have sufficient permissions.' };
           }
           if (response.status === 404) {
-            return { success: false, error: 'Server responded but the endpoint was not found (404). Verify the URL points to an OpenMgr server.' };
+            return { success: false, error: 'Server responded but the endpoint was not found (404). Verify the URL points to an Ants server.' };
           }
           if (response.status >= 500) {
             return { success: false, error: `Server error (${response.status}). The server may be misconfigured or experiencing issues.` };

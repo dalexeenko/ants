@@ -183,7 +183,7 @@ export function createSessionStreamingRoutes(
   // Send prompt with SSE streaming
   // Proxies the SSE stream from the agent server to the client AND
   // buffers all events in the SessionEventBuffer. The agent-server handles
-  // message storage; the openmgr server does not duplicate it.
+  // message storage; the ants server does not duplicate it.
   // ==========================================================================
   app.post('/:projectId/sessions/:sessionId/prompt/stream', async (c) => {
     const projectId = c.req.param('projectId');

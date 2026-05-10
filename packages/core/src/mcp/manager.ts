@@ -69,7 +69,7 @@ export class McpManager extends EventEmitter<McpManagerEvents> {
       // Stdio transport requires a client factory (Node.js-specific)
       throw new Error(
         `Stdio MCP transport requires a client factory. ` +
-        `Use McpManager with a clientFactory option, or use @openmgr/agent-node which provides one.`
+        `Use McpManager with a clientFactory option, or use @ants/agent-node which provides one.`
       );
     }
 

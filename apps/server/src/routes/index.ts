@@ -318,10 +318,10 @@ export function registerRoutes(
 
   const serverRoot = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 
-  // ── Web App UI (static files, gated by OPENMGR_WEB_APP) ─────────────
+  // ── Web App UI (static files, gated by ANTS_WEB_APP) ─────────────
   if (config.webApp) {
     const appDistCandidates = [
-      join(serverRoot, 'node_modules', '@openmgr', 'app-ui', 'dist'),
+      join(serverRoot, 'node_modules', '@ants', 'app-ui', 'dist'),
       join(serverRoot, 'dist', 'app'),
     ];
     const appDistDir = appDistCandidates.find(d => existsSync(d)) ?? appDistCandidates[0];
@@ -386,7 +386,7 @@ export function registerRoutes(
 
   // ── Server Web UI (static files) ─────────────────────────────────────
   const uiDistCandidates = [
-    join(serverRoot, 'node_modules', '@openmgr', 'server-ui', 'dist'),
+    join(serverRoot, 'node_modules', '@ants', 'server-ui', 'dist'),
     join(serverRoot, 'dist', 'ui'),
   ];
   const uiDistDir = uiDistCandidates.find(d => existsSync(d)) ?? uiDistCandidates[0];

@@ -1,7 +1,7 @@
 import { Hono } from 'hono';
 import { stream } from 'hono/streaming';
 import type { ProjectManager } from '../services/project-manager.js';
-import type { SearchSessionsParams, SearchMessagesParams } from '../services/openmgr-agent-manager.js';
+import type { SearchSessionsParams, SearchMessagesParams } from '../services/ants-agent-manager.js';
 import { getErrorMessage } from '../utils/errors.js';
 import { createLogger } from '../utils/logger.js';
 

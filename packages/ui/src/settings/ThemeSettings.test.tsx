@@ -26,7 +26,7 @@ describe('ThemeSettings', () => {
     render(<ThemeSettings />);
 
     expect(screen.getByText('Appearance')).toBeInTheDocument();
-    expect(screen.getByText('Choose how OpenMgr looks on your device')).toBeInTheDocument();
+    expect(screen.getByText('Choose how Ants looks on your device')).toBeInTheDocument();
   });
 
   it('should render descriptions for each option', () => {

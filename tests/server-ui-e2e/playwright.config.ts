@@ -1,7 +1,7 @@
 import { defineConfig } from '@playwright/test';
 
 /**
- * Playwright configuration for testing the OpenMgr server admin UI.
+ * Playwright configuration for testing the Ants server admin UI.
  *
  * The server is started in mock mode via global setup (src/global-setup.ts)
  * and torn down via global teardown. All tests share the same server instance

@@ -1,5 +1,5 @@
 /**
- * Structured logger for the OpenMgr app packages (ui, desktop, mobile).
+ * Structured logger for the Ants app packages (ui, desktop, mobile).
  *
  * Usage:
  *   import { createLogger } from '../utils/logger';
@@ -8,7 +8,7 @@
  *   log.error('Failed to create session', error);
  *
  * Log level is controlled by:
- *   - globalThis.__OPENMGR_LOG_LEVEL (set at app startup)
+ *   - globalThis.__ANTS_LOG_LEVEL (set at app startup)
  *   - Defaults to "warn" in production, "debug" in development
  *
  * Valid levels (from most to least verbose): debug, info, warn, error
@@ -25,12 +25,12 @@ const LEVELS: Record<LogLevel, number> = {
 
 declare global {
   // eslint-disable-next-line no-var
-  var __OPENMGR_LOG_LEVEL: LogLevel | undefined;
+  var __ANTS_LOG_LEVEL: LogLevel | undefined;
 }
 
 function getConfiguredLevel(): LogLevel {
-  if (globalThis.__OPENMGR_LOG_LEVEL && globalThis.__OPENMGR_LOG_LEVEL in LEVELS) {
-    return globalThis.__OPENMGR_LOG_LEVEL;
+  if (globalThis.__ANTS_LOG_LEVEL && globalThis.__ANTS_LOG_LEVEL in LEVELS) {
+    return globalThis.__ANTS_LOG_LEVEL;
   }
   // Default: warn in production, debug in development
   return process.env.NODE_ENV === 'production' ? 'warn' : 'debug';
@@ -39,7 +39,7 @@ function getConfiguredLevel(): LogLevel {
 let currentLevel: LogLevel | null = null;
 
 function getCurrentLevel(): LogLevel {
-  // Lazily evaluate so tests can set __OPENMGR_LOG_LEVEL before first use
+  // Lazily evaluate so tests can set __ANTS_LOG_LEVEL before first use
   if (currentLevel === null) {
     currentLevel = getConfiguredLevel();
   }

@@ -7,7 +7,7 @@ import { createDatabase, getDefaultDbPath } from "./database.js";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import { existsSync } from "fs";
-import type { MigrationResult } from "@openmgr/agent-database-core";
+import type { MigrationResult } from "@ants/agent-database-core";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 

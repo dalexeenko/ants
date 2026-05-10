@@ -3,7 +3,7 @@
  * Uses OpenAI-compatible API with custom base URL.
  */
 
-import type { LLMProvider, LLMStreamOptions, LLMStreamResult, AuthConfig } from "@openmgr/agent-core";
+import type { LLMProvider, LLMStreamOptions, LLMStreamResult, AuthConfig } from "@ants/agent-core";
 import { OpenAIClient, type OpenAIClientOptions } from "./openai-client.js";
 
 export interface OpenRouterProviderOptions {
@@ -26,8 +26,8 @@ export class OpenRouterProvider implements LLMProvider {
       fetch: options.fetch,
       baseUrl: "https://openrouter.ai/api/v1",
       defaultHeaders: {
-        "HTTP-Referer": "https://openmgr.ai",
-        "X-Title": "OpenMgr Agent",
+        "HTTP-Referer": "https://ants.ai",
+        "X-Title": "Ants Agent",
         ...options.defaultHeaders,
       },
     };

@@ -2,7 +2,7 @@ import Database from "better-sqlite3";
 import { join } from "path";
 import { mkdirSync, existsSync } from "fs";
 
-const MEMORY_DIR = ".openmgr";
+const MEMORY_DIR = ".ants";
 const MEMORY_DB_FILE = "memories.db";
 
 const projectDatabases = new Map<string, Database.Database>();

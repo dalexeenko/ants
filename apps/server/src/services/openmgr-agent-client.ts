@@ -1,12 +1,12 @@
-import type { IAgentClient, ToolInfo, SearchSessionsParams, SearchMessagesParams, SearchResult } from './openmgr-agent-manager.js';
+import type { IAgentClient, ToolInfo, SearchSessionsParams, SearchMessagesParams, SearchResult } from './ants-agent-manager.js';
 import { createLogger } from '../utils/logger.js';
 
 const log = createLogger('AgentClient');
 
 /**
- * HTTP client for communicating with a real OpenMgr Agent server.
+ * HTTP client for communicating with a real Ants Agent server.
  */
-export class OpenMgrAgentClient implements IAgentClient {
+export class AntsAgentClient implements IAgentClient {
   private baseUrl: string;
   private jsonHeaders = { 'Accept': 'application/json', 'Content-Type': 'application/json' };
 
@@ -26,7 +26,7 @@ export class OpenMgrAgentClient implements IAgentClient {
 
     if (!response.ok) {
       const text = await response.text();
-      log.error(`OpenMgr Agent ${method} ${path} failed: ${response.status}`, text);
+      log.error(`Ants Agent ${method} ${path} failed: ${response.status}`, text);
       throw new Error(`Failed ${method} ${path}: ${response.status} - ${text}`);
     }
 

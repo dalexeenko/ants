@@ -1,13 +1,13 @@
 /**
- * @openmgr/agent-skills-content
+ * @ants/agent-skills-content
  *
- * Default skill content for OpenMgr Agent.
+ * Default skill content for Ants Agent.
  * This package contains the raw SKILL.md content as strings,
  * making it platform agnostic (works in Node.js, React Native, browsers).
  *
  * @example
  * ```typescript
- * import { defaultSkills, getSkillContent } from "@openmgr/agent-skills-content";
+ * import { defaultSkills, getSkillContent } from "@ants/agent-skills-content";
  *
  * // Get all skills
  * for (const skill of defaultSkills) {
@@ -1522,7 +1522,7 @@ When writing tests:
 };
 
 /**
- * All default skills bundled with OpenMgr Agent.
+ * All default skills bundled with Ants Agent.
  */
 export const defaultSkills: SkillContent[] = [
   CODE_REVIEW_SKILL,

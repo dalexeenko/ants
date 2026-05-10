@@ -344,7 +344,7 @@ export function ChatView({ projectId, showSessionSettings = false }: { projectId
   }
 
   return (
-    <View testID="openmgr-chat-view" style={{ flex: 1 }}>
+    <View testID="ants-chat-view" style={{ flex: 1 }}>
       <ChatPanel
         messages={messages}
         isProcessing={isProcessing}

@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import * as agentExports from '../index.js';
 
-describe('@openmgr/agent exports', () => {
+describe('@ants/agent exports', () => {
   it('should export Agent class', () => {
     expect(agentExports.Agent).toBeDefined();
     expect(typeof agentExports.Agent).toBe('function');
@@ -14,14 +14,14 @@ describe('@openmgr/agent exports', () => {
 
   it('should export SkillManagerInterface type', () => {
     // SkillManagerInterface is now a type, not a class
-    // The actual implementation is in @openmgr/agent-skills-loader
+    // The actual implementation is in @ants/agent-skills-loader
     expect(agentExports.SkillLoadError).toBeDefined();
     expect(agentExports.SkillNotFoundError).toBeDefined();
   });
 
   it('should export ConfigLoader type', () => {
     // ConfigLoader is now a type, not a function
-    // The actual implementation is in @openmgr/agent-config-xdg
+    // The actual implementation is in @ants/agent-config-xdg
     expect(true).toBe(true);
   });
 
@@ -33,7 +33,7 @@ describe('@openmgr/agent exports', () => {
   it('should export providersPlugin', () => {
     expect(agentExports.providersPlugin).toBeDefined();
     expect(typeof agentExports.providersPlugin).toBe('object');
-    expect(agentExports.providersPlugin.name).toBe('@openmgr/agent-providers');
+    expect(agentExports.providersPlugin.name).toBe('@ants/agent-providers');
   });
 
   it('should export storage classes', () => {

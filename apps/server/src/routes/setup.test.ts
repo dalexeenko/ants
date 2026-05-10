@@ -102,7 +102,7 @@ describe('setup routes', () => {
 
       expect(res.status).toBe(201);
       const setCookie = res.headers.get('set-cookie');
-      expect(setCookie).toContain('openmgr_session=');
+      expect(setCookie).toContain('ants_session=');
     });
 
     it('should log an audit event', async () => {

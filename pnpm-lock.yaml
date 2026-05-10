@@ -51,61 +51,61 @@ importers:
       '@electron/rebuild':
         specifier: ^4.0.3
         version: 4.0.3
-      '@openmgr/agent':
+      '@ants/agent':
         specifier: workspace:*
         version: link:../../packages/agent
-      '@openmgr/agent-auth-anthropic':
+      '@ants/agent-auth-anthropic':
         specifier: workspace:*
         version: link:../../packages/auth-anthropic
-      '@openmgr/agent-browser-core':
+      '@ants/agent-browser-core':
         specifier: workspace:*
         version: link:../../packages/browser-core
-      '@openmgr/agent-browser-sandbox':
+      '@ants/agent-browser-sandbox':
         specifier: workspace:*
         version: link:../../packages/browser-sandbox
-      '@openmgr/agent-core':
+      '@ants/agent-core':
         specifier: workspace:*
         version: link:../../packages/core
-      '@openmgr/agent-database':
+      '@ants/agent-database':
         specifier: workspace:*
         version: link:../../packages/database
-      '@openmgr/agent-database-core':
+      '@ants/agent-database-core':
         specifier: workspace:*
         version: link:../../packages/database-core
-      '@openmgr/agent-docker':
+      '@ants/agent-docker':
         specifier: workspace:*
         version: link:../../packages/docker
-      '@openmgr/agent-mcp-stdio':
+      '@ants/agent-mcp-stdio':
         specifier: workspace:*
         version: link:../../packages/mcp-stdio
-      '@openmgr/agent-memory':
+      '@ants/agent-memory':
         specifier: workspace:*
         version: link:../../packages/memory
-      '@openmgr/agent-node':
+      '@ants/agent-node':
         specifier: workspace:*
         version: link:../../packages/node
-      '@openmgr/agent-providers':
+      '@ants/agent-providers':
         specifier: workspace:*
         version: link:../../packages/providers
-      '@openmgr/agent-skills-loader':
+      '@ants/agent-skills-loader':
         specifier: workspace:*
         version: link:../../packages/skills-loader
-      '@openmgr/agent-storage':
+      '@ants/agent-storage':
         specifier: workspace:*
         version: link:../../packages/storage
-      '@openmgr/agent-tools':
+      '@ants/agent-tools':
         specifier: workspace:*
         version: link:../../packages/tools
-      '@openmgr/agent-tools-director':
+      '@ants/agent-tools-director':
         specifier: workspace:*
         version: link:../../packages/tools-director
-      '@openmgr/agent-tools-terminal':
+      '@ants/agent-tools-terminal':
         specifier: workspace:*
         version: link:../../packages/tools-terminal
-      '@openmgr/agent-worktree':
+      '@ants/agent-worktree':
         specifier: workspace:*
         version: link:../../packages/agent-worktree
-      '@openmgr/ui':
+      '@ants/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       '@playwright/test':
@@ -174,22 +174,22 @@ importers:
       '@expo/metro-runtime':
         specifier: ~6.1.2
         version: 6.1.2(expo@54.0.33)(react-dom@19.1.0(react@19.1.0))(react-native@0.81.5(@babel/core@7.29.0)(@types/react@19.1.17)(react@19.1.0))(react@19.1.0)
-      '@openmgr/agent-auth-core':
+      '@ants/agent-auth-core':
         specifier: workspace:*
         version: link:../../packages/auth-core
-      '@openmgr/agent-auth-react-native':
+      '@ants/agent-auth-react-native':
         specifier: workspace:*
         version: link:../../packages/auth-react-native
-      '@openmgr/agent-core':
+      '@ants/agent-core':
         specifier: workspace:*
         version: link:../../packages/core
-      '@openmgr/agent-react-native':
+      '@ants/agent-react-native':
         specifier: workspace:*
         version: link:../../packages/react-native
-      '@openmgr/agent-tools-director':
+      '@ants/agent-tools-director':
         specifier: workspace:*
         version: link:../../packages/tools-director
-      '@openmgr/ui':
+      '@ants/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       '@react-native-async-storage/async-storage':
@@ -295,34 +295,34 @@ importers:
       '@modelcontextprotocol/sdk':
         specifier: ^1.25.2
         version: 1.26.0(zod@4.3.6)
-      '@openmgr/agent':
+      '@ants/agent':
         specifier: workspace:*
         version: link:../../packages/agent
-      '@openmgr/agent-auth-anthropic':
+      '@ants/agent-auth-anthropic':
         specifier: workspace:*
         version: link:../../packages/auth-anthropic
-      '@openmgr/agent-auth-core':
+      '@ants/agent-auth-core':
         specifier: workspace:*
         version: link:../../packages/auth-core
-      '@openmgr/agent-docker':
+      '@ants/agent-docker':
         specifier: workspace:*
         version: link:../../packages/docker
-      '@openmgr/agent-memory':
+      '@ants/agent-memory':
         specifier: workspace:*
         version: link:../../packages/memory
-      '@openmgr/agent-scheduler':
+      '@ants/agent-scheduler':
         specifier: workspace:*
         version: link:../../packages/scheduler
-      '@openmgr/agent-storage':
+      '@ants/agent-storage':
         specifier: workspace:*
         version: link:../../packages/storage
-      '@openmgr/agent-worktree':
+      '@ants/agent-worktree':
         specifier: workspace:*
         version: link:../../packages/agent-worktree
-      '@openmgr/app-ui':
+      '@ants/app-ui':
         specifier: workspace:*
         version: link:../../packages/app-ui
-      '@openmgr/server-ui':
+      '@ants/server-ui':
         specifier: workspace:*
         version: link:../../packages/server-ui
       better-sqlite3:
@@ -398,43 +398,43 @@ importers:
 
   packages/agent:
     dependencies:
-      '@openmgr/agent-auth-anthropic':
+      '@ants/agent-auth-anthropic':
         specifier: workspace:*
         version: link:../auth-anthropic
-      '@openmgr/agent-auth-core':
+      '@ants/agent-auth-core':
         specifier: workspace:*
         version: link:../auth-core
-      '@openmgr/agent-cli':
+      '@ants/agent-cli':
         specifier: workspace:*
         version: link:../cli
-      '@openmgr/agent-core':
+      '@ants/agent-core':
         specifier: workspace:*
         version: link:../core
-      '@openmgr/agent-database':
+      '@ants/agent-database':
         specifier: workspace:*
         version: link:../database
-      '@openmgr/agent-lsp':
+      '@ants/agent-lsp':
         specifier: workspace:*
         version: link:../lsp
-      '@openmgr/agent-memory':
+      '@ants/agent-memory':
         specifier: workspace:*
         version: link:../memory
-      '@openmgr/agent-providers':
+      '@ants/agent-providers':
         specifier: workspace:*
         version: link:../providers
-      '@openmgr/agent-server':
+      '@ants/agent-server':
         specifier: workspace:*
         version: link:../server
-      '@openmgr/agent-skills-loader':
+      '@ants/agent-skills-loader':
         specifier: workspace:*
         version: link:../skills-loader
-      '@openmgr/agent-storage':
+      '@ants/agent-storage':
         specifier: workspace:*
         version: link:../storage
-      '@openmgr/agent-tools':
+      '@ants/agent-tools':
         specifier: workspace:*
         version: link:../tools
-      '@openmgr/agent-tools-terminal':
+      '@ants/agent-tools-terminal':
         specifier: workspace:*
         version: link:../tools-terminal
     devDependencies:
@@ -447,10 +447,10 @@ importers:
 
   packages/agent-worktree:
     dependencies:
-      '@openmgr/agent-core':
+      '@ants/agent-core':
         specifier: workspace:*
         version: link:../core
-      '@openmgr/agent-storage':
+      '@ants/agent-storage':
         specifier: workspace:*
         version: link:../storage
       zod:
@@ -469,7 +469,7 @@ importers:
 
   packages/app-ui:
     dependencies:
-      '@openmgr/ui':
+      '@ants/ui':
         specifier: workspace:*
         version: link:../ui
       react:
@@ -500,7 +500,7 @@ importers:
 
   packages/auth-anthropic:
     dependencies:
-      '@openmgr/agent-auth-core':
+      '@ants/agent-auth-core':
         specifier: workspace:*
         version: link:../auth-core
     devDependencies:
@@ -522,7 +522,7 @@ importers:
 
   packages/auth-react-native:
     dependencies:
-      '@openmgr/agent-auth-core':
+      '@ants/agent-auth-core':
         specifier: workspace:*
         version: link:../auth-core
     devDependencies:
@@ -547,7 +547,7 @@ importers:
 
   packages/browser-core:
     dependencies:
-      '@openmgr/agent-core':
+      '@ants/agent-core':
         specifier: workspace:*
         version: link:../core
       zod:
@@ -566,7 +566,7 @@ importers:
 
   packages/browser-sandbox:
     dependencies:
-      '@openmgr/agent-browser-core':
+      '@ants/agent-browser-core':
         specifier: workspace:*
         version: link:../browser-core
       playwright:
@@ -585,40 +585,40 @@ importers:
 
   packages/cli:
     dependencies:
-      '@openmgr/agent-auth-anthropic':
+      '@ants/agent-auth-anthropic':
         specifier: workspace:*
         version: link:../auth-anthropic
-      '@openmgr/agent-config-xdg':
+      '@ants/agent-config-xdg':
         specifier: workspace:*
         version: link:../config-xdg
-      '@openmgr/agent-core':
+      '@ants/agent-core':
         specifier: workspace:*
         version: link:../core
-      '@openmgr/agent-lsp':
+      '@ants/agent-lsp':
         specifier: workspace:*
         version: link:../lsp
-      '@openmgr/agent-memory':
+      '@ants/agent-memory':
         specifier: workspace:*
         version: link:../memory
-      '@openmgr/agent-node':
+      '@ants/agent-node':
         specifier: workspace:*
         version: link:../node
-      '@openmgr/agent-providers':
+      '@ants/agent-providers':
         specifier: workspace:*
         version: link:../providers
-      '@openmgr/agent-server':
+      '@ants/agent-server':
         specifier: workspace:*
         version: link:../server
-      '@openmgr/agent-skills-loader':
+      '@ants/agent-skills-loader':
         specifier: workspace:*
         version: link:../skills-loader
-      '@openmgr/agent-storage':
+      '@ants/agent-storage':
         specifier: workspace:*
         version: link:../storage
-      '@openmgr/agent-tools':
+      '@ants/agent-tools':
         specifier: workspace:*
         version: link:../tools
-      '@openmgr/agent-tools-terminal':
+      '@ants/agent-tools-terminal':
         specifier: workspace:*
         version: link:../tools-terminal
       chalk:
@@ -637,7 +637,7 @@ importers:
 
   packages/config-xdg:
     dependencies:
-      '@openmgr/agent-core':
+      '@ants/agent-core':
         specifier: workspace:*
         version: link:../core
       zod:
@@ -681,7 +681,7 @@ importers:
 
   packages/database:
     dependencies:
-      '@openmgr/agent-database-core':
+      '@ants/agent-database-core':
         specifier: workspace:*
         version: link:../database-core
       better-sqlite3:
@@ -728,7 +728,7 @@ importers:
 
   packages/database-react-native:
     dependencies:
-      '@openmgr/agent-database-core':
+      '@ants/agent-database-core':
         specifier: workspace:*
         version: link:../database-core
     devDependencies:
@@ -759,7 +759,7 @@ importers:
 
   packages/lsp:
     dependencies:
-      '@openmgr/agent-core':
+      '@ants/agent-core':
         specifier: workspace:*
         version: link:../core
       eventemitter3:
@@ -781,7 +781,7 @@ importers:
       '@modelcontextprotocol/sdk':
         specifier: ^1.25.2
         version: 1.26.0(zod@4.3.6)
-      '@openmgr/agent-core':
+      '@ants/agent-core':
         specifier: workspace:*
         version: link:../core
     devDependencies:
@@ -800,7 +800,7 @@ importers:
       '@huggingface/transformers':
         specifier: ^3.8.1
         version: 3.8.1
-      '@openmgr/agent-core':
+      '@ants/agent-core':
         specifier: workspace:*
         version: link:../core
       better-sqlite3:
@@ -825,37 +825,37 @@ importers:
 
   packages/node:
     dependencies:
-      '@openmgr/agent-auth-anthropic':
+      '@ants/agent-auth-anthropic':
         specifier: workspace:*
         version: link:../auth-anthropic
-      '@openmgr/agent-browser-core':
+      '@ants/agent-browser-core':
         specifier: workspace:*
         version: link:../browser-core
-      '@openmgr/agent-browser-sandbox':
+      '@ants/agent-browser-sandbox':
         specifier: workspace:*
         version: link:../browser-sandbox
-      '@openmgr/agent-config-xdg':
+      '@ants/agent-config-xdg':
         specifier: workspace:*
         version: link:../config-xdg
-      '@openmgr/agent-core':
+      '@ants/agent-core':
         specifier: workspace:*
         version: link:../core
-      '@openmgr/agent-mcp-stdio':
+      '@ants/agent-mcp-stdio':
         specifier: workspace:*
         version: link:../mcp-stdio
-      '@openmgr/agent-providers':
+      '@ants/agent-providers':
         specifier: workspace:*
         version: link:../providers
-      '@openmgr/agent-skills-loader':
+      '@ants/agent-skills-loader':
         specifier: workspace:*
         version: link:../skills-loader
-      '@openmgr/agent-tools':
+      '@ants/agent-tools':
         specifier: workspace:*
         version: link:../tools
-      '@openmgr/agent-tools-terminal':
+      '@ants/agent-tools-terminal':
         specifier: workspace:*
         version: link:../tools-terminal
-      '@openmgr/agent-worktree':
+      '@ants/agent-worktree':
         specifier: workspace:*
         version: link:../agent-worktree
     devDependencies:
@@ -871,10 +871,10 @@ importers:
 
   packages/providers:
     dependencies:
-      '@openmgr/agent-auth-core':
+      '@ants/agent-auth-core':
         specifier: workspace:*
         version: link:../auth-core
-      '@openmgr/agent-core':
+      '@ants/agent-core':
         specifier: workspace:*
         version: link:../core
       zod:
@@ -896,28 +896,28 @@ importers:
 
   packages/react-native:
     dependencies:
-      '@openmgr/agent-auth-core':
+      '@ants/agent-auth-core':
         specifier: workspace:*
         version: link:../auth-core
-      '@openmgr/agent-auth-react-native':
+      '@ants/agent-auth-react-native':
         specifier: workspace:*
         version: link:../auth-react-native
-      '@openmgr/agent-core':
+      '@ants/agent-core':
         specifier: workspace:*
         version: link:../core
-      '@openmgr/agent-database-core':
+      '@ants/agent-database-core':
         specifier: workspace:*
         version: link:../database-core
-      '@openmgr/agent-database-react-native':
+      '@ants/agent-database-react-native':
         specifier: workspace:*
         version: link:../database-react-native
-      '@openmgr/agent-providers':
+      '@ants/agent-providers':
         specifier: workspace:*
         version: link:../providers
-      '@openmgr/agent-storage':
+      '@ants/agent-storage':
         specifier: workspace:*
         version: link:../storage
-      '@openmgr/agent-tools':
+      '@ants/agent-tools':
         specifier: workspace:*
         version: link:../tools
       expo-auth-session:
@@ -963,13 +963,13 @@ importers:
 
   packages/server:
     dependencies:
-      '@openmgr/agent-browser-core':
+      '@ants/agent-browser-core':
         specifier: workspace:*
         version: link:../browser-core
-      '@openmgr/agent-core':
+      '@ants/agent-core':
         specifier: workspace:*
         version: link:../core
-      '@openmgr/agent-storage':
+      '@ants/agent-storage':
         specifier: workspace:*
         version: link:../storage
       hono:
@@ -1031,7 +1031,7 @@ importers:
 
   packages/skills-loader:
     dependencies:
-      '@openmgr/agent-core':
+      '@ants/agent-core':
         specifier: workspace:*
         version: link:../core
     devDependencies:
@@ -1047,16 +1047,16 @@ importers:
 
   packages/storage:
     dependencies:
-      '@openmgr/agent-core':
+      '@ants/agent-core':
         specifier: workspace:*
         version: link:../core
-      '@openmgr/agent-database':
+      '@ants/agent-database':
         specifier: workspace:*
         version: link:../database
-      '@openmgr/agent-database-core':
+      '@ants/agent-database-core':
         specifier: workspace:*
         version: link:../database-core
-      '@openmgr/agent-providers':
+      '@ants/agent-providers':
         specifier: workspace:*
         version: link:../providers
       drizzle-orm:
@@ -1072,7 +1072,7 @@ importers:
 
   packages/tools:
     dependencies:
-      '@openmgr/agent-core':
+      '@ants/agent-core':
         specifier: workspace:*
         version: link:../core
       zod:
@@ -1091,7 +1091,7 @@ importers:
 
   packages/tools-director:
     dependencies:
-      '@openmgr/agent-core':
+      '@ants/agent-core':
         specifier: workspace:*
         version: link:../core
       zod:
@@ -1110,7 +1110,7 @@ importers:
 
   packages/tools-terminal:
     dependencies:
-      '@openmgr/agent-core':
+      '@ants/agent-core':
         specifier: workspace:*
         version: link:../core
       glob:
@@ -1202,13 +1202,13 @@ importers:
 
   tests/agent-e2e-tests:
     devDependencies:
-      '@openmgr/agent-core':
+      '@ants/agent-core':
         specifier: workspace:*
         version: link:../../packages/core
-      '@openmgr/agent-server':
+      '@ants/agent-server':
         specifier: workspace:*
         version: link:../../packages/server
-      '@openmgr/agent-storage':
+      '@ants/agent-storage':
         specifier: workspace:*
         version: link:../../packages/storage
       '@types/node':
@@ -1226,28 +1226,28 @@ importers:
 
   tests/agent-integration-tests:
     dependencies:
-      '@openmgr/agent-cli':
+      '@ants/agent-cli':
         specifier: workspace:*
         version: link:../../packages/cli
-      '@openmgr/agent-core':
+      '@ants/agent-core':
         specifier: workspace:*
         version: link:../../packages/core
-      '@openmgr/agent-memory':
+      '@ants/agent-memory':
         specifier: workspace:*
         version: link:../../packages/memory
-      '@openmgr/agent-providers':
+      '@ants/agent-providers':
         specifier: workspace:*
         version: link:../../packages/providers
-      '@openmgr/agent-skills-loader':
+      '@ants/agent-skills-loader':
         specifier: workspace:*
         version: link:../../packages/skills-loader
-      '@openmgr/agent-storage':
+      '@ants/agent-storage':
         specifier: workspace:*
         version: link:../../packages/storage
-      '@openmgr/agent-tools':
+      '@ants/agent-tools':
         specifier: workspace:*
         version: link:../../packages/tools
-      '@openmgr/agent-tools-terminal':
+      '@ants/agent-tools-terminal':
         specifier: workspace:*
         version: link:../../packages/tools-terminal
       zod:

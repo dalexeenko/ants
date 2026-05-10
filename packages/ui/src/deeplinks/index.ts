@@ -1,23 +1,23 @@
 /**
- * Deeplink configuration and utilities for OpenMgr.
+ * Deeplink configuration and utilities for Ants.
  * 
- * URL Scheme: openmgr://
+ * URL Scheme: ants://
  * 
  * Supported Routes:
- * - openmgr://                           → Open app (home)
- * - openmgr://project/:projectId         → Open specific project
- * - openmgr://project/:projectId/session/:sessionId → Open specific session
- * - openmgr://project/:projectId/settings → Open project settings
- * - openmgr://settings                   → Open app settings
- * - openmgr://settings/:section          → Open specific settings section
- * - openmgr://auth/callback?code=...     → OAuth callback
- * - openmgr://connect?url=...            → Connect to remote server
- * - openmgr://open?path=...              → Open local project by path
+ * - ants://                           → Open app (home)
+ * - ants://project/:projectId         → Open specific project
+ * - ants://project/:projectId/session/:sessionId → Open specific session
+ * - ants://project/:projectId/settings → Open project settings
+ * - ants://settings                   → Open app settings
+ * - ants://settings/:section          → Open specific settings section
+ * - ants://auth/callback?code=...     → OAuth callback
+ * - ants://connect?url=...            → Connect to remote server
+ * - ants://open?path=...              → Open local project by path
  */
 
 // ============ Constants ============
 
-export const DEEPLINK_SCHEME = 'openmgr';
+export const DEEPLINK_SCHEME = 'ants';
 export const DEEPLINK_PREFIX = `${DEEPLINK_SCHEME}://`;
 
 // ============ Route Types ============
@@ -65,10 +65,10 @@ export function parseDeeplink(url: string): DeeplinkRoute {
     // Handle both full URLs and path-only
     let urlObj: URL;
     if (url.startsWith(DEEPLINK_PREFIX)) {
-      // openmgr://path -> need to make it parseable
-      urlObj = new URL(url.replace(DEEPLINK_PREFIX, 'http://openmgr/'));
+      // ants://path -> need to make it parseable
+      urlObj = new URL(url.replace(DEEPLINK_PREFIX, 'http://ants/'));
     } else if (url.startsWith('/')) {
-      urlObj = new URL(`http://openmgr${url}`);
+      urlObj = new URL(`http://ants${url}`);
     } else {
       urlObj = new URL(url);
     }
@@ -215,7 +215,7 @@ export function buildDeeplink(route: BuildableDeeplinkRoute): string {
  * Use this in your NavigationContainer.
  */
 export const navigationLinkingConfig = {
-  prefixes: [DEEPLINK_PREFIX, 'https://openmgr.dev'],
+  prefixes: [DEEPLINK_PREFIX, 'https://ants.dev'],
   config: {
     screens: {
       Home: '',

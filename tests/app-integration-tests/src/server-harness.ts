@@ -41,7 +41,7 @@ export interface ServerInfo {
 }
 
 /**
- * Test harness for booting and managing @openmgr/server for integration tests.
+ * Test harness for booting and managing @ants/server for integration tests.
  * 
  * The harness:
  * - Starts the server in mock mode for testing
@@ -64,7 +64,7 @@ export class ServerHarness {
     
     // Create temp directories for test isolation
     const testId = randomBytes(8).toString('hex');
-    const tempBase = join(tmpdir(), 'openmgr-integration-test', testId);
+    const tempBase = join(tmpdir(), 'ants-integration-test', testId);
 
     this.config = {
       port: config.port ?? defaultPort,
@@ -103,20 +103,20 @@ export class ServerHarness {
     }
 
     // Environment variables for the server.
-    // Explicitly set OPENMGR_MULTI_USER=false so the secret-based Bearer
+    // Explicitly set ANTS_MULTI_USER=false so the secret-based Bearer
     // auth used by tests works, regardless of what the local .env says.
     const env = {
       ...process.env,
-      OPENMGR_PORT: String(this.config.port),
-      OPENMGR_HOST: this.config.host,
-      OPENMGR_DATA_DIR: this.config.dataDir,
-      OPENMGR_WORKSPACES_DIR: this.config.workspacesDir,
-      OPENMGR_ENCRYPTION_KEY: this.encryptionKey,
-      OPENMGR_SECRET: this.secret,
-      OPENMGR_MULTI_USER: 'false',
-      OPENMGR_MOCK_AGENT: this.config.mockAgent ? 'true' : 'false',
+      ANTS_PORT: String(this.config.port),
+      ANTS_HOST: this.config.host,
+      ANTS_DATA_DIR: this.config.dataDir,
+      ANTS_WORKSPACES_DIR: this.config.workspacesDir,
+      ANTS_ENCRYPTION_KEY: this.encryptionKey,
+      ANTS_SECRET: this.secret,
+      ANTS_MULTI_USER: 'false',
+      ANTS_MOCK_AGENT: this.config.mockAgent ? 'true' : 'false',
       ...(this.config.mockResponses && this.config.mockResponses.length > 0
-        ? { OPENMGR_MOCK_RESPONSES: JSON.stringify(this.config.mockResponses) }
+        ? { ANTS_MOCK_RESPONSES: JSON.stringify(this.config.mockResponses) }
         : {}),
     };
 
@@ -275,7 +275,7 @@ export class ServerHarness {
 
     // Clean up temp directories
     const tempBase = join(this.config.dataDir, '..');
-    if (existsSync(tempBase) && tempBase.includes('openmgr-integration-test')) {
+    if (existsSync(tempBase) && tempBase.includes('ants-integration-test')) {
       rmSync(tempBase, { recursive: true, force: true });
     }
   }

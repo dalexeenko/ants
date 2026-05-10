@@ -94,10 +94,10 @@ Two sections:
 
 - Header: back arrow + sub-screen title
 - Content area renders based on entry type:
-  - `activity` → `ActivityPanel` from `@openmgr/ui` (pass `sessionId`)
-  - `terminal` → `RemoteTerminal` from `@openmgr/ui` (pass `bridge`, `projectId`)
-  - `subagent` → `SubagentChatView` from `@openmgr/ui` (pass `bridge`, `projectId`, `subagentSessionId`)
-  - `file-editor` → `FileEditorTab` from `@openmgr/ui` (pass `bridge`, `projectId`, `filePath`)
+  - `activity` → `ActivityPanel` from `@ants/ui` (pass `sessionId`)
+  - `terminal` → `RemoteTerminal` from `@ants/ui` (pass `bridge`, `projectId`)
+  - `subagent` → `SubagentChatView` from `@ants/ui` (pass `bridge`, `projectId`, `subagentSessionId`)
+  - `file-editor` → `FileEditorTab` from `@ants/ui` (pass `bridge`, `projectId`, `filePath`)
 
 #### State Persistence
 
@@ -143,7 +143,7 @@ const handleFileOpen = (file: FileEntry) => {
 
 **File:** `apps/mobile/src/screens/SessionScreen.tsx`
 
-Add `TokenUsageBar` (from `@openmgr/ui`) to the model picker bar area, alongside `ModePickerModal` and `ModelPicker`. The shared component is already cross-platform. Show it in a compact form that fits the mobile layout.
+Add `TokenUsageBar` (from `@ants/ui`) to the model picker bar area, alongside `ModePickerModal` and `ModelPicker`. The shared component is already cross-platform. Show it in a compact form that fits the mobile layout.
 
 ### 2.2 File path click handling in chat
 
@@ -188,7 +188,7 @@ Check the desktop `ProjectSettingsPanel` for the exact component structure and b
 
 **File:** `apps/mobile/src/screens/ProjectSettingsScreen.tsx`
 
-- Import `TasksDashboard` from `@openmgr/ui`
+- Import `TasksDashboard` from `@ants/ui`
 - Add an "Advanced Features" section visible only for remote projects (`project.providerType === 'remote'`)
 - Add a navigable row "Scheduled Tasks" that renders `TasksDashboard` in a sub-view (using the same internal `SettingsView` pattern already used for tools/subagents drill-down)
 - The component uses direct HTTP calls to server API endpoints, which work the same on mobile
@@ -197,7 +197,7 @@ Check the desktop `ProjectSettingsPanel` for the exact component structure and b
 
 **File:** `apps/mobile/src/screens/ProjectSettingsScreen.tsx`
 
-- Import `ApprovalsDashboard` from `@openmgr/ui`
+- Import `ApprovalsDashboard` from `@ants/ui`
 - Add "Approvals" as another row in the "Advanced Features" section
 - Renders `ApprovalsDashboard` in a sub-view
 - Features: define approval rules (tool pattern matching), review pending approval requests (approve/deny), view approval history
@@ -207,7 +207,7 @@ Check the desktop `ProjectSettingsPanel` for the exact component structure and b
 **File:** `apps/mobile/src/screens/MorePanel.tsx`
 
 - When the current session is a worktree session, add a "Worktree Diff" entry in the static section of the More tab
-- Tapping it pushes `WorktreeDiffPanel` (from `@openmgr/ui`) into the More navigation stack
+- Tapping it pushes `WorktreeDiffPanel` (from `@ants/ui`) into the More navigation stack
 - Detect worktree sessions by checking session metadata (check how desktop determines this)
 
 ---

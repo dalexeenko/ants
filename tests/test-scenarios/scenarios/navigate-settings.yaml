@@ -4,19 +4,19 @@ preconditions: []
 steps:
   # Desktop: click icon rail settings button
   - tap:
-      testId: openmgr-icon-rail-settings
+      testId: ants-icon-rail-settings
       desktop: true
   - assertVisible:
-      testId: openmgr-settings-panel
+      testId: ants-settings-panel
       desktop: true
 
   # Mobile: open drawer, tap settings
   - tap:
-      testId: openmgr-drawer-toggle
+      testId: ants-drawer-toggle
       mobile: true
   - tap:
-      testId: openmgr-drawer-settings
+      testId: ants-drawer-settings
       mobile: true
   - assertVisible:
-      testId: openmgr-settings-screen
+      testId: ants-settings-screen
       mobile: true

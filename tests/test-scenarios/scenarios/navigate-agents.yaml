@@ -4,19 +4,19 @@ preconditions: []
 steps:
   # Desktop: click icon rail agents button
   - tap:
-      testId: openmgr-icon-rail-agents
+      testId: ants-icon-rail-agents
       desktop: true
   - assertVisible:
-      testId: openmgr-agents-panel
+      testId: ants-agents-panel
       desktop: true
 
   # Mobile: open drawer, tap agents
   - tap:
-      testId: openmgr-drawer-toggle
+      testId: ants-drawer-toggle
       mobile: true
   - tap:
-      testId: openmgr-drawer-agents
+      testId: ants-drawer-agents
       mobile: true
   - assertVisible:
-      testId: openmgr-screen-agents
+      testId: ants-screen-agents
       mobile: true

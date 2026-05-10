@@ -1,12 +1,12 @@
 import keytar from 'keytar';
-import type { AuthStatus, ApiKeyInfo, OAuthInitResult } from '@openmgr/ui';
+import type { AuthStatus, ApiKeyInfo, OAuthInitResult } from '@ants/ui';
 import {
   generateAuthorizationUrl,
   exchangeCodeForTokens,
-} from '@openmgr/agent-auth-anthropic';
+} from '@ants/agent-auth-anthropic';
 
 // Service name for keytar - all secrets stored under this namespace
-const SERVICE_NAME = 'com.openmgr.desktop';
+const SERVICE_NAME = 'com.ants.desktop';
 
 // Key names for different credentials
 const KEYTAR_KEYS = {

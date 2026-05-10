@@ -1,5 +1,5 @@
 import { z } from "zod";
-import type { ToolDefinition, ToolContext } from "@openmgr/agent-core";
+import type { ToolDefinition, ToolContext } from "@ants/agent-core";
 import type { WorktreeManager } from "../manager.js";
 
 const WORKTREE_MANAGER_KEY = "worktree.manager";

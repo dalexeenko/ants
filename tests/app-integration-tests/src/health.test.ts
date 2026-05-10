@@ -39,7 +39,7 @@ describe('Server Health and Connection', () => {
       expect(response.ok).toBe(true);
       
       const body = await response.json();
-      // version is only present when OPENMGR_SERVER_VERSION env var is set
+      // version is only present when ANTS_SERVER_VERSION env var is set
       expect(typeof body.agentInstalled).toBe('boolean');
     });
 
@@ -60,7 +60,7 @@ describe('Server Health and Connection', () => {
       
       const body = await response.json();
       expect(body.status).toBe('ok');
-      // version is only present when OPENMGR_SERVER_VERSION env var is set
+      // version is only present when ANTS_SERVER_VERSION env var is set
       expect(typeof body.agentInstalled).toBe('boolean');
     });
 

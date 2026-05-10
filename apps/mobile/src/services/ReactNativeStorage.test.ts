@@ -4,7 +4,7 @@
 
 import * as SecureStore from 'expo-secure-store';
 import { createReactNativeStorage } from './ReactNativeStorage';
-import { createManualOAuthHandler } from '@openmgr/agent-auth-react-native';
+import { createManualOAuthHandler } from '@ants/agent-auth-react-native';
 
 // Get mock functions
 const mockSecureStore = SecureStore as jest.Mocked<typeof SecureStore>;
@@ -43,7 +43,7 @@ describe('ReactNativeStorage', () => {
       mockSecureStore.getItemAsync.mockResolvedValue(null);
       const key = await storage.getApiKey('openai');
       expect(key).toBeNull();
-      expect(mockSecureStore.getItemAsync).toHaveBeenCalledWith('openmgr_api_key_openai');
+      expect(mockSecureStore.getItemAsync).toHaveBeenCalledWith('ants_api_key_openai');
     });
 
     it('should return stored API key', async () => {
@@ -55,14 +55,14 @@ describe('ReactNativeStorage', () => {
     it('should set API key', async () => {
       await storage.setApiKey('openai', 'sk-new-key');
       expect(mockSecureStore.setItemAsync).toHaveBeenCalledWith(
-        'openmgr_api_key_openai',
+        'ants_api_key_openai',
         'sk-new-key'
       );
     });
 
     it('should delete API key', async () => {
       await storage.deleteApiKey('openai');
-      expect(mockSecureStore.deleteItemAsync).toHaveBeenCalledWith('openmgr_api_key_openai');
+      expect(mockSecureStore.deleteItemAsync).toHaveBeenCalledWith('ants_api_key_openai');
     });
 
     it('should check if API key exists', async () => {
@@ -79,8 +79,8 @@ describe('ReactNativeStorage', () => {
 
     it('should list all stored API keys', async () => {
       mockSecureStore.getItemAsync.mockImplementation((key: string) => {
-        if (key === 'openmgr_api_key_anthropic') return Promise.resolve('sk-ant');
-        if (key === 'openmgr_api_key_openai') return Promise.resolve('sk-oai');
+        if (key === 'ants_api_key_anthropic') return Promise.resolve('sk-ant');
+        if (key === 'ants_api_key_openai') return Promise.resolve('sk-oai');
         return Promise.resolve(null);
       });
 
@@ -103,7 +103,7 @@ describe('ReactNativeStorage', () => {
 
     it('should return authenticated with API key', async () => {
       mockSecureStore.getItemAsync.mockImplementation((key: string) => {
-        if (key === 'openmgr_api_key_anthropic') return Promise.resolve('sk-ant');
+        if (key === 'ants_api_key_anthropic') return Promise.resolve('sk-ant');
         return Promise.resolve(null);
       });
 
@@ -170,7 +170,7 @@ describe('ReactNativeStorage', () => {
       const dir = await storage.getProjectsDirectory();
       
       expect(dir).toBe('/path/to/projects');
-      expect(mockSecureStore.getItemAsync).toHaveBeenCalledWith('openmgr_projects_directory');
+      expect(mockSecureStore.getItemAsync).toHaveBeenCalledWith('ants_projects_directory');
     });
 
     it('should return null when no projects directory is set', async () => {
@@ -185,7 +185,7 @@ describe('ReactNativeStorage', () => {
       await storage.setProjectsDirectory('/new/path');
       
       expect(mockSecureStore.setItemAsync).toHaveBeenCalledWith(
-        'openmgr_projects_directory',
+        'ants_projects_directory',
         '/new/path'
       );
     });

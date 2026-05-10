@@ -1,6 +1,6 @@
 /**
  * Desktop WorktreeManager — thin adapter around the shared
- * @openmgr/agent-worktree ProjectWorktreeManager.
+ * @ants/agent-worktree ProjectWorktreeManager.
  *
  * This wraps the shared package with the desktop-specific interface:
  * - Methods take (sessionId, projectId, projectDir) matching the old API
@@ -15,14 +15,14 @@
 import { spawn } from 'child_process';
 import { readFile, writeFile, stat, mkdir, rm } from 'fs/promises';
 import { resolve, dirname, basename, join } from 'path';
-import { ProjectWorktreeManager } from '@openmgr/agent-worktree';
+import { ProjectWorktreeManager } from '@ants/agent-worktree';
 import type {
   CommandExecutor,
   WorktreeFilesystem,
   GitCommandResult,
   WorktreeInfo as PackageWorktreeInfo,
-} from '@openmgr/agent-worktree';
-import { createLogger } from '@openmgr/ui';
+} from '@ants/agent-worktree';
+import { createLogger } from '@ants/ui';
 
 const log = createLogger('WorktreeManager');
 

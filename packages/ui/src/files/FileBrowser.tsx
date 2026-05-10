@@ -111,7 +111,7 @@ export function FileBrowser({
   }
 
   return (
-    <View style={[styles.container, { backgroundColor: colors.bg.secondary }]} testID="openmgr-file-browser">
+    <View style={[styles.container, { backgroundColor: colors.bg.secondary }]} testID="ants-file-browser">
       {/* Header */}
       <View style={[styles.header, { borderBottomColor: colors.border.light }]}>
         <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', gap: spacing[1] }}>

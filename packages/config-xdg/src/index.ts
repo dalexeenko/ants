@@ -1,8 +1,8 @@
 /**
- * @openmgr/agent-config-xdg
+ * @ants/agent-config-xdg
  * 
- * XDG-compliant file-based configuration for OpenMgr Agent.
- * Stores configuration in ~/.config/openmgr/ following the XDG Base Directory Specification.
+ * XDG-compliant file-based configuration for Ants Agent.
+ * Stores configuration in ~/.config/ants/ following the XDG Base Directory Specification.
  */
 
 import { readFile, writeFile, mkdir } from "fs/promises";
@@ -21,17 +21,17 @@ import {
   mergeConfigs,
   ApiKeysSchema,
   LspServerConfigSchema,
-} from "@openmgr/agent-core";
-import { McpServerConfigSchema } from "@openmgr/agent-core";
+} from "@ants/agent-core";
+import { McpServerConfigSchema } from "@ants/agent-core";
 
 // XDG paths (computed lazily so tests can override HOME)
 function getConfigDir(): string {
-  return join(homedir(), ".config", "openmgr");
+  return join(homedir(), ".config", "ants");
 }
 function getGlobalConfigFilePath(): string {
   return join(getConfigDir(), "agent.json");
 }
-const LOCAL_CONFIG_FILENAME = ".openmgr.json";
+const LOCAL_CONFIG_FILENAME = ".ants.json";
 
 // Agent type config schema
 const AgentTypeConfigSchema = z.object({
@@ -162,7 +162,7 @@ function resolveAuth(
 }
 
 /**
- * Load global configuration from ~/.config/openmgr/agent.json
+ * Load global configuration from ~/.config/ants/agent.json
  */
 export async function loadGlobalConfig(): Promise<Config | null> {
   return loadJsonFile(getGlobalConfigFilePath());

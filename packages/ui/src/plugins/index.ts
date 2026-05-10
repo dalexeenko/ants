@@ -1,5 +1,5 @@
 /**
- * @openmgr/ui/plugins — Public exports for the UI plugin system.
+ * @ants/ui/plugins — Public exports for the UI plugin system.
  *
  * This module is the public API for plugin authors and app integrations.
  * It re-exports the registry, context/hooks, and typed interfaces.

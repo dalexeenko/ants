@@ -42,8 +42,8 @@ export interface ProjectSetupFormProps {
   createLocalFilesystemProvider?: () => FilesystemProvider;
   /**
    * Platform-specific function to get the default projects directory.
-   * Desktop: app.getPath('documents')/OpenMgr Projects
-   * Mobile: FileSystem.documentDirectory + 'OpenMgr Projects'
+   * Desktop: app.getPath('documents')/Ants Projects
+   * Mobile: FileSystem.documentDirectory + 'Ants Projects'
    */
   getDefaultProjectsDirectory?: () => string;
   /**
@@ -65,7 +65,7 @@ export interface ProjectSetupFormProps {
   onBrowseDirectory?: (provider: FilesystemProvider, onSelect: (path: string) => void) => void;
   /**
    * Platform-specific function to write a file to disk.
-   * Used for writing .openmgr.json when applying a template to a local project.
+   * Used for writing .ants.json when applying a template to a local project.
    * If not provided, local template config is not written.
    */
   writeFile?: (filePath: string, content: string) => void | Promise<void>;
@@ -303,7 +303,7 @@ export function ProjectSetupForm({
         projectName || undefined,
       );
 
-      // Local project with template: write .openmgr.json with agent config
+      // Local project with template: write .ants.json with agent config
       if (selectedProvider === 'local' && selectedTemplate && pathToUse && writeFile) {
         log.info('Applying local template config:', selectedTemplate.slug);
         try {
@@ -316,10 +316,10 @@ export function ProjectSetupForm({
           }
           if (Object.keys(config).length > 0) {
             await writeFile(
-              `${pathToUse}/.openmgr.json`,
+              `${pathToUse}/.ants.json`,
               JSON.stringify(config, null, 2),
             );
-            log.debug('Wrote .openmgr.json with template config');
+            log.debug('Wrote .ants.json with template config');
           }
         } catch (e) {
           // Non-fatal: project was created, just couldn't apply template config
@@ -463,7 +463,7 @@ export function ProjectSetupForm({
                 <Text>Use default location</Text>
                 <Text variant="caption" color="muted">
                   {useDefaultDirectory
-                    ? 'Project will be created in OpenMgr Projects folder'
+                    ? 'Project will be created in Ants Projects folder'
                     : 'Choose a custom folder location'}
                 </Text>
               </View>
@@ -614,7 +614,7 @@ export function ProjectSetupForm({
           <Button variant="ghost" onPress={onCancel} disabled={creating}>
             Cancel
           </Button>
-          <Button testID="openmgr-create-project" variant="primary" onPress={handleCreateProject} disabled={!canCreate}>
+          <Button testID="ants-create-project" variant="primary" onPress={handleCreateProject} disabled={!canCreate}>
             {creating ? 'Creating...' : 'Create Project'}
           </Button>
         </View>

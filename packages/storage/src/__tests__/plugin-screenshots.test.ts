@@ -1,7 +1,7 @@
 import { describe, it, expect, afterEach, vi } from "vitest";
 import { storagePlugin } from "../plugin.js";
-import type { AgentInterface } from "@openmgr/agent-core";
-import type { ToolCall, ToolResult, ToolContext } from "@openmgr/agent-core";
+import type { AgentInterface } from "@ants/agent-core";
+import type { ToolCall, ToolResult, ToolContext } from "@ants/agent-core";
 import { mkdtempSync, rmSync, existsSync, readdirSync, readFileSync } from "fs";
 import { join } from "path";
 import { tmpdir } from "os";
@@ -42,7 +42,7 @@ describe("storagePlugin onAfterToolExecute (screenshots)", () => {
   });
 
   it("writes screenshot to disk and replaces dataUrl with path", async () => {
-    tmpDir = mkdtempSync(join(tmpdir(), "openmgr-test-"));
+    tmpDir = mkdtempSync(join(tmpdir(), "ants-test-"));
     const dbPath = join(tmpDir, "agent.db");
 
     const plugin = storagePlugin({ path: dbPath, inMemory: false });
@@ -109,7 +109,7 @@ describe("storagePlugin onAfterToolExecute (screenshots)", () => {
   });
 
   it("ignores results without image metadata", async () => {
-    tmpDir = mkdtempSync(join(tmpdir(), "openmgr-test-"));
+    tmpDir = mkdtempSync(join(tmpdir(), "ants-test-"));
     const dbPath = join(tmpDir, "agent.db");
 
     const plugin = storagePlugin({ path: dbPath, inMemory: false });

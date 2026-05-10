@@ -19,7 +19,7 @@ test.afterAll(async () => {
 test.describe('Keyboard Shortcuts', () => {
   test('should open shortcuts modal with Cmd+/', async () => {
     // Wait for the app to fully load and register keyboard handlers
-    await expect(page.getByTestId('openmgr-app')).toBeVisible({ timeout: 10000 });
+    await expect(page.getByTestId('ants-app')).toBeVisible({ timeout: 10000 });
     await page.keyboard.press('Meta+/');
     // The shortcuts modal should appear
     await expect(page.getByText('Keyboard Shortcuts')).toBeVisible({ timeout: 5000 });

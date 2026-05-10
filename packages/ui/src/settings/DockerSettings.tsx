@@ -258,7 +258,7 @@ export function DockerSettings({ bridge, project }: DockerSettingsProps) {
                   }]}
                   value={customImage}
                   onChangeText={setCustomImage}
-                  placeholder="openmgr-agent:latest"
+                  placeholder="ants-agent:latest"
                   placeholderTextColor={colors.text.muted}
                 />
               </View>

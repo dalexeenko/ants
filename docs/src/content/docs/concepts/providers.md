@@ -5,7 +5,7 @@ sidebar:
   order: 4
 ---
 
-OpenMgr supports 14+ LLM providers. API keys are encrypted at rest with AES-256-GCM.
+Ants supports 14+ LLM providers. API keys are encrypted at rest with AES-256-GCM.
 
 ## Supported Providers
 
@@ -30,7 +30,7 @@ OpenMgr supports 14+ LLM providers. API keys are encrypted at rest with AES-256-
 
 ### Via the Web UI
 
-1. Open the OpenMgr web UI
+1. Open the Ants web UI
 2. Go to **Settings**
 3. Under **API Keys**, select the provider
 4. Enter your API key and save
@@ -48,11 +48,11 @@ Replace `anthropic` with the provider identifier: `openai`, `google`, `openroute
 
 ## Security
 
-- All API keys are **encrypted at rest** using AES-256-GCM with the `OPENMGR_ENCRYPTION_KEY`
+- All API keys are **encrypted at rest** using AES-256-GCM with the `ANTS_ENCRYPTION_KEY`
 - Keys are only decrypted in memory when needed for LLM requests
 - The encryption key itself is never stored in the database
 - Legacy `providers.json` files are automatically migrated to encrypted storage on first startup
 
 :::caution
-If you lose the `OPENMGR_ENCRYPTION_KEY`, all stored API keys become unrecoverable. Back up the key securely.
+If you lose the `ANTS_ENCRYPTION_KEY`, all stored API keys become unrecoverable. Back up the key securely.
 :::

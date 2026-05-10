@@ -30,10 +30,10 @@ import {
 } from "../index.js";
 
 // Use a temp directory for tests
-const TEST_DIR = join(tmpdir(), "openmgr-node-test-" + Date.now() + "-" + Math.random().toString(36).slice(2));
+const TEST_DIR = join(tmpdir(), "ants-node-test-" + Date.now() + "-" + Math.random().toString(36).slice(2));
 const TEST_PROJECT_DIR = join(TEST_DIR, "project");
 
-describe("@openmgr/agent-node", () => {
+describe("@ants/agent-node", () => {
   beforeEach(async () => {
     await mkdir(TEST_PROJECT_DIR, { recursive: true });
   });
@@ -46,7 +46,7 @@ describe("@openmgr/agent-node", () => {
     }
   });
 
-  describe("re-exports from @openmgr/agent-core", () => {
+  describe("re-exports from @ants/agent-core", () => {
     it("should re-export definePlugin", () => {
       expect(definePlugin).toBeDefined();
       expect(typeof definePlugin).toBe("function");
@@ -69,7 +69,7 @@ describe("@openmgr/agent-node", () => {
     });
   });
 
-  describe("re-exports from @openmgr/agent-config-xdg", () => {
+  describe("re-exports from @ants/agent-config-xdg", () => {
     it("should re-export loadLocalConfig", async () => {
       expect(loadLocalConfig).toBeDefined();
       expect(typeof loadLocalConfig).toBe("function");
@@ -84,7 +84,7 @@ describe("@openmgr/agent-node", () => {
       expect(typeof getLocalConfigPath).toBe("function");
 
       const path = getLocalConfigPath(TEST_PROJECT_DIR);
-      expect(path).toBe(join(TEST_PROJECT_DIR, ".openmgr.json"));
+      expect(path).toBe(join(TEST_PROJECT_DIR, ".ants.json"));
     });
 
     it("should re-export xdgConfigLoader", () => {
@@ -94,7 +94,7 @@ describe("@openmgr/agent-node", () => {
     });
   });
 
-  describe("re-exports from @openmgr/agent-skills-loader", () => {
+  describe("re-exports from @ants/agent-skills-loader", () => {
     it("should re-export FilesystemSkillManager", () => {
       expect(FilesystemSkillManager).toBeDefined();
 
@@ -143,11 +143,11 @@ description: Test
       expect(typeof getSkillPaths).toBe("function");
 
       const paths = getSkillPaths(TEST_PROJECT_DIR);
-      expect(paths.local).toBe(join(TEST_PROJECT_DIR, ".openmgr", "skills"));
+      expect(paths.local).toBe(join(TEST_PROJECT_DIR, ".ants", "skills"));
     });
   });
 
-  describe("re-exports from @openmgr/agent-mcp-stdio", () => {
+  describe("re-exports from @ants/agent-mcp-stdio", () => {
     it("should re-export StdioMcpClient", () => {
       expect(StdioMcpClient).toBeDefined();
 
@@ -167,7 +167,7 @@ description: Test
   describe("integration", () => {
     it("should allow creating a skill manager and discovering skills", async () => {
       // Create a skill
-      const skillsDir = join(TEST_PROJECT_DIR, ".openmgr", "skills");
+      const skillsDir = join(TEST_PROJECT_DIR, ".ants", "skills");
       const skillDir = join(skillsDir, "my-skill");
       await mkdir(skillDir, { recursive: true });
       await writeFile(
@@ -195,7 +195,7 @@ Do this, then that.
 
     it("should allow loading local config", async () => {
       await writeFile(
-        join(TEST_PROJECT_DIR, ".openmgr.json"),
+        join(TEST_PROJECT_DIR, ".ants.json"),
         JSON.stringify({
           provider: "openai",
           model: "gpt-4",
@@ -312,7 +312,7 @@ Do this, then that.
 
     it("should export nodeProvidersPlugin", () => {
       expect(nodeProvidersPlugin).toBeDefined();
-      expect(nodeProvidersPlugin.name).toBe("@openmgr/agent-node/providers");
+      expect(nodeProvidersPlugin.name).toBe("@ants/agent-node/providers");
       expect(nodeProvidersPlugin.providers).toHaveLength(6);
       
       const providerNames = nodeProvidersPlugin.providers!.map(p => p.name);

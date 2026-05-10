@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # =============================================================================
-# OpenMgr Release Script
+# Ants Release Script
 #
 # Orchestrates a full release from your local machine:
 #   1. Validates prerequisites (clean tree, gh auth, docker auth)
@@ -146,7 +146,7 @@ echo "=============================================="
 echo "  Release ${VERSION} complete!"
 echo "=============================================="
 echo ""
-echo "  GitHub Release: https://github.com/openmgr/openmgr/releases/tag/${VERSION}"
-[ "${SKIP_DOCKER:-}" != "true" ] && echo "  Docker Hub:     https://hub.docker.com/r/openmgr/server/tags"
-[ "${SKIP_DOCKER:-}" != "true" ] && echo "  GHCR:           https://github.com/openmgr/openmgr/pkgs/container/openmgr-server"
+echo "  GitHub Release: https://github.com/ants/ants/releases/tag/${VERSION}"
+[ "${SKIP_DOCKER:-}" != "true" ] && echo "  Docker Hub:     https://hub.docker.com/r/ants/server/tags"
+[ "${SKIP_DOCKER:-}" != "true" ] && echo "  GHCR:           https://github.com/ants/ants/pkgs/container/ants-server"
 echo ""

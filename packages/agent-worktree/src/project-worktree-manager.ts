@@ -35,7 +35,7 @@ import type {
 
 const WORKTREES_DIR = ".worktrees";
 const METADATA_FILE = "metadata.json";
-const BRANCH_PREFIX = "openmgr/session-";
+const BRANCH_PREFIX = "ants/session-";
 
 /** No-op logger */
 const nullLogger: WorktreeLogger = {
@@ -240,8 +240,8 @@ export class ProjectWorktreeManager {
     }
 
     const newContent = content.trim()
-      ? `${content.trim()}\n\n# Git worktrees managed by openmgr agent\n.worktrees/\n`
-      : "# Git worktrees managed by openmgr agent\n.worktrees/\n";
+      ? `${content.trim()}\n\n# Git worktrees managed by ants agent\n.worktrees/\n`
+      : "# Git worktrees managed by ants agent\n.worktrees/\n";
 
     await this.filesystem.writeFile(gitignorePath, newContent);
 
@@ -267,7 +267,7 @@ export class ProjectWorktreeManager {
   /**
    * Create a new worktree for a project.
    *
-   * If options.branch is not provided, generates an openmgr/session-{uuid} branch.
+   * If options.branch is not provided, generates an ants/session-{uuid} branch.
    */
   async createWorktree(
     projectDir: string,
@@ -530,7 +530,7 @@ export class ProjectWorktreeManager {
     }
 
     const sanitized = this.sanitizeBranchName(newName);
-    const newBranchName = `openmgr/${sanitized}`;
+    const newBranchName = `ants/${sanitized}`;
 
     if (newBranchName === worktree.branch) {
       return worktree;

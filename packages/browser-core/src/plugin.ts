@@ -1,7 +1,7 @@
 /**
- * Browser tools plugin for OpenMgr Agent.
+ * Browser tools plugin for Ants Agent.
  */
-import { definePlugin } from "@openmgr/agent-core";
+import { definePlugin } from "@ants/agent-core";
 import { sandboxBrowserTools } from "./tool-factory.js";
 import type { BrowserController } from "./types.js";
 
@@ -19,8 +19,8 @@ export { sandboxBrowserTools } from "./tool-factory.js";
  * @example
  * ```typescript
  * import { chromium } from "playwright-core";
- * import { createSandboxBrowserPlugin } from "@openmgr/agent-browser-core";
- * import { createSandboxController } from "@openmgr/agent-browser-sandbox";
+ * import { createSandboxBrowserPlugin } from "@ants/agent-browser-core";
+ * import { createSandboxController } from "@ants/agent-browser-sandbox";
  *
  * const controller = createSandboxController(chromium, { headless: true });
  * await agent.use(createSandboxBrowserPlugin(controller));

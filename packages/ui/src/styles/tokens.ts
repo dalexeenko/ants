@@ -1,4 +1,4 @@
-// Design tokens for OpenMgr UI
+// Design tokens for Ants UI
 // This file is the single source of truth for all colors across the project.
 // See packages/ui/AGENTS.md for documentation on the palette and usage guidelines.
 import { Platform, type ViewStyle } from 'react-native';

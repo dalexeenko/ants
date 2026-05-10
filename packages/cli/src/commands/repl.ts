@@ -1,9 +1,9 @@
 import type { Command } from "commander";
 import chalk from "chalk";
 import * as readline from "readline";
-import type { AgentEvent } from "@openmgr/agent-core";
-import { createReadOnlyConfig } from "@openmgr/agent-core";
-import { createNodeAgent } from "@openmgr/agent-node";
+import type { AgentEvent } from "@ants/agent-core";
+import { createReadOnlyConfig } from "@ants/agent-core";
+import { createNodeAgent } from "@ants/agent-node";
 import { Spinner, debug } from "../utils.js";
 import { createPermissionCallback, handleQuestionEvent } from "../interaction.js";
 
@@ -29,7 +29,7 @@ export function registerReplCommand(program: Command): void {
       const config = agent.getConfig();
       debug.log("config", "Agent configuration", config);
 
-      console.log(chalk.cyan("OpenMgr Agent REPL"));
+      console.log(chalk.cyan("Ants Agent REPL"));
       console.log(chalk.gray(`Working directory: ${config.workingDirectory}`));
       console.log(chalk.gray(`Provider: ${config.provider} (${config.model})`));
       console.log(chalk.gray(`Auth: ${config.auth?.type ?? "default"}`));

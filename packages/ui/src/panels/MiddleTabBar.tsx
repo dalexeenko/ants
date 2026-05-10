@@ -132,7 +132,7 @@ function TabItem({ tab, isActive, onPress, onClose, index, onDragReorder, status
         Platform.OS === 'web' && tab.closable && { cursor: 'grab' } as any,
       ]}
       onPress={onPress}
-      testID={`openmgr-middle-tab-${tab.type}`}
+      testID={`ants-middle-tab-${tab.type}`}
       {...dragProps}
     >
       {status && status !== 'idle' ? (
@@ -312,7 +312,7 @@ function TabItemWithStatus({ tab, isActive, onPress, onClose, index, onDragReord
 }
 
 /** Inject a <style> tag to hide the scrollbar inside the tab bar (web only). */
-const scrollbarStyleId = 'openmgr-tab-scrollbar-hide';
+const scrollbarStyleId = 'ants-tab-scrollbar-hide';
 function ensureScrollbarStyle() {
   if (Platform.OS !== 'web') return;
   if (document.getElementById(scrollbarStyleId)) return;
@@ -435,7 +435,7 @@ export function MiddleTabBar({
               hovered && sidebarCollapsed && { backgroundColor: colors.bg.tertiary },
             ]}
             onPress={onSidebarToggle}
-            testID="openmgr-toggle-right-sidebar"
+            testID="ants-toggle-right-sidebar"
           >
             <Text style={{ fontSize: 14, color: sidebarCollapsed ? colors.text.muted : colors.primary }}>{sidebarCollapsed ? '\u25E7' : '\u25E8'}</Text>
           </Pressable>

@@ -102,7 +102,7 @@ export function ModelPickerDropdown({ bridge, projectId, sessionId }: ModelPicke
           isOverridden && { borderWidth: 1, borderColor: colors.primary },
         ]}
         onPress={() => setOpen(!open)}
-        testID="openmgr-model-picker"
+        testID="ants-model-picker"
       >
         <Text
           style={[
@@ -133,7 +133,7 @@ export function ModelPickerDropdown({ bridge, projectId, sessionId }: ModelPicke
               },
               shadows.lg,
             ]}
-            testID="openmgr-model-picker-dropdown"
+            testID="ants-model-picker-dropdown"
           >
             <ModelPickerContent
               models={models}

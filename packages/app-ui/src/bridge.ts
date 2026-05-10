@@ -12,8 +12,8 @@
  * 4. Syncing remote projects on startup
  */
 
-import { createBridgeCore, ServerClient } from '@openmgr/ui';
-import type { AgentBridge, RemoteServerConfig } from '@openmgr/ui';
+import { createBridgeCore, ServerClient } from '@ants/ui';
+import type { AgentBridge, RemoteServerConfig } from '@ants/ui';
 
 /** Create the web app bridge backed by the same-origin server */
 export function createWebBridge(): {
@@ -39,14 +39,14 @@ export function createWebBridge(): {
     storage: {
       getRemoteServers: async () => {
         try {
-          const stored = localStorage.getItem('openmgr-web-remote-servers');
+          const stored = localStorage.getItem('ants-web-remote-servers');
           return stored ? JSON.parse(stored) : [];
         } catch {
           return [];
         }
       },
       saveRemoteServers: async (servers: RemoteServerConfig[]) => {
-        localStorage.setItem('openmgr-web-remote-servers', JSON.stringify(servers));
+        localStorage.setItem('ants-web-remote-servers', JSON.stringify(servers));
       },
       getProjectsDirectory: async () => '',
       setProjectsDirectory: async () => {},
@@ -71,7 +71,7 @@ export function createWebBridge(): {
 
     // Remote servers changed callback
     onRemoteServersChanged: (servers: RemoteServerConfig[]) => {
-      localStorage.setItem('openmgr-web-remote-servers', JSON.stringify(servers));
+      localStorage.setItem('ants-web-remote-servers', JSON.stringify(servers));
     },
   });
 

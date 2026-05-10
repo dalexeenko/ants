@@ -6,7 +6,7 @@
 
 import { describe, it, expect, vi } from 'vitest';
 import { readTool, writeTool, editTool, listTool, fileToolsPlugin } from './file-tools.js';
-import type { Filesystem, FileStat, DirectoryEntry } from '@openmgr/agent-core';
+import type { Filesystem, FileStat, DirectoryEntry } from '@ants/agent-core';
 
 /**
  * Create a mock filesystem for testing.
@@ -415,7 +415,7 @@ describe('file-tools', () => {
 
   describe('fileToolsPlugin', () => {
     it('should export all tools', () => {
-      expect(fileToolsPlugin.name).toBe('@openmgr/agent-react-native/file-tools');
+      expect(fileToolsPlugin.name).toBe('@ants/agent-react-native/file-tools');
       expect(fileToolsPlugin.tools).toHaveLength(4);
       
       const toolNames = fileToolsPlugin.tools!.map((t: { name: string }) => t.name);

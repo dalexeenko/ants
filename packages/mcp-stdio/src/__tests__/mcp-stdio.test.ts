@@ -1,8 +1,8 @@
 import { describe, it, expect } from "vitest";
 import { StdioMcpClient } from "../index.js";
-import type { McpStdioConfig } from "@openmgr/agent-core";
+import type { McpStdioConfig } from "@ants/agent-core";
 
-describe("@openmgr/agent-mcp-stdio", () => {
+describe("@ants/agent-mcp-stdio", () => {
   const testConfig: McpStdioConfig = {
     transport: "stdio",
     command: "test-server",

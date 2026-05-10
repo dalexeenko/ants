@@ -7,7 +7,7 @@
 import { EventEmitter } from 'events';
 import { createServer } from 'http';
 import { v4 as uuidv4 } from 'uuid';
-import { createLogger } from '@openmgr/ui';
+import { createLogger } from '@ants/ui';
 
 const log = createLogger('LocalTerminalManager');
 

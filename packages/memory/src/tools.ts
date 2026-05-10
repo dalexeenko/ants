@@ -1,5 +1,5 @@
 import { z } from "zod";
-import type { ToolDefinition, ToolContext, ToolExecuteResult } from "@openmgr/agent-core";
+import type { ToolDefinition, ToolContext, ToolExecuteResult } from "@ants/agent-core";
 import { MemoryStorage } from "./storage.js";
 
 // ==================== memory_add ====================
@@ -7,7 +7,7 @@ import { MemoryStorage } from "./storage.js";
 const MEMORY_ADD_DESCRIPTION = `Add a memory to the project's knowledge base.
 
 Memories persist across sessions and are shared by all developers working on this project.
-They are stored in .openmgr/memories.db and can be tracked in git.
+They are stored in .ants/memories.db and can be tracked in git.
 
 ## When to Add Memories
 

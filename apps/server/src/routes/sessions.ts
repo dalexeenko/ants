@@ -23,7 +23,7 @@ import {
  *
  * The agent-server is the single source of truth for all session data —
  * both session metadata (create, get, list, delete) and messages.
- * The openmgr server proxies all session CRUD operations to the agent-server.
+ * The ants server proxies all session CRUD operations to the agent-server.
  *
  * Streaming endpoints (prompt/stream, SSE events, status, abort) live in
  * session-streaming.ts.

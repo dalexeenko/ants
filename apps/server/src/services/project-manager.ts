@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { eq } from 'drizzle-orm';
 import type { ServerConfig } from '../config.js';
 import type { ProjectConfig, CreateProjectRequest, UpdateProjectRequest, AgentConfig } from '../models/project.js';
-import { OpenMgrAgentManager, type IAgentClient } from './openmgr-agent-manager.js';
+import { AntsAgentManager, type IAgentClient } from './ants-agent-manager.js';
 import type { PluginRegistry } from './plugin-registry.js';
 import type { DrizzleDB } from '../db/index.js';
 import { projects } from '../db/schema.js';
@@ -12,11 +12,11 @@ import { isGitRepo } from '../utils/git.js';
 
 export class ProjectManager {
   private config: ServerConfig;
-  private agentManager: OpenMgrAgentManager;
+  private agentManager: AntsAgentManager;
   private pluginRegistry?: PluginRegistry;
   private db: DrizzleDB;
   
-  constructor(config: ServerConfig, agentManager: OpenMgrAgentManager, db: DrizzleDB) {
+  constructor(config: ServerConfig, agentManager: AntsAgentManager, db: DrizzleDB) {
     this.config = config;
     this.agentManager = agentManager;
     this.db = db;

@@ -1,11 +1,11 @@
 import { z } from "zod";
-import { defineTool } from "@openmgr/agent-core";
+import { defineTool } from "@ants/agent-core";
 import { getDirectorContext } from "../context.js";
 
 export const listServersTool = defineTool({
   name: "director_list_servers",
   description:
-    "List all configured remote OpenMgr servers, including their connection status and authentication type.",
+    "List all configured remote Ants servers, including their connection status and authentication type.",
   parameters: z.object({}),
   async execute(_params, ctx) {
     const director = getDirectorContext(ctx.extensions);
@@ -47,7 +47,7 @@ export const listServersTool = defineTool({
 
 export const addServerTool = defineTool({
   name: "director_add_server",
-  description: `Add a new remote OpenMgr server connection. You need the server's URL and an authentication token.
+  description: `Add a new remote Ants server connection. You need the server's URL and an authentication token.
 
 For bearer auth (default): provide the URL and the bearer token.
 For Cloudflare Access: set authType to 'cloudflare-access' (the user will need to configure it through the UI).
@@ -58,12 +58,12 @@ After adding, use director_test_server to verify the connection works.`,
     url: z
       .string()
       .describe(
-        "Server URL (e.g., 'https://openmgr.example.com' or 'http://localhost:6647')"
+        "Server URL (e.g., 'https://ants.example.com' or 'http://localhost:6647')"
       ),
     token: z
       .string()
       .optional()
-      .describe("Bearer authentication token (the OPENMGR_SECRET value from the server)"),
+      .describe("Bearer authentication token (the ANTS_SECRET value from the server)"),
     authType: z
       .enum(["bearer", "cloudflare-access"])
       .default("bearer")

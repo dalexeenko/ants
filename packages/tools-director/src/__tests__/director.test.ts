@@ -121,7 +121,7 @@ describe("tool naming convention", () => {
 describe("directorToolsPlugin", () => {
   it("has a name property", () => {
     expect(typeof directorToolsPlugin.name).toBe("string");
-    expect(directorToolsPlugin.name).toBe("@openmgr/agent-tools-director");
+    expect(directorToolsPlugin.name).toBe("@ants/agent-tools-director");
   });
 
   it("has a version property", () => {

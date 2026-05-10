@@ -28,7 +28,7 @@ export class DatabaseService {
   private _db: DrizzleDB;
 
   constructor(config: DatabaseConfig) {
-    const dbPath = join(config.dataDir, 'openmgr.db');
+    const dbPath = join(config.dataDir, 'ants.db');
     
     ensureDirectory(dirname(dbPath));
 

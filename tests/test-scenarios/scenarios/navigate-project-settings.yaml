@@ -5,11 +5,11 @@ preconditions:
 steps:
   # Tap the project settings button
   - tap:
-      testId: openmgr-project-settings
+      testId: ants-project-settings
   # Desktop shows project settings panel; mobile navigates to project settings screen
   - assertVisible:
       desktop: true
       text: "Project Settings"
   - assertVisible:
       mobile: true
-      testId: openmgr-screen-project-settings
+      testId: ants-screen-project-settings

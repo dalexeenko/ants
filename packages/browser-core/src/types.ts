@@ -1,5 +1,5 @@
 /**
- * Core browser controller types for OpenMgr Agent.
+ * Core browser controller types for Ants Agent.
  *
  * These types define the interface between the agent's browser tools
  * and platform-specific browser implementations (Puppeteer, Electron, React Native WebView).

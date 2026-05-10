@@ -6,7 +6,7 @@
  */
 
 import { z } from "zod";
-import { defineTool, type AgentPlugin, type Filesystem } from "@openmgr/agent-core";
+import { defineTool, type AgentPlugin, type Filesystem } from "@ants/agent-core";
 
 const MAX_FILE_SIZE = 1024 * 1024;
 const MAX_LINES = 2000;
@@ -361,7 +361,7 @@ export const fileTools = [readTool, writeTool, editTool, listTool];
  * IMPORTANT: You must set the filesystem extension before using these tools:
  * 
  * ```typescript
- * import { createReactNativeFilesystem } from '@openmgr/agent-react-native';
+ * import { createReactNativeFilesystem } from '@ants/agent-react-native';
  * import * as FileSystem from 'expo-file-system';
  * 
  * agent.setExtension('filesystem', createReactNativeFilesystem(FileSystem));
@@ -369,7 +369,7 @@ export const fileTools = [readTool, writeTool, editTool, listTool];
  * ```
  */
 export const fileToolsPlugin: AgentPlugin = {
-  name: "@openmgr/agent-react-native/file-tools",
+  name: "@ants/agent-react-native/file-tools",
   version: "0.1.0",
   tools: fileTools as AgentPlugin["tools"],
 };

@@ -183,7 +183,7 @@ export const useDirectorStore = create<DirectorState>()(
         })),
     }),
     {
-      name: 'openmgr-director-store',
+      name: 'ants-director-store',
       version: 1,
       storage: getPersistStorage(),
       partialize: (state) => ({

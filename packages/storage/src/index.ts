@@ -39,7 +39,7 @@ export {
   runMigrations,
   initializeDatabase,
   type MigrationResult,
-} from "@openmgr/agent-database";
+} from "@ants/agent-database";
 
 // Storage-specific exports
 export {

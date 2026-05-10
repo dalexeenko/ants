@@ -1,20 +1,20 @@
 /**
  * Filesystem-based OAuth token store for Node.js.
  * 
- * Stores OAuth tokens in the XDG config directory (~/.config/openmgr/).
+ * Stores OAuth tokens in the XDG config directory (~/.config/ants/).
  */
 
 import { readFile, writeFile, mkdir, unlink } from "fs/promises";
 import { existsSync } from "fs";
 import { join } from "path";
 import { homedir } from "os";
-import type { OAuthTokens, OAuthTokenStore } from "@openmgr/agent-auth-anthropic";
+import type { OAuthTokens, OAuthTokenStore } from "@ants/agent-auth-anthropic";
 
 /**
  * Default paths for auth files
  */
 export function getDefaultAuthPaths() {
-  const authDir = join(homedir(), ".config", "openmgr");
+  const authDir = join(homedir(), ".config", "ants");
   const authFile = join(authDir, "anthropic-oauth.json");
   return { authDir, authFile };
 }
@@ -29,12 +29,12 @@ interface StoredAuth {
 /**
  * Node.js token store using filesystem.
  * 
- * Stores OAuth tokens in JSON format at ~/.config/openmgr/anthropic-oauth.json
+ * Stores OAuth tokens in JSON format at ~/.config/ants/anthropic-oauth.json
  * 
  * @example
  * ```ts
- * import { FileTokenStore } from "@openmgr/agent-node";
- * import { isLoggedIn, login } from "@openmgr/agent-auth-anthropic";
+ * import { FileTokenStore } from "@ants/agent-node";
+ * import { isLoggedIn, login } from "@ants/agent-auth-anthropic";
  * 
  * const tokenStore = new FileTokenStore();
  * 

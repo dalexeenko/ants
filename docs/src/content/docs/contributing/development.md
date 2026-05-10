@@ -1,6 +1,6 @@
 ---
 title: Development Setup
-description: Set up the OpenMgr monorepo for local development — building, testing, and running.
+description: Set up the Ants monorepo for local development — building, testing, and running.
 sidebar:
   order: 1
 ---
@@ -13,8 +13,8 @@ sidebar:
 ## Clone and Install
 
 ```bash
-git clone https://github.com/openmgr/openmgr.git
-cd openmgr
+git clone https://github.com/ants/ants.git
+cd ants
 pnpm install
 ```
 
@@ -27,14 +27,14 @@ Turborepo handles build ordering across all packages:
 pnpm build
 
 # Build a specific package and its dependencies
-pnpm turbo build --filter=@openmgr/server
+pnpm turbo build --filter=@ants/server
 ```
 
 :::note
 The `apps/server/` build script uses `;` (not `&&`) because TypeScript has pre-existing type errors but still emits JavaScript. The build completes successfully despite type warnings.
 :::
 
-All `@openmgr/*` packages compile TypeScript to `dist/` directories. **Source changes are not picked up until rebuilt.**
+All `@ants/*` packages compile TypeScript to `dist/` directories. **Source changes are not picked up until rebuilt.**
 
 ## Run
 
@@ -124,7 +124,7 @@ docs/              Documentation site (Starlight / Astro)
 
 ## Common Pitfalls
 
-- **Cyclic dependencies** — `@openmgr/agent-core` cannot depend on `@openmgr/agent-providers`. Tests in core use mocks.
+- **Cyclic dependencies** — `@ants/agent-core` cannot depend on `@ants/agent-providers`. Tests in core use mocks.
 - **Missing direct dependencies** — pnpm strict mode doesn't hoist. If a package imports something, it must be in its own `package.json`.
 - **Test files in builds** — tsconfig `include: ["src/**/*"]` without excluding `__tests__/` will cause build failures when test files import vitest. Add `"exclude": ["src/**/__tests__/**"]`.
 - **Server tsconfig** — The server has its own standalone tsconfig. Do not extend `tsconfig.base.json`.
@@ -141,5 +141,5 @@ docs/              Documentation site (Starlight / Astro)
 
 ## Dependencies
 
-- All `@openmgr/*` dependencies use `workspace:*`
+- All `@ants/*` dependencies use `workspace:*`
 - React versions are pinned via pnpm overrides in root `package.json`

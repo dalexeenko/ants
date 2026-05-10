@@ -1,8 +1,8 @@
 {
-  "name": "@openmgr/integration-tests",
+  "name": "@ants/integration-tests",
   "version": "0.1.0",
   "private": true,
-  "description": "Integration tests for OpenMgr app with remote server",
+  "description": "Integration tests for Ants app with remote server",
   "type": "module",
   "scripts": {
     "test": "vitest run",

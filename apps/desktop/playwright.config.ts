@@ -2,7 +2,7 @@ import { defineConfig } from '@playwright/test';
 import path from 'path';
 
 /**
- * Playwright configuration for testing/debugging the OpenMgr Electron app.
+ * Playwright configuration for testing/debugging the Ants Electron app.
  * 
  * Usage:
  *   - Run tests: pnpm test:e2e

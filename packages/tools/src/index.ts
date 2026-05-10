@@ -1,7 +1,7 @@
 /**
- * @openmgr/agent-tools
+ * @ants/agent-tools
  * 
- * Pure code tools for @openmgr/agent that don't require filesystem or terminal access.
+ * Pure code tools for @ants/agent that don't require filesystem or terminal access.
  * These tools can run in sandboxed environments like Cloudflare Workers.
  * 
  * Included tools:
@@ -16,7 +16,7 @@
  * - question - Present interactive questions to the user
  */
 
-import type { AgentPlugin, AgentTypeDefinition } from "@openmgr/agent-core";
+import type { AgentPlugin, AgentTypeDefinition } from "@ants/agent-core";
 import { extendedAgentTypes } from "./agent-types.js";
 
 // Import tool definitions
@@ -119,7 +119,7 @@ Guidelines:
  * Tools without matching capabilities are deferred until the capability is registered.
  */
 export const toolsPlugin: AgentPlugin = {
-  name: "@openmgr/agent-tools",
+  name: "@ants/agent-tools",
   version: "0.1.0",
   tools: tools as AgentPlugin["tools"],
   agentTypes: builtinAgentTypes,

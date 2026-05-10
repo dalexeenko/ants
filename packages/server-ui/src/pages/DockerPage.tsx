@@ -26,7 +26,7 @@ interface ContainerInfo {
 }
 
 const SOURCE_LABELS: Record<AgentImageInfo['source'], string> = {
-  env: 'OPENMGR_IMAGE env var',
+  env: 'ANTS_IMAGE env var',
   introspection: 'Docker introspection',
   default: 'Default',
 };
