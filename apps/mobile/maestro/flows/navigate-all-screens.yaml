@@ -1,0 +1,46 @@
+# Navigate through all drawer screens sequentially
+appId: host.exp.Exponent
+---
+- launchApp
+- assertVisible:
+    id: "openmgr-home-screen"
+
+# Navigate to Director
+- tapOn:
+    id: "openmgr-drawer-toggle"
+- tapOn:
+    id: "openmgr-drawer-director"
+- assertVisible:
+    id: "openmgr-screen-director"
+
+# Navigate to Agents
+- tapOn:
+    id: "openmgr-drawer-toggle"
+- tapOn:
+    id: "openmgr-drawer-agents"
+- assertVisible:
+    id: "openmgr-screen-agents"
+
+# Navigate to Tools
+- tapOn:
+    id: "openmgr-drawer-toggle"
+- tapOn:
+    id: "openmgr-drawer-tools"
+- assertVisible:
+    id: "openmgr-screen-tools"
+
+# Navigate to Settings
+- tapOn:
+    id: "openmgr-drawer-toggle"
+- tapOn:
+    id: "openmgr-drawer-settings"
+- assertVisible:
+    id: "openmgr-screen-settings"
+
+# Navigate back to Home
+- tapOn:
+    id: "openmgr-drawer-toggle"
+- tapOn:
+    id: "openmgr-drawer-home"
+- assertVisible:
+    id: "openmgr-home-screen"

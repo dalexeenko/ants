@@ -1,0 +1,22 @@
+name: App Launch
+description: Verify the app launches and shows its initial state
+preconditions: []
+steps:
+  - assertVisible:
+      testId: openmgr-app
+  # Desktop: icon rail visible
+  - assertVisible:
+      testId: openmgr-icon-rail
+      desktop: true
+  # Desktop: welcome screen (no project selected)
+  - assertVisible:
+      testId: openmgr-welcome-screen
+      desktop: true
+  # Mobile: home screen visible
+  - assertVisible:
+      testId: openmgr-home-screen
+      mobile: true
+  # Mobile: drawer toggle visible
+  - assertVisible:
+      testId: openmgr-drawer-toggle
+      mobile: true

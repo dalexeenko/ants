@@ -1,0 +1,14 @@
+# Open drawer, tap Director, assert director screen
+appId: host.exp.Exponent
+---
+- launchApp
+- tapOn:
+    id: "openmgr-drawer-toggle"
+- assertVisible:
+    id: "openmgr-drawer"
+- tapOn:
+    id: "openmgr-drawer-director"
+- assertVisible:
+    id: "openmgr-screen-director"
+- assertVisible:
+    id: "openmgr-director-screen"

@@ -1,0 +1,22 @@
+# Navigate to Settings via the drawer menu.
+appId: host.exp.Exponent
+---
+- launchApp
+- assertVisible:
+    id: "openmgr-home-screen"
+
+# Open the drawer
+- tapOn:
+    id: "openmgr-drawer-toggle"
+- assertVisible:
+    id: "openmgr-drawer"
+
+# Tap Settings in the drawer
+- tapOn:
+    id: "openmgr-drawer-settings"
+
+# Verify we're on the settings screen
+- assertVisible:
+    id: "openmgr-screen-settings"
+- assertVisible:
+    id: "openmgr-settings-screen"

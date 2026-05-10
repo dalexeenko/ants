@@ -1,0 +1,22 @@
+name: Navigate to Agents
+description: Navigate to the agents screen from the initial state
+preconditions: []
+steps:
+  # Desktop: click icon rail agents button
+  - tap:
+      testId: openmgr-icon-rail-agents
+      desktop: true
+  - assertVisible:
+      testId: openmgr-agents-panel
+      desktop: true
+
+  # Mobile: open drawer, tap agents
+  - tap:
+      testId: openmgr-drawer-toggle
+      mobile: true
+  - tap:
+      testId: openmgr-drawer-agents
+      mobile: true
+  - assertVisible:
+      testId: openmgr-screen-agents
+      mobile: true

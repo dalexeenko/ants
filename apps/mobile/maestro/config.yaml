@@ -1,0 +1,12 @@
+# Maestro configuration for OpenMgr mobile E2E tests
+#
+# Run all flows:   maestro test maestro/flows/
+# Run single flow: maestro test maestro/flows/app-launch.yaml
+# Run with device:  maestro test --device <udid> maestro/flows/
+#
+# Prerequisites:
+#   - Maestro installed: brew install mobile-dev-inc/tap/maestro
+#   - iOS Simulator or Android Emulator running
+#   - App installed: npx expo run:ios / npx expo run:android
+
+appId: dev.openmgr.app

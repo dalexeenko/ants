@@ -1,0 +1,75 @@
+---
+title: Introduction
+description: Open-source platform for managing AI coding agents. Self-hosted server, desktop app, mobile app, and modular agent framework.
+template: splash
+hero:
+  tagline: Open-source platform for managing AI coding agents. Self-hosted server, desktop app, mobile app, and modular agent framework.
+  actions:
+    - text: Get Started
+      link: /getting-started/quickstart/
+      icon: right-arrow
+      variant: primary
+    - text: View on GitHub
+      link: https://github.com/openmgr/openmgr
+      icon: external
+---
+
+import { Card, CardGrid } from "@astrojs/starlight/components";
+
+## What is OpenMgr?
+
+OpenMgr is a self-hosted platform for creating, managing, and running AI coding agents. It gives you full control over your AI development infrastructure without depending on external services.
+
+<CardGrid stagger>
+  <Card title="Self-Hosted Server" icon="server">
+    Hono HTTP server with SQLite storage. REST API and built-in web UI. Run via
+    npx, Docker, or bare metal — your infrastructure, your data.
+  </Card>
+  <Card title="Multi-Platform Apps" icon="laptop">
+    Electron desktop app, React Native mobile app, and a web UI. Manage your
+    agents from anywhere.
+  </Card>
+  <Card title="14+ LLM Providers" icon="puzzle">
+    Anthropic, OpenAI, Google, OpenRouter, Groq, xAI, AWS Bedrock, Azure
+    OpenAI, Google Vertex, Mistral, Cohere, Together, Fireworks, and DeepSeek.
+    API keys encrypted at rest.
+  </Card>
+  <Card title="Modular Agent Framework" icon="setting">
+    Core orchestrator with plugins, MCP (Model Context Protocol) support, tools
+    system, skills, and conversation management. Extend with your own tools and
+    plugins.
+  </Card>
+</CardGrid>
+
+## Key Features
+
+- **Project Management** — Create and manage AI coding projects with dedicated workspaces
+- **Session Management** — Create agent sessions, send prompts, stream responses via SSE
+- **File Operations** — Browse, read, write, and manage project files through the API
+- **Terminal Sessions** — WebSocket-based terminal I/O within projects
+- **Task Scheduling** — Scheduled and recurring agent tasks
+- **Messaging Integrations** — Connect agents to Slack (with Discord, Telegram, and more planned)
+- **Human-in-the-Loop** — Approval workflows for agent actions
+- **Vector Memory** — Embedding-based knowledge base for agents
+- **Multi-User Mode** — RBAC with admin, operator, and viewer roles
+- **Docker Support** — Full and lite image variants with Docker Compose support
+
+## Quick Start
+
+The fastest way to get running:
+
+```bash
+npx @openmgr/server
+```
+
+Or with Docker:
+
+```bash
+docker run -p 6647:6647 \
+  -v openmgr-data:/data \
+  -v openmgr-workspaces:/workspaces \
+  -e OPENMGR_ENCRYPTION_KEY=$(openssl rand -base64 32) \
+  openmgr/server
+```
+
+See the [Quickstart guide](/getting-started/quickstart/) for full setup instructions.

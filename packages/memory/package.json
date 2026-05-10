@@ -1,0 +1,52 @@
+{
+  "name": "@openmgr/agent-memory",
+  "version": "0.1.0",
+  "description": "Semantic memory with local embeddings for @openmgr/agent",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "node -e \"if(process.env.CI){console.log('Skipping memory tests in CI (requires native sharp module)');process.exit(0)}else{process.exit(1)}\" || vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@openmgr/agent-core": "workspace:*",
+    "@huggingface/transformers": "^3.8.1",
+    "better-sqlite3": "^12.6.2",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.11",
+    "@types/node": "^22.19.7",
+    "typescript": "^5.8.3",
+    "vitest": "^4.0.0"
+  },
+  "keywords": [
+    "openmgr",
+    "agent",
+    "memory",
+    "embeddings",
+    "semantic-search"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/openmgr/agent.git",
+    "directory": "packages/memory"
+  }
+}

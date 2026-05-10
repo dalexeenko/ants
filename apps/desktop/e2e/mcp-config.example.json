@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "openmgr-desktop": {
+      "command": "npx",
+      "args": [
+        "@playwright/mcp@latest",
+        "--cdp-endpoint",
+        "http://localhost:9222"
+      ]
+    }
+  }
+}

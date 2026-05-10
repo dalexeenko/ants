@@ -1,0 +1,22 @@
+name: Navigate to Director
+description: Navigate to the director screen from the initial state
+preconditions: []
+steps:
+  # Desktop: click the director icon in the icon rail
+  - tap:
+      desktop: true
+      testId: openmgr-icon-rail-director
+  - assertVisible:
+      desktop: true
+      testId: director-sidebar
+
+  # Mobile: open drawer and tap Director
+  - tap:
+      mobile: true
+      testId: openmgr-drawer-toggle
+  - tap:
+      mobile: true
+      testId: openmgr-drawer-director
+  - assertVisible:
+      mobile: true
+      testId: openmgr-screen-director

@@ -1,0 +1,35 @@
+{
+  "name": "@openmgr/agent-database-core",
+  "version": "0.1.0",
+  "description": "Database schema, types, and interfaces for OpenMgr Agent (React Native compatible)",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "zod": "^3.25.56"
+  },
+  "devDependencies": {
+    "drizzle-orm": "^0.45.1",
+    "typescript": "^5.6.0",
+    "vitest": "^4.0.18"
+  },
+  "peerDependencies": {
+    "drizzle-orm": "^0.45.1"
+  },
+  "keywords": ["openmgr", "agent", "database", "schema", "react-native"]
+}

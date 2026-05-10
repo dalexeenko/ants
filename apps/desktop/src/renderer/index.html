@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CSP is relaxed in development; production builds should use stricter policy -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' ws://localhost:* http://localhost:*; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: openmgr-screenshot: http: https:; connect-src 'self' ws: wss: http: https:;" />
+    <title>OpenMgr</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      html, body, #root {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background-color: #272E27;
+      }
+      
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      
+      /* Drag region for macOS title bar */
+      .titlebar-drag-region {
+        -webkit-app-region: drag;
+      }
+      
+      /* Make buttons, inputs, and their wrapper divs non-draggable */
+      button, input, textarea, select, a {
+        -webkit-app-region: no-drag;
+      }
+      
+      .titlebar-no-drag, .titlebar-no-drag * {
+        -webkit-app-region: no-drag;
+      }
+      
+      /* Remove default focus outline on all inputs */
+      input, textarea, select, button {
+        outline: none;
+      }
+      
+      input:focus, textarea:focus, select:focus, button:focus {
+        outline: none;
+      }
+      
+      /* Also remove focus ring from any focusable element */
+      *:focus {
+        outline: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="./main.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,38 @@
+{
+  "name": "@openmgr/agent-tools-director",
+  "version": "0.1.0",
+  "description": "Director agent tools for configuring and managing OpenMgr - projects, sessions, servers, auth, Docker, and settings",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@openmgr/agent-core": "workspace:*",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.7",
+    "typescript": "^5.6.0",
+    "vitest": "^4.0.18"
+  },
+  "peerDependencies": {
+    "@openmgr/agent-core": "workspace:*"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

@@ -1,0 +1,11 @@
+# Playwright
+test-results/
+playwright-report/
+
+# Auth state (created during test runs)
+src/.auth/state.json
+src/.auth/server-info.json
+
+# Build
+dist/
+node_modules/

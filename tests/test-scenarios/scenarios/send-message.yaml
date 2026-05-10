@@ -1,0 +1,18 @@
+name: Send a message
+description: Create a new session and send a text message
+preconditions:
+  - projectExists: true
+steps:
+  - tap:
+      testId: openmgr-project-new-session
+  - assertVisible:
+      testId: openmgr-chat-input
+  - tap:
+      testId: openmgr-chat-input-field
+  - type:
+      testId: openmgr-chat-input-field
+      text: "Hello from E2E test"
+  - tap:
+      testId: openmgr-chat-send
+  - assertVisible:
+      text: "Hello from E2E test"

@@ -1,0 +1,33 @@
+{
+  "name": "@openmgr/agent-auth-core",
+  "version": "0.1.0",
+  "description": "Platform-agnostic OAuth types and utilities for OpenMgr Agent",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^5.6.0",
+    "vitest": "^4.0.18"
+  },
+  "keywords": ["openmgr", "agent", "auth", "oauth", "react-native"],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/openmgr/agent.git",
+    "directory": "packages/auth-core"
+  }
+}

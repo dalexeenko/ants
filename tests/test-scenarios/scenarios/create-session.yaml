@@ -1,0 +1,17 @@
+name: Create a new session
+description: Create a new chat session within an existing project
+preconditions:
+  - projectExists: true
+steps:
+  - tap:
+      testId: openmgr-project-new-session
+  - assertVisible:
+      testId: openmgr-chat-input
+  # Desktop: chat view visible
+  - assertVisible:
+      testId: openmgr-chat-view
+      desktop: true
+  # Mobile: session screen visible
+  - assertVisible:
+      testId: openmgr-session-screen
+      mobile: true

@@ -1,0 +1,41 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1768871376270,
+      "tag": "0000_eager_thunderbolt",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1769049600000,
+      "tag": "0001_add_parent_id",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1771113600000,
+      "tag": "0002_add_user_id",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1771200000000,
+      "tag": "0003_simplify_compaction",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1771286400000,
+      "tag": "0004_add_token_stats",
+      "breakpoints": true
+    }
+  ]
+}

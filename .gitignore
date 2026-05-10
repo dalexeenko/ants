@@ -1,0 +1,62 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+dist/
+out/
+*.tsbuildinfo
+
+# Turbo
+.turbo/
+
+# Astro
+.astro/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Test
+coverage/
+
+# Electron
+apps/desktop/out/
+
+# React Native
+apps/mobile/.expo/
+apps/mobile/ios/Pods/
+apps/mobile/android/.gradle/
+apps/mobile/android/app/build/
+
+# Docker build artifacts
+.tarballs/
+package.docker.json
+package-lock.docker.json
+
+# Server runtime data
+pids/
+*.pid
+*.seed
+.worktrees
+
+# OpenMgr local config
+.openmgr/

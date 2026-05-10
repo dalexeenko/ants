@@ -1,0 +1,12 @@
+export { createProjectMethods } from './projects';
+export { createSessionMethods } from './sessions';
+export { createMessagingMethods } from './messaging';
+export { createAuthMethods } from './auth';
+export { createPermissionMethods } from './permissions';
+export { createModelMethods } from './models';
+export { createFilesystemMethods } from './filesystem';
+export { createMcpMethods } from './mcp';
+export { createPluginMethods } from './plugins';
+export { createRemoteMethods } from './remote';
+export { createDirectorMethods } from './director';
+export type { BridgeState, BridgeHelpers, BridgeDeps } from './types';

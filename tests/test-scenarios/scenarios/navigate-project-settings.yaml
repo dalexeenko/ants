@@ -1,0 +1,15 @@
+name: Navigate to Project Settings
+description: Open the project settings panel for an existing project
+preconditions:
+  - projectExists: true
+steps:
+  # Tap the project settings button
+  - tap:
+      testId: openmgr-project-settings
+  # Desktop shows project settings panel; mobile navigates to project settings screen
+  - assertVisible:
+      desktop: true
+      text: "Project Settings"
+  - assertVisible:
+      mobile: true
+      testId: openmgr-screen-project-settings

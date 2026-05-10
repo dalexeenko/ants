@@ -1,0 +1,21 @@
+# Create a new session within an existing project.
+#
+# Preconditions:
+#   - User is authenticated (at least one provider)
+#   - At least one project exists
+appId: host.exp.Exponent
+---
+- launchApp
+- assertVisible:
+    id: "openmgr-home-screen"
+
+# Tap the new session "+" button on the first project section.
+# The testID is "openmgr-project-new-session" (from ProjectSection component).
+- tapOn:
+    id: "openmgr-project-new-session"
+
+# Should navigate to a chat/session screen with the chat input visible
+- assertVisible:
+    id: "openmgr-session-screen"
+- assertVisible:
+    id: "openmgr-chat-input"

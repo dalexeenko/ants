@@ -1,0 +1,17 @@
+{
+  "name": "@openmgr/server-ui-e2e",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Playwright E2E tests for the OpenMgr server admin UI",
+  "type": "module",
+  "scripts": {
+    "test:e2e": "playwright test",
+    "test:debug": "playwright test --debug",
+    "test:ui": "playwright test --ui"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.1",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.3.3"
+  }
+}

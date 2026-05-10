@@ -1,0 +1,16 @@
+# Docker Compose override for the lite image variant.
+#
+# Use with the base compose file:
+#   pnpm compose:up:lite          # build + start (foreground)
+#   pnpm compose:up:lite:detached # build + start (background)
+#
+# The lite variant omits Playwright/Chromium and ML embedding dependencies
+# for a significantly smaller image. Agents lose browser_* tools and fall
+# back to keyword-only memory search.
+
+services:
+  openmgr-server:
+    build:
+      args:
+        VARIANT: lite
+        IMAGE_TAG: openmgr/server:local-lite

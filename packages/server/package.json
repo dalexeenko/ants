@@ -1,0 +1,52 @@
+{
+  "name": "@openmgr/agent-server",
+  "version": "0.1.0",
+  "description": "HTTP/WebSocket server for @openmgr/agent",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@openmgr/agent-core": "workspace:*",
+    "@openmgr/agent-browser-core": "workspace:*",
+    "@openmgr/agent-storage": "workspace:*",
+    "hono": "^4.7.11",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@hono/node-server": "^1.14.2",
+    "@types/ws": "^8.5.10",
+    "typescript": "^5.8.3",
+    "vitest": "^4.0.0"
+  },
+  "keywords": [
+    "openmgr",
+    "agent",
+    "server",
+    "http",
+    "websocket",
+    "hono"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/openmgr/agent.git",
+    "directory": "packages/server"
+  }
+}
