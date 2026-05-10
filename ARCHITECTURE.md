@@ -143,6 +143,107 @@ tests/
   agent-task-tests/   → episode harness + example tasks (see below)
 ```
 
+## Agent Runtime
+
+Ants runs its own agent — not Claude Code, not OpenCode. The server spawns `ants serve --port <N>` as a subprocess per project and communicates with it over HTTP. The agent itself is built on `@ants/agent-core` and calls LLMs via the Anthropic/OpenAI/etc. API.
+
+This means the loop, compaction policy, permission model, retry logic, tool set, and system prompt are all ants' own code — fully inspectable and modifiable.
+
+### The Agent Loop
+
+`PromptExecutor.runAgentLoop()` is a `for` loop capped at 200 iterations. Each iteration:
+
+```
+1. Check if compaction is needed        (iteration 0 only)
+2. generateResponse()                   stream from the LLM
+3. No tool calls in response?  →  done, return the message
+4. executeTools(toolCalls)              run each tool
+5. Push tool results as a new "user" message
+6. Loop
+```
+
+The LLM decides when to stop by not requesting any tools. Two safety valves prevent runaway loops: the 200-iteration cap, and a loop detector that throws if the last 5 consecutive tool call signatures are identical.
+
+### LLM Streaming
+
+Every response is streamed, not awaited in one shot. The provider returns an async iterator of chunks:
+
+- `text` chunks → accumulated into `content`, emitted as `message.delta` events (text appears in the UI in real time)
+- `tool_call` chunks → pushed into `toolCalls[]`, emitted as `tool.start` events
+
+Token usage — including prompt cache hits — is recorded after the stream completes.
+
+### Compaction
+
+As a conversation grows, it eventually won't fit in the model's context window. Compaction summarises old history so the agent can keep working indefinitely. There are three layers:
+
+| Layer | When | What |
+|---|---|---|
+| **Proactive** | Start of every new user turn | If working window > token threshold, summarise before sending anything |
+| **Pre-send** | Right before calling the provider | Estimate payload tokens; if > 95% of model limit, compact then truncate |
+| **Reactive** | After a context-length error from the API | Emergency compact + truncate, retry once |
+
+Compaction calls the LLM with a fixed prompt asking for a structured summary: Tasks Completed, Files Modified, Key Decisions, Problems Encountered, Current State, Next Steps. The summary is injected as a `[Conversation Summary]` message at position 0. Everything before it is discarded. The **working window** is always defined as: everything from the last summary message to the end of the conversation.
+
+Truncation (last resort) drops message pairs (assistant tool call + user tool result) from position 1 — keeping the summary and the most recent messages — until the payload fits.
+
+### Tool Execution
+
+Each loop iteration may produce multiple tool calls. They are bucketed and executed differently:
+
+| Category | Execution | Determined by |
+|---|---|---|
+| **Pre-approved** | Parallel (`Promise.all`) | Permission config: always-allow list |
+| **Permission-required** | Sequential — pauses to ask user | Permission config: ask mode |
+| **Denied** | Immediately return error, no execution | Permission config: deny list |
+| **Unknown** | Immediately return "unknown tool" error | Tool not in registry |
+
+Each tool execution is wrapped in `withRetry` (transient failures) and a circuit breaker (persistent failures).
+
+### Full Example
+
+```
+User: "fix the login bug"
+  │
+  ▼
+Agent.run()
+  → load config, init provider, MCP servers, tools
+  │
+  ▼
+PromptExecutor.runAgentLoop()
+  │
+  ├─ iteration 0
+  │   ├─ compaction check                 working window within limit ✓
+  │   ├─ buildLLMMessages()               flatten message history to LLM format
+  │   ├─ ensureContextFits()              pre-send token check ✓
+  │   ├─ provider.stream(...)             → Claude streams back
+  │   │   ├─ emit message.delta           text appears in UI
+  │   │   └─ emit tool.start              "calling bash..."
+  │   ├─ LLM: call bash("grep -r login src/")
+  │   └─ executeTools → push result as user message
+  │
+  ├─ iteration 1
+  │   ├─ LLM sees grep output
+  │   ├─ LLM: call edit("src/auth.ts", ...)
+  │   └─ executeTools → push result
+  │
+  ├─ iteration 2
+  │   ├─ LLM sees edit result
+  │   ├─ LLM: call bash("pnpm test")
+  │   └─ executeTools → push result
+  │
+  └─ iteration 3
+      ├─ LLM sees tests pass
+      ├─ LLM: "Done. Fixed the null check in validateSession()"
+      └─ no tool calls → loop exits ✓
+```
+
+### Memory
+
+Separate from conversation messages. `packages/memory` uses ONNX Runtime locally to embed text into vectors and does nearest-neighbour search to surface relevant past context. No external service — the model runs in-process. The `lite` Docker variant strips this and falls back to keyword search.
+
+---
+
 ## RL with Verifiable Rewards
 
 Ants includes a lightweight framework for evaluating agent behavior with verifiable reward signals — the same principle used in RLVR training: the agent acts, the environment checks the outcome, a scalar reward is returned.
