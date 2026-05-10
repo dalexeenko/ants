@@ -6,31 +6,40 @@ You submit a task. A colony of parallel AI workers executes it. Results come bac
 
 ## What is this?
 
-The bottleneck in AI coding isn't the LLM — it's the feedback loop. An agent that can write code *and then run tests, check logs, verify visually, and open a PR* is qualitatively different from a chat assistant. That's what ants is built around.
+The bottleneck in AI coding isn't the LLM — it's the feedback loop. An agent that can write code *and then run tests, check logs, verify visually, and open a PR* is qualitatively different from a chat assistant. Ramp found that ~30% of their PRs now come from their internal agent (Inspect) after just a few months, with no forced adoption. Stripe and Shopify have built the same pattern internally. Ants is the open-source version of all three — same architecture, your infra, any LLM.
+
+What makes ants different from those proprietary systems:
+
+- **You own the infra** — no Modal, no proprietary cloud sandbox, runs anywhere Docker runs
+- **Any LLM** — Claude, GPT, Gemini, Groq, xAI, OpenRouter — not locked to one provider
+- **Every interface** — desktop app, mobile app, CLI, or HTTP API
+- **Extensible** — MCP plugins let you wire in Sentry, Datadog, Slack, GitHub, or any tool your stack uses
 
 **ants** gives you:
 
 - A **self-hostable server** — run your agents on your own machine or VPS, your data stays yours
 - A **desktop app** (Mac/Windows) — chat UI with full agent capabilities
 - A **mobile app** (iOS/Android) — control your agents from anywhere
-- An **orchestrator** — one agent that spawns and manages many sub-agents (the colony)
+- An **orchestrator** — a director agent that spawns and manages a colony of parallel workers
 
 The name fits: ants work in parallel, each on their own task, coordinated by a shared colony. That's the model here.
 
 ## How it works
 
-```
-You open the Desktop App
-  └── talks to the Agent via WebSocket
-      └── Agent runs the loop:
-          ├── calls an LLM (Claude, GPT, Gemini, Groq, etc.)
-          ├── uses tools: bash, read/write files, browser...
-          ├── spawns sub-agents for parallel work
-          ├── persists memory to SQLite
-          └── loads MCP plugins for extra capabilities
-```
+A director agent sits at the top. It breaks tasks into subtasks, spins up worker agents, hands each one a job, and collects results — all running concurrently. Each worker has the full tool suite: terminal access, file editing, web browsing, and code intelligence via LSP. Workers close the loop on their own work — they write code, run tests, check the output, and open PRs without waiting for a human in the middle.
 
-A director agent sits at the top. It can spin up worker agents, hand each one a task, and collect results — all running concurrently. Each worker has the full tool suite: terminal access, file editing, web browsing, code intelligence via LSP.
+```
+You submit a task
+  └── Director Agent plans and dispatches
+      ├── Worker 1: write the feature
+      ├── Worker 2: write the tests
+      └── Worker 3: update the docs
+          Each worker:
+          ├── calls an LLM (Claude, GPT, Gemini, Groq, etc.)
+          ├── uses tools: bash, read/write files, browser, LSP
+          ├── persists memory to SQLite
+          └── loads MCP plugins for external tools
+```
 
 ## Repository Structure
 
