@@ -1,38 +1,64 @@
-# OpenMgr
+# ants
 
-Open-source platform for managing AI coding agents. Includes a self-hosted server, desktop app (Electron), mobile app (React Native), and a modular agent framework.
+A platform for running and managing colonies of AI coding agents. Think of it as a control plane for AI workers — you dispatch tasks, agents go do the work, and you watch the results come in.
+
+## What is this?
+
+You want an AI coding assistant. Maybe several. Running in parallel. On your own hardware, not locked to someone else's cloud.
+
+**ants** gives you:
+
+- A **self-hostable server** — run your agents on your own machine or VPS, your data stays yours
+- A **desktop app** (Mac/Windows) — chat UI with full agent capabilities
+- A **mobile app** (iOS/Android) — control your agents from anywhere
+- An **orchestrator** — one agent that spawns and manages many sub-agents (the colony)
+
+The name fits: ants work in parallel, each on their own task, coordinated by a shared colony. That's the model here.
+
+## How it works
+
+```
+You open the Desktop App
+  └── talks to the Agent via WebSocket
+      └── Agent runs the loop:
+          ├── calls an LLM (Claude, GPT, Gemini, Groq, etc.)
+          ├── uses tools: bash, read/write files, browser...
+          ├── spawns sub-agents for parallel work
+          ├── persists memory to SQLite
+          └── loads MCP plugins for extra capabilities
+```
+
+A director agent sits at the top. It can spin up worker agents, hand each one a task, and collect results — all running concurrently. Each worker has the full tool suite: terminal access, file editing, web browsing, code intelligence via LSP.
 
 ## Repository Structure
 
 ```
 apps/
-  server/        Self-hosted management server (Hono + SQLite)
-  desktop/       Desktop app (Electron)
-  mobile/        Mobile app (React Native / Expo)
+  server/       Self-hosted server — deploy this for team or remote access
+  desktop/      Desktop app (Electron)
+  mobile/       Mobile app (React Native)
 
 packages/
-  core/          Agent framework core (orchestrator, plugins, MCP, tools)
-  providers/     LLM provider adapters (Anthropic, OpenAI, Google, etc.)
-  cli/           Command-line interface
-  server/        Embeddable HTTP server for the agent
-  ui/            Shared React UI components (cross-platform)
-  tools/         Platform-agnostic agent tools
-  tools-terminal/  Terminal/filesystem tools (Node.js)
-  tools-director/  Director-mode tools
-  database/      SQLite database adapter (better-sqlite3)
-  database-core/ Database interface and schema
-  storage/       Session persistence
-  memory/        Vector memory / knowledge base
-  skills-content/ Bundled skill content
-  skills-loader/ Filesystem skill loader
-  scheduler/     Task scheduling
-  ...            See packages/ for the full list
+  core/         Agent loop, plugin system, context compaction, MCP
+  providers/    LLM adapters: Anthropic, OpenAI, Google, OpenRouter, Groq, xAI
+  agent/        Full agent assembled from all packages
+  node/         Node.js agent with full filesystem access
 
-tests/
-  agent-e2e-tests/         CLI and HTTP server E2E tests
-  agent-integration-tests/ Plugin and skill integration tests
-  app-integration-tests/   Server API integration tests
-  test-scenarios/          Shared E2E scenarios (generates Playwright + Maestro)
+  tools-terminal/   Bash, read, write, edit, grep — the coding tools
+  tools/            Web search, todos, skills
+  tools-director/   Meta-tools: manage projects, sessions, Docker, settings
+  browser-core/     Browser control
+
+  database/     SQLite via Drizzle ORM
+  memory/       Semantic memory with local embeddings
+  scheduler/    Cron and scheduled tasks
+
+  server/       Embeddable HTTP/WebSocket server
+  mcp-stdio/    MCP protocol (plug in any MCP-compatible tool)
+  lsp/          Language Server Protocol (code intelligence)
+
+  ui/           Shared React chat UI (desktop + web)
+  cli/          Command-line interface
 ```
 
 ## Getting Started
@@ -45,71 +71,30 @@ tests/
 ### Setup
 
 ```bash
-git clone https://github.com/openmgr/openmgr.git
-cd openmgr
+git clone https://github.com/dalexeenko/ants.git
+cd ants
 pnpm install
 pnpm build
-```
-
-### Run the Server
-
-```bash
-cd apps/server
-pnpm dev
 ```
 
 ### Run the Desktop App
 
 ```bash
-cd apps/desktop
-pnpm dev
+pnpm dev:desktop
 ```
 
-### Run the Mobile App
+### Run the Server
 
 ```bash
-cd apps/mobile
-npx expo start
+pnpm dev:server
 ```
 
-## Development
-
-### Build
-
-Turborepo handles build ordering across all packages:
-
-```bash
-pnpm build              # Build everything
-pnpm turbo build --filter=@openmgr/server  # Build one package + deps
-```
-
-### Test
-
-```bash
-pnpm -r test --no-bail  # Run all tests across all packages
-pnpm test --filter=packages/core  # Run tests for a specific package
-```
-
-### Watch Mode
-
-```bash
-pnpm dev                # Watch mode for all packages
-```
-
-### Lint
-
-```bash
-pnpm lint
-```
-
-## Docker
-
-Build and run the server as a Docker container:
+### Run with Docker
 
 ```bash
 docker run -p 6647:6647 \
-  -v openmgr-data:/data \
-  -v openmgr-workspaces:/workspaces \
+  -v ants-data:/data \
+  -v ants-workspaces:/workspaces \
   -e OPENMGR_ENCRYPTION_KEY=$(openssl rand -base64 32) \
   openmgr/server
 ```
@@ -119,6 +104,16 @@ Or with Docker Compose:
 ```bash
 cd apps/server
 docker compose up
+```
+
+## Development
+
+```bash
+pnpm build                                          # Build everything
+pnpm turbo build --filter=@openmgr/server          # Build one package + deps
+pnpm test                                           # Run all tests
+pnpm dev                                            # Watch mode
+pnpm lint
 ```
 
 ## License
