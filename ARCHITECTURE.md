@@ -6,106 +6,15 @@ The key insight from Ramp's writeup: the bottleneck in AI coding isn't the LLM, 
 
 ## System Overview
 
-```mermaid
-flowchart TD
-    subgraph Interfaces["Interfaces"]
-        CLI[CLI]
-        Desktop[Desktop App\nElectron]
-        Mobile[Mobile App\nReact Native]
-        API[HTTP / WebSocket API]
-    end
-
-    subgraph Director["Director Agent (Orchestrator)"]
-        LOOP[Agent Loop\ncore]
-        SCHED[Scheduler\nCron / triggers]
-        DISPATCH[Task Dispatcher]
-    end
-
-    subgraph Colony["Worker Colony (parallel sessions)"]
-        W1[Worker Agent 1]
-        W2[Worker Agent 2]
-        W3[Worker Agent 3]
-        WN[Worker Agent N]
-    end
-
-    subgraph PerWorker["Each Worker Has"]
-        LLM[LLM\nClaude / GPT / Gemini / etc.]
-        TOOLS[Tools\nbash · read/write · edit · grep]
-        BROWSER[Browser\nheadless control]
-        LSP[LSP\ncode intelligence]
-        MCP[MCP Plugins\nexternal tools]
-    end
-
-    subgraph Shared["Shared Infrastructure"]
-        DB[(SQLite\nconversations · stats · settings)]
-        MEM[Semantic Memory\nlocal embeddings]
-        STORAGE[Session Storage\nworktrees · artifacts]
-    end
-
-    Interfaces --> Director
-    LOOP --> DISPATCH
-    SCHED --> DISPATCH
-    DISPATCH --> W1
-    DISPATCH --> W2
-    DISPATCH --> W3
-    DISPATCH --> WN
-    W1 & W2 & W3 & WN --> PerWorker
-    PerWorker --> Shared
-```
+![System Overview](docs/diagrams/system-overview.svg)
 
 ## How a Task Flows
 
-```mermaid
-sequenceDiagram
-    actor User
-    participant Interface as Interface\n(Desktop / API / CLI)
-    participant Director as Director Agent
-    participant Worker as Worker Agent(s)
-    participant Tools as Tools\n(bash, files, browser)
-    participant LLM as LLM Provider
-
-    User->>Interface: "Fix the login bug and open a PR"
-    Interface->>Director: task submitted
-    Director->>Director: plan — break into subtasks
-    Director->>Worker: spawn worker(s) in isolated session(s)
-
-    loop Agent loop
-        Worker->>LLM: next action?
-        LLM-->>Worker: call tool X
-        Worker->>Tools: execute
-        Tools-->>Worker: result
-    end
-
-    Worker->>Tools: run tests, open PR
-    Worker-->>Director: done — PR #123
-    Director-->>Interface: result + summary
-    Interface-->>User: ✓ PR opened
-```
+![Task Flow](docs/diagrams/task-flow.svg)
 
 ## Deployment Modes
 
-```mermaid
-flowchart LR
-    subgraph Local["Local (single user)"]
-        D[Desktop App] --> LA[Local Agent\nNode.js process]
-        CLI2[CLI] --> LA
-    end
-
-    subgraph Server["Self-hosted Server (team)"]
-        WEB[Web UI] --> SRV[Ants Server\nDocker]
-        SLACK[Slack / webhook] --> SRV
-        SRV --> A1[Agent Pool]
-    end
-
-    subgraph Storage2["Persistent Storage"]
-        VOL1[(ants-data\nSQLite · settings)]
-        VOL2[(ants-workspaces\nworktrees · artifacts)]
-    end
-
-    LA --> VOL1
-    A1 --> VOL1
-    A1 --> VOL2
-```
+![Deployment Modes](docs/diagrams/deployment-modes.svg)
 
 ## Package Map
 
@@ -250,19 +159,7 @@ Ants includes a lightweight framework for evaluating agent behavior with verifia
 
 ### How it fits into the agent loop
 
-```mermaid
-flowchart LR
-    subgraph Episode["Episode (one task run)"]
-        SETUP[Task Setup\ninitial broken state]
-        AGENT[Agent Runner\nLLM or stub]
-        VERIFY[Verifiers\nreward functions]
-        REWARD[Reward Score\n0.0 – 1.0]
-    end
-
-    SETUP -->|isolated temp workspace| AGENT
-    AGENT -->|modifies files| VERIFY
-    VERIFY --> REWARD
-```
+![RL Rewards](docs/diagrams/rl-rewards.svg)
 
 The harness is intentionally LLM-agnostic: `AgentRunner` is just `(prompt, workspacePath) => Promise<void>`. Swap in a real agent, a fine-tuned model, or a deterministic stub — the verifiers don't care.
 
