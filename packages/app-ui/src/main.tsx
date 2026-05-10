@@ -54,7 +54,7 @@ function WebApp() {
         }
 
         const authData = await authResponse.json();
-        if (!authData.authenticated) {
+        if (!authData.currentUser) {
           setState('unauthenticated');
           return;
         }
