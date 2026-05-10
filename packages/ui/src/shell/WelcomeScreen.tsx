@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Pressable } from 'react-native';
 import {
   ThemeContext,
   useProjectStore,
@@ -30,14 +30,21 @@ export function WelcomeScreen() {
     setShowProjectSetup(false);
   };
 
+  const suggestions = [
+    { label: 'Fix a bug', prompt: 'Find and fix a bug in my code' },
+    { label: 'Review code', prompt: 'Review my code for quality and correctness' },
+    { label: 'Write tests', prompt: 'Write tests for my code' },
+    { label: 'Open a PR', prompt: 'Create a pull request with my changes' },
+  ];
+
   return (
     <View testID="ants-welcome-screen" style={[styles.welcomeContainer, { backgroundColor: colors.bg.primary }]}>
       <View style={styles.welcomeContent}>
         <Text variant="title" style={styles.welcomeTitle}>
-          Welcome to Ants
+          What should we work on?
         </Text>
         <Text color="secondary" style={styles.welcomeSubtitle}>
-          Your AI-powered project assistant
+          Agents write code, run tests, verify output, and open PRs — without waiting for you in the middle.
         </Text>
 
         {/* Auth section — only for non-web platforms */}
@@ -49,15 +56,31 @@ export function WelcomeScreen() {
 
         <Card variant="outlined" padding="lg" style={styles.welcomeCard}>
           <Text variant="heading" style={styles.cardTitle}>
-            Get Started
+            Start a new project
           </Text>
           <Text color="secondary" style={styles.cardDescription}>
-            Create a new project to start working with the AI agent.
+            Each project gets its own AI session, sandbox, tool suite, and persistent state.
           </Text>
           <Button testID="ants-welcome-new-project" onPress={() => setShowProjectSetup(true)} style={styles.openButton}>
             New Project
           </Button>
         </Card>
+
+        <View style={styles.suggestionsRow}>
+          {suggestions.map((s) => (
+            <Pressable
+              key={s.label}
+              style={({ pressed }) => [
+                styles.suggestionChip,
+                { backgroundColor: colors.bg.secondary, borderColor: colors.border.light },
+                pressed && { opacity: 0.7 },
+              ]}
+              onPress={() => setShowProjectSetup(true)}
+            >
+              <Text variant="caption" color="secondary">{s.label}</Text>
+            </Pressable>
+          ))}
+        </View>
       </View>
 
       {window.agentBridge && (
@@ -114,5 +137,18 @@ const styles = StyleSheet.create({
   },
   openButton: {
     width: '100%',
+  },
+  suggestionsRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 8,
+    justifyContent: 'center',
+    marginTop: 16,
+  },
+  suggestionChip: {
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    borderRadius: 20,
+    borderWidth: 1,
   },
 });

@@ -5,6 +5,13 @@ import { resolve } from 'path';
 export default defineConfig({
   plugins: [react()],
   base: '/app/',
+  server: {
+    proxy: {
+      '/api': 'http://localhost:6647',
+      '/login': 'http://localhost:6647',
+      '/auth': 'http://localhost:6647',
+    },
+  },
   build: {
     outDir: 'dist',
     emptyOutDir: true,

@@ -45,12 +45,6 @@ importers:
         specifier: ^8.18.0
         version: 8.19.0
     devDependencies:
-      '@electron/notarize':
-        specifier: ^3.1.1
-        version: 3.1.1
-      '@electron/rebuild':
-        specifier: ^4.0.3
-        version: 4.0.3
       '@ants/agent':
         specifier: workspace:*
         version: link:../../packages/agent
@@ -108,6 +102,12 @@ importers:
       '@ants/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      '@electron/notarize':
+        specifier: ^3.1.1
+        version: 3.1.1
+      '@electron/rebuild':
+        specifier: ^4.0.3
+        version: 4.0.3
       '@playwright/test':
         specifier: ^1.58.1
         version: 1.58.2
@@ -134,7 +134,7 @@ importers:
         version: 7.18.0(eslint@8.57.1)(typescript@5.8.3)
       '@vitejs/plugin-react':
         specifier: ^4.2.1
-        version: 4.7.0(vite@5.4.21(@types/node@20.19.33)(lightningcss@1.31.1)(terser@5.46.0))
+        version: 4.7.0(vite@5.4.21(@types/node@22.19.11)(lightningcss@1.31.1)(terser@5.46.0))
       electron:
         specifier: ^33.4.11
         version: 33.4.11
@@ -143,7 +143,7 @@ importers:
         version: 26.8.0(electron-builder-squirrel-windows@26.8.0(dmg-builder@26.8.0))
       electron-vite:
         specifier: ^3.1.0
-        version: 3.1.0(vite@5.4.21(@types/node@20.19.33)(lightningcss@1.31.1)(terser@5.46.0))
+        version: 3.1.0(vite@5.4.21(@types/node@22.19.11)(lightningcss@1.31.1)(terser@5.46.0))
       eslint:
         specifier: ^8.57.0
         version: 8.57.1
@@ -164,16 +164,10 @@ importers:
         version: 5.8.3
       vite:
         specifier: ^5.0.11
-        version: 5.4.21(@types/node@20.19.33)(lightningcss@1.31.1)(terser@5.46.0)
+        version: 5.4.21(@types/node@22.19.11)(lightningcss@1.31.1)(terser@5.46.0)
 
   apps/mobile:
     dependencies:
-      '@babel/runtime':
-        specifier: ^7.20.0
-        version: 7.28.6
-      '@expo/metro-runtime':
-        specifier: ~6.1.2
-        version: 6.1.2(expo@54.0.33)(react-dom@19.1.0(react@19.1.0))(react-native@0.81.5(@babel/core@7.29.0)(@types/react@19.1.17)(react@19.1.0))(react@19.1.0)
       '@ants/agent-auth-core':
         specifier: workspace:*
         version: link:../../packages/auth-core
@@ -192,6 +186,12 @@ importers:
       '@ants/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      '@babel/runtime':
+        specifier: ^7.20.0
+        version: 7.28.6
+      '@expo/metro-runtime':
+        specifier: ~6.1.2
+        version: 6.1.2(expo@54.0.33)(react-dom@19.1.0(react@19.1.0))(react-native@0.81.5(@babel/core@7.29.0)(@types/react@19.1.17)(react@19.1.0))(react@19.1.0)
       '@react-native-async-storage/async-storage':
         specifier: ^2.2.0
         version: 2.2.0(react-native@0.81.5(@babel/core@7.29.0)(@types/react@19.1.17)(react@19.1.0))
@@ -267,7 +267,7 @@ importers:
         version: 7.29.0
       '@testing-library/react-native':
         specifier: ^12.4.3
-        version: 12.9.0(jest@29.7.0(@types/node@20.19.33))(react-native@0.81.5(@babel/core@7.29.0)(@types/react@19.1.17)(react@19.1.0))(react-test-renderer@19.1.0(react@19.1.0))(react@19.1.0)
+        version: 12.9.0(jest@29.7.0(@types/node@22.19.11))(react-native@0.81.5(@babel/core@7.29.0)(@types/react@19.1.17)(react@19.1.0))(react-test-renderer@19.1.0(react@19.1.0))(react@19.1.0)
       '@types/jest':
         specifier: ^29.5.12
         version: 29.5.14
@@ -276,25 +276,16 @@ importers:
         version: 19.1.17
       jest:
         specifier: ^29.7.0
-        version: 29.7.0(@types/node@20.19.33)
+        version: 29.7.0(@types/node@22.19.11)
       jest-expo:
         specifier: ~54.0.2
-        version: 54.0.17(@babel/core@7.29.0)(expo@54.0.33(@babel/core@7.29.0)(@expo/metro-runtime@6.1.2)(react-native@0.81.5(@babel/core@7.29.0)(@types/react@19.1.17)(react@19.1.0))(react@19.1.0))(jest@29.7.0(@types/node@20.19.33))(react-native@0.81.5(@babel/core@7.29.0)(@types/react@19.1.17)(react@19.1.0))(react@19.1.0)
+        version: 54.0.17(@babel/core@7.29.0)(expo@54.0.33(@babel/core@7.29.0)(@expo/metro-runtime@6.1.2)(react-native@0.81.5(@babel/core@7.29.0)(@types/react@19.1.17)(react@19.1.0))(react@19.1.0))(jest@29.7.0(@types/node@22.19.11))(react-native@0.81.5(@babel/core@7.29.0)(@types/react@19.1.17)(react@19.1.0))(react@19.1.0)
       typescript:
         specifier: ~5.9.2
         version: 5.9.3
 
   apps/server:
     dependencies:
-      '@hono/node-server':
-        specifier: ^1.8.0
-        version: 1.19.9(hono@4.11.9)
-      '@hono/node-ws':
-        specifier: ^1.3.0
-        version: 1.3.0(@hono/node-server@1.19.9(hono@4.11.9))(hono@4.11.9)
-      '@modelcontextprotocol/sdk':
-        specifier: ^1.25.2
-        version: 1.26.0(zod@4.3.6)
       '@ants/agent':
         specifier: workspace:*
         version: link:../../packages/agent
@@ -325,6 +316,15 @@ importers:
       '@ants/server-ui':
         specifier: workspace:*
         version: link:../../packages/server-ui
+      '@hono/node-server':
+        specifier: ^1.8.0
+        version: 1.19.9(hono@4.11.9)
+      '@hono/node-ws':
+        specifier: ^1.3.0
+        version: 1.3.0(@hono/node-server@1.19.9(hono@4.11.9))(hono@4.11.9)
+      '@modelcontextprotocol/sdk':
+        specifier: ^1.25.2
+        version: 1.26.0(zod@4.3.6)
       better-sqlite3:
         specifier: ^12.6.2
         version: 12.6.2
@@ -490,13 +490,13 @@ importers:
         version: 19.2.3(@types/react@19.1.17)
       '@vitejs/plugin-react':
         specifier: ^4.5.2
-        version: 4.7.0(vite@6.4.1(@types/node@20.19.33)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
+        version: 4.7.0(vite@6.4.1(@types/node@22.19.11)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
       typescript:
         specifier: ~5.8.3
         version: 5.8.3
       vite:
         specifier: ^6.3.5
-        version: 6.4.1(@types/node@20.19.33)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
+        version: 6.4.1(@types/node@22.19.11)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
 
   packages/auth-anthropic:
     dependencies:
@@ -509,7 +509,7 @@ importers:
         version: 5.8.3
       vitest:
         specifier: ^4.0.0
-        version: 4.0.18(@types/node@20.19.33)(jiti@2.6.1)(jsdom@27.4.0)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
+        version: 4.0.18(@types/node@22.19.11)(jiti@2.6.1)(jsdom@27.4.0)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
 
   packages/auth-core:
     devDependencies:
@@ -518,7 +518,7 @@ importers:
         version: 5.8.3
       vitest:
         specifier: ^4.0.18
-        version: 4.0.18(@types/node@20.19.33)(jiti@2.6.1)(jsdom@27.4.0)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
+        version: 4.0.18(@types/node@22.19.11)(jiti@2.6.1)(jsdom@27.4.0)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
 
   packages/auth-react-native:
     dependencies:
@@ -543,7 +543,7 @@ importers:
         version: 5.8.3
       vitest:
         specifier: ^4.0.18
-        version: 4.0.18(@types/node@20.19.33)(jiti@2.6.1)(jsdom@27.4.0)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
+        version: 4.0.18(@types/node@22.19.11)(jiti@2.6.1)(jsdom@27.4.0)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
 
   packages/browser-core:
     dependencies:
@@ -724,7 +724,7 @@ importers:
         version: 5.8.3
       vitest:
         specifier: ^4.0.18
-        version: 4.0.18(@types/node@20.19.33)(jiti@2.6.1)(jsdom@27.4.0)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
+        version: 4.0.18(@types/node@22.19.11)(jiti@2.6.1)(jsdom@27.4.0)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
 
   packages/database-react-native:
     dependencies:
@@ -743,7 +743,7 @@ importers:
         version: 5.8.3
       vitest:
         specifier: ^4.0.18
-        version: 4.0.18(@types/node@20.19.33)(jiti@2.6.1)(jsdom@27.4.0)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
+        version: 4.0.18(@types/node@22.19.11)(jiti@2.6.1)(jsdom@27.4.0)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
 
   packages/docker:
     devDependencies:
@@ -778,12 +778,12 @@ importers:
 
   packages/mcp-stdio:
     dependencies:
-      '@modelcontextprotocol/sdk':
-        specifier: ^1.25.2
-        version: 1.26.0(zod@4.3.6)
       '@ants/agent-core':
         specifier: workspace:*
         version: link:../core
+      '@modelcontextprotocol/sdk':
+        specifier: ^1.25.2
+        version: 1.26.0(zod@4.3.6)
     devDependencies:
       '@types/node':
         specifier: ^22.19.7
@@ -797,12 +797,12 @@ importers:
 
   packages/memory:
     dependencies:
-      '@huggingface/transformers':
-        specifier: ^3.8.1
-        version: 3.8.1
       '@ants/agent-core':
         specifier: workspace:*
         version: link:../core
+      '@huggingface/transformers':
+        specifier: ^3.8.1
+        version: 3.8.1
       better-sqlite3:
         specifier: ^12.6.2
         version: 12.6.2
@@ -947,7 +947,7 @@ importers:
         version: 5.8.3
       vitest:
         specifier: ^4.0.18
-        version: 4.0.18(@types/node@20.19.33)(jiti@2.6.1)(jsdom@27.4.0)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
+        version: 4.0.18(@types/node@22.19.11)(jiti@2.6.1)(jsdom@27.4.0)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
 
   packages/scheduler:
     devDependencies:
@@ -990,7 +990,7 @@ importers:
         version: 5.8.3
       vitest:
         specifier: ^4.0.0
-        version: 4.0.18(@types/node@20.19.33)(jiti@2.6.1)(jsdom@27.4.0)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
+        version: 4.0.18(@types/node@22.19.11)(jiti@2.6.1)(jsdom@27.4.0)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
 
   packages/server-ui:
     dependencies:
@@ -1012,13 +1012,13 @@ importers:
         version: 19.2.3(@types/react@19.1.17)
       '@vitejs/plugin-react':
         specifier: ^4.5.2
-        version: 4.7.0(vite@6.4.1(@types/node@20.19.33)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
+        version: 4.7.0(vite@6.4.1(@types/node@22.19.11)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
       typescript:
         specifier: ~5.8.3
         version: 5.8.3
       vite:
         specifier: ^6.3.5
-        version: 6.4.1(@types/node@20.19.33)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
+        version: 6.4.1(@types/node@22.19.11)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
 
   packages/skills-content:
     devDependencies:
@@ -1027,7 +1027,7 @@ importers:
         version: 5.8.3
       vitest:
         specifier: ^4.0.18
-        version: 4.0.18(@types/node@20.19.33)(jiti@2.6.1)(jsdom@27.4.0)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
+        version: 4.0.18(@types/node@22.19.11)(jiti@2.6.1)(jsdom@27.4.0)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
 
   packages/skills-loader:
     dependencies:
@@ -1068,7 +1068,7 @@ importers:
         version: 5.8.3
       vitest:
         specifier: ^4.0.0
-        version: 4.0.18(@types/node@20.19.33)(jiti@2.6.1)(jsdom@27.4.0)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
+        version: 4.0.18(@types/node@22.19.11)(jiti@2.6.1)(jsdom@27.4.0)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
 
   packages/tools:
     dependencies:
@@ -1177,7 +1177,7 @@ importers:
         version: 7.18.0(eslint@8.57.1)(typescript@5.8.3)
       '@vitejs/plugin-react':
         specifier: 4.2.0
-        version: 4.2.0(vite@5.4.21(@types/node@20.19.33)(lightningcss@1.31.1)(terser@5.46.0))
+        version: 4.2.0(vite@5.4.21(@types/node@22.19.11)(lightningcss@1.31.1)(terser@5.46.0))
       eslint:
         specifier: ^8.57.0
         version: 8.57.1
@@ -1195,10 +1195,26 @@ importers:
         version: 5.8.3
       vite:
         specifier: 5.4.21
-        version: 5.4.21(@types/node@20.19.33)(lightningcss@1.31.1)(terser@5.46.0)
+        version: 5.4.21(@types/node@22.19.11)(lightningcss@1.31.1)(terser@5.46.0)
       vitest:
         specifier: 1.6.0
-        version: 1.6.0(@types/node@20.19.33)(jsdom@27.4.0)(lightningcss@1.31.1)(terser@5.46.0)
+        version: 1.6.0(@types/node@22.19.11)(jsdom@27.4.0)(lightningcss@1.31.1)(terser@5.46.0)
+
+  packages/verifiers:
+    dependencies:
+      execa:
+        specifier: ^8.0.0
+        version: 8.0.1
+    devDependencies:
+      '@types/node':
+        specifier: ^22.0.0
+        version: 22.19.11
+      typescript:
+        specifier: ^5.6.0
+        version: 5.9.3
+      vitest:
+        specifier: ^4.0.0
+        version: 4.0.18(@types/node@22.19.11)(jiti@2.6.1)(jsdom@27.4.0)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
 
   tests/agent-e2e-tests:
     devDependencies:
@@ -1260,6 +1276,22 @@ importers:
       typescript:
         specifier: ^5.6.0
         version: 5.8.3
+      vitest:
+        specifier: ^4.0.0
+        version: 4.0.18(@types/node@22.19.11)(jiti@2.6.1)(jsdom@27.4.0)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
+
+  tests/agent-task-tests:
+    dependencies:
+      '@ants/agent-verifiers':
+        specifier: workspace:*
+        version: link:../../packages/verifiers
+    devDependencies:
+      '@types/node':
+        specifier: ^22.0.0
+        version: 22.19.11
+      typescript:
+        specifier: ^5.6.0
+        version: 5.9.3
       vitest:
         specifier: ^4.0.0
         version: 4.0.18(@types/node@22.19.11)(jiti@2.6.1)(jsdom@27.4.0)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
@@ -9731,7 +9763,7 @@ snapshots:
   '@jest/console@29.7.0':
     dependencies:
       '@jest/types': 29.6.3
-      '@types/node': 20.19.33
+      '@types/node': 22.19.11
       chalk: 4.1.2
       jest-message-util: 29.7.0
       jest-util: 29.7.0
@@ -9744,14 +9776,14 @@ snapshots:
       '@jest/test-result': 29.7.0
       '@jest/transform': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 20.19.33
+      '@types/node': 22.19.11
       ansi-escapes: 4.3.2
       chalk: 4.1.2
       ci-info: 3.9.0
       exit: 0.1.2
       graceful-fs: 4.2.11
       jest-changed-files: 29.7.0
-      jest-config: 29.7.0(@types/node@20.19.33)
+      jest-config: 29.7.0(@types/node@22.19.11)
       jest-haste-map: 29.7.0
       jest-message-util: 29.7.0
       jest-regex-util: 29.6.3
@@ -9780,7 +9812,7 @@ snapshots:
     dependencies:
       '@jest/fake-timers': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 20.19.33
+      '@types/node': 22.19.11
       jest-mock: 29.7.0
 
   '@jest/expect-utils@29.7.0':
@@ -9798,7 +9830,7 @@ snapshots:
     dependencies:
       '@jest/types': 29.6.3
       '@sinonjs/fake-timers': 10.3.0
-      '@types/node': 20.19.33
+      '@types/node': 22.19.11
       jest-message-util: 29.7.0
       jest-mock: 29.7.0
       jest-util: 29.7.0
@@ -9820,7 +9852,7 @@ snapshots:
       '@jest/transform': 29.7.0
       '@jest/types': 29.6.3
       '@jridgewell/trace-mapping': 0.3.31
-      '@types/node': 20.19.33
+      '@types/node': 22.19.11
       chalk: 4.1.2
       collect-v8-coverage: 1.0.3
       exit: 0.1.2
@@ -9890,7 +9922,7 @@ snapshots:
       '@jest/schemas': 29.6.3
       '@types/istanbul-lib-coverage': 2.0.6
       '@types/istanbul-reports': 3.0.4
-      '@types/node': 20.19.33
+      '@types/node': 22.19.11
       '@types/yargs': 17.0.35
       chalk: 4.1.2
 
@@ -10272,7 +10304,7 @@ snapshots:
       picocolors: 1.1.1
       redent: 3.0.0
 
-  '@testing-library/react-native@12.9.0(jest@29.7.0(@types/node@20.19.33))(react-native@0.81.5(@babel/core@7.29.0)(@types/react@19.1.17)(react@19.1.0))(react-test-renderer@19.1.0(react@19.1.0))(react@19.1.0)':
+  '@testing-library/react-native@12.9.0(jest@29.7.0(@types/node@22.19.11))(react-native@0.81.5(@babel/core@7.29.0)(@types/react@19.1.17)(react@19.1.0))(react-test-renderer@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
       jest-matcher-utils: 29.7.0
       pretty-format: 29.7.0
@@ -10281,7 +10313,7 @@ snapshots:
       react-test-renderer: 19.1.0(react@19.1.0)
       redent: 3.0.0
     optionalDependencies:
-      jest: 29.7.0(@types/node@20.19.33)
+      jest: 29.7.0(@types/node@22.19.11)
 
   '@testing-library/react@16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@19.2.3(@types/react@19.1.17))(@types/react@19.1.17)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
@@ -10326,7 +10358,7 @@ snapshots:
     dependencies:
       '@types/http-cache-semantics': 4.2.0
       '@types/keyv': 3.1.4
-      '@types/node': 20.19.33
+      '@types/node': 22.19.11
       '@types/responselike': 1.0.3
 
   '@types/chai@5.2.3':
@@ -10344,11 +10376,11 @@ snapshots:
 
   '@types/fs-extra@9.0.13':
     dependencies:
-      '@types/node': 20.19.33
+      '@types/node': 22.19.11
 
   '@types/graceful-fs@4.1.9':
     dependencies:
-      '@types/node': 20.19.33
+      '@types/node': 22.19.11
 
   '@types/http-cache-semantics@4.2.0': {}
 
@@ -10371,7 +10403,7 @@ snapshots:
 
   '@types/jsdom@20.0.1':
     dependencies:
-      '@types/node': 20.19.33
+      '@types/node': 22.19.11
       '@types/tough-cookie': 4.0.5
       parse5: 7.3.0
 
@@ -10379,7 +10411,7 @@ snapshots:
 
   '@types/keyv@3.1.4':
     dependencies:
-      '@types/node': 20.19.33
+      '@types/node': 22.19.11
 
   '@types/ms@2.1.0': {}
 
@@ -10393,7 +10425,7 @@ snapshots:
 
   '@types/plist@3.0.5':
     dependencies:
-      '@types/node': 20.19.33
+      '@types/node': 22.19.11
       xmlbuilder: 15.1.1
     optional: true
 
@@ -10407,7 +10439,7 @@ snapshots:
 
   '@types/responselike@1.0.3':
     dependencies:
-      '@types/node': 20.19.33
+      '@types/node': 22.19.11
 
   '@types/semver@7.7.1': {}
 
@@ -10436,7 +10468,7 @@ snapshots:
 
   '@types/yauzl@2.10.3':
     dependencies:
-      '@types/node': 20.19.33
+      '@types/node': 22.19.11
     optional: true
 
   '@typescript-eslint/eslint-plugin@6.21.0(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.8.3))(eslint@8.57.1)(typescript@5.8.3)':
@@ -10620,18 +10652,18 @@ snapshots:
       '@urql/core': 5.2.0
       wonka: 6.3.5
 
-  '@vitejs/plugin-react@4.2.0(vite@5.4.21(@types/node@20.19.33)(lightningcss@1.31.1)(terser@5.46.0))':
+  '@vitejs/plugin-react@4.2.0(vite@5.4.21(@types/node@22.19.11)(lightningcss@1.31.1)(terser@5.46.0))':
     dependencies:
       '@babel/core': 7.29.0
       '@babel/plugin-transform-react-jsx-self': 7.27.1(@babel/core@7.29.0)
       '@babel/plugin-transform-react-jsx-source': 7.27.1(@babel/core@7.29.0)
       '@types/babel__core': 7.20.5
       react-refresh: 0.14.2
-      vite: 5.4.21(@types/node@20.19.33)(lightningcss@1.31.1)(terser@5.46.0)
+      vite: 5.4.21(@types/node@22.19.11)(lightningcss@1.31.1)(terser@5.46.0)
     transitivePeerDependencies:
       - supports-color
 
-  '@vitejs/plugin-react@4.7.0(vite@5.4.21(@types/node@20.19.33)(lightningcss@1.31.1)(terser@5.46.0))':
+  '@vitejs/plugin-react@4.7.0(vite@5.4.21(@types/node@22.19.11)(lightningcss@1.31.1)(terser@5.46.0))':
     dependencies:
       '@babel/core': 7.29.0
       '@babel/plugin-transform-react-jsx-self': 7.27.1(@babel/core@7.29.0)
@@ -10639,11 +10671,11 @@ snapshots:
       '@rolldown/pluginutils': 1.0.0-beta.27
       '@types/babel__core': 7.20.5
       react-refresh: 0.17.0
-      vite: 5.4.21(@types/node@20.19.33)(lightningcss@1.31.1)(terser@5.46.0)
+      vite: 5.4.21(@types/node@22.19.11)(lightningcss@1.31.1)(terser@5.46.0)
     transitivePeerDependencies:
       - supports-color
 
-  '@vitejs/plugin-react@4.7.0(vite@6.4.1(@types/node@20.19.33)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))':
+  '@vitejs/plugin-react@4.7.0(vite@6.4.1(@types/node@22.19.11)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))':
     dependencies:
       '@babel/core': 7.29.0
       '@babel/plugin-transform-react-jsx-self': 7.27.1(@babel/core@7.29.0)
@@ -10651,7 +10683,7 @@ snapshots:
       '@rolldown/pluginutils': 1.0.0-beta.27
       '@types/babel__core': 7.20.5
       react-refresh: 0.17.0
-      vite: 6.4.1(@types/node@20.19.33)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
+      vite: 6.4.1(@types/node@22.19.11)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
     transitivePeerDependencies:
       - supports-color
 
@@ -11350,7 +11382,7 @@ snapshots:
 
   chrome-launcher@0.15.2:
     dependencies:
-      '@types/node': 20.19.33
+      '@types/node': 22.19.11
       escape-string-regexp: 4.0.0
       is-wsl: 2.2.0
       lighthouse-logger: 1.4.2
@@ -11359,7 +11391,7 @@ snapshots:
 
   chromium-edge-launcher@0.2.0:
     dependencies:
-      '@types/node': 20.19.33
+      '@types/node': 22.19.11
       escape-string-regexp: 4.0.0
       is-wsl: 2.2.0
       lighthouse-logger: 1.4.2
@@ -11501,13 +11533,13 @@ snapshots:
       buffer: 5.7.1
     optional: true
 
-  create-jest@29.7.0(@types/node@20.19.33):
+  create-jest@29.7.0(@types/node@22.19.11):
     dependencies:
       '@jest/types': 29.6.3
       chalk: 4.1.2
       exit: 0.1.2
       graceful-fs: 4.2.11
-      jest-config: 29.7.0(@types/node@20.19.33)
+      jest-config: 29.7.0(@types/node@22.19.11)
       jest-util: 29.7.0
       prompts: 2.4.2
     transitivePeerDependencies:
@@ -11821,7 +11853,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  electron-vite@3.1.0(vite@5.4.21(@types/node@20.19.33)(lightningcss@1.31.1)(terser@5.46.0)):
+  electron-vite@3.1.0(vite@5.4.21(@types/node@22.19.11)(lightningcss@1.31.1)(terser@5.46.0)):
     dependencies:
       '@babel/core': 7.29.0
       '@babel/plugin-transform-arrow-functions': 7.27.1(@babel/core@7.29.0)
@@ -11829,7 +11861,7 @@ snapshots:
       esbuild: 0.25.12
       magic-string: 0.30.21
       picocolors: 1.1.1
-      vite: 5.4.21(@types/node@20.19.33)(lightningcss@1.31.1)(terser@5.46.0)
+      vite: 5.4.21(@types/node@22.19.11)(lightningcss@1.31.1)(terser@5.46.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -13103,7 +13135,7 @@ snapshots:
       '@jest/expect': 29.7.0
       '@jest/test-result': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 20.19.33
+      '@types/node': 22.19.11
       chalk: 4.1.2
       co: 4.6.0
       dedent: 1.7.1
@@ -13123,16 +13155,16 @@ snapshots:
       - babel-plugin-macros
       - supports-color
 
-  jest-cli@29.7.0(@types/node@20.19.33):
+  jest-cli@29.7.0(@types/node@22.19.11):
     dependencies:
       '@jest/core': 29.7.0
       '@jest/test-result': 29.7.0
       '@jest/types': 29.6.3
       chalk: 4.1.2
-      create-jest: 29.7.0(@types/node@20.19.33)
+      create-jest: 29.7.0(@types/node@22.19.11)
       exit: 0.1.2
       import-local: 3.2.0
-      jest-config: 29.7.0(@types/node@20.19.33)
+      jest-config: 29.7.0(@types/node@22.19.11)
       jest-util: 29.7.0
       jest-validate: 29.7.0
       yargs: 17.7.2
@@ -13142,7 +13174,7 @@ snapshots:
       - supports-color
       - ts-node
 
-  jest-config@29.7.0(@types/node@20.19.33):
+  jest-config@29.7.0(@types/node@22.19.11):
     dependencies:
       '@babel/core': 7.29.0
       '@jest/test-sequencer': 29.7.0
@@ -13167,7 +13199,7 @@ snapshots:
       slash: 3.0.0
       strip-json-comments: 3.1.1
     optionalDependencies:
-      '@types/node': 20.19.33
+      '@types/node': 22.19.11
     transitivePeerDependencies:
       - babel-plugin-macros
       - supports-color
@@ -13197,7 +13229,7 @@ snapshots:
       '@jest/fake-timers': 29.7.0
       '@jest/types': 29.6.3
       '@types/jsdom': 20.0.1
-      '@types/node': 20.19.33
+      '@types/node': 22.19.11
       jest-mock: 29.7.0
       jest-util: 29.7.0
       jsdom: 20.0.3
@@ -13211,11 +13243,11 @@ snapshots:
       '@jest/environment': 29.7.0
       '@jest/fake-timers': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 20.19.33
+      '@types/node': 22.19.11
       jest-mock: 29.7.0
       jest-util: 29.7.0
 
-  jest-expo@54.0.17(@babel/core@7.29.0)(expo@54.0.33(@babel/core@7.29.0)(@expo/metro-runtime@6.1.2)(react-native@0.81.5(@babel/core@7.29.0)(@types/react@19.1.17)(react@19.1.0))(react@19.1.0))(jest@29.7.0(@types/node@20.19.33))(react-native@0.81.5(@babel/core@7.29.0)(@types/react@19.1.17)(react@19.1.0))(react@19.1.0):
+  jest-expo@54.0.17(@babel/core@7.29.0)(expo@54.0.33(@babel/core@7.29.0)(@expo/metro-runtime@6.1.2)(react-native@0.81.5(@babel/core@7.29.0)(@types/react@19.1.17)(react@19.1.0))(react@19.1.0))(jest@29.7.0(@types/node@22.19.11))(react-native@0.81.5(@babel/core@7.29.0)(@types/react@19.1.17)(react@19.1.0))(react@19.1.0):
     dependencies:
       '@expo/config': 12.0.13
       '@expo/json-file': 10.0.8
@@ -13226,7 +13258,7 @@ snapshots:
       jest-environment-jsdom: 29.7.0
       jest-snapshot: 29.7.0
       jest-watch-select-projects: 2.0.0
-      jest-watch-typeahead: 2.2.1(jest@29.7.0(@types/node@20.19.33))
+      jest-watch-typeahead: 2.2.1(jest@29.7.0(@types/node@22.19.11))
       json5: 2.2.3
       lodash: 4.17.23
       react-native: 0.81.5(@babel/core@7.29.0)(@types/react@19.1.17)(react@19.1.0)
@@ -13248,7 +13280,7 @@ snapshots:
     dependencies:
       '@jest/types': 29.6.3
       '@types/graceful-fs': 4.1.9
-      '@types/node': 20.19.33
+      '@types/node': 22.19.11
       anymatch: 3.1.3
       fb-watchman: 2.0.2
       graceful-fs: 4.2.11
@@ -13287,7 +13319,7 @@ snapshots:
   jest-mock@29.7.0:
     dependencies:
       '@jest/types': 29.6.3
-      '@types/node': 20.19.33
+      '@types/node': 22.19.11
       jest-util: 29.7.0
 
   jest-pnp-resolver@1.2.3(jest-resolve@29.7.0):
@@ -13322,7 +13354,7 @@ snapshots:
       '@jest/test-result': 29.7.0
       '@jest/transform': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 20.19.33
+      '@types/node': 22.19.11
       chalk: 4.1.2
       emittery: 0.13.1
       graceful-fs: 4.2.11
@@ -13350,7 +13382,7 @@ snapshots:
       '@jest/test-result': 29.7.0
       '@jest/transform': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 20.19.33
+      '@types/node': 22.19.11
       chalk: 4.1.2
       cjs-module-lexer: 1.4.3
       collect-v8-coverage: 1.0.3
@@ -13396,7 +13428,7 @@ snapshots:
   jest-util@29.7.0:
     dependencies:
       '@jest/types': 29.6.3
-      '@types/node': 20.19.33
+      '@types/node': 22.19.11
       chalk: 4.1.2
       ci-info: 3.9.0
       graceful-fs: 4.2.11
@@ -13417,11 +13449,11 @@ snapshots:
       chalk: 3.0.0
       prompts: 2.4.2
 
-  jest-watch-typeahead@2.2.1(jest@29.7.0(@types/node@20.19.33)):
+  jest-watch-typeahead@2.2.1(jest@29.7.0(@types/node@22.19.11)):
     dependencies:
       ansi-escapes: 6.2.1
       chalk: 4.1.2
-      jest: 29.7.0(@types/node@20.19.33)
+      jest: 29.7.0(@types/node@22.19.11)
       jest-regex-util: 29.6.3
       jest-watcher: 29.7.0
       slash: 5.1.0
@@ -13432,7 +13464,7 @@ snapshots:
     dependencies:
       '@jest/test-result': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 20.19.33
+      '@types/node': 22.19.11
       ansi-escapes: 4.3.2
       chalk: 4.1.2
       emittery: 0.13.1
@@ -13441,17 +13473,17 @@ snapshots:
 
   jest-worker@29.7.0:
     dependencies:
-      '@types/node': 20.19.33
+      '@types/node': 22.19.11
       jest-util: 29.7.0
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
-  jest@29.7.0(@types/node@20.19.33):
+  jest@29.7.0(@types/node@22.19.11):
     dependencies:
       '@jest/core': 29.7.0
       '@jest/types': 29.6.3
       import-local: 3.2.0
-      jest-cli: 29.7.0(@types/node@20.19.33)
+      jest-cli: 29.7.0(@types/node@22.19.11)
     transitivePeerDependencies:
       - '@types/node'
       - babel-plugin-macros
@@ -14508,7 +14540,7 @@ snapshots:
       '@protobufjs/path': 1.1.2
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
-      '@types/node': 20.19.33
+      '@types/node': 22.19.11
       long: 5.3.2
 
   proxy-addr@2.0.7:
@@ -15561,13 +15593,13 @@ snapshots:
       extsprintf: 1.4.1
     optional: true
 
-  vite-node@1.6.0(@types/node@20.19.33)(lightningcss@1.31.1)(terser@5.46.0):
+  vite-node@1.6.0(@types/node@22.19.11)(lightningcss@1.31.1)(terser@5.46.0):
     dependencies:
       cac: 6.7.14
       debug: 4.4.3
       pathe: 1.1.2
       picocolors: 1.1.1
-      vite: 5.4.21(@types/node@20.19.33)(lightningcss@1.31.1)(terser@5.46.0)
+      vite: 5.4.21(@types/node@22.19.11)(lightningcss@1.31.1)(terser@5.46.0)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -15608,6 +15640,17 @@ snapshots:
       lightningcss: 1.31.1
       terser: 5.46.0
 
+  vite@5.4.21(@types/node@22.19.11)(lightningcss@1.31.1)(terser@5.46.0):
+    dependencies:
+      esbuild: 0.21.5
+      postcss: 8.5.6
+      rollup: 4.57.1
+    optionalDependencies:
+      '@types/node': 22.19.11
+      fsevents: 2.3.3
+      lightningcss: 1.31.1
+      terser: 5.46.0
+
   vite@6.4.1(@types/node@20.19.33)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2):
     dependencies:
       esbuild: 0.25.12
@@ -15642,7 +15685,7 @@ snapshots:
       tsx: 4.21.0
       yaml: 2.8.2
 
-  vitest@1.6.0(@types/node@20.19.33)(jsdom@27.4.0)(lightningcss@1.31.1)(terser@5.46.0):
+  vitest@1.6.0(@types/node@22.19.11)(jsdom@27.4.0)(lightningcss@1.31.1)(terser@5.46.0):
     dependencies:
       '@vitest/expect': 1.6.0
       '@vitest/runner': 1.6.0
@@ -15661,11 +15704,11 @@ snapshots:
       strip-literal: 2.1.1
       tinybench: 2.9.0
       tinypool: 0.8.4
-      vite: 5.4.21(@types/node@20.19.33)(lightningcss@1.31.1)(terser@5.46.0)
-      vite-node: 1.6.0(@types/node@20.19.33)(lightningcss@1.31.1)(terser@5.46.0)
+      vite: 5.4.21(@types/node@22.19.11)(lightningcss@1.31.1)(terser@5.46.0)
+      vite-node: 1.6.0(@types/node@22.19.11)(lightningcss@1.31.1)(terser@5.46.0)
       why-is-node-running: 2.3.0
     optionalDependencies:
-      '@types/node': 20.19.33
+      '@types/node': 22.19.11
       jsdom: 27.4.0
     transitivePeerDependencies:
       - less

@@ -4,19 +4,19 @@
 import { Platform, type ViewStyle } from 'react-native';
 
 // ── Raw Palette ──────────────────────────────────────────────────────
-// Gray-green scale (dark mode foundation, with a subtle green tinge)
+// Cool-neutral scale (dark mode foundation — clean gray with a slight blue cast)
 const grayGreen = {
-  950: '#1A1F1A', // darkest
-  900: '#272E27', // primary dark background
-  800: '#343C34', // secondary dark background
-  700: '#475047', // elevated/tertiary dark background
-  600: '#5C665C', // heavy borders, muted text (dark)
-  500: '#748074', // muted text (dark)
-  400: '#95A095', // secondary text (dark)
-  300: '#B5BDB5', // secondary text (light)
-  200: '#D4DAD4', // borders (light)
-  100: '#E8ECE8', // elevated/tertiary light background
-  50: '#F5F7F5', // secondary light background
+  950: '#171A1E', // darkest
+  900: '#1F2329', // primary dark background
+  800: '#272C35', // secondary dark background
+  700: '#353C48', // elevated/tertiary dark background
+  600: '#475060', // heavy borders, muted text (dark)
+  500: '#626B7A', // muted text (dark)
+  400: '#8A95A8', // secondary text (dark)
+  300: '#B0B8C8', // secondary text (light)
+  200: '#D0D7E4', // borders (light)
+  100: '#E8ECF4', // elevated/tertiary light background
+  50: '#F4F6FA',  // secondary light background
 } as const;
 
 // Neutral scale (for light mode text/borders that need no tinge)

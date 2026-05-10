@@ -183,7 +183,7 @@ export function ProjectSidebar() {
       style={[styles.sidebar, { backgroundColor: colors.bg.secondary }]}
     >
       <View testID="ants-project-sidebar" style={styles.sidebarHeader}>
-        <Text variant="heading" style={styles.sidebarTitle}>Projects</Text>
+        <Text style={[styles.brandWordmark, { color: colors.primary }]}>ants</Text>
         <View style={styles.sidebarHeaderActions}>
           <IconButton testID="ants-sidebar-refresh" icon="refresh" size="sm" variant="ghost" onPress={async () => {
             if (!window.agentBridge) return;
@@ -208,7 +208,7 @@ export function ProjectSidebar() {
               log.error('Failed to refresh projects:', e);
             }
           }} />
-          <IconButton testID="ants-sidebar-new-project" icon="plus" size="sm" onPress={() => setShowProjectSetup(true)} />
+          <IconButton testID="ants-sidebar-new-project" icon="plus" size="sm" variant="default" onPress={() => setShowProjectSetup(true)} />
         </View>
       </View>
 
@@ -325,8 +325,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 12,
   },
-  sidebarTitle: {
-    fontSize: 18,
+  brandWordmark: {
+    fontSize: 20,
+    fontWeight: '700',
+    letterSpacing: 0.5,
   },
   sidebarHeaderActions: {
     flexDirection: 'row',
