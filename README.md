@@ -1,10 +1,12 @@
 # ants
 
-A platform for running and managing colonies of AI coding agents. Think of it as a control plane for AI workers — you dispatch tasks, agents go do the work, and you watch the results come in.
+A self-hostable background agent harness — the open-source version of [Ramp Inspect](https://builders.ramp.com/post/why-we-built-our-background-agent), Stripe Minions, and Shopify River.
+
+You submit a task. A colony of parallel AI workers executes it. Results come back across any interface — desktop, mobile, CLI, or API. No proprietary cloud required.
 
 ## What is this?
 
-You want an AI coding assistant. Maybe several. Running in parallel. On your own hardware, not locked to someone else's cloud.
+The bottleneck in AI coding isn't the LLM — it's the feedback loop. An agent that can write code *and then run tests, check logs, verify visually, and open a PR* is qualitatively different from a chat assistant. That's what ants is built around.
 
 **ants** gives you:
 
@@ -115,6 +117,10 @@ pnpm test                                           # Run all tests
 pnpm dev                                            # Watch mode
 pnpm lint
 ```
+
+## Architecture
+
+See [ARCHITECTURE.md](./ARCHITECTURE.md) for system diagrams, task flow, deployment modes, and a comparison with Ramp Inspect / Stripe Minions / Shopify River.
 
 ## License
 
