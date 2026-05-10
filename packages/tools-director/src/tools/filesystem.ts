@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { defineTool } from "@openmgr/agent-core";
+import { defineTool } from "@ants/agent-core";
 import { getDirectorContext } from "../context.js";
 
 export const browseDirectoryTool = defineTool({
@@ -83,7 +83,7 @@ Each entry includes the name, full path, and whether it is a directory.`,
 
 export const getDefaultProjectsDirectoryTool = defineTool({
   name: "director_get_default_projects_directory",
-  description: `Get the default directory where new projects are created. This is typically "<Documents>/OpenMgr Projects" on desktop or the app's document directory on mobile.
+  description: `Get the default directory where new projects are created. This is typically "<Documents>/Ants Projects" on desktop or the app's document directory on mobile.
 
 Use this to suggest a default location when the user wants to create a project but hasn't specified a path.`,
   parameters: z.object({}),

@@ -1,6 +1,6 @@
 import { spawn } from "child_process";
 import { z } from "zod";
-import { defineTool } from "@openmgr/agent-core";
+import { defineTool } from "@ants/agent-core";
 
 const MAX_OUTPUT_SIZE = 50000;
 

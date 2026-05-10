@@ -82,8 +82,8 @@ export interface PluginSkillSource {
 
 /**
  * UI contributions that a plugin can provide to the app.
- * All `component` fields use `unknown` so that @openmgr/agent-core
- * has no React dependency. The UI layer (@openmgr/ui/plugins) narrows
+ * All `component` fields use `unknown` so that @ants/agent-core
+ * has no React dependency. The UI layer (@ants/ui/plugins) narrows
  * these to `React.ComponentType<...>` at the consumption boundary.
  *
  * Headless consumers (CLI, server) simply ignore the `ui` field.

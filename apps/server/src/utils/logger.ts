@@ -1,5 +1,5 @@
 /**
- * Structured logger for the OpenMgr server.
+ * Structured logger for the Ants server.
  *
  * Usage:
  *   import { createLogger } from './utils/logger.js';

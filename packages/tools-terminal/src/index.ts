@@ -1,7 +1,7 @@
 /**
- * @openmgr/agent-tools-terminal
+ * @ants/agent-tools-terminal
  * 
- * Terminal and filesystem tools for @openmgr/agent.
+ * Terminal and filesystem tools for @ants/agent.
  * These tools require Node.js runtime and cannot run in sandboxed environments.
  * 
  * Included tools:
@@ -17,7 +17,7 @@
  * This allows tools to work with custom filesystem implementations (e.g., React Native).
  */
 
-import type { AgentPlugin } from "@openmgr/agent-core";
+import type { AgentPlugin } from "@ants/agent-core";
 
 // Import tool definitions
 import { bashTool } from "./bash.js";
@@ -57,7 +57,7 @@ export const tools = [
  * Tools in this plugin require these capabilities to function.
  */
 export const toolsTerminalPlugin: AgentPlugin = {
-  name: "@openmgr/agent-tools-terminal",
+  name: "@ants/agent-tools-terminal",
   version: "0.1.0",
   tools: tools as AgentPlugin["tools"],
   capabilities: ["filesystem", "terminal"],

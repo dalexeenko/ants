@@ -182,10 +182,10 @@ export function ProjectSidebar() {
       onCollapsedChange={setLeftSidebarCollapsed}
       style={[styles.sidebar, { backgroundColor: colors.bg.secondary }]}
     >
-      <View testID="openmgr-project-sidebar" style={styles.sidebarHeader}>
+      <View testID="ants-project-sidebar" style={styles.sidebarHeader}>
         <Text variant="heading" style={styles.sidebarTitle}>Projects</Text>
         <View style={styles.sidebarHeaderActions}>
-          <IconButton testID="openmgr-sidebar-refresh" icon="refresh" size="sm" variant="ghost" onPress={async () => {
+          <IconButton testID="ants-sidebar-refresh" icon="refresh" size="sm" variant="ghost" onPress={async () => {
             if (!window.agentBridge) return;
             try {
               const result = await window.agentBridge.syncRemoteProjects();
@@ -208,7 +208,7 @@ export function ProjectSidebar() {
               log.error('Failed to refresh projects:', e);
             }
           }} />
-          <IconButton testID="openmgr-sidebar-new-project" icon="plus" size="sm" onPress={() => setShowProjectSetup(true)} />
+          <IconButton testID="ants-sidebar-new-project" icon="plus" size="sm" onPress={() => setShowProjectSetup(true)} />
         </View>
       </View>
 
@@ -283,7 +283,7 @@ export function ProjectSidebar() {
       <ConfirmDialog
         visible={deleteProjectConfirm.visible}
         title="Remove Project"
-        message={`Are you sure you want to remove "${deleteProjectConfirm.project?.name || 'this project'}" from OpenMgr? The project files will not be deleted.`}
+        message={`Are you sure you want to remove "${deleteProjectConfirm.project?.name || 'this project'}" from Ants? The project files will not be deleted.`}
         confirmText="Remove"
         cancelText="Cancel"
         destructive
@@ -301,7 +301,7 @@ export function ProjectSidebar() {
           openNativeDirectoryPicker={() =>
             platform.openDirectoryDialog?.() ?? Promise.resolve(null)
           }
-          getDefaultProjectsDirectory={documentsPath ? () => `${documentsPath}/OpenMgr Projects` : undefined}
+          getDefaultProjectsDirectory={documentsPath ? () => `${documentsPath}/Ants Projects` : undefined}
           ensureDirectoryExists={async (p) => {
             await platform.ensureDirectoryExists?.(p);
           }}

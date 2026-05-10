@@ -33,22 +33,22 @@ async function main() {
 
   // ── Agent installation check ───────────────────────────────────────
   if (config.autoInstallAgent) {
-    log.info('Checking OpenMgr Agent installation...');
+    log.info('Checking Ants Agent installation...');
     const agentInstalled = await services.agentManager.isInstalled();
 
     if (!agentInstalled) {
-      log.info('OpenMgr Agent not found. Installing...');
+      log.info('Ants Agent not found. Installing...');
       try {
         await services.agentManager.install();
         const agentVersion = await services.agentManager.getVersion();
-        log.info(`OpenMgr Agent installed successfully (${agentVersion})`);
+        log.info(`Ants Agent installed successfully (${agentVersion})`);
       } catch (e) {
-        log.error('Failed to install OpenMgr Agent:', e instanceof Error ? e.message : e);
+        log.error('Failed to install Ants Agent:', e instanceof Error ? e.message : e);
         log.error('Agent features will not be available. Install manually or check your network.');
       }
     } else {
       const agentVersion = await services.agentManager.getVersion();
-      log.info(`OpenMgr Agent found: ${agentVersion}`);
+      log.info(`Ants Agent found: ${agentVersion}`);
     }
   }
 
@@ -134,7 +134,7 @@ async function main() {
   // display the actual bound port (important when config.port is 0).
   const printBanner = (actualPort: number) => {
     banner('');
-    banner('  OpenMgr Remote Server');
+    banner('  Ants Remote Server');
     banner('  =====================');
     banner('');
     banner(`  Server:     http://${config.host}:${actualPort}`);
@@ -170,7 +170,7 @@ async function main() {
         banner('  │  No admin account exists yet.                   │');
         banner('  │  Create one via POST /setup or the web UI.      │');
         if (config.setupToken) {
-          banner('  │  A setup token is required (OPENMGR_SETUP_TOKEN)│');
+          banner('  │  A setup token is required (ANTS_SETUP_TOKEN)│');
         }
         banner('  └─────────────────────────────────────────────────┘');
       } else {

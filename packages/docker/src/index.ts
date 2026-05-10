@@ -1,14 +1,14 @@
 /**
- * @openmgr/agent-docker
+ * @ants/agent-docker
  *
- * Docker container management for OpenMgr agents.
+ * Docker container management for Ants agents.
  *
  * Provides the DockerManager class for managing Docker containers used to
  * sandbox agent sessions. Shared between the server and desktop app.
  *
  * @example
  * ```ts
- * import { DockerManager } from "@openmgr/agent-docker";
+ * import { DockerManager } from "@ants/agent-docker";
  *
  * const docker = new DockerManager(myLogger);
  * const status = await docker.checkAvailability();

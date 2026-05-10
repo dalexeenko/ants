@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { WorktreeManager } from "../manager.js";
 import { ProjectWorktreeManager } from "../project-worktree-manager.js";
 import type { CommandExecutor, WorktreeFilesystem, GitCommandResult, WorktreeMetadata } from "../types.js";
-import type { AgentInterface } from "@openmgr/agent-core";
+import type { AgentInterface } from "@ants/agent-core";
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -72,7 +72,7 @@ function twoWorktreeMetadata(): WorktreeMetadata {
       {
         id: "wt-main-id",
         path: "/repo/.worktrees/wt-main-id",
-        branchName: "openmgr/session-main",
+        branchName: "ants/session-main",
         baseBranch: "main",
         createdAt: "2025-01-01T00:00:00.000Z",
         updatedAt: "2025-01-01T00:00:00.000Z",
@@ -80,7 +80,7 @@ function twoWorktreeMetadata(): WorktreeMetadata {
       {
         id: "wt-feature-id",
         path: "/repo/.worktrees/wt-feature-id",
-        branchName: "openmgr/session-feature",
+        branchName: "ants/session-feature",
         baseBranch: "main",
         sessionId: "session-123",
         createdAt: "2025-01-02T00:00:00.000Z",
@@ -244,7 +244,7 @@ describe("WorktreeManager", () => {
       const worktrees = await manager.list();
       expect(worktrees).toHaveLength(2);
       expect(worktrees[0]!.id).toBe("wt-main-id");
-      expect(worktrees[0]!.branch).toBe("openmgr/session-main");
+      expect(worktrees[0]!.branch).toBe("ants/session-main");
       expect(worktrees[1]!.id).toBe("wt-feature-id");
       expect(worktrees[1]!.sessionId).toBe("session-123");
     });
@@ -286,7 +286,7 @@ describe("WorktreeManager", () => {
         "rev-parse HEAD": ok("deadbeef\n"),
         "symbolic-ref": fail("not found"),
         "show-ref --verify --quiet refs/heads/main": ok(""),
-        "show-ref --verify --quiet refs/heads/openmgr/session-": fail("not found"),
+        "show-ref --verify --quiet refs/heads/ants/session-": fail("not found"),
         "worktree add": ok(""),
       });
       fs = createMockFilesystem();
@@ -366,7 +366,7 @@ describe("WorktreeManager", () => {
       const result = await manager.switch(
         "/repo/.worktrees/wt-feature-id"
       );
-      expect(result.branch).toBe("openmgr/session-feature");
+      expect(result.branch).toBe("ants/session-feature");
       expect(agent.getWorkingDirectory()).toBe(
         "/repo/.worktrees/wt-feature-id"
       );
@@ -442,7 +442,7 @@ describe("WorktreeManager", () => {
       const result = await manager.current();
       expect(result).not.toBeNull();
       expect(result!.path).toBe("/repo/.worktrees/wt-feature-id");
-      expect(result!.branch).toBe("openmgr/session-feature");
+      expect(result!.branch).toBe("ants/session-feature");
     });
 
     it("should return worktree when in a subdirectory", async () => {
@@ -547,13 +547,13 @@ describe("ProjectWorktreeManager", () => {
         "rev-parse --show-toplevel": ok("/repo\n"),
         "rev-parse --git-dir": ok(".git\n"),
         "rev-parse HEAD": ok("abc12345\n"),
-        "show-ref --verify --quiet refs/heads/openmgr/my-feature": fail("not found"),
+        "show-ref --verify --quiet refs/heads/ants/my-feature": fail("not found"),
         "branch -m": ok(""),
       });
       manager = new ProjectWorktreeManager(executor, fs);
 
       const result = await manager.renameWorktreeBranch("/repo", "wt-feature-id", "my-feature");
-      expect(result.branch).toBe("openmgr/my-feature");
+      expect(result.branch).toBe("ants/my-feature");
     });
   });
 
@@ -563,7 +563,7 @@ describe("ProjectWorktreeManager", () => {
       expect(wt).not.toBeNull();
       const prompt = manager.getSystemPrompt(wt!);
       expect(prompt).toContain("Git Worktree Mode");
-      expect(prompt).toContain("openmgr/session-feature");
+      expect(prompt).toContain("ants/session-feature");
       expect(prompt).toContain("main");
     });
   });

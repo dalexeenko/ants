@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, type FormEvent, type MouseEvent } fro
 import { useNavigate } from 'react-router-dom';
 import { api } from '../lib/api';
 
-const DEEPLINK_SCHEME = 'openmgr';
+const DEEPLINK_SCHEME = 'ants';
 
 /* ── Types ────────────────────────────────────────────────────── */
 
@@ -297,7 +297,7 @@ export function SettingsPage() {
       <div className="section" data-testid="server-ui-settings-connect">
         <h2 className="section-header">Connect App</h2>
         <p className="section-description">
-          Open this server in the OpenMgr desktop or mobile app.
+          Open this server in the Ants desktop or mobile app.
         </p>
         <div className="card">
           <div className="card-row">
@@ -321,15 +321,15 @@ export function SettingsPage() {
             <div className="card-info">
               <span className="text-muted text-sm">
                 Don't have the app?{' '}
-                <a href="https://apps.apple.com/app/openmgr" target="_blank" rel="noopener noreferrer">
+                <a href="https://apps.apple.com/app/ants" target="_blank" rel="noopener noreferrer">
                   iOS
                 </a>
                 {' / '}
-                <a href="https://play.google.com/store/apps/details?id=com.openmgr" target="_blank" rel="noopener noreferrer">
+                <a href="https://play.google.com/store/apps/details?id=com.ants" target="_blank" rel="noopener noreferrer">
                   Android
                 </a>
                 {' / '}
-                <a href="https://openmgr.dev/download" target="_blank" rel="noopener noreferrer">
+                <a href="https://ants.dev/download" target="_blank" rel="noopener noreferrer">
                   Desktop
                 </a>
               </span>
@@ -378,7 +378,7 @@ export function SettingsPage() {
               <div className="modal" onClick={(e) => e.stopPropagation()}>
                 <h3>Sign In with Anthropic</h3>
                 <p>
-                  This will open Anthropic's website where you can authorize OpenMgr to use
+                  This will open Anthropic's website where you can authorize Ants to use
                   your Claude Pro/Max subscription. You'll need to copy back an authorization code.
                 </p>
                 <div className="modal-actions">
@@ -571,7 +571,7 @@ export function SettingsPage() {
                     type="text"
                     value={installSpec}
                     onChange={(e) => setInstallSpec(e.target.value)}
-                    placeholder="e.g. @openmgr/plugin-example"
+                    placeholder="e.g. @ants/plugin-example"
                     autoFocus
                   />
                 </div>

@@ -12,7 +12,7 @@ export default defineConfig({
   resolve: {
     alias: {
       'react-native': resolve(__dirname, 'node_modules/react-native-web'),
-      '@openmgr/ui': resolve(__dirname, '../ui/src'),
+      '@ants/ui': resolve(__dirname, '../ui/src'),
     },
     extensions: ['.web.tsx', '.web.ts', '.web.js', '.tsx', '.ts', '.js'],
   },

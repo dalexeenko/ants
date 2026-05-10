@@ -8,7 +8,7 @@ import {
   useDirectorStore,
   spacing,
   type AgentBridge,
-} from '@openmgr/ui';
+} from '@ants/ui';
 import { Plus, Trash2, Sparkles, MessageSquare, Clock } from 'lucide-react-native';
 
 interface DirectorScreenProps {
@@ -201,14 +201,14 @@ export function DirectorScreen({ bridge, onOpenDrawer }: DirectorScreenProps) {
   const keyboardOffset = headerHeight + tabBarHeight;
 
   return (
-    <View testID="openmgr-director-screen" style={[styles.container, { backgroundColor: colors.bg.primary }]}>
+    <View testID="ants-director-screen" style={[styles.container, { backgroundColor: colors.bg.primary }]}>
       {/* Header */}
       <View
         style={[styles.header, { backgroundColor: colors.bg.secondary, borderBottomColor: colors.border.light }]}
         onLayout={handleHeaderLayout}
       >
         {onOpenDrawer && (
-          <IconButton testID="openmgr-drawer-toggle" icon="menu" size="md" onPress={onOpenDrawer} />
+          <IconButton testID="ants-drawer-toggle" icon="menu" size="md" onPress={onOpenDrawer} />
         )}
         <Text variant="heading" style={styles.headerTitle}>Director</Text>
         <IconButton

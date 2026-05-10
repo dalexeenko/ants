@@ -34,11 +34,11 @@ export * from './panels';
 export * from './browser';
 
 // NOTE: Platform and Shell are NOT re-exported from the barrel.
-// The Electron main process imports from '@openmgr/ui' for utilities
+// The Electron main process imports from '@ants/ui' for utilities
 // (createLogger, types, etc.). Re-exporting shell/platform here would
 // pull React, react-native-web, and the entire component tree into the
 // main process bundle, crashing it (no DOM in Node.js context).
 //
 // Import platform and shell directly:
-//   import { PlatformProvider, usePlatform } from '@openmgr/ui/src/platform';
-//   import { AppShell } from '@openmgr/ui/src/shell';
+//   import { PlatformProvider, usePlatform } from '@ants/ui/src/platform';
+//   import { AppShell } from '@ants/ui/src/shell';

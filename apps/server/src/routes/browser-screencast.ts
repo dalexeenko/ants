@@ -16,7 +16,7 @@ import { Hono } from 'hono';
 import { timingSafeEqual } from 'crypto';
 import WebSocket from 'ws';
 import type { ProjectManager } from '../services/project-manager.js';
-import type { OpenMgrAgentManager } from '../services/openmgr-agent-manager.js';
+import type { AntsAgentManager } from '../services/ants-agent-manager.js';
 import type { UserManager } from '../services/user-manager.js';
 import { createLogger } from '../utils/logger.js';
 
@@ -24,7 +24,7 @@ const log = createLogger('browser-screencast');
 
 export interface ScreencastRouteDeps {
   projectManager: ProjectManager;
-  agentManager: OpenMgrAgentManager;
+  agentManager: AntsAgentManager;
   upgradeWebSocket: any;
   /** Shared server secret (single-user mode) */
   secret?: string;

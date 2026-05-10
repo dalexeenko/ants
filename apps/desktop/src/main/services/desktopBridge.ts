@@ -1,7 +1,7 @@
 /**
  * DesktopBridge - Electron-specific bridge built on top of BridgeCore.
  *
- * This replaces ProviderRegistry by using the shared BridgeCore from @openmgr/ui
+ * This replaces ProviderRegistry by using the shared BridgeCore from @ants/ui
  * with Electron-specific platform adapters for agent creation, storage, and
  * filesystem. Desktop-only features (MCP, project discovery, sandbox browser,
  * subagents) are added via method overrides after the bridge is created,
@@ -44,7 +44,7 @@ import {
   type DockerStatus,
   type DockerContainerInfo,
   createLogger,
-} from '@openmgr/ui';
+} from '@ants/ui';
 
 const log = createLogger('DesktopBridge');
 
@@ -63,21 +63,21 @@ import {
   toolRegistry,
   providerRegistry as agentProviderRegistry,
   type ToolPermissionConfig as CorePermissionConfig,
-} from '@openmgr/agent-node';
-import { AnthropicOAuthProvider } from '@openmgr/agent-providers';
+} from '@ants/agent-node';
+import { AnthropicOAuthProvider } from '@ants/agent-providers';
 import {
   storagePlugin,
   SessionManager,
-} from '@openmgr/agent-storage';
-import type { DatabaseConnection } from '@openmgr/agent-database-core';
+} from '@ants/agent-storage';
+import type { DatabaseConnection } from '@ants/agent-database-core';
 import type {
   SandboxBrowserController,
-} from '@openmgr/agent-browser-sandbox';
+} from '@ants/agent-browser-sandbox';
 import {
   SubagentManager,
   capabilityRegistry,
   agentTypeRegistry,
-} from '@openmgr/agent-core';
+} from '@ants/agent-core';
 import {
   directorToolsPlugin,
   DIRECTOR_SYSTEM_PROMPT,
@@ -91,8 +91,8 @@ import {
   type DirectorSystemInfo,
   type DirectorAppSettings,
   type NavigationTarget,
-} from '@openmgr/agent-tools-director';
-// @openmgr/agent-memory is loaded via dynamic import() because it depends on
+} from '@ants/agent-tools-director';
+// @ants/agent-memory is loaded via dynamic import() because it depends on
 // @xenova/transformers → onnxruntime-node, which has platform-specific native
 // .node binaries that Rollup cannot bundle. Dynamic import() lets Node resolve
 // the ESM package and its native deps at runtime on any platform.
@@ -100,17 +100,17 @@ let _memoryPlugin: (() => any) | null = null;
 const loadMemoryPlugin = async () => {
   if (_memoryPlugin) return _memoryPlugin;
   try {
-    const mod = await import('@openmgr/agent-memory');
+    const mod = await import('@ants/agent-memory');
     _memoryPlugin = mod.memoryPlugin;
     return _memoryPlugin;
   } catch (e) {
-    log.warn('Failed to load @openmgr/agent-memory (embeddings will be unavailable):', e);
+    log.warn('Failed to load @ants/agent-memory (embeddings will be unavailable):', e);
     return null;
   }
 };
 
 // Debug logging
-const LOG_FILE = '/tmp/openmgr-debug.log';
+const LOG_FILE = '/tmp/ants-debug.log';
 function debugLog(msg: string) {
   const timestamp = new Date().toISOString();
   const line = `[${timestamp}] ${msg}\n`;
@@ -264,10 +264,10 @@ function createDesktopAgentFactory(
 
       log.info(`createAgent projectId=${projectId} workingDirectory=${workingDirectory}`);
 
-      // Ensure .openmgr directory exists
-      const openmgrDir = path.join(workingDirectory, '.openmgr');
-      await fs.mkdir(openmgrDir, { recursive: true });
-      const dbPath = path.join(openmgrDir, 'agent.db');
+      // Ensure .ants directory exists
+      const antsDir = path.join(workingDirectory, '.ants');
+      await fs.mkdir(antsDir, { recursive: true });
+      const dbPath = path.join(antsDir, 'agent.db');
 
       const skillManager = new FilesystemSkillManager(workingDirectory);
 
@@ -379,7 +379,7 @@ function createDesktopAgentFactory(
       const subagentManager = new SubagentManager(agent);
       agent.setExtension('subagentManager', subagentManager);
       capabilityRegistry.register('subagent', {
-        providedBy: '@openmgr/app-electron',
+        providedBy: '@ants/app-electron',
         version: '0.1.0',
       });
       agent.getToolRegistry().reevaluateDeferred();
@@ -647,7 +647,7 @@ export function createDesktopBridge(
       return resolver ? resolver(authConfig) : undefined;
     },
     resolveScreenshotUrl: (projectId, path) =>
-      `openmgr-screenshot://${projectId}/${path}`,
+      `ants-screenshot://${projectId}/${path}`,
     onEvent: (projectId, event) => {
       mainWindow.webContents.send(`project:${projectId}:event`, event);
     },
@@ -1177,7 +1177,7 @@ export function createDesktopBridge(
     // Persist to project config
     const project = (await bridge.listProjects()).find((p) => p.id === projectId);
     if (project) {
-      const configPath = path.join(project.path, '.openmgr', 'config.json');
+      const configPath = path.join(project.path, '.ants', 'config.json');
       let existingConfig: Record<string, unknown> = {};
       try { existingConfig = JSON.parse(await fs.readFile(configPath, 'utf-8')); } catch {}
       if (!existingConfig.mcp) existingConfig.mcp = { servers: {} };
@@ -1393,11 +1393,11 @@ export function createDesktopBridge(
         const projectPath = path.join(directory, entry.name);
 
         let hasGit = false;
-        let hasOpenMgr = false;
+        let hasAnts = false;
         try { await fs.access(path.join(projectPath, '.git')); hasGit = true; } catch {}
-        try { await fs.access(path.join(projectPath, '.openmgr')); hasOpenMgr = true; } catch {}
+        try { await fs.access(path.join(projectPath, '.ants')); hasAnts = true; } catch {}
 
-        if ((hasGit || hasOpenMgr) && !existingPaths.has(projectPath)) {
+        if ((hasGit || hasAnts) && !existingPaths.has(projectPath)) {
           discovered.push({
             id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
             name: entry.name,
@@ -1492,7 +1492,7 @@ export function createDesktopBridge(
       agent.setProvider('anthropic-oauth');
     } else {
       // Register the providers plugin for API-key-based auth
-      const { providersPlugin } = await import('@openmgr/agent-providers');
+      const { providersPlugin } = await import('@ants/agent-providers');
       await agent.use(providersPlugin);
     }
 
@@ -1749,7 +1749,7 @@ export function createDesktopBridge(
       async getDefaultProjectsDirectory() {
         try {
           const documentsPath = app.getPath('documents');
-          return `${documentsPath}/OpenMgr Projects`;
+          return `${documentsPath}/Ants Projects`;
         } catch {
           return null;
         }

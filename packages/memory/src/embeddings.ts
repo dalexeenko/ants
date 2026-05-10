@@ -3,7 +3,7 @@ import { join } from "path";
 import { homedir } from "os";
 import { mkdirSync, existsSync } from "fs";
 
-const MODELS_DIR = join(homedir(), ".config", "openmgr", "models");
+const MODELS_DIR = join(homedir(), ".config", "ants", "models");
 const MODEL_NAME = "Xenova/all-MiniLM-L6-v2";
 const EMBEDDING_DIMENSIONS = 384;
 

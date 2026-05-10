@@ -36,7 +36,7 @@ export class SseMcpClient implements McpClientInterface {
 
     this.client = new Client(
       {
-        name: "openmgr-agent",
+        name: "ants-agent",
         version: "0.1.0",
       },
       {

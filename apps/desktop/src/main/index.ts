@@ -6,7 +6,7 @@ import { SecureStorage } from './services/secureStorage';
 import { BrowserViewManager } from './services/browserViewManager';
 import { setupIpcHandlers } from './ipc';
 import { initAutoUpdater } from './autoUpdater';
-import { createLogger } from '@openmgr/ui';
+import { createLogger } from '@ants/ui';
 
 // Prevent EPIPE errors from crashing the app when stdout/stderr pipes close
 // (e.g., when the parent process or terminal that launched the app goes away).
@@ -40,9 +40,9 @@ console.log('[electron-main] Module loaded, NODE_ENV=' + process.env.NODE_ENV);
 console.log('[electron-main] argv[1]=' + process.argv[1]);
 
 // ============ CDP Remote Debugging ============
-// When OPENMGR_CDP_PORT is set, enable Chrome DevTools Protocol remote debugging
+// When ANTS_CDP_PORT is set, enable Chrome DevTools Protocol remote debugging
 // so external tools (e.g., @playwright/mcp) can connect to the renderer process.
-const cdpPort = process.env.OPENMGR_CDP_PORT;
+const cdpPort = process.env.ANTS_CDP_PORT;
 if (cdpPort) {
   app.commandLine.appendSwitch('remote-debugging-port', cdpPort);
   log.info(`CDP remote debugging enabled on port ${cdpPort}`);
@@ -60,8 +60,8 @@ try {
 
 // ============ Custom Protocol Registration ============
 // Must be called before app.ready to register privileged schemes.
-// This protocol serves screenshot images from project .openmgr/screenshots/ dirs.
-const SCREENSHOT_SCHEME = 'openmgr-screenshot';
+// This protocol serves screenshot images from project .ants/screenshots/ dirs.
+const SCREENSHOT_SCHEME = 'ants-screenshot';
 protocol.registerSchemesAsPrivileged([
   {
     scheme: SCREENSHOT_SCHEME,
@@ -77,7 +77,7 @@ protocol.registerSchemesAsPrivileged([
 
 // ============ Constants ============
 
-const DEEPLINK_SCHEME = 'openmgr';
+const DEEPLINK_SCHEME = 'ants';
 
 // ============ Global State ============
 
@@ -314,11 +314,11 @@ function setupApplicationMenu() {
         { type: 'separator' as const },
         {
           label: 'Documentation',
-          click: () => shell.openExternal('https://openmgr.dev/docs'),
+          click: () => shell.openExternal('https://ants.dev/docs'),
         },
         {
           label: 'Report Issue',
-          click: () => shell.openExternal('https://github.com/openmgr/app/issues'),
+          click: () => shell.openExternal('https://github.com/ants/app/issues'),
         },
       ],
     },
@@ -334,8 +334,8 @@ app.whenReady().then(() => {
   console.log('[electron-main] app is ready');
 
   // ── Register screenshot protocol handler ──────────────────────────
-  // Serves images from <projectDir>/.openmgr/screenshots/<filename>
-  // URL format: openmgr-screenshot://<projectId>/screenshots/<filename>
+  // Serves images from <projectDir>/.ants/screenshots/<filename>
+  // URL format: ants-screenshot://<projectId>/screenshots/<filename>
   // The projectId is resolved to a working directory via the desktop bridge.
   protocol.handle(SCREENSHOT_SCHEME, async (request) => {
     try {
@@ -364,7 +364,7 @@ app.whenReady().then(() => {
         return new Response('Project not found', { status: 404 });
       }
 
-      const filePath = join(project.path, '.openmgr', 'screenshots', filename);
+      const filePath = join(project.path, '.ants', 'screenshots', filename);
       const data = await readFile(filePath);
 
       const ext = filename.split('.').pop() || 'png';
@@ -464,15 +464,15 @@ if (process.env.NODE_ENV !== 'test') {
 /**
  * Handle incoming deeplink URL.
  * Routes:
- * - openmgr://                           → Open app (home)
- * - openmgr://project/:projectId         → Open specific project
- * - openmgr://project/:projectId/session/:sessionId → Open specific session
- * - openmgr://project/:projectId/settings → Open project settings
- * - openmgr://settings                   → Open app settings
- * - openmgr://settings/:section          → Open specific settings section
- * - openmgr://auth/callback?code=...     → OAuth callback
- * - openmgr://connect?url=...            → Connect to remote server
- * - openmgr://open?path=...              → Open local project by path
+ * - ants://                           → Open app (home)
+ * - ants://project/:projectId         → Open specific project
+ * - ants://project/:projectId/session/:sessionId → Open specific session
+ * - ants://project/:projectId/settings → Open project settings
+ * - ants://settings                   → Open app settings
+ * - ants://settings/:section          → Open specific settings section
+ * - ants://auth/callback?code=...     → OAuth callback
+ * - ants://connect?url=...            → Connect to remote server
+ * - ants://open?path=...              → Open local project by path
  */
 function handleDeeplink(url: string) {
   log.info('Received deeplink:', url);

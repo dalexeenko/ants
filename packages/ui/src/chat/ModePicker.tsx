@@ -58,7 +58,7 @@ export function ModePicker({ bridge, projectId, sessionId }: ModePickerProps) {
   if (loading) return null;
 
   return (
-    <View style={[styles.container, { backgroundColor: colors.bg.tertiary, borderColor: colors.border.light }]} testID="openmgr-mode-picker">
+    <View style={[styles.container, { backgroundColor: colors.bg.tertiary, borderColor: colors.border.light }]} testID="ants-mode-picker">
       <Pressable
         style={[
           styles.option,
@@ -66,7 +66,7 @@ export function ModePicker({ bridge, projectId, sessionId }: ModePickerProps) {
           mode === 'plan' && styles.activeOption,
         ]}
         onPress={() => handleModeChange('plan')}
-        testID="openmgr-mode-option-plan"
+        testID="ants-mode-option-plan"
       >
         <Text
           style={[
@@ -84,7 +84,7 @@ export function ModePicker({ bridge, projectId, sessionId }: ModePickerProps) {
           mode === 'build' && styles.activeOption,
         ]}
         onPress={() => handleModeChange('build')}
-        testID="openmgr-mode-option-build"
+        testID="ants-mode-option-build"
       >
         <Text
           style={[

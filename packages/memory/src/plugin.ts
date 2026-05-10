@@ -1,4 +1,4 @@
-import type { AgentPlugin, AgentInterface } from "@openmgr/agent-core";
+import type { AgentPlugin, AgentInterface } from "@ants/agent-core";
 import { memoryTools } from "./tools.js";
 import { MemoryStorage } from "./storage.js";
 import { closeAllMemoryDbs } from "./database.js";
@@ -19,8 +19,8 @@ Use descriptive tags and appropriate scopes when saving memories. The scope shou
  * 
  * @example
  * ```ts
- * import { Agent } from "@openmgr/agent-core";
- * import { memoryPlugin } from "@openmgr/agent-memory";
+ * import { Agent } from "@ants/agent-core";
+ * import { memoryPlugin } from "@ants/agent-memory";
  * 
  * const agent = new Agent({ ... });
  * await agent.use(memoryPlugin());

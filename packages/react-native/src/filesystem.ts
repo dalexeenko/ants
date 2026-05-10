@@ -5,7 +5,7 @@
  * This allows terminal tools (read, write, edit) to work in React Native.
  */
 
-import type { Filesystem, FileStat, DirectoryEntry } from "@openmgr/agent-core";
+import type { Filesystem, FileStat, DirectoryEntry } from "@ants/agent-core";
 
 /**
  * File class instance from expo-file-system

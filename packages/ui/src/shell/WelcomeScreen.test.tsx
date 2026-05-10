@@ -61,18 +61,18 @@ describe('WelcomeScreen', () => {
 
   it('renders the welcome screen with testID', () => {
     render(<WelcomeScreen />);
-    expect(screen.getByTestId('openmgr-welcome-screen')).toBeInTheDocument();
+    expect(screen.getByTestId('ants-welcome-screen')).toBeInTheDocument();
   });
 
   it('renders welcome text', () => {
     render(<WelcomeScreen />);
-    expect(screen.getByText('Welcome to OpenMgr')).toBeInTheDocument();
+    expect(screen.getByText('Welcome to Ants')).toBeInTheDocument();
     expect(screen.getByText('Your AI-powered project assistant')).toBeInTheDocument();
   });
 
   it('renders the New Project button', () => {
     render(<WelcomeScreen />);
-    expect(screen.getByTestId('openmgr-welcome-new-project')).toBeInTheDocument();
+    expect(screen.getByTestId('ants-welcome-new-project')).toBeInTheDocument();
   });
 
   it('shows AuthenticationSection on desktop platform', () => {
@@ -102,7 +102,7 @@ describe('WelcomeScreen', () => {
   it('renders New Project button that is clickable', () => {
     render(<WelcomeScreen />);
 
-    const button = screen.getByTestId('openmgr-welcome-new-project');
+    const button = screen.getByTestId('ants-welcome-new-project');
     expect(button).toBeInTheDocument();
     // Verify it contains the expected text
     expect(button).toHaveTextContent('New Project');

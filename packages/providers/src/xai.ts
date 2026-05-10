@@ -3,7 +3,7 @@
  * Uses OpenAI-compatible API.
  */
 
-import type { LLMProvider, LLMStreamOptions, LLMStreamResult, AuthConfig } from "@openmgr/agent-core";
+import type { LLMProvider, LLMStreamOptions, LLMStreamResult, AuthConfig } from "@ants/agent-core";
 import { OpenAIClient, type OpenAIClientOptions } from "./openai-client.js";
 
 export interface XAIProviderOptions {

@@ -21,7 +21,7 @@ import {
   type AgentBridge,
   createLogger,
   type RemoteServerConfig,
-} from '@openmgr/ui';
+} from '@ants/ui';
 
 const log = createLogger('ProjectSettingsScreen');
 
@@ -457,7 +457,7 @@ export function ProjectSettingsScreen({
             <>
               <View style={{ height: 1, backgroundColor: 'rgba(239, 68, 68, 0.2)', marginVertical: 16 }} />
               <Text style={{ color: colors.text.muted, fontSize: 13, marginBottom: 8 }}>
-                Remove this project from OpenMgr. Project files will not be deleted.
+                Remove this project from Ants. Project files will not be deleted.
               </Text>
               <Button
                 variant="danger"

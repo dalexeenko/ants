@@ -53,7 +53,7 @@ export class UITestServer {
 
   constructor(config: ServerConfig = {}) {
     const testId = randomBytes(8).toString('hex');
-    const tempBase = join(tmpdir(), 'openmgr-ui-e2e', testId);
+    const tempBase = join(tmpdir(), 'ants-ui-e2e', testId);
 
     this.dataDir = join(tempBase, 'data');
     this.workspacesDir = join(tempBase, 'workspaces');
@@ -97,25 +97,25 @@ export class UITestServer {
 
     const env: Record<string, string> = {
       ...process.env as Record<string, string>,
-      OPENMGR_PORT: String(this.config.port),
-      OPENMGR_HOST: this.config.host,
-      OPENMGR_DATA_DIR: this.dataDir,
-      OPENMGR_WORKSPACES_DIR: this.workspacesDir,
-      OPENMGR_ENCRYPTION_KEY: this.encryptionKey,
-      OPENMGR_MOCK_AGENT: this.config.mockAgent ? 'true' : 'false',
+      ANTS_PORT: String(this.config.port),
+      ANTS_HOST: this.config.host,
+      ANTS_DATA_DIR: this.dataDir,
+      ANTS_WORKSPACES_DIR: this.workspacesDir,
+      ANTS_ENCRYPTION_KEY: this.encryptionKey,
+      ANTS_MOCK_AGENT: this.config.mockAgent ? 'true' : 'false',
     };
 
-    // Multi-user mode uses per-user credentials; OPENMGR_SECRET is not
+    // Multi-user mode uses per-user credentials; ANTS_SECRET is not
     // allowed.  In single-user mode we set the secret for bearer auth.
     if (this.config.multiUser) {
-      env.OPENMGR_MULTI_USER = 'true';
+      env.ANTS_MULTI_USER = 'true';
     } else {
-      env.OPENMGR_SECRET = this.secret;
+      env.ANTS_SECRET = this.secret;
     }
 
     // Pass mock responses if configured
     if (this.config.mockResponses.length > 0) {
-      env.OPENMGR_MOCK_RESPONSES = JSON.stringify(this.config.mockResponses);
+      env.ANTS_MOCK_RESPONSES = JSON.stringify(this.config.mockResponses);
     }
 
     return new Promise<ServerInfo>((resolve, reject) => {
@@ -223,7 +223,7 @@ export class UITestServer {
   async cleanup(): Promise<void> {
     await this.stop();
     const tempBase = join(this.dataDir, '..');
-    if (existsSync(tempBase) && tempBase.includes('openmgr-ui-e2e')) {
+    if (existsSync(tempBase) && tempBase.includes('ants-ui-e2e')) {
       rmSync(tempBase, { recursive: true, force: true });
     }
   }
@@ -276,14 +276,14 @@ export class UITestServer {
     }
     // Extract session cookie from Set-Cookie header
     const setCookie = res.headers.getSetCookie?.() ?? [];
-    const sessionCookie = setCookie.find((c: string) => c.startsWith('openmgr_session='));
+    const sessionCookie = setCookie.find((c: string) => c.startsWith('ants_session='));
     if (sessionCookie) {
       // Store just the cookie value part (before the first ;)
       this.sessionCookie = sessionCookie.split(';')[0];
     } else {
       // Fallback: try the raw set-cookie header
       const rawCookie = res.headers.get('set-cookie') ?? '';
-      const match = rawCookie.match(/openmgr_session=[^;]+/);
+      const match = rawCookie.match(/ants_session=[^;]+/);
       if (match) {
         this.sessionCookie = match[0];
       } else {

@@ -1,6 +1,6 @@
 /**
  * Screenshot serving route — serves screenshot image files stored by the
- * storage plugin in <projectDir>/.openmgr/screenshots/.
+ * storage plugin in <projectDir>/.ants/screenshots/.
  */
 
 import { Hono } from 'hono';
@@ -37,7 +37,7 @@ export function createScreenshotRoutes(projectManager: ProjectManager) {
         return c.json({ error: 'Project not found' }, 404);
       }
 
-      const screenshotsDir = join(project.workingDirectory, '.openmgr', 'screenshots');
+      const screenshotsDir = join(project.workingDirectory, '.ants', 'screenshots');
       const filePath = resolve(screenshotsDir, filename);
 
       // Path traversal check

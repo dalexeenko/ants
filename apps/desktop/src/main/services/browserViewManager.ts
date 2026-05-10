@@ -9,7 +9,7 @@
  * giving the user a native, full-fidelity view of what the agent is browsing.
  */
 import { WebContentsView, BrowserWindow } from 'electron';
-import { createLogger } from '@openmgr/ui';
+import { createLogger } from '@ants/ui';
 
 const log = createLogger('BrowserViewManager');
 

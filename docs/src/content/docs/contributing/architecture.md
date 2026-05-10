@@ -1,6 +1,6 @@
 ---
 title: Architecture Deep Dive
-description: Detailed architecture reference for OpenMgr contributors — server internals, agent framework, and cross-platform UI.
+description: Detailed architecture reference for Ants contributors — server internals, agent framework, and cross-platform UI.
 sidebar:
   order: 2
 ---
@@ -105,14 +105,14 @@ React components shared between desktop (react-dom via react-native-web) and mob
 
 - Uses react-native-web for cross-platform primitives
 - Color palette defined in `src/styles/tokens.ts` — single source of truth for all colors
-- Path aliases in desktop (`electron.vite.config.ts`) and mobile (`jest.config.js`) point `@openmgr/ui` to the source directory
+- Path aliases in desktop (`electron.vite.config.ts`) and mobile (`jest.config.js`) point `@ants/ui` to the source directory
 
 ### Server UI (`packages/server-ui/`)
 
 Separate React + Vite SPA for the server's web interface:
 
 - Built to `dist/` and consumed by `apps/server/`
-- Server copies the built UI during build: `cp -r node_modules/@openmgr/server-ui/dist dist/ui`
+- Server copies the built UI during build: `cp -r node_modules/@ants/server-ui/dist dist/ui`
 - Colors are CSS custom properties mirrored from `packages/ui/src/styles/tokens.ts`
 
 ## CI / GitHub Actions

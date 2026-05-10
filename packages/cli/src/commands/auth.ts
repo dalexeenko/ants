@@ -1,8 +1,8 @@
 import type { Command } from "commander";
 import chalk from "chalk";
 import * as readline from "readline";
-import { login, isLoggedIn } from "@openmgr/agent-auth-anthropic";
-import { FileTokenStore } from "@openmgr/agent-node";
+import { login, isLoggedIn } from "@ants/agent-auth-anthropic";
+import { FileTokenStore } from "@ants/agent-node";
 
 // Shared token store instance for the CLI
 const tokenStore = new FileTokenStore();

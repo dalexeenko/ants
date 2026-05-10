@@ -64,7 +64,7 @@ export interface AgentOptions {
   /**
    * Custom config loader implementation.
    * If not provided and skipConfigLoad is false, config loading is skipped.
-   * Use @openmgr/agent-node which provides filesystem-based config loading.
+   * Use @ants/agent-node which provides filesystem-based config loading.
    */
   configLoader?: ConfigLoader;
   /**
@@ -74,14 +74,14 @@ export interface AgentOptions {
   /**
    * Skill manager implementation.
    * If not provided, skills are disabled.
-   * Use @openmgr/agent-node which provides filesystem-based skill loading.
+   * Use @ants/agent-node which provides filesystem-based skill loading.
    */
   skillManager?: SkillManagerInterface;
   mcp?: Record<string, McpServerConfig>;
   /**
    * Factory function for creating MCP clients.
    * Required for stdio transport. If not provided, only SSE transport is supported.
-   * Use @openmgr/agent-node which provides a factory that includes stdio support.
+   * Use @ants/agent-node which provides a factory that includes stdio support.
    */
   mcpClientFactory?: McpClientFactory;
   compaction?: Partial<CompactionConfig>;

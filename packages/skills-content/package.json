@@ -1,7 +1,7 @@
 {
-  "name": "@openmgr/agent-skills-content",
+  "name": "@ants/agent-skills-content",
   "version": "0.1.0",
-  "description": "Default skill content for OpenMgr Agent - platform agnostic",
+  "description": "Default skill content for Ants Agent - platform agnostic",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -23,11 +23,11 @@
     "typescript": "^5.6.0",
     "vitest": "^4.0.18"
   },
-  "keywords": ["openmgr", "agent", "skills", "content"],
+  "keywords": ["ants", "agent", "skills", "content"],
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/openmgr/agent.git",
+    "url": "git+https://github.com/ants/agent.git",
     "directory": "packages/skills-content"
   }
 }

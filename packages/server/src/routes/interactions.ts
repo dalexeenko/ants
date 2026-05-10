@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import type { QuestionResponse, PermissionResponse } from "@openmgr/agent-core";
+import type { QuestionResponse, PermissionResponse } from "@ants/agent-core";
 import type { RouteContext } from "./types.js";
 
 /**

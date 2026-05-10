@@ -13,7 +13,7 @@ describe('Filesystem Routes', () => {
 
   beforeEach(() => {
     // Create temporary test directory
-    testDir = join(tmpdir(), `openmgr-fs-test-${Date.now()}-${Math.random().toString(36).substring(7)}`);
+    testDir = join(tmpdir(), `ants-fs-test-${Date.now()}-${Math.random().toString(36).substring(7)}`);
     mkdirSync(testDir, { recursive: true });
 
     // Create test directory structure

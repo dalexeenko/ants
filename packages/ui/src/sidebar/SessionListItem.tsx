@@ -173,7 +173,7 @@ export function SessionListItem({
 
   const content = (
     <Pressable
-      testID={`openmgr-session-item-${session.id}`}
+      testID={`ants-session-item-${session.id}`}
       ref={itemRef}
       style={[
         styles.container,

@@ -12,7 +12,7 @@
  * - Terminal: terminal-helper
  */
 
-import type { AgentTypeDefinition } from "@openmgr/agent-core";
+import type { AgentTypeDefinition } from "@ants/agent-core";
 
 // ---------------------------------------------------------------------------
 // Coding Family

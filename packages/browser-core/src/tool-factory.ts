@@ -4,13 +4,13 @@
  * Creates browser tools with a configurable prefix and extension key.
  * This allows having separate tool sets for sandbox vs user browser.
  */
-import { defineTool } from "@openmgr/agent-core";
+import { defineTool } from "@ants/agent-core";
 import { z } from "zod";
 import { appendFileSync } from "node:fs";
 import type { BrowserController } from "./types.js";
 
 // Debug logging
-const LOG_FILE = '/tmp/openmgr-debug.log';
+const LOG_FILE = '/tmp/ants-debug.log';
 function debugLog(msg: string) {
   const timestamp = new Date().toISOString();
   const line = `[${timestamp}] [browser-tools] ${msg}\n`;

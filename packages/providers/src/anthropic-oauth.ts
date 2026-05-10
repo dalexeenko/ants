@@ -5,8 +5,8 @@
  * For React Native, pass expo/fetch as the fetch option.
  */
 
-import type { LLMProvider, LLMStreamOptions, LLMStreamResult, LLMStreamChunk, LLMResponse, ToolCall } from "@openmgr/agent-core";
-import { type OAuthTokens, refreshAccessToken, shouldRefreshTokens } from "@openmgr/agent-auth-core";
+import type { LLMProvider, LLMStreamOptions, LLMStreamResult, LLMStreamChunk, LLMResponse, ToolCall } from "@ants/agent-core";
+import { type OAuthTokens, refreshAccessToken, shouldRefreshTokens } from "@ants/agent-auth-core";
 import { parseSSEStream } from "./sse.js";
 
 // ============================================================================
@@ -418,9 +418,9 @@ export class AnthropicOAuthProvider implements LLMProvider {
     // Add user's system prompt if provided, sanitizing any conflicting names
     if (userSystem) {
       const sanitizedSystem = userSystem
-        .replace(/OpenMgr Agent/gi, "Claude Code")
-        .replace(/openmgr-agent/gi, "Claude")
-        .replace(/openmgr/gi, "Claude Code");
+        .replace(/Ants Agent/gi, "Claude Code")
+        .replace(/ants-agent/gi, "Claude")
+        .replace(/ants/gi, "Claude Code");
       
       systemBlocks.push({
         type: "text",

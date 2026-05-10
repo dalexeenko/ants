@@ -14,15 +14,15 @@ describe('loadConfig', () => {
   const originalEnv = { ...process.env };
 
   beforeEach(() => {
-    testDir = join(tmpdir(), `openmgr-config-test-${Date.now()}-${Math.random().toString(36).slice(2)}`);
+    testDir = join(tmpdir(), `ants-config-test-${Date.now()}-${Math.random().toString(36).slice(2)}`);
     dataDir = join(testDir, 'data');
     mkdirSync(testDir, { recursive: true });
     mkdirSync(dataDir, { recursive: true });
 
     // Set required env vars
-    process.env.OPENMGR_ENCRYPTION_KEY = Buffer.from('a'.repeat(32)).toString('base64');
-    process.env.OPENMGR_DATA_DIR = dataDir;
-    process.env.OPENMGR_WORKSPACES_DIR = join(testDir, 'workspaces');
+    process.env.ANTS_ENCRYPTION_KEY = Buffer.from('a'.repeat(32)).toString('base64');
+    process.env.ANTS_DATA_DIR = dataDir;
+    process.env.ANTS_WORKSPACES_DIR = join(testDir, 'workspaces');
 
     // Reset module cache so loadConfig re-reads env
     vi.resetModules();
@@ -32,7 +32,7 @@ describe('loadConfig', () => {
     process.cwd = originalCwd;
     // Restore env
     for (const key of Object.keys(process.env)) {
-      if (key.startsWith('OPENMGR_')) {
+      if (key.startsWith('ANTS_')) {
         delete process.env[key];
       }
     }
@@ -50,7 +50,7 @@ describe('loadConfig', () => {
     }));
 
     // Create a .env file in the "cwd"
-    writeFileSync(join(testDir, '.env'), 'OPENMGR_ENCRYPTION_KEY=ignored');
+    writeFileSync(join(testDir, '.env'), 'ANTS_ENCRYPTION_KEY=ignored');
 
     // Point cwd to testDir
     process.cwd = () => testDir;
@@ -64,7 +64,7 @@ describe('loadConfig', () => {
 
   it('should not write config.json when .env is present in cwd', async () => {
     // Create a .env file in the "cwd"
-    writeFileSync(join(testDir, '.env'), 'OPENMGR_ENCRYPTION_KEY=ignored');
+    writeFileSync(join(testDir, '.env'), 'ANTS_ENCRYPTION_KEY=ignored');
 
     process.cwd = () => testDir;
 
@@ -106,11 +106,11 @@ describe('loadConfig', () => {
     expect(written).toHaveProperty('host');
   });
 
-  it('should parse OPENMGR_ALLOWED_HOSTS from env', async () => {
+  it('should parse ANTS_ALLOWED_HOSTS from env', async () => {
     const noDotEnvDir = join(testDir, 'no-dotenv');
     mkdirSync(noDotEnvDir);
     process.cwd = () => noDotEnvDir;
-    process.env.OPENMGR_ALLOWED_HOSTS = 'example.com, Other.COM ';
+    process.env.ANTS_ALLOWED_HOSTS = 'example.com, Other.COM ';
 
     const { loadConfig } = await import('./config.js');
     const config = loadConfig();
@@ -129,12 +129,12 @@ describe('loadConfig', () => {
     expect(config.allowedHosts).toEqual([]);
   });
 
-  it('should enable multiUser from OPENMGR_MULTI_USER env var', async () => {
+  it('should enable multiUser from ANTS_MULTI_USER env var', async () => {
     writeFileSync(join(testDir, '.env'), '');
     process.cwd = () => testDir;
-    process.env.OPENMGR_MULTI_USER = 'true';
+    process.env.ANTS_MULTI_USER = 'true';
     // Multi-user mode conflicts with explicit secret
-    delete process.env.OPENMGR_SECRET;
+    delete process.env.ANTS_SECRET;
 
     const { loadConfig } = await import('./config.js');
     const config = loadConfig();

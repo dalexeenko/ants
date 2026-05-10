@@ -21,7 +21,7 @@ import {
   type SubagentInfo,
   type QuestionRequest,
   type QuestionResponsePayload,
-} from '@openmgr/ui';
+} from '@ants/ui';
 
 const log = createLogger('ChatScreen');
 

@@ -62,7 +62,7 @@ describe('health routes', () => {
       expect(body.status).toBe('ok');
     });
 
-    it('should not include version when OPENMGR_SERVER_VERSION is not set', async () => {
+    it('should not include version when ANTS_SERVER_VERSION is not set', async () => {
       const app = createApp();
       const res = await app.request('/health');
 
@@ -84,7 +84,7 @@ describe('health routes', () => {
       expect(body.agentInstalled).toBe(true);
     });
 
-    it('should not include version when OPENMGR_SERVER_VERSION is not set', async () => {
+    it('should not include version when ANTS_SERVER_VERSION is not set', async () => {
       const app = createApp();
       const res = await app.request('/info');
 

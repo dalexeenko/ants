@@ -348,7 +348,7 @@ export function AppShell({ registry }: AppShellProps) {
     >
       <UIPluginProvider registry={effectiveRegistry}>
       <ThemeContext.Provider value={theme}>
-        <View testID="openmgr-app" style={[styles.container, { backgroundColor: theme.colors.bg.primary }]}>
+        <View testID="ants-app" style={[styles.container, { backgroundColor: theme.colors.bg.primary }]}>
           {/* Title bar with search */}
           <View 
             style={[
@@ -386,7 +386,7 @@ export function AppShell({ registry }: AppShellProps) {
 
 
             {/* Main content */}
-            <View testID="openmgr-main-content" style={styles.mainContent}>
+            <View testID="ants-main-content" style={styles.mainContent}>
               {activeScreen === 'director' && window.agentBridge ? (
                 <DirectorChatView bridge={window.agentBridge} />
               ) : activeScreen === 'agents' && window.agentBridge ? (

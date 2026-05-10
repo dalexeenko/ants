@@ -74,7 +74,7 @@ describe('Director Bug Fixes', () => {
 
   describe('Bug 2: Director should use a separate database', () => {
     it('Director database path should be distinct from main database', () => {
-      const mainDbPath = 'openmgr.db';
+      const mainDbPath = 'ants.db';
       const directorDbPath = 'director.db';
 
       expect(directorDbPath).not.toBe(mainDbPath);

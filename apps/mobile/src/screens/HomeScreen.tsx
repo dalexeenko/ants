@@ -19,7 +19,7 @@ import {
   type AuthStatus,
   createLogger,
   type RemoteServerConfig,
-} from '@openmgr/ui';
+} from '@ants/ui';
 
 const log = createLogger('HomeScreen');
 
@@ -217,11 +217,11 @@ export function HomeScreen({
   }
 
   return (
-    <View testID="openmgr-home-screen" style={[styles.container, { backgroundColor: colors.bg.primary }]}>
+    <View testID="ants-home-screen" style={[styles.container, { backgroundColor: colors.bg.primary }]}>
       {/* Header */}
       <View style={[styles.header, { borderBottomColor: colors.border.light }]}>
-        <IconButton testID="openmgr-drawer-toggle" icon="menu" size="md" onPress={onOpenDrawer} />
-        <Text variant="title">OpenMgr</Text>
+        <IconButton testID="ants-drawer-toggle" icon="menu" size="md" onPress={onOpenDrawer} />
+        <Text variant="title">Ants</Text>
         <IconButton icon="search" size="md" onPress={onNavigateToSearch} />
       </View>
 

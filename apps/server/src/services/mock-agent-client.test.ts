@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { MockAgentClient } from './openmgr-agent-manager.js';
+import { MockAgentClient } from './ants-agent-manager.js';
 
 describe('MockAgentClient', () => {
   let client: MockAgentClient;

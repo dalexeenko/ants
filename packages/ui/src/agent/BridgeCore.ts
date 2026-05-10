@@ -303,7 +303,7 @@ export interface PlatformSessionManager {
 }
 
 /**
- * OAuth tokens structure (compatible with @openmgr/agent-auth-core).
+ * OAuth tokens structure (compatible with @ants/agent-auth-core).
  */
 export interface OAuthTokens {
   accessToken: string;
@@ -424,7 +424,7 @@ export interface BridgeCoreConfig {
   /**
    * Optional resolver that turns a relative screenshot file path into a
    * displayable URL. Each platform provides its own implementation:
-   * - Desktop: openmgr-screenshot://<projectId>/<path>
+   * - Desktop: ants-screenshot://<projectId>/<path>
    * - Web: /api/beta/projects/<projectId>/<path>
    */
   resolveScreenshotUrl?: (projectId: string, path: string) => string;

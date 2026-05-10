@@ -3,18 +3,18 @@ appId: host.exp.Exponent
 ---
 - launchApp
 - assertVisible:
-    id: "openmgr-home-screen"
+    id: "ants-home-screen"
 
 # Open the drawer
 - tapOn:
-    id: "openmgr-drawer-toggle"
+    id: "ants-drawer-toggle"
 - assertVisible:
-    id: "openmgr-drawer"
+    id: "ants-drawer"
 
 # Tap Agents in the drawer
 - tapOn:
-    id: "openmgr-drawer-agents"
+    id: "ants-drawer-agents"
 
 # Verify we're on the agents screen
 - assertVisible:
-    id: "openmgr-screen-agents"
+    id: "ants-screen-agents"

@@ -1,5 +1,5 @@
 {
-  "name": "@openmgr/agent-browser-sandbox",
+  "name": "@ants/agent-browser-sandbox",
   "version": "0.1.0",
   "description": "Sandbox browser controller using Playwright with bundled Chromium",
   "type": "module",
@@ -20,7 +20,7 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@openmgr/agent-browser-core": "workspace:*",
+    "@ants/agent-browser-core": "workspace:*",
     "playwright": "^1.40.0"
   },
   "devDependencies": {

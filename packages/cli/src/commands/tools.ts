@@ -6,7 +6,7 @@ import {
   loadLocalConfig,
   saveGlobalConfig,
   saveLocalConfig,
-} from "@openmgr/agent-config-xdg";
+} from "@ants/agent-config-xdg";
 
 // ============================================================================
 // Built-in tool definitions (for display purposes)
@@ -19,7 +19,7 @@ interface ToolInfo {
 }
 
 const BUILTIN_TOOLS: ToolInfo[] = [
-  // Platform-agnostic tools (@openmgr/agent-tools)
+  // Platform-agnostic tools (@ants/agent-tools)
   { name: "todoread", description: "Read current todo list", plugin: "agent-tools" },
   { name: "todowrite", description: "Write/update todo list", plugin: "agent-tools" },
   { name: "phaseread", description: "Read current phase", plugin: "agent-tools" },
@@ -32,7 +32,7 @@ const BUILTIN_TOOLS: ToolInfo[] = [
   { name: "task_cancel", description: "Cancel a running subagent task", plugin: "agent-tools" },
   { name: "question", description: "Ask the user a question with options", plugin: "agent-tools" },
 
-  // Terminal/filesystem tools (@openmgr/agent-tools-terminal)
+  // Terminal/filesystem tools (@ants/agent-tools-terminal)
   { name: "bash", description: "Execute shell commands", plugin: "agent-tools-terminal" },
   { name: "read", description: "Read file contents", plugin: "agent-tools-terminal" },
   { name: "write", description: "Write file contents", plugin: "agent-tools-terminal" },

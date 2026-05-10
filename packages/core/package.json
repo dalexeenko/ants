@@ -1,5 +1,5 @@
 {
-  "name": "@openmgr/agent-core",
+  "name": "@ants/agent-core",
   "version": "0.1.0",
   "description": "Core agent framework with plugin system, MCP, skills, and compaction",
   "type": "module",

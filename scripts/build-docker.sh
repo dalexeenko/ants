@@ -6,8 +6,8 @@
 #   ./scripts/build-docker.sh <version>
 #
 # Builds multi-arch images (linux/amd64 + linux/arm64) and pushes to:
-#   - ghcr.io/openmgr/openmgr-server
-#   - openmgr/server (Docker Hub)
+#   - ghcr.io/ants/ants-server
+#   - ants/server (Docker Hub)
 #
 # Prerequisites:
 #   - Docker with buildx support
@@ -30,14 +30,14 @@ VERSION_BARE="${VERSION#v}"
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$REPO_ROOT"
 
-GHCR_IMAGE="ghcr.io/openmgr/openmgr-server"
-DOCKERHUB_IMAGE="openmgr/server"
+GHCR_IMAGE="ghcr.io/ants/ants-server"
+DOCKERHUB_IMAGE="ants/server"
 PLATFORMS="${DOCKER_PLATFORMS:-linux/amd64,linux/arm64}"
 PUSH="${SKIP_PUSH:+--load}"
 PUSH="${PUSH:---push}"
 
 # Ensure buildx builder exists
-BUILDER_NAME="openmgr-release"
+BUILDER_NAME="ants-release"
 if ! docker buildx inspect "$BUILDER_NAME" &>/dev/null; then
   echo "==> Creating buildx builder '${BUILDER_NAME}'..."
   docker buildx create --name "$BUILDER_NAME" --driver docker-container --bootstrap
@@ -75,7 +75,7 @@ build_variant() {
     --platform "$PLATFORMS" \
     --build-arg "VARIANT=${variant}" \
     --build-arg "IMAGE_TAG=${DOCKERHUB_IMAGE}:${VERSION_BARE}${suffix}" \
-    --build-arg "OPENMGR_SERVER_VERSION=${VERSION}" \
+    --build-arg "ANTS_SERVER_VERSION=${VERSION}" \
     ${tags} \
     ${PUSH} \
     .

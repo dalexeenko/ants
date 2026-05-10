@@ -1,10 +1,10 @@
 import { Hono } from 'hono';
 import type { ServerConfig } from '../config.js';
-import type { OpenMgrAgentManager } from '../services/openmgr-agent-manager.js';
+import type { AntsAgentManager } from '../services/ants-agent-manager.js';
 
-const serverVersion = process.env.OPENMGR_SERVER_VERSION || undefined;
+const serverVersion = process.env.ANTS_SERVER_VERSION || undefined;
 
-export function createHealthRoutes(config: ServerConfig, agentManager: OpenMgrAgentManager) {
+export function createHealthRoutes(config: ServerConfig, agentManager: AntsAgentManager) {
   const app = new Hono();
   
   app.get('/health', (c) => {
@@ -42,7 +42,7 @@ export function createHealthRoutes(config: ServerConfig, agentManager: OpenMgrAg
  * This validates the bearer token in addition to checking server reachability,
  * so the app can verify that both the URL and credentials are correct.
  */
-export function createAuthenticatedHealthRoutes(config: ServerConfig, agentManager: OpenMgrAgentManager) {
+export function createAuthenticatedHealthRoutes(config: ServerConfig, agentManager: AntsAgentManager) {
   const app = new Hono();
   
   app.get('/', async (c) => {

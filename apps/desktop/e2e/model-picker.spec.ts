@@ -24,11 +24,11 @@ test.describe.skip('Model Picker', () => {
   });
 
   test('should display the model picker', async () => {
-    await expect(page.getByTestId('openmgr-model-picker')).toBeVisible();
+    await expect(page.getByTestId('ants-model-picker')).toBeVisible();
   });
 
   test('should open dropdown when clicked', async () => {
-    await page.getByTestId('openmgr-model-picker').click();
-    await expect(page.getByTestId('openmgr-model-picker-dropdown')).toBeVisible();
+    await page.getByTestId('ants-model-picker').click();
+    await expect(page.getByTestId('ants-model-picker-dropdown')).toBeVisible();
   });
 });

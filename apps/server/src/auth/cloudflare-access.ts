@@ -4,7 +4,7 @@
  * Validates the `Cf-Access-Jwt-Assertion` header (RS256 JWT) against
  * Cloudflare's JWKS endpoint for the configured team domain.
  *
- * Enabled by setting OPENMGR_CF_ACCESS_TEAM_DOMAIN and OPENMGR_CF_ACCESS_AUD.
+ * Enabled by setting ANTS_CF_ACCESS_TEAM_DOMAIN and ANTS_CF_ACCESS_AUD.
  *
  * @see https://developers.cloudflare.com/cloudflare-one/access-controls/applications/http-apps/authorization-cookie/validating-json/
  */

@@ -8,7 +8,7 @@ import type { ApiKeyManager } from './api-key-manager.js';
 import type { PluginRegistry } from './plugin-registry.js';
 import { AGENT_PORT_RANGE_START, AGENT_PORT_RANGE_END, AGENT_STARTUP_TIMEOUT_MS } from '../constants.js';
 import { MockAgentClient } from './mock-agent-client.js';
-import { OpenMgrAgentClient } from './openmgr-agent-client.js';
+import { AntsAgentClient } from './ants-agent-client.js';
 import { DockerManager, type DockerConfig } from './docker-manager.js';
 import { pathExists } from '../utils/fs.js';
 import { createLogger } from '../utils/logger.js';
@@ -123,7 +123,7 @@ interface AgentServerInfo {
   isDocker: boolean;
 }
 
-export class OpenMgrAgentManager {
+export class AntsAgentManager {
   private config: ServerConfig;
   private apiKeyManager?: ApiKeyManager;
   private pluginRegistry?: PluginRegistry;
@@ -153,7 +153,7 @@ export class OpenMgrAgentManager {
 
     for (let port = AGENT_PORT_RANGE_START; port < AGENT_PORT_RANGE_END; port++) {
       try {
-        const probe = new OpenMgrAgentClient(`http://127.0.0.1:${port}`);
+        const probe = new AntsAgentClient(`http://127.0.0.1:${port}`);
         if (await probe.isHealthy()) {
           log.info(`Found orphaned agent server on port ${port}, shutting it down`);
           try {
@@ -229,14 +229,14 @@ export class OpenMgrAgentManager {
     
     // Check for global installation
     try {
-      const { stdout } = await execFileAsync('which', ['openmgr-agent']);
+      const { stdout } = await execFileAsync('which', ['ants-agent']);
       return stdout.trim();
     } catch {
       // Check for npm global installation
       try {
         const { stdout } = await execFileAsync('npm', ['root', '-g']);
         const npmPath = stdout.trim();
-        const globalAgentPath = join(npmPath, '@openmgr', 'agent', 'dist', 'cli.js');
+        const globalAgentPath = join(npmPath, '@ants', 'agent', 'dist', 'cli.js');
         if (await pathExists(globalAgentPath)) {
           return `node ${globalAgentPath}`;
         }
@@ -244,7 +244,7 @@ export class OpenMgrAgentManager {
         // Ignore
       }
       
-      throw new Error('OpenMgr Agent not found. Build the monorepo with: pnpm build');
+      throw new Error('Ants Agent not found. Build the monorepo with: pnpm build');
     }
   }
   
@@ -276,7 +276,7 @@ export class OpenMgrAgentManager {
     if (await pathExists(pnpmWorkspace)) {
       log.info('Detected monorepo environment, building CLI package...');
       return new Promise((resolve, reject) => {
-        const proc = spawn('pnpm', ['turbo', 'build', '--filter=@openmgr/agent-cli'], {
+        const proc = spawn('pnpm', ['turbo', 'build', '--filter=@ants/agent-cli'], {
           cwd: monorepoRoot,
           stdio: 'inherit',
         });
@@ -293,7 +293,7 @@ export class OpenMgrAgentManager {
 
     // Outside monorepo: install from npm
     return new Promise((resolve, reject) => {
-      const proc = spawn('npm', ['install', '-g', '@openmgr/agent'], {
+      const proc = spawn('npm', ['install', '-g', '@ants/agent'], {
         stdio: 'inherit',
       });
       proc.on('close', (code) => {
@@ -314,7 +314,7 @@ export class OpenMgrAgentManager {
   }
   
   async writeAgentConfig(workingDirectory: string, agentConfig: AgentConfig): Promise<void> {
-    const configPath = join(workingDirectory, '.openmgr.json');
+    const configPath = join(workingDirectory, '.ants.json');
     const config: Record<string, unknown> = {};
     
     if (agentConfig.provider) {
@@ -346,7 +346,7 @@ export class OpenMgrAgentManager {
   }
   
   async readAgentConfig(workingDirectory: string): Promise<AgentConfig | undefined> {
-    const configPath = join(workingDirectory, '.openmgr.json');
+    const configPath = join(workingDirectory, '.ants.json');
     if (!await pathExists(configPath)) {
       return undefined;
     }
@@ -422,7 +422,7 @@ export class OpenMgrAgentManager {
     
     const clientUrl = `http://127.0.0.1:${port}`;
     log.debug(`Creating client for: ${clientUrl}`);
-    const client = new OpenMgrAgentClient(clientUrl);
+    const client = new AntsAgentClient(clientUrl);
     
     this.servers.set(workingDirectory, { port, process: proc, client, isMock: false, isDocker: false });
     
@@ -501,7 +501,7 @@ export class OpenMgrAgentManager {
     
     proc.kill();
     this.servers.delete(workingDirectory);
-    throw new Error(`Failed to start OpenMgr Agent server: ${startupOutput}`);
+    throw new Error(`Failed to start Ants Agent server: ${startupOutput}`);
   }
 
   /**
@@ -539,7 +539,7 @@ export class OpenMgrAgentManager {
 
     const clientUrl = `http://127.0.0.1:${port}`;
     log.debug(`Creating client for Docker container: ${clientUrl}`);
-    const client = new OpenMgrAgentClient(clientUrl);
+    const client = new AntsAgentClient(clientUrl);
 
     this.servers.set(workingDirectory, {
       port,
@@ -660,5 +660,5 @@ export class OpenMgrAgentManager {
   }
 }
 
-export { OpenMgrAgentClient } from './openmgr-agent-client.js';
+export { AntsAgentClient } from './ants-agent-client.js';
 export { MockAgentClient } from './mock-agent-client.js';

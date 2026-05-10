@@ -14,8 +14,8 @@ import {
 } from "../index.js";
 
 // Use a temp directory for tests
-const TEST_DIR = join(tmpdir(), "openmgr-skills-loader-test-" + Date.now() + "-" + Math.random().toString(36).slice(2));
-const TEST_SKILLS_DIR = join(TEST_DIR, ".openmgr", "skills");
+const TEST_DIR = join(tmpdir(), "ants-skills-loader-test-" + Date.now() + "-" + Math.random().toString(36).slice(2));
+const TEST_SKILLS_DIR = join(TEST_DIR, ".ants", "skills");
 
 const VALID_SKILL_MD = `---
 name: test-skill
@@ -41,7 +41,7 @@ description: Minimal skill
 Instructions here.
 `;
 
-describe("@openmgr/agent-skills-loader", () => {
+describe("@ants/agent-skills-loader", () => {
   beforeEach(async () => {
     await mkdir(TEST_SKILLS_DIR, { recursive: true });
   });
@@ -219,8 +219,8 @@ Content
     it("should return correct paths", () => {
       const paths = getSkillPaths("/project");
 
-      expect(paths.local).toBe("/project/.openmgr/skills");
-      expect(paths.global).toBe(join(homedir(), ".config", "openmgr", "skills"));
+      expect(paths.local).toBe("/project/.ants/skills");
+      expect(paths.global).toBe(join(homedir(), ".config", "ants", "skills"));
       expect(paths.bundled).toBeDefined();
       expect(paths.additionalBundled).toEqual([]);
     });

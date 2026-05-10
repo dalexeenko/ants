@@ -5,12 +5,12 @@ import type { ServerConfig } from '../config.js';
 /**
  * Tests for the server version in health endpoints.
  *
- * The version is resolved at module load time from OPENMGR_SERVER_VERSION,
+ * The version is resolved at module load time from ANTS_SERVER_VERSION,
  * so we set the env var BEFORE re-importing the module.
  */
-describe('health routes with OPENMGR_SERVER_VERSION set', () => {
+describe('health routes with ANTS_SERVER_VERSION set', () => {
   const TEST_VERSION = 'v1.2.3';
-  const originalEnv = process.env.OPENMGR_SERVER_VERSION;
+  const originalEnv = process.env.ANTS_SERVER_VERSION;
 
   const mockConfig = {
     secret: 'test-secret',
@@ -35,7 +35,7 @@ describe('health routes with OPENMGR_SERVER_VERSION set', () => {
   let createAuthenticatedHealthRoutes: typeof import('./health.js').createAuthenticatedHealthRoutes;
 
   beforeAll(async () => {
-    process.env.OPENMGR_SERVER_VERSION = TEST_VERSION;
+    process.env.ANTS_SERVER_VERSION = TEST_VERSION;
     vi.resetModules();
     const mod = await vi.importActual<typeof import('./health.js')>('./health.js');
     createHealthRoutes = mod.createHealthRoutes;
@@ -44,9 +44,9 @@ describe('health routes with OPENMGR_SERVER_VERSION set', () => {
 
   afterAll(() => {
     if (originalEnv === undefined) {
-      delete process.env.OPENMGR_SERVER_VERSION;
+      delete process.env.ANTS_SERVER_VERSION;
     } else {
-      process.env.OPENMGR_SERVER_VERSION = originalEnv;
+      process.env.ANTS_SERVER_VERSION = originalEnv;
     }
     vi.resetModules();
   });

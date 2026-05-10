@@ -6,7 +6,7 @@
 // Server defaults
 // =============================================================================
 
-/** Default HTTP port for the OpenMgr server */
+/** Default HTTP port for the Ants server */
 export const DEFAULT_PORT = 6647;
 
 /** Default bind address */

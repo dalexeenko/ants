@@ -349,7 +349,7 @@ export function AgentsPanel({ bridge, onBack }: AgentsPanelProps) {
 
   // ---- List screen ----
   return (
-    <View testID="openmgr-agents-panel" style={[styles.container, { backgroundColor: colors.bg.primary }]}>
+    <View testID="ants-agents-panel" style={[styles.container, { backgroundColor: colors.bg.primary }]}>
       {/* Header */}
       <View style={[styles.header, { borderBottomColor: colors.border.light }]}>
         {onBack && (

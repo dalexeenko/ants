@@ -172,7 +172,7 @@ describe('auth routes', () => {
 
       expect(res.status).toBe(200);
       const setCookie = res.headers.get('set-cookie');
-      expect(setCookie).toContain('openmgr_session=');
+      expect(setCookie).toContain('ants_session=');
     });
 
     it('should reject login with wrong password', async () => {
@@ -220,7 +220,7 @@ describe('auth routes', () => {
         body: JSON.stringify({ username: 'admin', password: 'password123' }),
       });
       const setCookieHeader = res.headers.get('set-cookie')!;
-      // Extract just the cookie value (e.g. "openmgr_session=abc123; Path=/; ...")
+      // Extract just the cookie value (e.g. "ants_session=abc123; Path=/; ...")
       return setCookieHeader.split(';')[0];
     }
 
@@ -285,7 +285,7 @@ describe('auth routes', () => {
       const tokenRes = await app.request('/auth/token', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ code, redirect_uri: 'openmgr://connect' }),
+        body: JSON.stringify({ code, redirect_uri: 'ants://connect' }),
       });
 
       expect(tokenRes.status).toBe(200);
@@ -310,7 +310,7 @@ describe('auth routes', () => {
       const tokenRes1 = await app.request('/auth/token', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ code, redirect_uri: 'openmgr://connect' }),
+        body: JSON.stringify({ code, redirect_uri: 'ants://connect' }),
       });
       expect(tokenRes1.status).toBe(200);
 
@@ -318,7 +318,7 @@ describe('auth routes', () => {
       const tokenRes2 = await app.request('/auth/token', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ code, redirect_uri: 'openmgr://connect' }),
+        body: JSON.stringify({ code, redirect_uri: 'ants://connect' }),
       });
       expect(tokenRes2.status).toBe(400);
     });
@@ -337,7 +337,7 @@ describe('auth routes', () => {
       const tokenRes = await app.request('/auth/token', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ code, redirect_uri: 'openmgr://auth/callback' }),
+        body: JSON.stringify({ code, redirect_uri: 'ants://auth/callback' }),
       });
       expect(tokenRes.status).toBe(400);
     });

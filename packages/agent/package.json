@@ -1,12 +1,12 @@
 {
-  "name": "@openmgr/agent",
+  "name": "@ants/agent",
   "version": "0.1.0",
-  "description": "OpenMgr Agent - AI coding assistant with batteries included",
+  "description": "Ants Agent - AI coding assistant with batteries included",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "bin": {
-    "openmgr-agent": "./dist/bin.js",
+    "ants-agent": "./dist/bin.js",
     "oa": "./dist/bin.js"
   },
   "exports": {
@@ -17,76 +17,76 @@
       "default": "./dist/index.js"
     },
     "./core": {
-      "types": "./node_modules/@openmgr/agent-core/dist/index.d.ts",
-      "import": "@openmgr/agent-core",
-      "require": "@openmgr/agent-core",
-      "default": "@openmgr/agent-core"
+      "types": "./node_modules/@ants/agent-core/dist/index.d.ts",
+      "import": "@ants/agent-core",
+      "require": "@ants/agent-core",
+      "default": "@ants/agent-core"
     },
     "./providers": {
-      "types": "./node_modules/@openmgr/agent-providers/dist/index.d.ts",
-      "import": "@openmgr/agent-providers",
-      "require": "@openmgr/agent-providers",
-      "default": "@openmgr/agent-providers"
+      "types": "./node_modules/@ants/agent-providers/dist/index.d.ts",
+      "import": "@ants/agent-providers",
+      "require": "@ants/agent-providers",
+      "default": "@ants/agent-providers"
     },
     "./tools": {
-      "types": "./node_modules/@openmgr/agent-tools/dist/index.d.ts",
-      "import": "@openmgr/agent-tools",
-      "require": "@openmgr/agent-tools",
-      "default": "@openmgr/agent-tools"
+      "types": "./node_modules/@ants/agent-tools/dist/index.d.ts",
+      "import": "@ants/agent-tools",
+      "require": "@ants/agent-tools",
+      "default": "@ants/agent-tools"
     },
     "./tools-terminal": {
-      "types": "./node_modules/@openmgr/agent-tools-terminal/dist/index.d.ts",
-      "import": "@openmgr/agent-tools-terminal",
-      "require": "@openmgr/agent-tools-terminal",
-      "default": "@openmgr/agent-tools-terminal"
+      "types": "./node_modules/@ants/agent-tools-terminal/dist/index.d.ts",
+      "import": "@ants/agent-tools-terminal",
+      "require": "@ants/agent-tools-terminal",
+      "default": "@ants/agent-tools-terminal"
     },
     "./storage": {
-      "types": "./node_modules/@openmgr/agent-storage/dist/index.d.ts",
-      "import": "@openmgr/agent-storage",
-      "require": "@openmgr/agent-storage",
-      "default": "@openmgr/agent-storage"
+      "types": "./node_modules/@ants/agent-storage/dist/index.d.ts",
+      "import": "@ants/agent-storage",
+      "require": "@ants/agent-storage",
+      "default": "@ants/agent-storage"
     },
     "./memory": {
-      "types": "./node_modules/@openmgr/agent-memory/dist/index.d.ts",
-      "import": "@openmgr/agent-memory",
-      "require": "@openmgr/agent-memory",
-      "default": "@openmgr/agent-memory"
+      "types": "./node_modules/@ants/agent-memory/dist/index.d.ts",
+      "import": "@ants/agent-memory",
+      "require": "@ants/agent-memory",
+      "default": "@ants/agent-memory"
     },
     "./auth-anthropic": {
-      "types": "./node_modules/@openmgr/agent-auth-anthropic/dist/index.d.ts",
-      "import": "@openmgr/agent-auth-anthropic",
-      "require": "@openmgr/agent-auth-anthropic",
-      "default": "@openmgr/agent-auth-anthropic"
+      "types": "./node_modules/@ants/agent-auth-anthropic/dist/index.d.ts",
+      "import": "@ants/agent-auth-anthropic",
+      "require": "@ants/agent-auth-anthropic",
+      "default": "@ants/agent-auth-anthropic"
     },
     "./skills-loader": {
-      "types": "./node_modules/@openmgr/agent-skills-loader/dist/index.d.ts",
-      "import": "@openmgr/agent-skills-loader",
-      "require": "@openmgr/agent-skills-loader",
-      "default": "@openmgr/agent-skills-loader"
+      "types": "./node_modules/@ants/agent-skills-loader/dist/index.d.ts",
+      "import": "@ants/agent-skills-loader",
+      "require": "@ants/agent-skills-loader",
+      "default": "@ants/agent-skills-loader"
     },
     "./lsp": {
-      "types": "./node_modules/@openmgr/agent-lsp/dist/index.d.ts",
-      "import": "@openmgr/agent-lsp",
-      "require": "@openmgr/agent-lsp",
-      "default": "@openmgr/agent-lsp"
+      "types": "./node_modules/@ants/agent-lsp/dist/index.d.ts",
+      "import": "@ants/agent-lsp",
+      "require": "@ants/agent-lsp",
+      "default": "@ants/agent-lsp"
     },
     "./server": {
-      "types": "./node_modules/@openmgr/agent-server/dist/index.d.ts",
-      "import": "@openmgr/agent-server",
-      "require": "@openmgr/agent-server",
-      "default": "@openmgr/agent-server"
+      "types": "./node_modules/@ants/agent-server/dist/index.d.ts",
+      "import": "@ants/agent-server",
+      "require": "@ants/agent-server",
+      "default": "@ants/agent-server"
     },
     "./cli": {
-      "types": "./node_modules/@openmgr/agent-cli/dist/index.d.ts",
-      "import": "@openmgr/agent-cli",
-      "require": "@openmgr/agent-cli",
-      "default": "@openmgr/agent-cli"
+      "types": "./node_modules/@ants/agent-cli/dist/index.d.ts",
+      "import": "@ants/agent-cli",
+      "require": "@ants/agent-cli",
+      "default": "@ants/agent-cli"
     },
     "./database": {
-      "types": "./node_modules/@openmgr/agent-database/dist/index.d.ts",
-      "import": "@openmgr/agent-database",
-      "require": "@openmgr/agent-database",
-      "default": "@openmgr/agent-database"
+      "types": "./node_modules/@ants/agent-database/dist/index.d.ts",
+      "import": "@ants/agent-database",
+      "require": "@ants/agent-database",
+      "default": "@ants/agent-database"
     }
   },
   "scripts": {
@@ -95,19 +95,19 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@openmgr/agent-core": "workspace:*",
-    "@openmgr/agent-providers": "workspace:*",
-    "@openmgr/agent-tools": "workspace:*",
-    "@openmgr/agent-tools-terminal": "workspace:*",
-    "@openmgr/agent-database": "workspace:*",
-    "@openmgr/agent-storage": "workspace:*",
-    "@openmgr/agent-memory": "workspace:*",
-    "@openmgr/agent-auth-anthropic": "workspace:*",
-    "@openmgr/agent-auth-core": "workspace:*",
-    "@openmgr/agent-skills-loader": "workspace:*",
-    "@openmgr/agent-lsp": "workspace:*",
-    "@openmgr/agent-server": "workspace:*",
-    "@openmgr/agent-cli": "workspace:*"
+    "@ants/agent-core": "workspace:*",
+    "@ants/agent-providers": "workspace:*",
+    "@ants/agent-tools": "workspace:*",
+    "@ants/agent-tools-terminal": "workspace:*",
+    "@ants/agent-database": "workspace:*",
+    "@ants/agent-storage": "workspace:*",
+    "@ants/agent-memory": "workspace:*",
+    "@ants/agent-auth-anthropic": "workspace:*",
+    "@ants/agent-auth-core": "workspace:*",
+    "@ants/agent-skills-loader": "workspace:*",
+    "@ants/agent-lsp": "workspace:*",
+    "@ants/agent-server": "workspace:*",
+    "@ants/agent-cli": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^22.19.7",

@@ -124,13 +124,13 @@ export function createNotificationRoutes(pushService: PushNotificationService) {
       const body = await parseBodyOptional(c, TestNotificationSchema, {});
 
       const result = await pushService.notify('test', {
-        title: body.title || 'OpenMgr Test Notification',
-        body: body.body || 'This is a test push notification from your OpenMgr server.',
+        title: body.title || 'Ants Test Notification',
+        body: body.body || 'This is a test push notification from your Ants server.',
         tag: 'test',
         data: {
           deeplink: body.projectId
-            ? `openmgr://projects/${body.projectId}`
-            : 'openmgr://notifications',
+            ? `ants://projects/${body.projectId}`
+            : 'ants://notifications',
           type: 'test',
           projectId: body.projectId,
         },

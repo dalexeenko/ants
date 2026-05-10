@@ -1,7 +1,7 @@
 /**
- * @openmgr/agent-auth-react-native
+ * @ants/agent-auth-react-native
  *
- * React Native OAuth authentication for OpenMgr Agent using Expo libraries.
+ * React Native OAuth authentication for Ants Agent using Expo libraries.
  *
  * This package provides:
  * - SecureTokenStore: Token storage using expo-secure-store
@@ -11,7 +11,7 @@
  *
  * @example
  * ```typescript
- * import { createExpoOAuthHandler } from "@openmgr/agent-auth-react-native";
+ * import { createExpoOAuthHandler } from "@ants/agent-auth-react-native";
  * import * as AuthSession from "expo-auth-session";
  * import * as Crypto from "expo-crypto";
  * import * as SecureStore from "expo-secure-store";
@@ -38,7 +38,7 @@ import type {
   OAuthTokenStore,
   PKCEUtils,
   OAuthFlowHandler,
-} from "@openmgr/agent-auth-core";
+} from "@ants/agent-auth-core";
 import {
   ANTHROPIC_OAUTH_CONFIG,
   buildAuthorizationUrl,
@@ -47,7 +47,7 @@ import {
   shouldRefreshTokens,
   base64UrlEncode,
   base64ToBase64Url,
-} from "@openmgr/agent-auth-core";
+} from "@ants/agent-auth-core";
 
 // Re-export types from core
 export type {
@@ -55,14 +55,14 @@ export type {
   OAuthTokenStore,
   PKCEUtils,
   OAuthFlowHandler,
-} from "@openmgr/agent-auth-core";
+} from "@ants/agent-auth-core";
 export {
   ANTHROPIC_OAUTH_CONFIG,
   buildAuthorizationUrl,
   exchangeCodeForTokens,
   refreshAccessToken,
   shouldRefreshTokens,
-} from "@openmgr/agent-auth-core";
+} from "@ants/agent-auth-core";
 
 /**
  * Minimal interface for expo-secure-store.
@@ -117,7 +117,7 @@ export interface ExpoAuthSession {
 /**
  * Token storage key for secure store.
  */
-const TOKEN_STORAGE_KEY = "openmgr_oauth_tokens";
+const TOKEN_STORAGE_KEY = "ants_oauth_tokens";
 
 /**
  * Stored token format in secure store.
@@ -217,7 +217,7 @@ export interface ExpoOAuthHandlerOptions {
  *
  * @example
  * ```typescript
- * import { createExpoOAuthHandler } from "@openmgr/agent-auth-react-native";
+ * import { createExpoOAuthHandler } from "@ants/agent-auth-react-native";
  * import * as AuthSession from "expo-auth-session";
  * import * as Crypto from "expo-crypto";
  * import * as SecureStore from "expo-secure-store";

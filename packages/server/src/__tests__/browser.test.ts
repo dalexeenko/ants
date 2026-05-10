@@ -1,8 +1,8 @@
 import { describe, it, expect, vi } from 'vitest';
 import { createServer } from '../index.js';
 import type { ServerAgent } from '../index.js';
-import type { Message } from '@openmgr/agent-core';
-import type { BrowserController, BrowserInstance } from '@openmgr/agent-browser-core';
+import type { Message } from '@ants/agent-core';
+import type { BrowserController, BrowserInstance } from '@ants/agent-browser-core';
 import { isScreencastUrl } from '../routes/screencast.js';
 
 // ============ Helpers ============

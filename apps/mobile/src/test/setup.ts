@@ -58,8 +58,8 @@ jest.mock('expo-sqlite', () => ({
   }),
 }), { virtual: true });
 
-// Mock @openmgr/agent-auth-react-native
-jest.mock('@openmgr/agent-auth-react-native', () => ({
+// Mock @ants/agent-auth-react-native
+jest.mock('@ants/agent-auth-react-native', () => ({
   createManualOAuthHandler: jest.fn(() => ({
     generateAuthUrl: jest.fn().mockResolvedValue({
       url: 'https://mock-oauth-url.com',
@@ -76,8 +76,8 @@ jest.mock('@openmgr/agent-auth-react-native', () => ({
   })),
 }), { virtual: true });
 
-// Mock @openmgr/agent-react-native
-jest.mock('@openmgr/agent-react-native', () => ({
+// Mock @ants/agent-react-native
+jest.mock('@ants/agent-react-native', () => ({
   Agent: jest.fn().mockImplementation(() => ({
     use: jest.fn().mockResolvedValue(undefined),
     setProvider: jest.fn(),
@@ -181,8 +181,8 @@ jest.mock('@openmgr/agent-react-native', () => ({
   }),
 }), { virtual: true });
 
-// Mock @openmgr/agent-core (for providerRegistry)
-jest.mock('@openmgr/agent-core', () => ({
+// Mock @ants/agent-core (for providerRegistry)
+jest.mock('@ants/agent-core', () => ({
   providerRegistry: {
     register: jest.fn(),
     has: jest.fn().mockReturnValue(false),
@@ -192,13 +192,13 @@ jest.mock('@openmgr/agent-core', () => ({
   },
 }), { virtual: true });
 
-// Mock @openmgr/agent-auth-core
-jest.mock('@openmgr/agent-auth-core', () => ({
+// Mock @ants/agent-auth-core
+jest.mock('@ants/agent-auth-core', () => ({
   DEFAULT_ANTHROPIC_CLIENT_ID: 'mock-client-id',
 }), { virtual: true });
 
-// Mock @openmgr/ui styles
-jest.mock('@openmgr/ui/styles/theme', () => ({
+// Mock @ants/ui styles
+jest.mock('@ants/ui/styles/theme', () => ({
   useTheme: () => ({
     colors: {
       bg: {

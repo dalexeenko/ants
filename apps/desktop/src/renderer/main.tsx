@@ -24,7 +24,7 @@ console.error = (...args: unknown[]) => {
 
 // Clear old zustand persist storage - backend is now the source of truth
 // This prevents duplicate projects from appearing after removing persist middleware
-localStorage.removeItem('openmgr-project-store');
+localStorage.removeItem('ants-project-store');
 
 const container = document.getElementById('root');
 if (!container) {

@@ -2,7 +2,7 @@
  * Google AI provider (Gemini models) using direct API calls.
  */
 
-import type { LLMProvider, LLMStreamOptions, LLMStreamResult, AuthConfig } from "@openmgr/agent-core";
+import type { LLMProvider, LLMStreamOptions, LLMStreamResult, AuthConfig } from "@ants/agent-core";
 import { GoogleClient, type GoogleClientOptions } from "./google-client.js";
 
 export interface GoogleProviderOptions {

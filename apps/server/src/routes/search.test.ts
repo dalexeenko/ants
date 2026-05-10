@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { Hono } from 'hono';
 import { createSearchRoutes } from './search.js';
 import type { ProjectManager } from '../services/project-manager.js';
-import type { IAgentClient } from '../services/openmgr-agent-manager.js';
+import type { IAgentClient } from '../services/ants-agent-manager.js';
 
 describe('Search Routes', () => {
   let app: Hono;

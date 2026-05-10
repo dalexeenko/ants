@@ -6,7 +6,7 @@
 
 import { readFile, writeFile, stat, readdir, mkdir, unlink, rm } from "fs/promises";
 import { resolve, relative, dirname, basename, join } from "path";
-import type { Filesystem, FileStat, DirectoryEntry } from "@openmgr/agent-core";
+import type { Filesystem, FileStat, DirectoryEntry } from "@ants/agent-core";
 
 /**
  * Node.js implementation of the Filesystem interface.

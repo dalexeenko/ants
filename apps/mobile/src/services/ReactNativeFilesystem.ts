@@ -6,8 +6,8 @@
  */
 
 import { Paths, Directory, File } from 'expo-file-system';
-import type { PlatformFilesystem, FileEntry } from '@openmgr/ui';
-import { createLogger } from '@openmgr/ui';
+import type { PlatformFilesystem, FileEntry } from '@ants/ui';
+import { createLogger } from '@ants/ui';
 
 const log = createLogger('ReactNativeFilesystem');
 

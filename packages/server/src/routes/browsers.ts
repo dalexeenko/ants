@@ -6,7 +6,7 @@
  * Screencast streaming is handled separately via WebSocket.
  */
 import { Hono } from "hono";
-import type { BrowserController } from "@openmgr/agent-browser-core";
+import type { BrowserController } from "@ants/agent-browser-core";
 import type { RouteContext } from "./types.js";
 
 /**

@@ -12,7 +12,7 @@ import type {
   LLMResponse,
   ToolCall,
   ContentPart,
-} from "@openmgr/agent-core";
+} from "@ants/agent-core";
 import { zodToJsonSchema } from "zod-to-json-schema";
 
 // ============================================================================

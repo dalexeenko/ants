@@ -1,5 +1,5 @@
 {
-  "name": "@openmgr/app-electron",
+  "name": "@ants/app-electron",
   "version": "0.1.0",
   "private": true,
   "main": "dist/main/index.js",
@@ -18,7 +18,7 @@
     "test:e2e:debug": "playwright test --debug",
     "test:e2e:ui": "playwright test --ui",
     "launch:mcp": "npx tsx e2e/launch-for-mcp.ts",
-    "launch:mcp:dev": "OPENMGR_CDP_PORT=9222 electron-vite dev"
+    "launch:mcp:dev": "ANTS_CDP_PORT=9222 electron-vite dev"
   },
   "dependencies": {
     "better-sqlite3": "^12.6.2",
@@ -32,25 +32,25 @@
   "devDependencies": {
     "@electron/notarize": "^3.1.1",
     "@electron/rebuild": "^4.0.3",
-    "@openmgr/agent": "workspace:*",
-    "@openmgr/agent-auth-anthropic": "workspace:*",
-    "@openmgr/agent-browser-core": "workspace:*",
-    "@openmgr/agent-browser-sandbox": "workspace:*",
-    "@openmgr/agent-core": "workspace:*",
-    "@openmgr/agent-database": "workspace:*",
-    "@openmgr/agent-database-core": "workspace:*",
-    "@openmgr/agent-docker": "workspace:*",
-    "@openmgr/agent-mcp-stdio": "workspace:*",
-    "@openmgr/agent-memory": "workspace:*",
-    "@openmgr/agent-node": "workspace:*",
-    "@openmgr/agent-providers": "workspace:*",
-    "@openmgr/agent-skills-loader": "workspace:*",
-    "@openmgr/agent-storage": "workspace:*",
-    "@openmgr/agent-tools": "workspace:*",
-    "@openmgr/agent-tools-director": "workspace:*",
-    "@openmgr/agent-tools-terminal": "workspace:*",
-    "@openmgr/agent-worktree": "workspace:*",
-    "@openmgr/ui": "workspace:*",
+    "@ants/agent": "workspace:*",
+    "@ants/agent-auth-anthropic": "workspace:*",
+    "@ants/agent-browser-core": "workspace:*",
+    "@ants/agent-browser-sandbox": "workspace:*",
+    "@ants/agent-core": "workspace:*",
+    "@ants/agent-database": "workspace:*",
+    "@ants/agent-database-core": "workspace:*",
+    "@ants/agent-docker": "workspace:*",
+    "@ants/agent-mcp-stdio": "workspace:*",
+    "@ants/agent-memory": "workspace:*",
+    "@ants/agent-node": "workspace:*",
+    "@ants/agent-providers": "workspace:*",
+    "@ants/agent-skills-loader": "workspace:*",
+    "@ants/agent-storage": "workspace:*",
+    "@ants/agent-tools": "workspace:*",
+    "@ants/agent-tools-director": "workspace:*",
+    "@ants/agent-tools-terminal": "workspace:*",
+    "@ants/agent-worktree": "workspace:*",
+    "@ants/ui": "workspace:*",
     "@playwright/test": "^1.58.1",
     "@types/better-sqlite3": "^7.6.13",
     "@types/react": "^19.1.0",
@@ -72,8 +72,8 @@
     "vite": "^5.0.11"
   },
   "build": {
-    "appId": "com.openmgr.app",
-    "productName": "OpenMgr",
+    "appId": "com.ants.app",
+    "productName": "Ants",
     "directories": {
       "output": "out"
     },
@@ -88,16 +88,16 @@
     ],
     "protocols": [
       {
-        "name": "OpenMgr",
+        "name": "Ants",
         "schemes": [
-          "openmgr"
+          "ants"
         ]
       }
     ],
     "publish": {
       "provider": "github",
-      "owner": "openmgr",
-      "repo": "openmgr"
+      "owner": "ants",
+      "repo": "ants"
     },
     "mac": {
       "category": "public.app-category.developer-tools",
@@ -124,7 +124,7 @@
       ],
       "category": "Development",
       "mimeTypes": [
-        "x-scheme-handler/openmgr"
+        "x-scheme-handler/ants"
       ]
     },
     "nsis": {

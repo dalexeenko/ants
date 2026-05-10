@@ -1,6 +1,6 @@
 ---
 title: Installation
-description: All the ways to install and run OpenMgr — npx, global install, Docker, Docker Compose, and from source.
+description: All the ways to install and run Ants — npx, global install, Docker, Docker Compose, and from source.
 ---
 
 ## npx (quickest)
@@ -8,7 +8,7 @@ description: All the ways to install and run OpenMgr — npx, global install, Do
 Run the server without installing anything globally:
 
 ```bash
-npx @openmgr/server
+npx @ants/server
 ```
 
 This always uses the latest published version.
@@ -18,8 +18,8 @@ This always uses the latest published version.
 Install globally via npm for a persistent command:
 
 ```bash
-npm install -g @openmgr/server
-openmgr-server
+npm install -g @ants/server
+ants-server
 ```
 
 ## Docker
@@ -28,15 +28,15 @@ Run the server as a Docker container with persistent storage:
 
 ```bash
 docker run -p 6647:6647 \
-  -v openmgr-data:/data \
-  -v openmgr-workspaces:/workspaces \
-  -e OPENMGR_ENCRYPTION_KEY=$(openssl rand -base64 32) \
-  openmgr/server
+  -v ants-data:/data \
+  -v ants-workspaces:/workspaces \
+  -e ANTS_ENCRYPTION_KEY=$(openssl rand -base64 32) \
+  ants/server
 ```
 
 ### Image Variants
 
-OpenMgr publishes two Docker image variants:
+Ants publishes two Docker image variants:
 
 | Variant | Tags | Description |
 |---------|------|-------------|
@@ -47,10 +47,10 @@ Use the lite variant if you don't need browser automation tools and want a small
 
 ```bash
 docker run -p 6647:6647 \
-  -v openmgr-data:/data \
-  -v openmgr-workspaces:/workspaces \
-  -e OPENMGR_ENCRYPTION_KEY=$(openssl rand -base64 32) \
-  openmgr/server:lite
+  -v ants-data:/data \
+  -v ants-workspaces:/workspaces \
+  -e ANTS_ENCRYPTION_KEY=$(openssl rand -base64 32) \
+  ants/server:lite
 ```
 
 ## Docker Compose
@@ -58,8 +58,8 @@ docker run -p 6647:6647 \
 Clone the repo and use the provided compose file:
 
 ```bash
-git clone https://github.com/openmgr/openmgr.git
-cd openmgr/apps/server
+git clone https://github.com/ants/ants.git
+cd ants/apps/server
 docker compose up
 ```
 
@@ -77,8 +77,8 @@ For development or customization:
 
 ```bash
 # Clone the monorepo
-git clone https://github.com/openmgr/openmgr.git
-cd openmgr
+git clone https://github.com/ants/ants.git
+cd ants
 
 # Install dependencies (requires pnpm 9+)
 pnpm install

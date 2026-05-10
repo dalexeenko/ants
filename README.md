@@ -95,8 +95,8 @@ pnpm dev:server
 docker run -p 6647:6647 \
   -v ants-data:/data \
   -v ants-workspaces:/workspaces \
-  -e OPENMGR_ENCRYPTION_KEY=$(openssl rand -base64 32) \
-  openmgr/server
+  -e ANTS_ENCRYPTION_KEY=$(openssl rand -base64 32) \
+  ants/server
 ```
 
 Or with Docker Compose:
@@ -110,7 +110,7 @@ docker compose up
 
 ```bash
 pnpm build                                          # Build everything
-pnpm turbo build --filter=@openmgr/server          # Build one package + deps
+pnpm turbo build --filter=@ants/server          # Build one package + deps
 pnpm test                                           # Run all tests
 pnpm dev                                            # Watch mode
 pnpm lint

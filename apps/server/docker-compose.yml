@@ -1,4 +1,4 @@
-# Docker Compose for openmgr-server local development
+# Docker Compose for ants-server local development
 #
 # Uses the production Dockerfile so the image is identical to what ships.
 # Run from the monorepo root:
@@ -10,34 +10,34 @@
 # The server will be available at http://localhost:6647
 
 services:
-  openmgr-server:
+  ants-server:
     build:
       context: ../..
       dockerfile: apps/server/Dockerfile
       args:
-        IMAGE_TAG: openmgr/server:local
-        OPENMGR_SERVER_VERSION: ${OPENMGR_SERVER_VERSION:-dev}
+        IMAGE_TAG: ants/server:local
+        ANTS_SERVER_VERSION: ${ANTS_SERVER_VERSION:-dev}
     ports:
       - "6647:6647"
     volumes:
       # Persistent data directory
-      - openmgr-data:/data
+      - ants-data:/data
       # Workspaces for agents
-      - openmgr-workspaces:/workspaces
+      - ants-workspaces:/workspaces
     environment:
-      - OPENMGR_HOST=0.0.0.0
-      - OPENMGR_PORT=6647
-      - OPENMGR_DATA_DIR=/data
-      - OPENMGR_WORKSPACES_DIR=/workspaces
-      # Multi-user mode — incompatible with OPENMGR_SECRET
-      - OPENMGR_MULTI_USER=true
+      - ANTS_HOST=0.0.0.0
+      - ANTS_PORT=6647
+      - ANTS_DATA_DIR=/data
+      - ANTS_WORKSPACES_DIR=/workspaces
+      # Multi-user mode — incompatible with ANTS_SECRET
+      - ANTS_MULTI_USER=true
       # Token required to create the first admin account (POST /api/users/setup)
       # DO NOT use this value in production
-      - OPENMGR_SETUP_TOKEN=dev-setup-token-do-not-use-in-production
+      - ANTS_SETUP_TOKEN=dev-setup-token-do-not-use-in-production
       # Encryption key for API keys (32-byte base64 - DO NOT use in production)
-      - OPENMGR_ENCRYPTION_KEY=ruuwZl5FbgAGSobitm4RCMSu4dVrDz+VVNpQDP6XXTs=
+      - ANTS_ENCRYPTION_KEY=ruuwZl5FbgAGSobitm4RCMSu4dVrDz+VVNpQDP6XXTs=
     restart: unless-stopped
 
 volumes:
-  openmgr-data:
-  openmgr-workspaces:
+  ants-data:
+  ants-workspaces:

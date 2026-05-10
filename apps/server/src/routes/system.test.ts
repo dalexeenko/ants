@@ -2,19 +2,19 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { Hono } from 'hono';
 import { createSystemRoutes } from './system.js';
 import type { ServerConfig } from '../config.js';
-import type { OpenMgrAgentManager } from '../services/openmgr-agent-manager.js';
+import type { AntsAgentManager } from '../services/ants-agent-manager.js';
 import type { ApiKeyManager } from '../services/api-key-manager.js';
 
 describe('system routes', () => {
   let app: Hono;
   let mockConfig: ServerConfig;
-  let mockAgentManager: Partial<OpenMgrAgentManager>;
+  let mockAgentManager: Partial<AntsAgentManager>;
   let mockApiKeyManager: Partial<ApiKeyManager>;
 
   beforeEach(() => {
     mockConfig = {
-      dataDir: '/tmp/openmgr-test-data',
-      workspacesDir: '/tmp/openmgr-test-workspaces',
+      dataDir: '/tmp/ants-test-data',
+      workspacesDir: '/tmp/ants-test-workspaces',
       port: 3000,
       host: 'localhost',
     } as ServerConfig;
@@ -22,7 +22,7 @@ describe('system routes', () => {
     mockAgentManager = {
       isInstalled: vi.fn().mockResolvedValue(true),
       getVersion: vi.fn().mockResolvedValue('1.0.0'),
-      getAgentPath: vi.fn().mockReturnValue('/usr/local/bin/openmgr-agent'),
+      getAgentPath: vi.fn().mockReturnValue('/usr/local/bin/ants-agent'),
       install: vi.fn().mockResolvedValue(undefined),
       restartAllServers: vi.fn().mockResolvedValue({ restarted: ['proj-1'], failed: [] }),
     };
@@ -66,7 +66,7 @@ describe('system routes', () => {
     app = new Hono();
     const systemRoutes = createSystemRoutes(
       mockConfig,
-      mockAgentManager as OpenMgrAgentManager,
+      mockAgentManager as AntsAgentManager,
       mockApiKeyManager as ApiKeyManager
     );
     app.route('/system', systemRoutes);
@@ -80,7 +80,7 @@ describe('system routes', () => {
       const body = await res.json();
       expect(body.installed).toBe(true);
       expect(body.version).toBe('1.0.0');
-      expect(body.path).toBe('/usr/local/bin/openmgr-agent');
+      expect(body.path).toBe('/usr/local/bin/ants-agent');
     });
 
     it('should return agent status when not installed', async () => {
@@ -103,7 +103,7 @@ describe('system routes', () => {
       expect(res.status).toBe(200);
       const body = await res.json();
       expect(body.success).toBe(true);
-      expect(body.message).toBe('OpenMgr Agent is already installed');
+      expect(body.message).toBe('Ants Agent is already installed');
       expect(body.version).toBe('1.0.0');
     });
 
@@ -117,7 +117,7 @@ describe('system routes', () => {
       expect(res.status).toBe(200);
       const body = await res.json();
       expect(body.success).toBe(true);
-      expect(body.message).toBe('OpenMgr Agent installed successfully');
+      expect(body.message).toBe('Ants Agent installed successfully');
       expect(mockAgentManager.install).toHaveBeenCalled();
     });
 
@@ -143,9 +143,9 @@ describe('system routes', () => {
       expect(res.status).toBe(200);
       const body = await res.json();
       expect(body.dataDir).toBeDefined();
-      expect(body.dataDir.path).toBe('/tmp/openmgr-test-data');
+      expect(body.dataDir.path).toBe('/tmp/ants-test-data');
       expect(body.workspacesDir).toBeDefined();
-      expect(body.workspacesDir.path).toBe('/tmp/openmgr-test-workspaces');
+      expect(body.workspacesDir.path).toBe('/tmp/ants-test-workspaces');
       expect(body.total).toBeDefined();
       expect(typeof body.total.sizeBytes).toBe('number');
       expect(typeof body.total.sizeHuman).toBe('string');

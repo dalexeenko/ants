@@ -1,7 +1,7 @@
 {
-  "name": "@openmgr/agent-tools-director",
+  "name": "@ants/agent-tools-director",
   "version": "0.1.0",
-  "description": "Director agent tools for configuring and managing OpenMgr - projects, sessions, servers, auth, Docker, and settings",
+  "description": "Director agent tools for configuring and managing Ants - projects, sessions, servers, auth, Docker, and settings",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -21,7 +21,7 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@openmgr/agent-core": "workspace:*",
+    "@ants/agent-core": "workspace:*",
     "zod": "^3.23.0"
   },
   "devDependencies": {
@@ -30,7 +30,7 @@
     "vitest": "^4.0.18"
   },
   "peerDependencies": {
-    "@openmgr/agent-core": "workspace:*"
+    "@ants/agent-core": "workspace:*"
   },
   "engines": {
     "node": ">=20.0.0"

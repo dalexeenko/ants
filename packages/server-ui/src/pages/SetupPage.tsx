@@ -95,12 +95,12 @@ export function SetupPage() {
                 type="password"
                 value={setupToken}
                 onChange={(e) => setSetupToken(e.target.value)}
-                placeholder="OPENMGR_SETUP_TOKEN"
+                placeholder="ANTS_SETUP_TOKEN"
                 autoComplete="off"
                 required
               />
               <p className="text-secondary" style={{ fontSize: 12, marginTop: 4 }}>
-                The token set via the OPENMGR_SETUP_TOKEN environment variable.
+                The token set via the ANTS_SETUP_TOKEN environment variable.
               </p>
             </div>
           )}

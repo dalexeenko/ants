@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
-import { createServer, startServer } from '@openmgr/agent-server';
-import type { AgentInterface, AgentConfig } from '@openmgr/agent-core';
+import { createServer, startServer } from '@ants/agent-server';
+import type { AgentInterface, AgentConfig } from '@ants/agent-core';
 
 // Helper to parse JSON with type assertion
 async function parseJson<T>(response: Response): Promise<T> {

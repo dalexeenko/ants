@@ -24,7 +24,7 @@ import {
   fontSize,
   type AgentBridge,
   type WorktreeInfo,
-} from '@openmgr/ui';
+} from '@ants/ui';
 
 // -------------------------------------------------------------------
 // Types

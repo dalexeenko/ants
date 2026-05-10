@@ -1,6 +1,6 @@
 {
   "mcpServers": {
-    "openmgr-mobile": {
+    "ants-mobile": {
       "command": "node",
       "args": ["./app/packages/mobile/maestro-mcp/dist/server.js"],
       "env": {}

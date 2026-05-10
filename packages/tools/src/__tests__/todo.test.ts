@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { todoReadTool } from '../todo-read.js';
 import { todoWriteTool } from '../todo-write.js';
-import type { ToolContext, TodoItem } from '@openmgr/agent-core';
+import type { ToolContext, TodoItem } from '@ants/agent-core';
 
 // Mock tool context
 function createMockContext(options: {

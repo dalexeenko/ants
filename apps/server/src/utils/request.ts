@@ -54,7 +54,7 @@ export function isSecure(c: Context): boolean {
 /**
  * Build the external server URL (scheme + host) for the current request.
  *
- * Example: `https://personal.openmgr.dev`
+ * Example: `https://personal.ants.dev`
  */
 export function getServerUrl(c: Context): string {
   const proto = isSecure(c) ? 'https' : 'http';

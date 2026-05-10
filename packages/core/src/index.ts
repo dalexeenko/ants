@@ -1,5 +1,5 @@
 /**
- * @openmgr/agent-core
+ * @ants/agent-core
  *
  * Core agent functionality including the Agent class, plugin system, MCP integration,
  * skills, compaction, and slash commands.
@@ -100,7 +100,7 @@ export {
 export { DEFAULT_SYSTEM_PROMPT, DEFAULT_AGENT_CONFIG, PLAN_MODE_SYSTEM_PROMPT_SECTION, BUILD_MODE_SYSTEM_PROMPT_SECTION, PLAN_MODE_DISABLED_TOOLS } from "./types.js";
 
 // Config types (pure - no Node.js dependencies)
-// For Node.js filesystem config, use @openmgr/agent-config-xdg or @openmgr/agent-node
+// For Node.js filesystem config, use @ants/agent-config-xdg or @ants/agent-node
 export {
   type ConfigLoader,
   type ConfigOverrides,
@@ -154,10 +154,10 @@ export type {
 } from "./mcp/types.js";
 
 // Note: StdioMcpClient is no longer exported from core.
-// For stdio MCP transport, use @openmgr/agent-mcp-stdio or @openmgr/agent-node.
+// For stdio MCP transport, use @ants/agent-mcp-stdio or @ants/agent-node.
 
 // Skills types (pure - no Node.js dependencies)
-// For Node.js filesystem skills, use @openmgr/agent-skills-loader or @openmgr/agent-node
+// For Node.js filesystem skills, use @ants/agent-skills-loader or @ants/agent-node
 export type {
   SkillMetadata,
   LoadedSkill,

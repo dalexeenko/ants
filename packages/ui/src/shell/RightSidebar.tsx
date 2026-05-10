@@ -86,12 +86,12 @@ export function RightSidebar({ projectId, sessionId }: { projectId: string; sess
       onWidthChange={setRightSidebarWidth}
       onCollapsedChange={setRightSidebarCollapsed}
       style={[styles.rightSidebar, { backgroundColor: colors.bg.secondary }]}
-      testID="openmgr-right-sidebar"
+      testID="ants-right-sidebar"
     >
       {/* Header with tabs */}
       <View style={[styles.rightSidebarHeader, { borderBottomColor: colors.border.light }]}>
         {visibleTabs.map((tab) => (
-          <Pressable key={tab.id} onPress={() => setRightSidebarTab(tab.id)} style={styles.tabButton} testID={`openmgr-right-sidebar-tab-${tab.id}`}>
+          <Pressable key={tab.id} onPress={() => setRightSidebarTab(tab.id)} style={styles.tabButton} testID={`ants-right-sidebar-tab-${tab.id}`}>
             <Text style={[
               styles.rightSidebarTitle,
               { color: activeTab === tab.id ? colors.text.primary : colors.text.muted },

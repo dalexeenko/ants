@@ -3,20 +3,20 @@ description: Verify the app launches and shows its initial state
 preconditions: []
 steps:
   - assertVisible:
-      testId: openmgr-app
+      testId: ants-app
   # Desktop: icon rail visible
   - assertVisible:
-      testId: openmgr-icon-rail
+      testId: ants-icon-rail
       desktop: true
   # Desktop: welcome screen (no project selected)
   - assertVisible:
-      testId: openmgr-welcome-screen
+      testId: ants-welcome-screen
       desktop: true
   # Mobile: home screen visible
   - assertVisible:
-      testId: openmgr-home-screen
+      testId: ants-home-screen
       mobile: true
   # Mobile: drawer toggle visible
   - assertVisible:
-      testId: openmgr-drawer-toggle
+      testId: ants-drawer-toggle
       mobile: true

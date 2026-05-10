@@ -1,6 +1,6 @@
 ---
 title: Docker Deployment
-description: Run OpenMgr with Docker and Docker Compose, including full and lite image variants.
+description: Run Ants with Docker and Docker Compose, including full and lite image variants.
 sidebar:
   order: 1
 ---
@@ -9,10 +9,10 @@ sidebar:
 
 ```bash
 docker run -p 6647:6647 \
-  -v openmgr-data:/data \
-  -v openmgr-workspaces:/workspaces \
-  -e OPENMGR_ENCRYPTION_KEY=$(openssl rand -base64 32) \
-  openmgr/server
+  -v ants-data:/data \
+  -v ants-workspaces:/workspaces \
+  -e ANTS_ENCRYPTION_KEY=$(openssl rand -base64 32) \
+  ants/server
 ```
 
 The server is available at `http://localhost:6647`.
@@ -33,28 +33,28 @@ Choose **lite** if you don't need browser automation and want faster pulls and l
 ```yaml
 # docker-compose.yml
 services:
-  openmgr:
-    image: openmgr/server:latest
+  ants:
+    image: ants/server:latest
     ports:
       - "6647:6647"
     volumes:
-      - openmgr-data:/data
-      - openmgr-workspaces:/workspaces
+      - ants-data:/data
+      - ants-workspaces:/workspaces
     environment:
-      - OPENMGR_ENCRYPTION_KEY=${OPENMGR_ENCRYPTION_KEY}
-      - OPENMGR_HOST=0.0.0.0
+      - ANTS_ENCRYPTION_KEY=${ANTS_ENCRYPTION_KEY}
+      - ANTS_HOST=0.0.0.0
     restart: unless-stopped
 
 volumes:
-  openmgr-data:
-  openmgr-workspaces:
+  ants-data:
+  ants-workspaces:
 ```
 
 Run with:
 
 ```bash
 # Generate an encryption key
-export OPENMGR_ENCRYPTION_KEY=$(openssl rand -base64 32)
+export ANTS_ENCRYPTION_KEY=$(openssl rand -base64 32)
 
 docker compose up -d
 ```
@@ -82,14 +82,14 @@ Pass configuration via `-e` flags or a `.env` file:
 
 ```bash
 docker run -p 6647:6647 \
-  -v openmgr-data:/data \
-  -v openmgr-workspaces:/workspaces \
-  -e OPENMGR_ENCRYPTION_KEY="your-key" \
-  -e OPENMGR_SECRET="your-secret" \
-  -e OPENMGR_HOST=0.0.0.0 \
+  -v ants-data:/data \
+  -v ants-workspaces:/workspaces \
+  -e ANTS_ENCRYPTION_KEY="your-key" \
+  -e ANTS_SECRET="your-secret" \
+  -e ANTS_HOST=0.0.0.0 \
   -e LOG_LEVEL=info \
   --restart unless-stopped \
-  openmgr/server
+  ants/server
 ```
 
 See [Configuration](/getting-started/configuration/) for the full environment variable reference.
@@ -100,15 +100,15 @@ For production deployments:
 
 ```bash
 docker run -d \
-  --name openmgr-server \
+  --name ants-server \
   -p 6647:6647 \
-  -v /opt/openmgr/data:/data \
-  -v /opt/openmgr/workspaces:/workspaces \
-  -e OPENMGR_HOST=0.0.0.0 \
-  -e OPENMGR_ENCRYPTION_KEY="your-base64-key" \
-  -e OPENMGR_SECRET="your-secret" \
+  -v /opt/ants/data:/data \
+  -v /opt/ants/workspaces:/workspaces \
+  -e ANTS_HOST=0.0.0.0 \
+  -e ANTS_ENCRYPTION_KEY="your-base64-key" \
+  -e ANTS_SECRET="your-secret" \
   --restart unless-stopped \
-  openmgr/server
+  ants/server
 ```
 
 See the [Production Hardening guide](/guides/production/) for TLS, reverse proxy, and security recommendations.
@@ -118,8 +118,8 @@ See the [Production Hardening guide](/guides/production/) for TLS, reverse proxy
 Build from the monorepo source:
 
 ```bash
-git clone https://github.com/openmgr/openmgr.git
-cd openmgr
+git clone https://github.com/ants/ants.git
+cd ants
 
 # Build full variant
 pnpm docker:build

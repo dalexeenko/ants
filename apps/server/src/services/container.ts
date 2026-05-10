@@ -14,7 +14,7 @@ import { createLogger } from '../utils/logger.js';
 
 const log = createLogger('container');
 import { EncryptionService } from './encryption.js';
-import { OpenMgrAgentManager } from './openmgr-agent-manager.js';
+import { AntsAgentManager } from './ants-agent-manager.js';
 import { ProjectManager } from './project-manager.js';
 import { TaskScheduler } from './task-scheduler.js';
 import { ApiKeyManager } from './api-key-manager.js';
@@ -47,7 +47,7 @@ export interface Services {
   db: DrizzleDB;
   encryption: EncryptionService;
   apiKeyManager: ApiKeyManager;
-  agentManager: OpenMgrAgentManager;
+  agentManager: AntsAgentManager;
   projectManager: ProjectManager;
   taskScheduler: TaskScheduler;
   terminalManager: TerminalManager;
@@ -122,13 +122,13 @@ async function migrateLegacyProviders(
 
 /**
  * One-time migration: import OAuth credentials from the legacy plaintext
- * `~/.local/share/openmgr/auth.json` file into the encrypted database,
+ * `~/.local/share/ants/auth.json` file into the encrypted database,
  * then rename the file to `.backup` so it is not re-processed.
  */
 async function migrateLegacyAuthJson(
   apiKeyManager: ApiKeyManager,
 ): Promise<void> {
-  const legacyPath = join(homedir(), '.local', 'share', 'openmgr', 'auth.json');
+  const legacyPath = join(homedir(), '.local', 'share', 'ants', 'auth.json');
   if (!existsSync(legacyPath)) return;
 
   try {
@@ -175,7 +175,7 @@ export async function createServices(config: ServerConfig, db: DrizzleDB): Promi
   // Migrate legacy plaintext auth.json → encrypted store
   await migrateLegacyAuthJson(apiKeyManager);
 
-  const agentManager = new OpenMgrAgentManager(config, apiKeyManager);
+  const agentManager = new AntsAgentManager(config, apiKeyManager);
 
   // Wire worktree lifecycle hooks to Docker manager for future per-worktree containers.
   // Currently the server spawns one agent-server per project; these hooks log

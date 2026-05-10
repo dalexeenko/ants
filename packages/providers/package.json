@@ -1,7 +1,7 @@
 {
-  "name": "@openmgr/agent-providers",
+  "name": "@ants/agent-providers",
   "version": "0.1.0",
-  "description": "LLM providers for @openmgr/agent (Anthropic, OpenAI, Google, OpenRouter, Groq, xAI)",
+  "description": "LLM providers for @ants/agent (Anthropic, OpenAI, Google, OpenRouter, Groq, xAI)",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -58,8 +58,8 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@openmgr/agent-auth-core": "workspace:*",
-    "@openmgr/agent-core": "workspace:*",
+    "@ants/agent-auth-core": "workspace:*",
+    "@ants/agent-core": "workspace:*",
     "zod": "^3.23.0",
     "zod-to-json-schema": "^3.24.0"
   },
@@ -69,7 +69,7 @@
     "vitest": "^4.0.18"
   },
   "peerDependencies": {
-    "@openmgr/agent-core": "workspace:*"
+    "@ants/agent-core": "workspace:*"
   },
   "engines": {
     "node": ">=20.0.0"

@@ -1,12 +1,12 @@
 import { z } from "zod";
-import { defineTool } from "@openmgr/agent-core";
+import { defineTool } from "@ants/agent-core";
 import { getDirectorContext } from "../context.js";
 
 export const getDockerStatusTool = defineTool({
   name: "director_get_docker_status",
   description: `Check Docker availability and status on a remote server. Docker is used for sandboxed agent execution and is only available on remote servers.
 
-Returns whether Docker is installed, its version, platform info, and whether the OpenMgr agent image has been built.`,
+Returns whether Docker is installed, its version, platform info, and whether the Ants agent image has been built.`,
   parameters: z.object({
     serverId: z
       .string()
@@ -71,7 +71,7 @@ Docker must be available on the server (use director_get_docker_status to check)
     image: z
       .string()
       .optional()
-      .describe("Custom Docker image (defaults to the built-in OpenMgr agent image)"),
+      .describe("Custom Docker image (defaults to the built-in Ants agent image)"),
     cpus: z
       .string()
       .optional()

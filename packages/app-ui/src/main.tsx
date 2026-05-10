@@ -1,18 +1,18 @@
 /**
  * Web app entry point.
  *
- * Bootstraps the web version of the OpenMgr app:
+ * Bootstraps the web version of the Ants app:
  * 1. Checks authentication (cookie-based)
  * 2. Initializes the BridgeCore with a same-origin ServerClient
- * 3. Renders the shared AppShell from @openmgr/ui with a web PlatformAdapter
+ * 3. Renders the shared AppShell from @ants/ui with a web PlatformAdapter
  */
 
 import React, { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createWebBridge, initializeWebBridge } from './bridge';
-import { type AgentBridge } from '@openmgr/ui';
-import { PlatformProvider, type PlatformAdapter } from '@openmgr/ui/platform';
-import { AppShell } from '@openmgr/ui/shell';
+import { type AgentBridge } from '@ants/ui';
+import { PlatformProvider, type PlatformAdapter } from '@ants/ui/platform';
+import { AppShell } from '@ants/ui/shell';
 
 // Extend window type for the bridge
 declare global {

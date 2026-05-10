@@ -3,13 +3,13 @@ import { Hono } from 'hono';
 import { createSessionRoutes } from './sessions.js';
 import { createSessionStreamingRoutes } from './session-streaming.js';
 import type { ProjectManager } from '../services/project-manager.js';
-import type { IAgentClient } from '../services/openmgr-agent-manager.js';
+import type { IAgentClient } from '../services/ants-agent-manager.js';
 
 vi.mock('../services/worktree-manager.js', () => ({
   worktreeManager: {
     createWorktree: vi.fn().mockResolvedValue({
       id: 'wt-1',
-      branch: 'openmgr/session-wt-1',
+      branch: 'ants/session-wt-1',
       baseBranch: 'main',
       path: '/tmp/test-project/.worktrees/wt-1',
     }),
@@ -179,7 +179,7 @@ describe('sessions routes', () => {
       expect(res.status).toBe(201);
       const body = await res.json();
       expect(body.worktree).toBeDefined();
-      expect(body.worktree.branch).toBe('openmgr/session-wt-1');
+      expect(body.worktree.branch).toBe('ants/session-wt-1');
       expect(mockWorktreeManager.createWorktree).toHaveBeenCalledWith('/tmp/test-project');
     });
 

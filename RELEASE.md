@@ -1,4 +1,4 @@
-# Releasing OpenMgr
+# Releasing Ants
 
 Releases are built locally and published to GitHub Releases, Docker Hub, and GHCR.
 
@@ -101,5 +101,5 @@ Two variants, each for `linux/amd64` and `linux/arm64`:
 | lite | `1.0.0-lite`, `1.0-lite`, `1-lite`, `latest-lite` | No Playwright/Chromium, no ML embedding deps (~300-500 MB smaller) |
 
 Pushed to both:
-- `ghcr.io/openmgr/openmgr-server`
-- `openmgr/server` (Docker Hub)
+- `ghcr.io/ants/ants-server`
+- `ants/server` (Docker Hub)

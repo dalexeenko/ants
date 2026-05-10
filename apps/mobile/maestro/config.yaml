@@ -1,4 +1,4 @@
-# Maestro configuration for OpenMgr mobile E2E tests
+# Maestro configuration for Ants mobile E2E tests
 #
 # Run all flows:   maestro test maestro/flows/
 # Run single flow: maestro test maestro/flows/app-launch.yaml
@@ -9,4 +9,4 @@
 #   - iOS Simulator or Android Emulator running
 #   - App installed: npx expo run:ios / npx expo run:android
 
-appId: dev.openmgr.app
+appId: dev.ants.app

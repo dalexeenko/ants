@@ -62,7 +62,7 @@ let capturedSseHandler: {
 let capturedOnEvent: ((projectId: string, event: { type: string; [key: string]: unknown }) => void) | null = null;
 
 // Mock createBridgeCore
-jest.mock('@openmgr/ui', () => ({
+jest.mock('@ants/ui', () => ({
   createBridgeCore: jest.fn().mockImplementation((config) => {
     // Store the SSE handler and onEvent for tests
     capturedSseHandler = config.sseHandler;
@@ -100,14 +100,14 @@ jest.mock('./ReactNativeFilesystem', () => ({
   createReactNativeFilesystem: jest.fn().mockReturnValue({}),
 }));
 
-// Mock @openmgr/agent-react-native
-jest.mock('@openmgr/agent-react-native', () => ({
+// Mock @ants/agent-react-native
+jest.mock('@ants/agent-react-native', () => ({
   projects: {},
   remoteServers: {},
   eq: jest.fn(),
   desc: jest.fn(),
   toolsPlugin: {
-    name: '@openmgr/agent-tools',
+    name: '@ants/agent-tools',
     agentTypes: [
       { name: 'general-code', description: 'General coding agent', tags: ['root'] },
       { name: 'explore-code', description: 'Code exploration agent', tags: ['root'] },
@@ -121,8 +121,8 @@ jest.mock('@openmgr/agent-react-native', () => ({
   },
 }));
 
-// Mock @openmgr/agent-tools-director (avoids ESM resolution issues with agent-core in Jest)
-jest.mock('@openmgr/agent-tools-director', () => ({
+// Mock @ants/agent-tools-director (avoids ESM resolution issues with agent-core in Jest)
+jest.mock('@ants/agent-tools-director', () => ({
   directorToolsPlugin: { name: 'director-tools', tools: [] },
   DIRECTOR_CONTEXT_KEY: 'director',
 }));

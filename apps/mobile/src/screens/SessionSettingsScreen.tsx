@@ -10,7 +10,7 @@ import {
   SubagentSettings,
   SubagentSettingsPage,
   type AgentBridge,
-} from '@openmgr/ui';
+} from '@ants/ui';
 
 type SettingsView = 'main' | 'tools' | 'subagents';
 

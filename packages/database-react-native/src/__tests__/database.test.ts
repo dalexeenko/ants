@@ -26,8 +26,8 @@ function createMockSQLite() {
 }
 
 describe("DEFAULT_DB_NAME", () => {
-  it('equals "openmgr-agent.db"', () => {
-    expect(DEFAULT_DB_NAME).toBe("openmgr-agent.db");
+  it('equals "ants-agent.db"', () => {
+    expect(DEFAULT_DB_NAME).toBe("ants-agent.db");
   });
 });
 

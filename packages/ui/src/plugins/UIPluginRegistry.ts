@@ -21,7 +21,7 @@ import { createLogger } from '../utils/logger';
 const log = createLogger('UIPluginRegistry');
 
 /**
- * Local structural equivalent of UIPluginContributions from @openmgr/agent-core.
+ * Local structural equivalent of UIPluginContributions from @ants/agent-core.
  * Defined here so the UI package doesn't need a dependency on agent-core.
  * All component fields are `unknown` — the registry narrows them when accessed via getters.
  */
@@ -76,7 +76,7 @@ export class UIPluginRegistry {
             ...tab,
             // Narrow unknown -> ComponentType. The actual runtime type is a React component
             // provided by the plugin. This cast is safe because the plugin author imports
-            // the typed interfaces from @openmgr/ui/plugins.
+            // the typed interfaces from @ants/ui/plugins.
             component: tab.component as TypedMiddleTabContribution['component'],
             pluginName,
           });

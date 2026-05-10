@@ -1,7 +1,7 @@
 {
-  "name": "@openmgr/agent-server",
+  "name": "@ants/agent-server",
   "version": "0.1.0",
-  "description": "HTTP/WebSocket server for @openmgr/agent",
+  "description": "HTTP/WebSocket server for @ants/agent",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -23,9 +23,9 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@openmgr/agent-core": "workspace:*",
-    "@openmgr/agent-browser-core": "workspace:*",
-    "@openmgr/agent-storage": "workspace:*",
+    "@ants/agent-core": "workspace:*",
+    "@ants/agent-browser-core": "workspace:*",
+    "@ants/agent-storage": "workspace:*",
     "hono": "^4.7.11",
     "ws": "^8.18.0"
   },
@@ -36,7 +36,7 @@
     "vitest": "^4.0.0"
   },
   "keywords": [
-    "openmgr",
+    "ants",
     "agent",
     "server",
     "http",
@@ -46,7 +46,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/openmgr/agent.git",
+    "url": "git+https://github.com/ants/agent.git",
     "directory": "packages/server"
   }
 }

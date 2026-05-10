@@ -27,7 +27,7 @@
 import type { IncomingMessage } from "node:http";
 import type { Duplex } from "node:stream";
 import { WebSocketServer, WebSocket } from "ws";
-import type { BrowserController, ScreencastOptions } from "@openmgr/agent-browser-core";
+import type { BrowserController, ScreencastOptions } from "@ants/agent-browser-core";
 import type { RouteContext } from "./types.js";
 
 /**

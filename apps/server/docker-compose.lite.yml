@@ -9,8 +9,8 @@
 # back to keyword-only memory search.
 
 services:
-  openmgr-server:
+  ants-server:
     build:
       args:
         VARIANT: lite
-        IMAGE_TAG: openmgr/server:local-lite
+        IMAGE_TAG: ants/server:local-lite

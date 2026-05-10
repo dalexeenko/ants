@@ -1,7 +1,7 @@
 {
-  "name": "@openmgr/agent-docker",
+  "name": "@ants/agent-docker",
   "version": "0.1.0",
-  "description": "Docker container management for OpenMgr agents",
+  "description": "Docker container management for Ants agents",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -29,7 +29,7 @@
     "vitest": "^4.0.0"
   },
   "keywords": [
-    "openmgr",
+    "ants",
     "agent",
     "docker",
     "container"
@@ -37,7 +37,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/openmgr/openmgr.git",
+    "url": "git+https://github.com/ants/ants.git",
     "directory": "packages/docker"
   }
 }

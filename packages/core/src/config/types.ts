@@ -1,5 +1,5 @@
 /**
- * Abstract configuration types for OpenMgr Agent
+ * Abstract configuration types for Ants Agent
  * 
  * These types define the interface for configuration without any
  * Node.js dependencies, allowing different implementations

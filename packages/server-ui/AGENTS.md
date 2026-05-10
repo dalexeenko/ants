@@ -2,7 +2,7 @@
 
 ## Overview
 
-Standalone React + Vite SPA for the server's web admin interface. Built to `dist/` and served by `apps/server/`. Does **not** depend on `@openmgr/ui` — it uses plain CSS with its own component set.
+Standalone React + Vite SPA for the server's web admin interface. Built to `dist/` and served by `apps/server/`. Does **not** depend on `@ants/ui` — it uses plain CSS with its own component set.
 
 ## Color Palette
 
@@ -43,7 +43,7 @@ The server-ui uses `@media (prefers-color-scheme: light)` to switch themes — i
 ## Building
 
 ```bash
-pnpm turbo build --filter=@openmgr/server-ui
+pnpm turbo build --filter=@ants/server-ui
 ```
 
 Output goes to `dist/`. The server copies this during its own build.

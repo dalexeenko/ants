@@ -19,7 +19,7 @@ jobs:
         working-directory: tests/server-ui-e2e
 
       - name: Run server UI E2E tests
-        run: pnpm --filter @openmgr/server-ui-e2e test:e2e
+        run: pnpm --filter @ants/server-ui-e2e test:e2e
 
       - name: Upload test artifacts
         if: always()

@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import type { AgentEvent } from "@openmgr/agent-core";
+import type { AgentEvent } from "@ants/agent-core";
 import type { RouteContext } from "./types.js";
 
 /**

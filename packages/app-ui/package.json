@@ -1,5 +1,5 @@
 {
-  "name": "@openmgr/app-ui",
+  "name": "@ants/app-ui",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@openmgr/ui": "workspace:*",
+    "@ants/ui": "workspace:*",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-native-web": "^0.19.10"

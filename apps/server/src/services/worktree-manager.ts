@@ -1,19 +1,19 @@
 /**
- * Server worktree manager — uses the shared @openmgr/agent-worktree package.
+ * Server worktree manager — uses the shared @ants/agent-worktree package.
  *
  * This module creates a ProjectWorktreeManager singleton with Node.js
  * filesystem and command executor implementations. The server's session
  * routes import this singleton.
  *
  * The full worktree implementation has been consolidated in the
- * @openmgr/agent-worktree package. This file is a thin adapter.
+ * @ants/agent-worktree package. This file is a thin adapter.
  */
 
 import { spawn } from 'child_process';
 import { readFile, writeFile, stat, mkdir, rm } from 'fs/promises';
 import { resolve, dirname, basename, join } from 'path';
-import { ProjectWorktreeManager } from '@openmgr/agent-worktree';
-import type { CommandExecutor, WorktreeFilesystem, GitCommandResult } from '@openmgr/agent-worktree';
+import { ProjectWorktreeManager } from '@ants/agent-worktree';
+import type { CommandExecutor, WorktreeFilesystem, GitCommandResult } from '@ants/agent-worktree';
 import { createLogger } from '../utils/logger.js';
 
 const log = createLogger('WorktreeManager');
@@ -81,7 +81,7 @@ const filesystem: WorktreeFilesystem = {
 export const worktreeManager = new ProjectWorktreeManager(executor, filesystem, log);
 
 // Re-export types for convenience
-export { ProjectWorktreeManager } from '@openmgr/agent-worktree';
+export { ProjectWorktreeManager } from '@ants/agent-worktree';
 export type {
   WorktreeInfo,
   DiffResult,
@@ -90,4 +90,4 @@ export type {
   WorktreeCreateOptions,
   WorktreeRemoveOptions,
   WorktreeLifecycleHooks,
-} from '@openmgr/agent-worktree';
+} from '@ants/agent-worktree';

@@ -1,8 +1,8 @@
 {
-  "name": "@openmgr/agent-integration-tests",
+  "name": "@ants/agent-integration-tests",
   "version": "0.1.0",
   "private": true,
-  "description": "Integration tests for @openmgr/agent packages",
+  "description": "Integration tests for @ants/agent packages",
   "type": "module",
   "scripts": {
     "test": "vitest run",
@@ -10,14 +10,14 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@openmgr/agent-core": "workspace:*",
-    "@openmgr/agent-skills-loader": "workspace:*",
-    "@openmgr/agent-providers": "workspace:*",
-    "@openmgr/agent-tools": "workspace:*",
-    "@openmgr/agent-tools-terminal": "workspace:*",
-    "@openmgr/agent-storage": "workspace:*",
-    "@openmgr/agent-memory": "workspace:*",
-    "@openmgr/agent-cli": "workspace:*",
+    "@ants/agent-core": "workspace:*",
+    "@ants/agent-skills-loader": "workspace:*",
+    "@ants/agent-providers": "workspace:*",
+    "@ants/agent-tools": "workspace:*",
+    "@ants/agent-tools-terminal": "workspace:*",
+    "@ants/agent-storage": "workspace:*",
+    "@ants/agent-memory": "workspace:*",
+    "@ants/agent-cli": "workspace:*",
     "zod": "^3.23.0"
   },
   "devDependencies": {

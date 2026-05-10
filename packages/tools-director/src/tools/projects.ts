@@ -1,11 +1,11 @@
 import { z } from "zod";
-import { defineTool } from "@openmgr/agent-core";
+import { defineTool } from "@ants/agent-core";
 import { getDirectorContext } from "../context.js";
 
 export const listProjectsTool = defineTool({
   name: "director_list_projects",
   description:
-    "List all projects configured in OpenMgr, including their name, path, type (local/remote), provider, model, and other configuration details.",
+    "List all projects configured in Ants, including their name, path, type (local/remote), provider, model, and other configuration details.",
   parameters: z.object({}),
   async execute(_params, ctx) {
     const director = getDirectorContext(ctx.extensions);
@@ -41,11 +41,11 @@ export const listProjectsTool = defineTool({
 
 export const createProjectTool = defineTool({
   name: "director_create_project",
-  description: `Create a new project in OpenMgr. Projects can be local (run on this machine) or remote (run on a remote OpenMgr server).
+  description: `Create a new project in Ants. Projects can be local (run on this machine) or remote (run on a remote Ants server).
 
 For local projects, you can either:
 - Provide an explicit filesystem path to the project directory
-- Omit the path and set useDefaultDirectory to true — the project will be created in the default projects directory (e.g., "<Documents>/OpenMgr Projects/<project-name>"), and the directory will be created automatically if it does not exist
+- Omit the path and set useDefaultDirectory to true — the project will be created in the default projects directory (e.g., "<Documents>/Ants Projects/<project-name>"), and the directory will be created automatically if it does not exist
 
 For remote projects, also provide the remoteServerId of an existing remote server.`,
   parameters: z.object({
@@ -201,7 +201,7 @@ Use director_list_projects first to get the project ID.`,
 export const removeProjectTool = defineTool({
   name: "director_remove_project",
   description:
-    "Remove a project from OpenMgr. This does NOT delete any files on disk — it only removes the project from the app's configuration. Use director_list_projects first to get the project ID.",
+    "Remove a project from Ants. This does NOT delete any files on disk — it only removes the project from the app's configuration. Use director_list_projects first to get the project ID.",
   parameters: z.object({
     projectId: z.string().describe("ID of the project to remove"),
   }),
@@ -215,7 +215,7 @@ export const removeProjectTool = defineTool({
       await director.removeProject(params.projectId);
       return {
         output:
-          "Project removed from OpenMgr. No files were deleted from disk.",
+          "Project removed from Ants. No files were deleted from disk.",
       };
     } catch (err) {
       return {

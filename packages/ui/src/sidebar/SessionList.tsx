@@ -42,7 +42,7 @@ export function SessionList({
   }
 
   return (
-    <View testID="openmgr-session-list" style={styles.list}>
+    <View testID="ants-session-list" style={styles.list}>
       {sessions.map((session) => (
         <SessionListItem
           key={session.id}

@@ -16,7 +16,7 @@ import type {
   ToolCall,
   PermissionResponse,
   QuestionResponse,
-} from "@openmgr/agent-core";
+} from "@ants/agent-core";
 
 /**
  * Format a tool call's arguments into a short, readable summary.

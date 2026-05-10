@@ -75,7 +75,7 @@ export function ChatInput({
   };
 
   return (
-    <View testID="openmgr-chat-input" style={styles.wrapper}>
+    <View testID="ants-chat-input" style={styles.wrapper}>
       {/* Attachments preview */}
       {attachments && attachments.length > 0 && (
         <View style={styles.attachments}>
@@ -143,7 +143,7 @@ export function ChatInput({
 
         <TextInput
           ref={inputRef}
-          testID="openmgr-chat-input-field"
+          testID="ants-chat-input-field"
           style={[
             styles.input,
             { color: colors.text.primary },
@@ -162,7 +162,7 @@ export function ChatInput({
         {isProcessing ? (
           <View style={styles.actionButton}>
             <Pressable
-              testID="openmgr-chat-cancel"
+              testID="ants-chat-cancel"
               style={[styles.cancelButton, { backgroundColor: colors.bg.tertiary }]}
               onPress={onCancel}
             >
@@ -172,7 +172,7 @@ export function ChatInput({
         ) : (
           <View style={styles.actionButton}>
             <Pressable
-              testID="openmgr-chat-send"
+              testID="ants-chat-send"
               style={[
                 styles.sendButton,
                 {

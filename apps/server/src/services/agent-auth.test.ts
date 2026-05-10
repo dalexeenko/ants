@@ -5,11 +5,11 @@ import { EncryptionService } from './encryption.js';
 import { randomBytes } from 'crypto';
 
 // Mock the auth-core module for Anthropic token refresh
-vi.mock('@openmgr/agent-auth-core', () => ({
+vi.mock('@ants/agent-auth-core', () => ({
   refreshAccessToken: vi.fn(),
 }));
 
-import { refreshAccessToken } from '@openmgr/agent-auth-core';
+import { refreshAccessToken } from '@ants/agent-auth-core';
 
 // Generate a random 32-byte key for tests
 const TEST_ENCRYPTION_KEY = randomBytes(32).toString('base64');

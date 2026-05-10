@@ -1,5 +1,5 @@
 {
-  "name": "@openmgr/maestro-mcp",
+  "name": "@ants/maestro-mcp",
   "version": "0.1.0",
   "private": true,
   "description": "MCP server wrapping Maestro CLI for AI agent mobile testing",

@@ -1,7 +1,7 @@
 {
-  "name": "@openmgr/agent-storage",
+  "name": "@ants/agent-storage",
   "version": "0.1.0",
-  "description": "Session and message management layer for @openmgr/agent",
+  "description": "Session and message management layer for @ants/agent",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -31,10 +31,10 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@openmgr/agent-core": "workspace:*",
-    "@openmgr/agent-database": "workspace:*",
-    "@openmgr/agent-database-core": "workspace:*",
-    "@openmgr/agent-providers": "workspace:*"
+    "@ants/agent-core": "workspace:*",
+    "@ants/agent-database": "workspace:*",
+    "@ants/agent-database-core": "workspace:*",
+    "@ants/agent-providers": "workspace:*"
   },
   "peerDependencies": {
     "drizzle-orm": "^0.45.1"
@@ -44,7 +44,7 @@
     "vitest": "^4.0.0"
   },
   "keywords": [
-    "openmgr",
+    "ants",
     "agent",
     "storage",
     "sqlite",
@@ -53,7 +53,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/openmgr/agent.git",
+    "url": "git+https://github.com/ants/agent.git",
     "directory": "packages/storage"
   }
 }

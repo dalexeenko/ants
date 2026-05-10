@@ -1,7 +1,7 @@
 /**
- * @openmgr/agent-cli
+ * @ants/agent-cli
  *
- * Command-line interface for OpenMgr Agent
+ * Command-line interface for Ants Agent
  */
 
 export { Spinner, DebugLogger, debug } from "./utils.js";

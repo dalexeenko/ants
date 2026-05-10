@@ -1,8 +1,8 @@
 import { spawn } from "child_process";
 import { resolve, dirname, basename, join } from "path";
 import { readFile, writeFile, stat, mkdir, rm } from "fs/promises";
-import type { AgentPlugin, AgentInterface, Filesystem } from "@openmgr/agent-core";
-import type { SessionManager } from "@openmgr/agent-storage";
+import type { AgentPlugin, AgentInterface, Filesystem } from "@ants/agent-core";
+import type { SessionManager } from "@ants/agent-storage";
 import { WorktreeManager } from "./manager.js";
 import {
   worktreeCreateTool,
@@ -127,7 +127,7 @@ function createDefaultFilesystem(): WorktreeFilesystem {
  * 
  * @example
  * ```ts
- * import { worktreePlugin } from "@openmgr/agent-worktree";
+ * import { worktreePlugin } from "@ants/agent-worktree";
  * 
  * const agent = await createAgent({ ... });
  * await agent.use(worktreePlugin());
@@ -144,7 +144,7 @@ export function worktreePlugin(options: WorktreePluginOptions = {}): AgentPlugin
   const filesystem = options.filesystem ?? createDefaultFilesystem();
   
   return {
-    name: "@openmgr/agent-worktree",
+    name: "@ants/agent-worktree",
     version: "0.1.0",
     
     tools: [

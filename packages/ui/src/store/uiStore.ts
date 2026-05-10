@@ -440,7 +440,7 @@ export const useUIStore = create<UIState>()(
       },
     }),
     {
-      name: 'openmgr-ui-store',
+      name: 'ants-ui-store',
       version: 4, // Bump for session-scoped tab state
       storage: getPersistStorage(),
       partialize: (state) => ({

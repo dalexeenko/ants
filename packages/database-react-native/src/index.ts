@@ -1,14 +1,14 @@
 /**
- * @openmgr/agent-database-react-native
+ * @ants/agent-database-react-native
  *
- * React Native SQLite database implementation for OpenMgr Agent using expo-sqlite.
+ * React Native SQLite database implementation for Ants Agent using expo-sqlite.
  *
  * This package provides a React Native compatible database layer that implements
- * the same interface as @openmgr/agent-database for Node.js.
+ * the same interface as @ants/agent-database for Node.js.
  *
  * @example
  * ```typescript
- * import { createReactNativeDatabase } from "@openmgr/agent-database-react-native";
+ * import { createReactNativeDatabase } from "@ants/agent-database-react-native";
  * import * as SQLite from "expo-sqlite";
  *
  * // Create a database connection
@@ -17,7 +17,7 @@
  * });
  *
  * // Use with SessionManager
- * import { SessionManager } from "@openmgr/agent-storage";
+ * import { SessionManager } from "@ants/agent-storage";
  * const sessionManager = new SessionManager(db);
  * ```
  */
@@ -32,10 +32,10 @@ import {
   type DatabaseAdapter,
   type MigrationResult,
   getSchemaStatements,
-} from "@openmgr/agent-database-core";
+} from "@ants/agent-database-core";
 
 // Re-export everything from core
-export * from "@openmgr/agent-database-core";
+export * from "@ants/agent-database-core";
 
 /**
  * The typed database instance for React Native using expo-sqlite.
@@ -63,7 +63,7 @@ export interface ReactNativeDatabaseConnection
  * Default database name for React Native.
  * On React Native, databases are stored in the app's document directory.
  */
-export const DEFAULT_DB_NAME = "openmgr-agent.db";
+export const DEFAULT_DB_NAME = "ants-agent.db";
 
 /**
  * Create a React Native database connection using expo-sqlite.
@@ -75,7 +75,7 @@ export const DEFAULT_DB_NAME = "openmgr-agent.db";
  * @example
  * ```typescript
  * import * as SQLite from "expo-sqlite";
- * import { createReactNativeDatabase } from "@openmgr/agent-database-react-native";
+ * import { createReactNativeDatabase } from "@ants/agent-database-react-native";
  *
  * const { db, close } = createReactNativeDatabase(SQLite, {
  *   path: "my-app.db",
@@ -173,7 +173,7 @@ export function createInMemoryReactNativeDatabase(
  * @example
  * ```typescript
  * import * as SQLite from "expo-sqlite";
- * import { createReactNativeDatabaseAdapter } from "@openmgr/agent-database-react-native";
+ * import { createReactNativeDatabaseAdapter } from "@ants/agent-database-react-native";
  *
  * const adapter = createReactNativeDatabaseAdapter(SQLite);
  * const { db, close } = adapter.createDatabase({ path: "app.db" });

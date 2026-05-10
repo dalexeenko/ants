@@ -14,15 +14,15 @@ import {
 
 describe('parseDeeplink', () => {
   describe('home route', () => {
-    it('should parse openmgr:// as home', () => {
-      const route = parseDeeplink('openmgr://');
+    it('should parse ants:// as home', () => {
+      const route = parseDeeplink('ants://');
       expect(route).toEqual({ type: 'home' });
     });
 
-    it('should return unknown for openmgr:/// (triple slash)', () => {
-      // openmgr:/// has an extra slash that produces a "//" pathname, which
+    it('should return unknown for ants:/// (triple slash)', () => {
+      // ants:/// has an extra slash that produces a "//" pathname, which
       // doesn't match any known route
-      const route = parseDeeplink('openmgr:///');
+      const route = parseDeeplink('ants:///');
       expect(route.type).toBe('unknown');
     });
 
@@ -34,12 +34,12 @@ describe('parseDeeplink', () => {
 
   describe('project route', () => {
     it('should parse project URL', () => {
-      const route = parseDeeplink('openmgr://project/abc-123');
+      const route = parseDeeplink('ants://project/abc-123');
       expect(route).toEqual({ type: 'project', projectId: 'abc-123' });
     });
 
     it('should decode URL-encoded project IDs', () => {
-      const route = parseDeeplink('openmgr://project/my%20project');
+      const route = parseDeeplink('ants://project/my%20project');
       expect(route).toEqual({ type: 'project', projectId: 'my project' });
     });
 
@@ -51,7 +51,7 @@ describe('parseDeeplink', () => {
 
   describe('session route', () => {
     it('should parse session URL', () => {
-      const route = parseDeeplink('openmgr://project/proj-1/session/sess-1');
+      const route = parseDeeplink('ants://project/proj-1/session/sess-1');
       expect(route).toEqual({
         type: 'session',
         projectId: 'proj-1',
@@ -60,7 +60,7 @@ describe('parseDeeplink', () => {
     });
 
     it('should decode URL-encoded IDs in session route', () => {
-      const route = parseDeeplink('openmgr://project/p%201/session/s%202');
+      const route = parseDeeplink('ants://project/p%201/session/s%202');
       expect(route).toEqual({
         type: 'session',
         projectId: 'p 1',
@@ -71,7 +71,7 @@ describe('parseDeeplink', () => {
 
   describe('project-settings route', () => {
     it('should parse project settings URL', () => {
-      const route = parseDeeplink('openmgr://project/proj-1/settings');
+      const route = parseDeeplink('ants://project/proj-1/settings');
       expect(route).toEqual({
         type: 'project-settings',
         projectId: 'proj-1',
@@ -79,7 +79,7 @@ describe('parseDeeplink', () => {
     });
 
     it('should decode URL-encoded project ID in settings', () => {
-      const route = parseDeeplink('openmgr://project/my%20proj/settings');
+      const route = parseDeeplink('ants://project/my%20proj/settings');
       expect(route).toEqual({
         type: 'project-settings',
         projectId: 'my proj',
@@ -89,12 +89,12 @@ describe('parseDeeplink', () => {
 
   describe('settings route', () => {
     it('should parse settings URL without section', () => {
-      const route = parseDeeplink('openmgr://settings');
+      const route = parseDeeplink('ants://settings');
       expect(route).toEqual({ type: 'settings' });
     });
 
     it('should parse settings URL with section', () => {
-      const route = parseDeeplink('openmgr://settings/authentication');
+      const route = parseDeeplink('ants://settings/authentication');
       expect(route).toEqual({
         type: 'settings',
         section: 'authentication',
@@ -109,7 +109,7 @@ describe('parseDeeplink', () => {
       'permissions',
       'theme',
     ] as SettingsSectionId[])('should parse settings/%s section', (section) => {
-      const route = parseDeeplink(`openmgr://settings/${section}`);
+      const route = parseDeeplink(`ants://settings/${section}`);
       expect(route).toEqual({ type: 'settings', section });
     });
 
@@ -121,7 +121,7 @@ describe('parseDeeplink', () => {
 
   describe('auth-callback route', () => {
     it('should parse auth callback with code', () => {
-      const route = parseDeeplink('openmgr://auth/callback?code=abc123');
+      const route = parseDeeplink('ants://auth/callback?code=abc123');
       expect(route).toEqual({
         type: 'auth-callback',
         code: 'abc123',
@@ -130,7 +130,7 @@ describe('parseDeeplink', () => {
     });
 
     it('should parse auth callback with code and state', () => {
-      const route = parseDeeplink('openmgr://auth/callback?code=abc&state=xyz');
+      const route = parseDeeplink('ants://auth/callback?code=abc&state=xyz');
       expect(route).toEqual({
         type: 'auth-callback',
         code: 'abc',
@@ -139,12 +139,12 @@ describe('parseDeeplink', () => {
     });
 
     it('should return unknown for auth callback without code', () => {
-      const route = parseDeeplink('openmgr://auth/callback');
+      const route = parseDeeplink('ants://auth/callback');
       expect(route.type).toBe('unknown');
     });
 
     it('should return unknown for auth callback with empty code', () => {
-      const route = parseDeeplink('openmgr://auth/callback?code=');
+      const route = parseDeeplink('ants://auth/callback?code=');
       // Empty string is falsy, so this falls through to unknown
       expect(route.type).toBe('unknown');
     });
@@ -152,7 +152,7 @@ describe('parseDeeplink', () => {
 
   describe('connect route', () => {
     it('should parse connect URL with url param', () => {
-      const route = parseDeeplink('openmgr://connect?url=https://server.example.com');
+      const route = parseDeeplink('ants://connect?url=https://server.example.com');
       expect(route).toEqual({
         type: 'connect',
         url: 'https://server.example.com',
@@ -162,7 +162,7 @@ describe('parseDeeplink', () => {
 
     it('should parse connect URL with url and name params', () => {
       const route = parseDeeplink(
-        'openmgr://connect?url=https://server.com&name=My%20Server',
+        'ants://connect?url=https://server.com&name=My%20Server',
       );
       expect(route).toEqual({
         type: 'connect',
@@ -172,14 +172,14 @@ describe('parseDeeplink', () => {
     });
 
     it('should return unknown for connect without url param', () => {
-      const route = parseDeeplink('openmgr://connect');
+      const route = parseDeeplink('ants://connect');
       expect(route.type).toBe('unknown');
     });
   });
 
   describe('open route', () => {
     it('should parse open URL with path param', () => {
-      const route = parseDeeplink('openmgr://open?path=/home/user/project');
+      const route = parseDeeplink('ants://open?path=/home/user/project');
       expect(route).toEqual({
         type: 'open',
         path: '/home/user/project',
@@ -187,12 +187,12 @@ describe('parseDeeplink', () => {
     });
 
     it('should return unknown for open without path param', () => {
-      const route = parseDeeplink('openmgr://open');
+      const route = parseDeeplink('ants://open');
       expect(route.type).toBe('unknown');
     });
 
     it('should handle URL-encoded paths', () => {
-      const route = parseDeeplink('openmgr://open?path=%2Fhome%2Fuser%2Fmy%20project');
+      const route = parseDeeplink('ants://open?path=%2Fhome%2Fuser%2Fmy%20project');
       expect(route).toEqual({
         type: 'open',
         path: '/home/user/my project',
@@ -202,10 +202,10 @@ describe('parseDeeplink', () => {
 
   describe('unknown / invalid routes', () => {
     it('should return unknown for unrecognized path', () => {
-      const route = parseDeeplink('openmgr://some/random/path');
+      const route = parseDeeplink('ants://some/random/path');
       expect(route).toEqual({
         type: 'unknown',
-        url: 'openmgr://some/random/path',
+        url: 'ants://some/random/path',
       });
     });
 
@@ -224,12 +224,12 @@ describe('parseDeeplink', () => {
     });
 
     it('should handle http:// URLs (non-scheme)', () => {
-      const route = parseDeeplink('http://openmgr/project/abc');
+      const route = parseDeeplink('http://ants/project/abc');
       expect(route).toEqual({ type: 'project', projectId: 'abc' });
     });
 
     it('should return unknown for deeply nested unrecognized paths', () => {
-      const route = parseDeeplink('openmgr://project/abc/session/def/extra');
+      const route = parseDeeplink('ants://project/abc/session/def/extra');
       expect(route.type).toBe('unknown');
     });
   });
@@ -240,17 +240,17 @@ describe('parseDeeplink', () => {
 describe('buildDeeplink', () => {
   it('should build home URL', () => {
     const url = buildDeeplink({ type: 'home' });
-    expect(url).toBe('openmgr://');
+    expect(url).toBe('ants://');
   });
 
   it('should build project URL', () => {
     const url = buildDeeplink({ type: 'project', projectId: 'proj-1' });
-    expect(url).toBe('openmgr://project/proj-1');
+    expect(url).toBe('ants://project/proj-1');
   });
 
   it('should encode special characters in project ID', () => {
     const url = buildDeeplink({ type: 'project', projectId: 'my project' });
-    expect(url).toBe('openmgr://project/my%20project');
+    expect(url).toBe('ants://project/my%20project');
   });
 
   it('should build session URL', () => {
@@ -259,27 +259,27 @@ describe('buildDeeplink', () => {
       projectId: 'proj-1',
       sessionId: 'sess-1',
     });
-    expect(url).toBe('openmgr://project/proj-1/session/sess-1');
+    expect(url).toBe('ants://project/proj-1/session/sess-1');
   });
 
   it('should build project-settings URL', () => {
     const url = buildDeeplink({ type: 'project-settings', projectId: 'proj-1' });
-    expect(url).toBe('openmgr://project/proj-1/settings');
+    expect(url).toBe('ants://project/proj-1/settings');
   });
 
   it('should build settings URL without section', () => {
     const url = buildDeeplink({ type: 'settings' });
-    expect(url).toBe('openmgr://settings');
+    expect(url).toBe('ants://settings');
   });
 
   it('should build settings URL with section', () => {
     const url = buildDeeplink({ type: 'settings', section: 'authentication' });
-    expect(url).toBe('openmgr://settings/authentication');
+    expect(url).toBe('ants://settings/authentication');
   });
 
   it('should build auth-callback URL with code only', () => {
     const url = buildDeeplink({ type: 'auth-callback', code: 'mycode' });
-    expect(url).toBe('openmgr://auth/callback?code=mycode');
+    expect(url).toBe('ants://auth/callback?code=mycode');
   });
 
   it('should build auth-callback URL with code and state', () => {
@@ -290,7 +290,7 @@ describe('buildDeeplink', () => {
     });
     expect(url).toContain('code=mycode');
     expect(url).toContain('state=mystate');
-    expect(url).toMatch(/^openmgr:\/\/auth\/callback\?/);
+    expect(url).toMatch(/^ants:\/\/auth\/callback\?/);
   });
 
   it('should build connect URL with url only', () => {
@@ -299,7 +299,7 @@ describe('buildDeeplink', () => {
       url: 'https://server.com',
     });
     expect(url).toContain('url=https');
-    expect(url).toMatch(/^openmgr:\/\/connect\?/);
+    expect(url).toMatch(/^ants:\/\/connect\?/);
   });
 
   it('should build connect URL with url and name', () => {
@@ -310,12 +310,12 @@ describe('buildDeeplink', () => {
     });
     expect(url).toContain('url=');
     expect(url).toContain('name=My+Server');
-    expect(url).toMatch(/^openmgr:\/\/connect\?/);
+    expect(url).toMatch(/^ants:\/\/connect\?/);
   });
 
   it('should build open URL', () => {
     const url = buildDeeplink({ type: 'open', path: '/home/user/project' });
-    expect(url).toBe('openmgr://open?path=%2Fhome%2Fuser%2Fproject');
+    expect(url).toBe('ants://open?path=%2Fhome%2Fuser%2Fproject');
   });
 
   it('should encode spaces in open path', () => {
@@ -442,11 +442,11 @@ describe('round-trip: buildDeeplink → parseDeeplink', () => {
 
 describe('constants', () => {
   it('should export correct scheme', () => {
-    expect(DEEPLINK_SCHEME).toBe('openmgr');
+    expect(DEEPLINK_SCHEME).toBe('ants');
   });
 
   it('should export correct prefix', () => {
-    expect(DEEPLINK_PREFIX).toBe('openmgr://');
+    expect(DEEPLINK_PREFIX).toBe('ants://');
   });
 });
 
@@ -457,7 +457,7 @@ describe('createDeeplinkHandler', () => {
     const handler = vi.fn();
     const processUrl = createDeeplinkHandler(handler);
 
-    processUrl('openmgr://project/abc');
+    processUrl('ants://project/abc');
 
     expect(handler).toHaveBeenCalledWith({
       type: 'project',
@@ -469,7 +469,7 @@ describe('createDeeplinkHandler', () => {
     const handler = vi.fn().mockResolvedValue(undefined);
     const processUrl = createDeeplinkHandler(handler);
 
-    await processUrl('openmgr://settings');
+    await processUrl('ants://settings');
 
     expect(handler).toHaveBeenCalledWith({ type: 'settings' });
   });
@@ -478,11 +478,11 @@ describe('createDeeplinkHandler', () => {
     const handler = vi.fn();
     const processUrl = createDeeplinkHandler(handler);
 
-    processUrl('openmgr://garbage/path');
+    processUrl('ants://garbage/path');
 
     expect(handler).toHaveBeenCalledWith({
       type: 'unknown',
-      url: 'openmgr://garbage/path',
+      url: 'ants://garbage/path',
     });
   });
 });

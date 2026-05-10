@@ -102,7 +102,7 @@ export type EnvResolver = (varName: string) => string | undefined;
 /**
  * Default environment resolver - returns undefined.
  * In React Native or browser environments, provide a custom resolver.
- * For Node.js environments, use the resolver from @openmgr/agent-mcp-stdio.
+ * For Node.js environments, use the resolver from @ants/agent-mcp-stdio.
  */
 export const defaultEnvResolver: EnvResolver = (_varName: string) => {
   // Default implementation returns undefined - it's up to the platform-specific

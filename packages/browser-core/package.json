@@ -1,7 +1,7 @@
 {
-  "name": "@openmgr/agent-browser-core",
+  "name": "@ants/agent-browser-core",
   "version": "0.1.0",
-  "description": "Core browser controller types and tools for OpenMgr Agent",
+  "description": "Core browser controller types and tools for Ants Agent",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -20,7 +20,7 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@openmgr/agent-core": "workspace:*",
+    "@ants/agent-core": "workspace:*",
     "zod": "^3.23.0"
   },
   "devDependencies": {

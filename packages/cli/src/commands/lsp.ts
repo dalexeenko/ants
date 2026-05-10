@@ -2,14 +2,14 @@ import type { Command } from "commander";
 import chalk from "chalk";
 import { existsSync } from "fs";
 import { resolve } from "path";
-import { loadConfig } from "@openmgr/agent-config-xdg";
-import type { LspServerConfig } from "@openmgr/agent-core";
+import { loadConfig } from "@ants/agent-config-xdg";
+import type { LspServerConfig } from "@ants/agent-core";
 import {
   LspManager,
   DEFAULT_LANGUAGE_SERVERS,
   getLanguageId,
   LANGUAGE_IDS,
-} from "@openmgr/agent-lsp";
+} from "@ants/agent-lsp";
 
 export function registerLspCommands(program: Command): void {
   const lspCmd = program

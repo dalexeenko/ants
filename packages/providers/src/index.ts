@@ -1,7 +1,7 @@
 /**
- * @openmgr/agent-providers
+ * @ants/agent-providers
  * 
- * LLM providers for @openmgr/agent
+ * LLM providers for @ants/agent
  * 
  * Supported providers:
  * - Anthropic (Claude models)
@@ -12,7 +12,7 @@
  * - xAI (Grok models)
  */
 
-import type { AgentPlugin, LLMProvider } from "@openmgr/agent-core";
+import type { AgentPlugin, LLMProvider } from "@ants/agent-core";
 import { AnthropicProvider } from "./anthropic.js";
 import { OpenAIProvider } from "./openai.js";
 import { GoogleProvider } from "./google.js";
@@ -91,7 +91,7 @@ export function createProvider(
  * Plugin that registers all LLM providers with the agent
  */
 export const providersPlugin: AgentPlugin = {
-  name: "@openmgr/agent-providers",
+  name: "@ants/agent-providers",
   version: "0.1.0",
   providers: [
     {

@@ -8,7 +8,7 @@ describe('ensureDirectory', () => {
   let testDir: string;
 
   beforeEach(() => {
-    testDir = join(tmpdir(), `openmgr-test-${Date.now()}`);
+    testDir = join(tmpdir(), `ants-test-${Date.now()}`);
   });
 
   afterEach(() => {
@@ -40,7 +40,7 @@ describe('readJsonFile', () => {
   let testDir: string;
 
   beforeEach(() => {
-    testDir = join(tmpdir(), `openmgr-test-${Date.now()}`);
+    testDir = join(tmpdir(), `ants-test-${Date.now()}`);
     mkdirSync(testDir, { recursive: true });
   });
 

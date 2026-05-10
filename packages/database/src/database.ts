@@ -15,14 +15,14 @@ import {
   type DatabaseConnection,
   type DatabaseAdapter,
   getSchemaStatements,
-} from "@openmgr/agent-database-core";
+} from "@ants/agent-database-core";
 
 /**
  * The typed database instance for Node.js using better-sqlite3.
  */
 export type AgentDatabase = BetterSQLite3Database<Schema>;
 
-const DEFAULT_CONFIG_DIR = join(homedir(), ".config", "openmgr");
+const DEFAULT_CONFIG_DIR = join(homedir(), ".config", "ants");
 const DEFAULT_DB_PATH = join(DEFAULT_CONFIG_DIR, "agent.db");
 
 let defaultDb: AgentDatabase | null = null;
@@ -37,7 +37,7 @@ function ensureDirectoryExists(dir: string): void {
 
 /**
  * Get or create the default database connection.
- * Uses ~/.config/openmgr/agent.db by default.
+ * Uses ~/.config/ants/agent.db by default.
  */
 export function getDb(config?: DatabaseConfig): AgentDatabase {
   const dbPath = config?.path ?? DEFAULT_DB_PATH;

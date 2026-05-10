@@ -24,11 +24,11 @@ test.describe.skip('Mode Picker', () => {
   });
 
   test('should display the mode picker', async () => {
-    await expect(page.getByTestId('openmgr-mode-picker')).toBeVisible();
+    await expect(page.getByTestId('ants-mode-picker')).toBeVisible();
   });
 
   test('should show plan and build options', async () => {
-    await expect(page.getByTestId('openmgr-mode-option-plan')).toBeVisible();
-    await expect(page.getByTestId('openmgr-mode-option-build')).toBeVisible();
+    await expect(page.getByTestId('ants-mode-option-plan')).toBeVisible();
+    await expect(page.getByTestId('ants-mode-option-build')).toBeVisible();
   });
 });

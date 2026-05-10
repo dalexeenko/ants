@@ -1,10 +1,10 @@
 /**
- * @openmgr/agent-skills-loader
+ * @ants/agent-skills-loader
  *
- * Filesystem-based skill loading for OpenMgr Agent.
+ * Filesystem-based skill loading for Ants Agent.
  * Provides functions to discover and load skills from:
- * - Local project: .openmgr/skills/
- * - Global user: ~/.config/openmgr/skills/
+ * - Local project: .ants/skills/
+ * - Global user: ~/.config/ants/skills/
  * - Bundled: shipped with this package
  */
 
@@ -20,12 +20,12 @@ import type {
   SkillReference,
   AgentPlugin,
   PluginSkillSource,
-} from "@openmgr/agent-core";
+} from "@ants/agent-core";
 import {
   SkillLoadError,
   SkillNotFoundError,
   parseSkillMd,
-} from "@openmgr/agent-core";
+} from "@ants/agent-core";
 
 // Re-export types and functions for convenience
 export type { SkillMetadata, LoadedSkill, SkillSource, SkillReference };
@@ -133,8 +133,8 @@ function toPluginSkillSources(): PluginSkillSource[] {
  *
  * @example
  * ```ts
- * import { Agent } from "@openmgr/agent-core";
- * import { skillsBundledPlugin } from "@openmgr/agent-skills-loader";
+ * import { Agent } from "@ants/agent-core";
+ * import { skillsBundledPlugin } from "@ants/agent-skills-loader";
  *
  * const agent = new Agent({ ... });
  * await agent.use(skillsBundledPlugin());
@@ -232,9 +232,9 @@ export async function loadSkillMetadata(
  * Skill discovery paths in priority order
  */
 export interface SkillPaths {
-  /** Project-local: .openmgr/skills/ in working directory */
+  /** Project-local: .ants/skills/ in working directory */
   local: string;
-  /** Global user: ~/.config/openmgr/skills/ */
+  /** Global user: ~/.config/ants/skills/ */
   global: string;
   /** Bundled: shipped with the package */
   bundled: string;
@@ -260,11 +260,11 @@ export function getSkillPaths(
   options: { additionalBundledPaths?: string[]; bundledPath?: string } = {}
 ): SkillPaths {
   // Default bundled path - this may not exist if called outside the core package
-  const defaultBundledPath = options.bundledPath ?? join(workingDirectory, ".openmgr", "bundled-skills");
+  const defaultBundledPath = options.bundledPath ?? join(workingDirectory, ".ants", "bundled-skills");
   
   return {
-    local: join(workingDirectory, ".openmgr", "skills"),
-    global: join(homedir(), ".config", "openmgr", "skills"),
+    local: join(workingDirectory, ".ants", "skills"),
+    global: join(homedir(), ".config", "ants", "skills"),
     bundled: defaultBundledPath,
     additionalBundled: options.additionalBundledPaths ?? [],
   };

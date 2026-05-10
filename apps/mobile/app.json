@@ -1,12 +1,12 @@
 {
   "expo": {
-    "name": "OpenMgr",
-    "slug": "openmgr",
+    "name": "Ants",
+    "slug": "ants",
     "version": "0.1.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
-    "scheme": "openmgr",
+    "scheme": "ants",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -17,16 +17,16 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.nottheworstdev.openmgr",
+      "bundleIdentifier": "com.nottheworstdev.ants",
       "associatedDomains": [
-        "applinks:openmgr.dev",
-        "applinks:www.openmgr.dev"
+        "applinks:ants.dev",
+        "applinks:www.ants.dev"
       ],
       "infoPlist": {
         "CFBundleURLTypes": [
           {
             "CFBundleURLSchemes": [
-              "openmgr"
+              "ants"
             ]
           }
         ]
@@ -37,14 +37,14 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "dev.openmgr.app",
+      "package": "dev.ants.app",
       "intentFilters": [
         {
           "action": "VIEW",
           "autoVerify": true,
           "data": [
             {
-              "scheme": "openmgr"
+              "scheme": "ants"
             }
           ],
           "category": [
@@ -58,7 +58,7 @@
           "data": [
             {
               "scheme": "https",
-              "host": "openmgr.dev",
+              "host": "ants.dev",
               "pathPrefix": "/app"
             }
           ],
@@ -71,7 +71,7 @@
     },
     "runtimeVersion": "0.1.0",
     "updates": {
-      "url": "https://updates.openmgr.ai",
+      "url": "https://updates.ants.ai",
       "enabled": true,
       "checkAutomatically": "ON_LOAD",
       "fallbackToCacheTimeout": 0

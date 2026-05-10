@@ -9,10 +9,10 @@
  *   POST /setup         — create the initial admin account
  *
  * Security:
- *   - If OPENMGR_SETUP_TOKEN is set, the POST /setup request must include the
+ *   - If ANTS_SETUP_TOKEN is set, the POST /setup request must include the
  *     matching token. This prevents unauthorized users from claiming admin on
  *     a publicly accessible deployment.
- *   - If OPENMGR_SETUP_TOKEN is not set, the first person to POST /setup
+ *   - If ANTS_SETUP_TOKEN is not set, the first person to POST /setup
  *     claims admin (suitable for local / trusted-network deployments).
  *   - Once setup is complete (an admin exists), both endpoints become no-ops.
  */
@@ -29,7 +29,7 @@ import { isSecure } from '../utils/request.js';
 
 const log = createLogger('setup-routes');
 
-const SESSION_COOKIE = 'openmgr_session';
+const SESSION_COOKIE = 'ants_session';
 const SESSION_MAX_AGE = 7 * 24 * 60 * 60; // 7 days in seconds
 
 interface SetupRouteDeps {

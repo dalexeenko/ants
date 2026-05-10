@@ -1,7 +1,7 @@
 {
-  "name": "@openmgr/agent-database-core",
+  "name": "@ants/agent-database-core",
   "version": "0.1.0",
-  "description": "Database schema, types, and interfaces for OpenMgr Agent (React Native compatible)",
+  "description": "Database schema, types, and interfaces for Ants Agent (React Native compatible)",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -31,5 +31,5 @@
   "peerDependencies": {
     "drizzle-orm": "^0.45.1"
   },
-  "keywords": ["openmgr", "agent", "database", "schema", "react-native"]
+  "keywords": ["ants", "agent", "database", "schema", "react-native"]
 }

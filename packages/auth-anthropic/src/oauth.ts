@@ -2,7 +2,7 @@
  * Anthropic OAuth implementation.
  *
  * This module provides OAuth authentication for Anthropic APIs using
- * the platform-agnostic core from @openmgr/agent-auth-core.
+ * the platform-agnostic core from @ants/agent-auth-core.
  *
  * Uses WebCrypto API for cross-platform compatibility (Node.js, React Native, browsers).
  */
@@ -12,14 +12,14 @@ import type {
   OAuthTokenStore,
   PKCEUtils,
   OAuthFlowHandler,
-} from "@openmgr/agent-auth-core";
+} from "@ants/agent-auth-core";
 import {
   ANTHROPIC_OAUTH_CONFIG,
   buildAuthorizationUrl,
   exchangeCodeForTokens,
   refreshAccessToken as coreRefreshAccessToken,
   shouldRefreshTokens,
-} from "@openmgr/agent-auth-core";
+} from "@ants/agent-auth-core";
 
 // Re-export types and functions from core
 export type { OAuthTokens, OAuthTokenStore, PKCEUtils, OAuthFlowHandler };

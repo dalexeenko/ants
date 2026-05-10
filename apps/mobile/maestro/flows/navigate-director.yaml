@@ -3,12 +3,12 @@ appId: host.exp.Exponent
 ---
 - launchApp
 - tapOn:
-    id: "openmgr-drawer-toggle"
+    id: "ants-drawer-toggle"
 - assertVisible:
-    id: "openmgr-drawer"
+    id: "ants-drawer"
 - tapOn:
-    id: "openmgr-drawer-director"
+    id: "ants-drawer-director"
 - assertVisible:
-    id: "openmgr-screen-director"
+    id: "ants-screen-director"
 - assertVisible:
-    id: "openmgr-director-screen"
+    id: "ants-director-screen"

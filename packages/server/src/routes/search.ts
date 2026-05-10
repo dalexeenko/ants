@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import type { SearchSessionsOptions, SearchMessagesOptions } from "@openmgr/agent-storage";
+import type { SearchSessionsOptions, SearchMessagesOptions } from "@ants/agent-storage";
 import type { RouteContext } from "./types.js";
 
 /**

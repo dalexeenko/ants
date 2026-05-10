@@ -2,7 +2,7 @@
  * Portable session manager exports for React Native.
  * 
  * This module re-exports the SessionManager without Node.js-specific dependencies.
- * Use this in React Native apps with @openmgr/agent-database-react-native.
+ * Use this in React Native apps with @ants/agent-database-react-native.
  */
 
 export {
@@ -39,4 +39,4 @@ export {
   type CompactionHistoryInsert,
   type ToolCallData,
   type ToolResultData,
-} from "@openmgr/agent-database-core";
+} from "@ants/agent-database-core";

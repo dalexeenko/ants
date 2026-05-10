@@ -1,12 +1,12 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { OpenMgrServerClient } from './client.js';
+import { AntsServerClient } from './client.js';
 
-describe('OpenMgrServerClient', () => {
-  let client: OpenMgrServerClient;
+describe('AntsServerClient', () => {
+  let client: AntsServerClient;
   let mockFetch: ReturnType<typeof vi.fn>;
   
   beforeEach(() => {
-    client = new OpenMgrServerClient({
+    client = new AntsServerClient({
       baseUrl: 'http://localhost:6647',
       secret: 'test-secret',
     });

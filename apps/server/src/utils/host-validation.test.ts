@@ -86,7 +86,7 @@ describe('createHostValidation', () => {
   });
 
   describe('explicitly allowed hosts', () => {
-    const app = createApp(['example.com', 'openmgr.internal']);
+    const app = createApp(['example.com', 'ants.internal']);
 
     it('should allow a configured host', async () => {
       const res = await app.request('/test', { headers: { host: 'example.com' } });
@@ -99,7 +99,7 @@ describe('createHostValidation', () => {
     });
 
     it('should allow the second configured host', async () => {
-      const res = await app.request('/test', { headers: { host: 'openmgr.internal' } });
+      const res = await app.request('/test', { headers: { host: 'ants.internal' } });
       expect(res.status).toBe(200);
     });
 

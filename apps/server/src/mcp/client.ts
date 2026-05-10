@@ -216,7 +216,7 @@ export interface TerminalCreateResponse {
   createdAt: string;
 }
 
-export class OpenMgrServerClient {
+export class AntsServerClient {
   constructor(private config: ClientConfig) {}
   
   private async request<T>(

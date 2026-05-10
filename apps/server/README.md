@@ -1,4 +1,4 @@
-# OpenMgr Server
+# Ants Server
 
 Self-hosted server for managing AI coding agents. Provides a REST API and web UI for creating projects, running agent sessions, scheduling tasks, and integrating with messaging platforms like Slack.
 
@@ -9,35 +9,35 @@ Designed to be deployed on your own infrastructure - no external services requir
 ### Option 1: npx (fastest)
 
 ```bash
-npx @openmgr/server
+npx @ants/server
 ```
 
 ### Option 2: Global Install
 
 ```bash
-npm install -g @openmgr/server
-openmgr-server
+npm install -g @ants/server
+ants-server
 ```
 
 ### Option 3: Docker
 
 ```bash
 docker run -p 6647:6647 \
-  -v openmgr-data:/data \
-  -v openmgr-workspaces:/workspaces \
-  -e OPENMGR_ENCRYPTION_KEY=$(openssl rand -base64 32) \
-  openmgr/server
+  -v ants-data:/data \
+  -v ants-workspaces:/workspaces \
+  -e ANTS_ENCRYPTION_KEY=$(openssl rand -base64 32) \
+  ants/server
 ```
 
 ### Option 4: Docker Compose
 
 ```bash
-git clone https://github.com/openmgr/server.git
+git clone https://github.com/ants/server.git
 cd server
 docker compose up
 ```
 
-On startup, the server prints a bearer token to the console. Use this token to authenticate with the [OpenMgr App](https://github.com/openmgr/app) or API calls.
+On startup, the server prints a bearer token to the console. Use this token to authenticate with the [Ants App](https://github.com/ants/app) or API calls.
 
 ## Configuration
 
@@ -51,22 +51,22 @@ cp .env.example .env
 
 | Variable | Description |
 |----------|-------------|
-| `OPENMGR_ENCRYPTION_KEY` | 32-byte base64 key for encrypting stored credentials. Generate with: `openssl rand -base64 32` |
+| `ANTS_ENCRYPTION_KEY` | 32-byte base64 key for encrypting stored credentials. Generate with: `openssl rand -base64 32` |
 
 ### Optional
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `OPENMGR_PORT` | `6647` | Port to listen on |
-| `OPENMGR_HOST` | `127.0.0.1` | Bind address |
-| `OPENMGR_SECRET` | Auto-generated | Bearer token for authentication |
-| `OPENMGR_DATA_DIR` | `~/.config/openmgr-server/` | Server data directory |
-| `OPENMGR_WORKSPACES_DIR` | `~/openmgr/` | Project workspace directory |
-| `OPENMGR_AGENT_PATH` | Auto-detected | Path to the OpenMgr Agent binary |
-| `OPENMGR_AUTO_INSTALL_AGENT` | `true` | Auto-install agent if not found |
-| `OPENMGR_MULTI_USER` | `false` | Enable multi-user mode with RBAC |
-| `OPENMGR_CORS_ORIGINS` | | Comma-separated allowed CORS origins |
-| `OPENMGR_MOCK_AGENT` | `false` | Use mock agent for testing |
+| `ANTS_PORT` | `6647` | Port to listen on |
+| `ANTS_HOST` | `127.0.0.1` | Bind address |
+| `ANTS_SECRET` | Auto-generated | Bearer token for authentication |
+| `ANTS_DATA_DIR` | `~/.config/ants-server/` | Server data directory |
+| `ANTS_WORKSPACES_DIR` | `~/ants/` | Project workspace directory |
+| `ANTS_AGENT_PATH` | Auto-detected | Path to the Ants Agent binary |
+| `ANTS_AUTO_INSTALL_AGENT` | `true` | Auto-install agent if not found |
+| `ANTS_MULTI_USER` | `false` | Enable multi-user mode with RBAC |
+| `ANTS_CORS_ORIGINS` | | Comma-separated allowed CORS origins |
+| `ANTS_MOCK_AGENT` | `false` | Use mock agent for testing |
 
 ### Cloudflare Access (Optional)
 
@@ -74,9 +74,9 @@ When both variables are set, Cloudflare Access JWT validation replaces bearer to
 
 | Variable | Description |
 |----------|-------------|
-| `OPENMGR_CF_ACCESS_TEAM_DOMAIN` | Your team domain (e.g., `https://myteam.cloudflareaccess.com`) |
-| `OPENMGR_CF_ACCESS_AUD` | Application Audience tag from your Access app config |
-| `OPENMGR_CF_ACCESS_SET_IDENTITY` | Extract email from CF JWT as request identity (default: `true`) |
+| `ANTS_CF_ACCESS_TEAM_DOMAIN` | Your team domain (e.g., `https://myteam.cloudflareaccess.com`) |
+| `ANTS_CF_ACCESS_AUD` | Application Audience tag from your Access app config |
+| `ANTS_CF_ACCESS_SET_IDENTITY` | Extract email from CF JWT as request identity (default: `true`) |
 
 ## Authentication
 
@@ -86,11 +86,11 @@ The server uses Bearer token auth. Include the token in every request:
 Authorization: Bearer <your-token>
 ```
 
-The token is printed to the console on startup. If `OPENMGR_SECRET` is set, the token is deterministically derived from it.
+The token is printed to the console on startup. If `ANTS_SECRET` is set, the token is deterministically derived from it.
 
 ### Multi-User Mode
 
-Set `OPENMGR_MULTI_USER=true` to enable user accounts with role-based access control:
+Set `ANTS_MULTI_USER=true` to enable user accounts with role-based access control:
 
 - **Admin** - Full access, user management
 - **Operator** - Create/manage projects and sessions
@@ -114,7 +114,7 @@ API keys are encrypted at rest with AES-256-GCM.
 
 ## Web UI
 
-The server includes a built-in web UI at `http://localhost:6647` for managing projects, viewing sessions, and configuring settings. For a full-featured experience, use the [OpenMgr App](https://github.com/openmgr/app).
+The server includes a built-in web UI at `http://localhost:6647` for managing projects, viewing sessions, and configuring settings. For a full-featured experience, use the [Ants App](https://github.com/ants/app).
 
 ## API Overview
 
@@ -167,23 +167,23 @@ For production deployments:
 
 1. **Set a strong encryption key** - `openssl rand -base64 32`
 2. **Use a reverse proxy** - Put nginx or Caddy in front for TLS termination
-3. **Set `OPENMGR_HOST=0.0.0.0`** - To listen on all interfaces
-4. **Set `OPENMGR_SECRET`** - For a stable, known bearer token
-5. **Configure CORS** - Set `OPENMGR_CORS_ORIGINS` for your app domains
+3. **Set `ANTS_HOST=0.0.0.0`** - To listen on all interfaces
+4. **Set `ANTS_SECRET`** - For a stable, known bearer token
+5. **Configure CORS** - Set `ANTS_CORS_ORIGINS` for your app domains
 
 Example with Docker:
 
 ```bash
 docker run -d \
-  --name openmgr-server \
+  --name ants-server \
   -p 6647:6647 \
-  -v /opt/openmgr/data:/data \
-  -v /opt/openmgr/workspaces:/workspaces \
-  -e OPENMGR_HOST=0.0.0.0 \
-  -e OPENMGR_ENCRYPTION_KEY="your-base64-key" \
-  -e OPENMGR_SECRET="your-secret" \
+  -v /opt/ants/data:/data \
+  -v /opt/ants/workspaces:/workspaces \
+  -e ANTS_HOST=0.0.0.0 \
+  -e ANTS_ENCRYPTION_KEY="your-base64-key" \
+  -e ANTS_SECRET="your-secret" \
   --restart unless-stopped \
-  openmgr/server
+  ants/server
 ```
 
 ## Development
@@ -196,7 +196,7 @@ docker run -d \
 ### Setup
 
 ```bash
-git clone https://github.com/openmgr/server.git
+git clone https://github.com/ants/server.git
 cd server
 pnpm install
 

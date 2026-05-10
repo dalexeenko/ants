@@ -1,7 +1,7 @@
 {
-  "name": "@openmgr/agent-auth-react-native",
+  "name": "@ants/agent-auth-react-native",
   "version": "0.1.0",
-  "description": "React Native OAuth authentication for OpenMgr Agent using Expo",
+  "description": "React Native OAuth authentication for Ants Agent using Expo",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -19,7 +19,7 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@openmgr/agent-auth-core": "workspace:*"
+    "@ants/agent-auth-core": "workspace:*"
   },
   "peerDependencies": {
     "expo-auth-session": ">=5.0.0",
@@ -49,11 +49,11 @@
     "typescript": "^5.6.0",
     "vitest": "^4.0.18"
   },
-  "keywords": ["openmgr", "agent", "auth", "oauth", "react-native", "expo"],
+  "keywords": ["ants", "agent", "auth", "oauth", "react-native", "expo"],
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/openmgr/agent.git",
+    "url": "git+https://github.com/ants/agent.git",
     "directory": "packages/auth-react-native"
   }
 }

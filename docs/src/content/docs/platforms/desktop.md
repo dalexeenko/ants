@@ -1,16 +1,16 @@
 ---
 title: Desktop App
-description: The OpenMgr Electron desktop app for managing agents on macOS, Windows, and Linux.
+description: The Ants Electron desktop app for managing agents on macOS, Windows, and Linux.
 sidebar:
   order: 2
 ---
 
-The OpenMgr desktop app is an Electron application that provides a native experience for managing your AI coding agents.
+The Ants desktop app is an Electron application that provides a native experience for managing your AI coding agents.
 
 ## Features
 
-- **Native UI** — Platform-native look and feel using the shared `@openmgr/ui` component library
-- **Server connection** — Connect to any OpenMgr server (local or remote)
+- **Native UI** — Platform-native look and feel using the shared `@ants/ui` component library
+- **Server connection** — Connect to any Ants server (local or remote)
 - **Project management** — Full project, session, and file management
 - **Terminal integration** — Built-in terminal for project workspaces
 
@@ -35,7 +35,7 @@ The build produces platform-specific packages for macOS, Windows, and Linux.
 
 ## Architecture
 
-The desktop app is a thin wrapper around the shared `AppShell` component from `@openmgr/ui`. The renderer process uses react-native-web for cross-platform component compatibility.
+The desktop app is a thin wrapper around the shared `AppShell` component from `@ants/ui`. The renderer process uses react-native-web for cross-platform component compatibility.
 
 - **Main process** — Handles Electron lifecycle, IPC, and platform-specific features
 - **Renderer process** — React UI using the shared component library
@@ -43,7 +43,7 @@ The desktop app is a thin wrapper around the shared `AppShell` component from `@
 
 ## Connecting to a Server
 
-The desktop app connects to an OpenMgr server instance. You can connect to:
+The desktop app connects to an Ants server instance. You can connect to:
 
 - A local server running on `localhost:6647`
 - A remote server at any accessible URL

@@ -12,10 +12,10 @@ describe('resolveImageUrl', () => {
   it('resolves file path via platform resolver', () => {
     const opts: HistoryBlockOptions = {
       projectId: 'proj-1',
-      resolveScreenshotUrl: (pid, path) => `openmgr-screenshot://${pid}/${path}`,
+      resolveScreenshotUrl: (pid, path) => `ants-screenshot://${pid}/${path}`,
     };
     const url = resolveImageUrl({ path: 'screenshots/abc.png' }, opts);
-    expect(url).toBe('openmgr-screenshot://proj-1/screenshots/abc.png');
+    expect(url).toBe('ants-screenshot://proj-1/screenshots/abc.png');
   });
 
   it('returns undefined when no dataUrl and no resolver', () => {

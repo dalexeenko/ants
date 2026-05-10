@@ -8,7 +8,7 @@ import {
   spacing,
   type AgentBridge,
   createLogger,
-} from '@openmgr/ui';
+} from '@ants/ui';
 
 const log = createLogger('FileViewerScreen');
 

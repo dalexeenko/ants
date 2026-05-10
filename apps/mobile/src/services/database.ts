@@ -8,7 +8,7 @@ import {
   createReactNativeDatabase,
   type AgentDatabase,
   type ExpoSQLiteModule,
-} from '@openmgr/agent-react-native';
+} from '@ants/agent-react-native';
 import * as SQLite from 'expo-sqlite';
 
 // Singleton database connection
@@ -23,7 +23,7 @@ export function getDatabase(): AgentDatabase {
     // Cast needed due to expo-sqlite version mismatch between app and agent packages
     dbConnection = createReactNativeDatabase(
       SQLite as unknown as ExpoSQLiteModule,
-      { path: 'openmgr.db' }
+      { path: 'ants.db' }
     );
   }
   return dbConnection.db;

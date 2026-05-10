@@ -1,11 +1,11 @@
 ---
 title: Server & Web UI
-description: The OpenMgr self-hosted server — REST API, built-in web UI, and real-time streaming.
+description: The Ants self-hosted server — REST API, built-in web UI, and real-time streaming.
 sidebar:
   order: 1
 ---
 
-The OpenMgr server is a Hono HTTP server backed by SQLite (via Drizzle ORM). It provides a REST API for all operations and includes a built-in web UI for managing your agents.
+The Ants server is a Hono HTTP server backed by SQLite (via Drizzle ORM). It provides a REST API for all operations and includes a built-in web UI for managing your agents.
 
 ## Web UI
 
@@ -23,7 +23,7 @@ The server includes a built-in web UI at the root URL (`http://localhost:6647` b
 An optional full-featured web app is available at `/app` when enabled:
 
 ```bash
-OPENMGR_WEB_APP=true
+ANTS_WEB_APP=true
 ```
 
 This provides a richer interface with additional features beyond the default server UI.
@@ -40,7 +40,7 @@ Include the token in every request:
 Authorization: Bearer <your-token>
 ```
 
-The token is printed to the console on server startup. Set `OPENMGR_SECRET` for a stable token.
+The token is printed to the console on server startup. Set `ANTS_SECRET` for a stable token.
 
 ### Multi-User Mode
 
@@ -52,4 +52,4 @@ Agent responses are streamed via **Server-Sent Events (SSE)**. When you send a p
 
 ## MCP Server Mode
 
-The server can also act as an MCP (Model Context Protocol) server, allowing external tools and editors to connect to it. The `openmgr-server-mcp` binary is included in the server package.
+The server can also act as an MCP (Model Context Protocol) server, allowing external tools and editors to connect to it. The `ants-server-mcp` binary is included in the server package.

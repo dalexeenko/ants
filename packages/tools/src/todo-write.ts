@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { defineTool } from "@openmgr/agent-core";
+import { defineTool } from "@ants/agent-core";
 
 const DESCRIPTION = `Use this tool to create and manage a structured task list for your current coding session.
 

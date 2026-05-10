@@ -20,7 +20,7 @@ vi.mock('../utils/fs.js', () => ({
   readJsonFile: vi.fn().mockReturnValue({}),
 }));
 
-const CONFIG_DIR = path.join(homedir(), '.config', 'openmgr-mcp');
+const CONFIG_DIR = path.join(homedir(), '.config', 'ants-mcp');
 const CONFIG_FILE = path.join(CONFIG_DIR, 'config.json');
 
 describe('MCP Config Management', () => {
@@ -106,7 +106,7 @@ describe('MCP Tools', () => {
     vi.restoreAllMocks();
   });
   
-  describe('openmgr_server_configure', () => {
+  describe('ants_server_configure', () => {
     it('should save config on successful connection', async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
@@ -118,7 +118,7 @@ describe('MCP Tools', () => {
       vi.resetModules();
       const { handleTool } = await import('./index.js');
       
-      const result = await handleTool('openmgr_server_configure', {
+      const result = await handleTool('ants_server_configure', {
         serverUrl: 'http://localhost:6647',
         secret: 'new-secret',
       });
@@ -136,25 +136,25 @@ describe('MCP Tools', () => {
       vi.resetModules();
       const { handleTool } = await import('./index.js');
       
-      await expect(handleTool('openmgr_server_configure', {
+      await expect(handleTool('ants_server_configure', {
         serverUrl: 'http://localhost:6647',
         secret: 'test',
       })).rejects.toThrow('Failed to connect to server');
     });
   });
   
-  describe('openmgr_server_get_config', () => {
+  describe('ants_server_get_config', () => {
     it('should return not configured when no config exists', async () => {
       mockReadJsonFileAsync.mockResolvedValue(null);
       
       vi.resetModules();
       const { handleTool } = await import('./index.js');
       
-      const result = await handleTool('openmgr_server_get_config', {});
+      const result = await handleTool('ants_server_get_config', {});
       
       expect(JSON.parse(result)).toEqual({
         configured: false,
-        message: 'Not configured. Use openmgr_server_configure first.',
+        message: 'Not configured. Use ants_server_configure first.',
       });
     });
     
@@ -162,7 +162,7 @@ describe('MCP Tools', () => {
       vi.resetModules();
       const { handleTool } = await import('./index.js');
       
-      const result = await handleTool('openmgr_server_get_config', {});
+      const result = await handleTool('ants_server_get_config', {});
       
       expect(JSON.parse(result)).toEqual({
         configured: true,
@@ -171,7 +171,7 @@ describe('MCP Tools', () => {
     });
   });
   
-  describe('openmgr_server_status', () => {
+  describe('ants_server_status', () => {
     it('should return server info', async () => {
       const serverInfo = {
         version: '0.1.0',
@@ -189,7 +189,7 @@ describe('MCP Tools', () => {
       vi.resetModules();
       const { handleTool } = await import('./index.js');
       
-      const result = await handleTool('openmgr_server_status', {});
+      const result = await handleTool('ants_server_status', {});
       
       expect(JSON.parse(result)).toEqual(serverInfo);
     });
@@ -200,13 +200,13 @@ describe('MCP Tools', () => {
       vi.resetModules();
       const { handleTool } = await import('./index.js');
       
-      await expect(handleTool('openmgr_server_status', {}))
+      await expect(handleTool('ants_server_status', {}))
         .rejects.toThrow('Server not configured');
     });
   });
   
   describe('project tools', () => {
-    it('openmgr_projects_list should list projects', async () => {
+    it('ants_projects_list should list projects', async () => {
       const projects = [{ id: 'a1', name: 'Project 1' }];
       
       mockFetch.mockResolvedValueOnce({
@@ -217,12 +217,12 @@ describe('MCP Tools', () => {
       vi.resetModules();
       const { handleTool } = await import('./index.js');
       
-      const result = await handleTool('openmgr_projects_list', {});
+      const result = await handleTool('ants_projects_list', {});
       
       expect(JSON.parse(result)).toEqual({ projects });
     });
     
-    it('openmgr_projects_get should get project by id', async () => {
+    it('ants_projects_get should get project by id', async () => {
       const project = { id: 'a1', name: 'Project 1' };
       
       mockFetch.mockResolvedValueOnce({
@@ -233,12 +233,12 @@ describe('MCP Tools', () => {
       vi.resetModules();
       const { handleTool } = await import('./index.js');
       
-      const result = await handleTool('openmgr_projects_get', { projectId: 'a1' });
+      const result = await handleTool('ants_projects_get', { projectId: 'a1' });
       
       expect(JSON.parse(result)).toEqual(project);
     });
     
-    it('openmgr_projects_create should create project', async () => {
+    it('ants_projects_create should create project', async () => {
       const project = { id: 'a2', name: 'New Project' };
       
       mockFetch.mockResolvedValueOnce({
@@ -249,12 +249,12 @@ describe('MCP Tools', () => {
       vi.resetModules();
       const { handleTool } = await import('./index.js');
       
-      const result = await handleTool('openmgr_projects_create', { name: 'New Project' });
+      const result = await handleTool('ants_projects_create', { name: 'New Project' });
       
       expect(JSON.parse(result)).toEqual(project);
     });
     
-    it('openmgr_projects_delete should delete project', async () => {
+    it('ants_projects_delete should delete project', async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         json: async () => ({ success: true }),
@@ -263,14 +263,14 @@ describe('MCP Tools', () => {
       vi.resetModules();
       const { handleTool } = await import('./index.js');
       
-      const result = await handleTool('openmgr_projects_delete', { projectId: 'a1' });
+      const result = await handleTool('ants_projects_delete', { projectId: 'a1' });
       
       expect(JSON.parse(result)).toEqual({ success: true });
     });
   });
   
   describe('task tools', () => {
-    it('openmgr_tasks_list should list tasks', async () => {
+    it('ants_tasks_list should list tasks', async () => {
       const tasks = [{ id: 't1', name: 'Task 1' }];
       
       mockFetch.mockResolvedValueOnce({
@@ -281,12 +281,12 @@ describe('MCP Tools', () => {
       vi.resetModules();
       const { handleTool } = await import('./index.js');
       
-      const result = await handleTool('openmgr_tasks_list', { projectId: 'a1' });
+      const result = await handleTool('ants_tasks_list', { projectId: 'a1' });
       
       expect(JSON.parse(result)).toEqual({ tasks });
     });
     
-    it('openmgr_tasks_create should create task', async () => {
+    it('ants_tasks_create should create task', async () => {
       const task = { id: 't2', name: 'New Task', prompt: 'Do it', cronSchedule: '0 9 * * *' };
       
       mockFetch.mockResolvedValueOnce({
@@ -297,7 +297,7 @@ describe('MCP Tools', () => {
       vi.resetModules();
       const { handleTool } = await import('./index.js');
       
-      const result = await handleTool('openmgr_tasks_create', {
+      const result = await handleTool('ants_tasks_create', {
         projectId: 'a1',
         name: 'New Task',
         prompt: 'Do it',
@@ -307,7 +307,7 @@ describe('MCP Tools', () => {
       expect(JSON.parse(result)).toEqual(task);
     });
     
-    it('openmgr_tasks_run should run task immediately', async () => {
+    it('ants_tasks_run should run task immediately', async () => {
       const run = { id: 'r1', status: 'running' };
       
       mockFetch.mockResolvedValueOnce({
@@ -318,7 +318,7 @@ describe('MCP Tools', () => {
       vi.resetModules();
       const { handleTool } = await import('./index.js');
       
-      const result = await handleTool('openmgr_tasks_run', { projectId: 'a1', taskId: 't1' });
+      const result = await handleTool('ants_tasks_run', { projectId: 'a1', taskId: 't1' });
       
       expect(JSON.parse(result)).toEqual(run);
     });

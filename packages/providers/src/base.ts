@@ -2,7 +2,7 @@
  * Base types and utilities for LLM providers.
  */
 
-import type { AuthConfig } from "@openmgr/agent-core";
+import type { AuthConfig } from "@ants/agent-core";
 
 export interface ProviderOptions {
   auth?: AuthConfig;

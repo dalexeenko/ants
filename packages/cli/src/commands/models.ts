@@ -9,9 +9,9 @@ import {
   loadLocalConfig,
   saveGlobalConfig,
   saveLocalConfig,
-} from "@openmgr/agent-config-xdg";
-import { isLoggedIn, getValidAccessToken } from "@openmgr/agent-auth-anthropic";
-import { FileTokenStore } from "@openmgr/agent-node";
+} from "@ants/agent-config-xdg";
+import { isLoggedIn, getValidAccessToken } from "@ants/agent-auth-anthropic";
+import { FileTokenStore } from "@ants/agent-node";
 
 // ============================================================================
 // Model Registry
@@ -117,7 +117,7 @@ function getEnvApiKey(provider: string): string | undefined {
 // Model Cache
 // ============================================================================
 
-const CACHE_DIR = join(homedir(), ".config", "openmgr", "cache");
+const CACHE_DIR = join(homedir(), ".config", "ants", "cache");
 const MODELS_CACHE_FILE = join(CACHE_DIR, "models.json");
 
 interface CachedModels {
@@ -334,7 +334,7 @@ export function registerModelsCommands(program: Command): void {
     .description("Show the current model configuration")
     .option("-d, --directory <dir>", "Working directory", process.cwd())
     .action(async (options) => {
-      const { loadConfig } = await import("@openmgr/agent-config-xdg");
+      const { loadConfig } = await import("@ants/agent-config-xdg");
       const config = await loadConfig(options.directory);
 
       console.log(chalk.cyan("\nCurrent Model Configuration:\n"));

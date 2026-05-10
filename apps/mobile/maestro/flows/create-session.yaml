@@ -7,15 +7,15 @@ appId: host.exp.Exponent
 ---
 - launchApp
 - assertVisible:
-    id: "openmgr-home-screen"
+    id: "ants-home-screen"
 
 # Tap the new session "+" button on the first project section.
-# The testID is "openmgr-project-new-session" (from ProjectSection component).
+# The testID is "ants-project-new-session" (from ProjectSection component).
 - tapOn:
-    id: "openmgr-project-new-session"
+    id: "ants-project-new-session"
 
 # Should navigate to a chat/session screen with the chat input visible
 - assertVisible:
-    id: "openmgr-session-screen"
+    id: "ants-session-screen"
 - assertVisible:
-    id: "openmgr-chat-input"
+    id: "ants-chat-input"

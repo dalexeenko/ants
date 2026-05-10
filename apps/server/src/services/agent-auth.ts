@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import { eq } from 'drizzle-orm';
-import { refreshAccessToken as refreshAnthropicToken } from '@openmgr/agent-auth-core';
+import { refreshAccessToken as refreshAnthropicToken } from '@ants/agent-auth-core';
 import type { DrizzleDB } from '../db/index.js';
 import { apiKeys } from '../db/schema.js';
 import { EncryptionService } from './encryption.js';

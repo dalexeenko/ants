@@ -6,7 +6,7 @@ import {
   commandRegistry,
   definePlugin,
   defineTool,
-} from "@openmgr/agent-core";
+} from "@ants/agent-core";
 import { z } from "zod";
 
 describe("Plugin Integration", () => {

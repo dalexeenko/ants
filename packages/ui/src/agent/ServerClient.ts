@@ -1,5 +1,5 @@
 /**
- * ServerClient — Encapsulates all HTTP communication with an OpenMgr server.
+ * ServerClient — Encapsulates all HTTP communication with an Ants server.
  *
  * This class can be used by:
  * - BridgeCore (for remote project operations in desktop/mobile)

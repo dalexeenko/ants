@@ -71,7 +71,7 @@ describe('SettingsPanel', () => {
 
   it('renders the settings panel with testID', () => {
     render(<SettingsPanel />);
-    expect(screen.getByTestId('openmgr-settings-panel')).toBeInTheDocument();
+    expect(screen.getByTestId('ants-settings-panel')).toBeInTheDocument();
   });
 
   it('renders Settings heading', () => {

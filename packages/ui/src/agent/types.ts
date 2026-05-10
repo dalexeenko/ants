@@ -556,7 +556,7 @@ export type AgentEvent =
 export interface DockerConfig {
   /** Enable Docker for this project's agent sessions */
   enabled: boolean;
-  /** Custom Docker image (defaults to openmgr-agent:latest) */
+  /** Custom Docker image (defaults to ants-agent:latest) */
   image?: string;
   /** Extra volume mounts (host:container) */
   volumes?: string[];

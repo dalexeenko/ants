@@ -126,10 +126,10 @@ describe('getServerUrl', () => {
 
   it('should return https:// when x-forwarded-proto is https', async () => {
     const res = await app.request('/test', {
-      headers: { host: 'personal.openmgr.dev', 'x-forwarded-proto': 'https' },
+      headers: { host: 'personal.ants.dev', 'x-forwarded-proto': 'https' },
     });
     const data = await res.json();
-    expect(data.serverUrl).toBe('https://personal.openmgr.dev');
+    expect(data.serverUrl).toBe('https://personal.ants.dev');
   });
 
   it('should preserve port in host header', async () => {

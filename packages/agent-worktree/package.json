@@ -1,7 +1,7 @@
 {
-  "name": "@openmgr/agent-worktree",
+  "name": "@ants/agent-worktree",
   "version": "0.1.0",
-  "description": "Git worktree support for @openmgr/agent - isolate branches with dedicated sessions",
+  "description": "Git worktree support for @ants/agent - isolate branches with dedicated sessions",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -23,8 +23,8 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@openmgr/agent-core": "workspace:*",
-    "@openmgr/agent-storage": "workspace:*",
+    "@ants/agent-core": "workspace:*",
+    "@ants/agent-storage": "workspace:*",
     "zod": "^3.23.0"
   },
   "devDependencies": {
@@ -33,7 +33,7 @@
     "vitest": "^4.0.0"
   },
   "keywords": [
-    "openmgr",
+    "ants",
     "agent",
     "git",
     "worktree"
@@ -41,7 +41,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/openmgr/agent.git",
+    "url": "git+https://github.com/ants/agent.git",
     "directory": "packages/agent-worktree"
   }
 }

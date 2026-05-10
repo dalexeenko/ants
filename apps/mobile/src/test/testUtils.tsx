@@ -5,7 +5,7 @@
 /// <reference types="jest" />
 import React, { ReactNode } from 'react';
 import { render, RenderOptions } from '@testing-library/react-native';
-import { ThemeContext, resolveTheme } from '@openmgr/ui';
+import { ThemeContext, resolveTheme } from '@ants/ui';
 
 /**
  * Custom render function that wraps components with theme context

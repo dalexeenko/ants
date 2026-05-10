@@ -1,8 +1,8 @@
 {
-  "name": "@openmgr/server-ui-e2e",
+  "name": "@ants/server-ui-e2e",
   "version": "0.1.0",
   "private": true,
-  "description": "Playwright E2E tests for the OpenMgr server admin UI",
+  "description": "Playwright E2E tests for the Ants server admin UI",
   "type": "module",
   "scripts": {
     "test:e2e": "playwright test",

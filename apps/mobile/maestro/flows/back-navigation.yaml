@@ -3,18 +3,18 @@ appId: host.exp.Exponent
 ---
 - launchApp
 - assertVisible:
-    id: "openmgr-home-screen"
+    id: "ants-home-screen"
 # Navigate to a different screen first
 - tapOn:
-    id: "openmgr-drawer-toggle"
+    id: "ants-drawer-toggle"
 - tapOn:
-    id: "openmgr-drawer-settings"
+    id: "ants-drawer-settings"
 - assertVisible:
-    id: "openmgr-settings-screen"
+    id: "ants-settings-screen"
 # Navigate back to home via drawer
 - tapOn:
-    id: "openmgr-drawer-toggle"
+    id: "ants-drawer-toggle"
 - tapOn:
-    id: "openmgr-drawer-home"
+    id: "ants-drawer-home"
 - assertVisible:
-    id: "openmgr-home-screen"
+    id: "ants-home-screen"

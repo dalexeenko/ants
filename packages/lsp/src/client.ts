@@ -195,7 +195,7 @@ export class LspClient extends EventEmitter<LspClientEvents> {
     const params: InitializeParams = {
       processId: process.pid,
       clientInfo: {
-        name: "openmgr-agent",
+        name: "ants-agent",
         version: "0.1.0",
       },
       rootUri: this.options.rootUri,

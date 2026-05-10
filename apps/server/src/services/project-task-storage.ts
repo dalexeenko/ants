@@ -8,7 +8,7 @@ import type {
   UpdateTaskInput,
   TaskStatus,
   WebhookResult,
-} from '@openmgr/agent-scheduler';
+} from '@ants/agent-scheduler';
 import type { DrizzleDB } from '../db/index.js';
 import { tasks } from '../db/schema.js';
 
@@ -25,7 +25,7 @@ export interface ServerTaskMetadata extends Record<string, unknown> {
 
 /**
  * TaskStorage implementation that wraps the server's existing database schema.
- * This adapter allows using the generic @openmgr/agent-scheduler with the
+ * This adapter allows using the generic @ants/agent-scheduler with the
  * server's project-scoped task system.
  */
 export class ProjectTaskStorage implements TaskStorage {

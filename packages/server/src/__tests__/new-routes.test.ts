@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { createServer } from '../index.js';
 import type { ServerAgent, ServerState } from '../index.js';
-import type { Message } from '@openmgr/agent-core';
+import type { Message } from '@ants/agent-core';
 
 /**
  * Create a full ServerAgent mock with all methods needed by the server.

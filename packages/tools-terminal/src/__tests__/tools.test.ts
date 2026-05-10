@@ -6,7 +6,7 @@ import { readTool } from '../read.js';
 import { writeTool } from '../write.js';
 import { editTool } from '../edit.js';
 import { globTool } from '../glob.js';
-import type { ToolContext } from '@openmgr/agent-core';
+import type { ToolContext } from '@ants/agent-core';
 
 // Create a temp directory for tests
 let testDir: string;

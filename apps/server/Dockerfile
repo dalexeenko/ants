@@ -1,18 +1,18 @@
 # =============================================================================
-# OpenMgr Server Dockerfile
+# Ants Server Dockerfile
 # =============================================================================
 #
-# Build context: monorepo root (openmgr/)
+# Build context: monorepo root (ants/)
 #
 #   docker build -f apps/server/Dockerfile \
-#     --build-arg IMAGE_TAG=openmgr/server:v1.0.0 \
-#     --build-arg OPENMGR_SERVER_VERSION=v1.0.0 \
-#     -t openmgr/server:v1.0.0 .
+#     --build-arg IMAGE_TAG=ants/server:v1.0.0 \
+#     --build-arg ANTS_SERVER_VERSION=v1.0.0 \
+#     -t ants/server:v1.0.0 .
 #
 # Required build args:
 #   IMAGE_TAG                — baked into the image so the server knows its own
 #                              image name when spawning agent containers.
-#   OPENMGR_SERVER_VERSION   — version string exposed via /health and /info.
+#   ANTS_SERVER_VERSION   — version string exposed via /health and /info.
 #                              Use a git sha for dev builds, a release tag for CI.
 #
 # Optional build args:
@@ -78,7 +78,7 @@ COPY packages/ packages/
 COPY apps/server/ apps/server/
 
 # Build everything the server needs
-RUN pnpm turbo build --filter=@openmgr/server...
+RUN pnpm turbo build --filter=@ants/server...
 
 # Download Playwright's Chromium browser while all deps (including playwright)
 # are still present. The browser is stored in ~/.cache/ms-playwright and will
@@ -90,14 +90,14 @@ RUN pnpm turbo build --filter=@openmgr/server...
 # stage doesn't fail for the lite variant.
 RUN mkdir -p /root/.cache/ms-playwright && \
     if [ "$VARIANT" = "full" ]; then \
-      pnpm --filter @openmgr/agent-browser-sandbox exec playwright install chromium; \
+      pnpm --filter @ants/agent-browser-sandbox exec playwright install chromium; \
     fi
 
 # Remove dev dependencies to slim down the image
 RUN pnpm prune --prod
 
 # ── Strip packages not needed at server runtime (both variants) ────────────
-# The UI packages (@openmgr/ui, @openmgr/app-ui, @openmgr/server-ui) are
+# The UI packages (@ants/ui, @ants/app-ui, @ants/server-ui) are
 # pre-built SPAs whose dist/ is copied into apps/server/dist/ during the build
 # step above. Their npm dependencies (react-native, lucide-react-native,
 # react-native-web, etc.) are no longer needed — the server just serves the
@@ -147,15 +147,15 @@ FROM node:20-slim
 ARG VARIANT=full
 
 ARG IMAGE_TAG
-RUN test -n "${IMAGE_TAG}" || (echo "ERROR: IMAGE_TAG build arg is required. Example: --build-arg IMAGE_TAG=openmgr/server:v1.0.0" && exit 1)
-ENV OPENMGR_IMAGE=${IMAGE_TAG}
+RUN test -n "${IMAGE_TAG}" || (echo "ERROR: IMAGE_TAG build arg is required. Example: --build-arg IMAGE_TAG=ants/server:v1.0.0" && exit 1)
+ENV ANTS_IMAGE=${IMAGE_TAG}
 
-ARG OPENMGR_SERVER_VERSION
-RUN test -n "${OPENMGR_SERVER_VERSION}" || (echo "ERROR: OPENMGR_SERVER_VERSION build arg is required." && exit 1)
-ENV OPENMGR_SERVER_VERSION=${OPENMGR_SERVER_VERSION}
+ARG ANTS_SERVER_VERSION
+RUN test -n "${ANTS_SERVER_VERSION}" || (echo "ERROR: ANTS_SERVER_VERSION build arg is required." && exit 1)
+ENV ANTS_SERVER_VERSION=${ANTS_SERVER_VERSION}
 
 # Bake the variant into the image so runtime code can detect it if needed.
-ENV OPENMGR_IMAGE_VARIANT=${VARIANT}
+ENV ANTS_IMAGE_VARIANT=${VARIANT}
 
 # Install runtime system dependencies.
 # The full variant includes Chromium system libraries required by Playwright.
@@ -204,7 +204,7 @@ COPY --from=build /app .
 # empty for the lite variant, so this is a no-op copy in that case.
 COPY --from=build /root/.cache/ms-playwright /root/.cache/ms-playwright
 
-# Make the openmgr-agent CLI available on PATH
+# Make the ants-agent CLI available on PATH
 ENV PATH="/app/node_modules/.bin:${PATH}"
 
 # Prevent CLI tools (gh, gcloud, etc.) from trying to open a browser.
@@ -216,10 +216,10 @@ ENV GH_BROWSER=false
 RUN printf '#!/bin/sh\necho "ERROR: Cannot open browser in headless container: $*" >&2\nexit 1\n' > /usr/local/bin/xdg-open \
     && chmod +x /usr/local/bin/xdg-open
 
-ENV OPENMGR_HOST=0.0.0.0
-ENV OPENMGR_PORT=6647
-ENV OPENMGR_DATA_DIR=/data
-ENV OPENMGR_WORKSPACES_DIR=/workspaces
+ENV ANTS_HOST=0.0.0.0
+ENV ANTS_PORT=6647
+ENV ANTS_DATA_DIR=/data
+ENV ANTS_WORKSPACES_DIR=/workspaces
 
 VOLUME ["/data", "/workspaces"]
 

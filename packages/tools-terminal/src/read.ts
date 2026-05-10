@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { defineTool } from "@openmgr/agent-core";
+import { defineTool } from "@ants/agent-core";
 import { getFilesystem } from "./filesystem.js";
 
 const MAX_FILE_SIZE = 1024 * 1024;

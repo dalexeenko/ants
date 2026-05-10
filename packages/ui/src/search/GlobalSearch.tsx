@@ -166,7 +166,7 @@ export function GlobalSearch({
           onBlur={handleBlur}
           onKeyPress={handleKeyPress}
           autoFocus={autoFocus}
-          testID="openmgr-global-search"
+          testID="ants-global-search"
         />
         {query.length > 0 && (
           <Pressable

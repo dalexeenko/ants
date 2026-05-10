@@ -27,24 +27,24 @@ export function IconRail() {
   };
 
   return (
-    <View testID="openmgr-icon-rail" style={[styles.iconRail, { backgroundColor: colors.bg.secondary, borderRightColor: colors.border.light }]}>
+    <View testID="ants-icon-rail" style={[styles.iconRail, { backgroundColor: colors.bg.secondary, borderRightColor: colors.border.light }]}>
       <View style={styles.iconRailTop}>
         <IconButton
-          testID="openmgr-icon-rail-projects"
+          testID="ants-icon-rail-projects"
           icon="folder"
           size="md"
           variant={activeScreen === 'project' ? 'default' : 'ghost'}
           onPress={() => handleIconClick('project')}
         />
         <IconButton
-          testID="openmgr-icon-rail-director"
+          testID="ants-icon-rail-director"
           icon="sparkles"
           size="md"
           variant={activeScreen === 'director' ? 'default' : 'ghost'}
           onPress={() => handleIconClick('director')}
         />
         <IconButton
-          testID="openmgr-icon-rail-agents"
+          testID="ants-icon-rail-agents"
           icon="users"
           size="md"
           variant={activeScreen === 'agents' ? 'default' : 'ghost'}
@@ -54,7 +54,7 @@ export function IconRail() {
         {pluginScreens.map((screen) => (
           <IconButton
             key={screen.id}
-            testID={`openmgr-icon-rail-plugin-${screen.id}`}
+            testID={`ants-icon-rail-plugin-${screen.id}`}
             icon={screen.icon as any}
             size="md"
             variant={activeScreen === screen.id ? 'default' : 'ghost'}
@@ -64,7 +64,7 @@ export function IconRail() {
       </View>
       <View style={styles.iconRailBottom}>
         <IconButton
-          testID="openmgr-icon-rail-settings"
+          testID="ants-icon-rail-settings"
           icon="settings"
           size="md"
           variant={activeScreen === 'settings' ? 'default' : 'ghost'}

@@ -1,11 +1,11 @@
-import type { AgentPlugin, AgentInterface, ToolContext } from "@openmgr/agent-core";
+import type { AgentPlugin, AgentInterface, ToolContext } from "@ants/agent-core";
 import {
   generateTitle,
   isDefaultTitle,
   COMPACTION_SUMMARY_PREFIX,
-} from "@openmgr/agent-core";
-import type { Message, ToolCall, ToolResult } from "@openmgr/agent-core";
-import type { ToolCallData, ToolResultData } from "@openmgr/agent-database-core";
+} from "@ants/agent-core";
+import type { Message, ToolCall, ToolResult } from "@ants/agent-core";
+import type { ToolCallData, ToolResultData } from "@ants/agent-database-core";
 import {
   createDatabase,
   createInMemoryDatabase,
@@ -13,8 +13,8 @@ import {
   type AgentDatabase,
   type DatabaseConfig,
   type NodeDatabaseConnection,
-} from "@openmgr/agent-database";
-import { getSmallModel, type ProviderName, SMALL_MODELS } from "@openmgr/agent-providers";
+} from "@ants/agent-database";
+import { getSmallModel, type ProviderName, SMALL_MODELS } from "@ants/agent-providers";
 import { SessionManager } from "./sessions.js";
 import { randomUUID } from "crypto";
 import { writeFile, mkdir } from "fs/promises";
@@ -57,8 +57,8 @@ export interface StoragePluginOptions extends DatabaseConfig {
  * 
  * @example
  * ```ts
- * import { Agent } from "@openmgr/agent-core";
- * import { storagePlugin } from "@openmgr/agent-storage";
+ * import { Agent } from "@ants/agent-core";
+ * import { storagePlugin } from "@ants/agent-storage";
  * 
  * const agent = new Agent({ ... });
  * await agent.use(storagePlugin());
@@ -194,7 +194,7 @@ export function storagePlugin(options: StoragePluginOptions = {}): AgentPlugin {
         await writeFile(join(screenshotsDir, filename), parsed.buffer);
 
         // Replace the data URL with a relative path.
-        // The path is relative to the .openmgr directory so each platform
+        // The path is relative to the .ants directory so each platform
         // can resolve it to a serveable URL independently.
         delete (image as Record<string, unknown>).dataUrl;
         (image as Record<string, unknown>).path = `screenshots/${filename}`;

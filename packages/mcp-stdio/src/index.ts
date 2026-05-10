@@ -1,7 +1,7 @@
 /**
- * @openmgr/agent-mcp-stdio
+ * @ants/agent-mcp-stdio
  *
- * Stdio MCP (Model Context Protocol) client for OpenMgr Agent.
+ * Stdio MCP (Model Context Protocol) client for Ants Agent.
  * This package provides the Node.js-specific stdio transport for MCP servers.
  */
 
@@ -14,8 +14,8 @@ import type {
   McpResource,
   McpPrompt,
   EnvResolver,
-} from "@openmgr/agent-core";
-import { expandEnvVars, defaultEnvResolver } from "@openmgr/agent-core";
+} from "@ants/agent-core";
+import { expandEnvVars, defaultEnvResolver } from "@ants/agent-core";
 
 export class StdioMcpClient implements McpClientInterface {
   readonly name: string;
@@ -67,7 +67,7 @@ export class StdioMcpClient implements McpClientInterface {
 
     this.client = new Client(
       {
-        name: "openmgr-agent",
+        name: "ants-agent",
         version: "0.1.0",
       },
       {

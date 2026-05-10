@@ -1,7 +1,7 @@
 /**
  * Typed UI Plugin contribution interfaces and component props.
  *
- * These narrow the `unknown` component types from @openmgr/agent-core
+ * These narrow the `unknown` component types from @ants/agent-core
  * to proper `React.ComponentType<...>` for use in the UI layer.
  */
 

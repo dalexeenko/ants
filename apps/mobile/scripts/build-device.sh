@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Build and deploy the OpenMgr Expo Dev Client to a physical iOS device.
+# Build and deploy the Ants Expo Dev Client to a physical iOS device.
 #
 # Usage:
 #   ./scripts/build-device.sh              # auto-detect connected device
@@ -25,8 +25,8 @@ set -euo pipefail
 REPO_ROOT="$(cd "$(dirname "$0")/../../.." && pwd)"
 MOBILE_DIR="$REPO_ROOT/apps/mobile"
 IOS_DIR="$MOBILE_DIR/ios"
-WORKSPACE="$IOS_DIR/OpenMgr.xcworkspace"
-SCHEME="OpenMgr"
+WORKSPACE="$IOS_DIR/Ants.xcworkspace"
+SCHEME="Ants"
 CONFIGURATION="Debug"
 DEVELOPMENT_TEAM="2U9885LF7M"
 
@@ -67,7 +67,7 @@ echo "==> Building workspace packages..."
 # --- Step 2: Ensure signing is configured ---
 # expo prebuild --clean wipes the ios/ directory, so we patch signing
 # into the pbxproj if it's missing. This is idempotent.
-PBXPROJ="$IOS_DIR/OpenMgr.xcodeproj/project.pbxproj"
+PBXPROJ="$IOS_DIR/Ants.xcodeproj/project.pbxproj"
 if ! grep -q "DEVELOPMENT_TEAM" "$PBXPROJ"; then
   echo "==> Patching code signing (team: $DEVELOPMENT_TEAM)..."
   sed -i '' "/CODE_SIGN_ENTITLEMENTS/a\\
@@ -78,7 +78,7 @@ fi
 
 # --- Step 3: Build with xcodebuild ---
 echo ""
-echo "==> Building OpenMgr for device $DEVICE_UDID..."
+echo "==> Building Ants for device $DEVICE_UDID..."
 echo "    First build takes 10-15 minutes. Subsequent builds are much faster."
 echo ""
 
@@ -124,12 +124,12 @@ fi
 xcrun devicectl device install app --device "$DEVICE_UDID" "$APP_PATH" 2>&1
 
 echo ""
-echo "==> Done! OpenMgr dev client installed on your device."
+echo "==> Done! Ants dev client installed on your device."
 echo ""
 echo "Next steps:"
 echo "  1. On your iPhone, go to Settings > General > VPN & Device Management"
 echo "     and trust your developer certificate (first time only)."
 echo "  2. Start the Metro dev server:"
 echo "       cd apps/mobile && pnpm start"
-echo "  3. Open the OpenMgr app on your device — it will connect to Metro."
+echo "  3. Open the Ants app on your device — it will connect to Metro."
 echo ""

@@ -1,6 +1,6 @@
 import { glob as globFn } from "glob";
 import { z } from "zod";
-import { defineTool } from "@openmgr/agent-core";
+import { defineTool } from "@ants/agent-core";
 
 const MAX_RESULTS = 100;
 

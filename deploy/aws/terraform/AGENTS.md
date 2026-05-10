@@ -2,7 +2,7 @@
 
 ## Overview
 
-Terraform configuration that deploys the OpenMgr server on AWS ECS Fargate (ARM64/Graviton). Produces a VPC, NLB, ECS service, EFS volumes, and optionally ACM + Route 53 for HTTPS.
+Terraform configuration that deploys the Ants server on AWS ECS Fargate (ARM64/Graviton). Produces a VPC, NLB, ECS service, EFS volumes, and optionally ACM + Route 53 for HTTPS.
 
 ## File Layout
 
@@ -45,37 +45,37 @@ The `local.effective_image` resolves which Docker image the task definition uses
 
 | `enable_ecr` | Result |
 |---|---|
-| `false` | Uses `var.image` directly (e.g. `openmgr/server:latest` from Docker Hub) |
+| `false` | Uses `var.image` directly (e.g. `ants/server:latest` from Docker Hub) |
 | `true` | Uses `aws_ecr_repository.this[0].repository_url:var.image_tag` |
 
 When adding image-related logic, use `local.effective_image` — do not reference `var.image` directly in the task definition.
 
 ## Authentication Variables
 
-Four auth-related variables map to OpenMgr server environment variables:
+Four auth-related variables map to Ants server environment variables:
 
 | Terraform variable | Env var | Required | Sensitive |
 |---|---|---|---|
-| `openmgr_encryption_key` | `OPENMGR_ENCRYPTION_KEY` | Yes | Yes |
-| `openmgr_secret` | `OPENMGR_SECRET` | Mode 1 only | Yes |
-| `openmgr_multi_user` | `OPENMGR_MULTI_USER` | Mode 2 only | No |
-| `openmgr_setup_token` | `OPENMGR_SETUP_TOKEN` | Mode 2 only | Yes |
+| `ants_encryption_key` | `ANTS_ENCRYPTION_KEY` | Yes | Yes |
+| `ants_secret` | `ANTS_SECRET` | Mode 1 only | Yes |
+| `ants_multi_user` | `ANTS_MULTI_USER` | Mode 2 only | No |
+| `ants_setup_token` | `ANTS_SETUP_TOKEN` | Mode 2 only | Yes |
 
 ### Auth mode constraint (mutually exclusive)
 
 Users must choose exactly one of two authentication modes:
 
-1. **Bearer token mode** — set `openmgr_secret`, leave `openmgr_multi_user = false`
-2. **Multi-user mode** — set `openmgr_multi_user = true` + `openmgr_setup_token`, leave `openmgr_secret` empty
+1. **Bearer token mode** — set `ants_secret`, leave `ants_multi_user = false`
+2. **Multi-user mode** — set `ants_multi_user = true` + `ants_setup_token`, leave `ants_secret` empty
 
 Three `check` blocks in `main.tf` enforce this:
-- `auth_mode_exclusive` — cannot set both `openmgr_secret` and `openmgr_multi_user`
+- `auth_mode_exclusive` — cannot set both `ants_secret` and `ants_multi_user`
 - `auth_mode_required` — must set at least one
-- `setup_token_when_multi_user` — `openmgr_setup_token` is required when `openmgr_multi_user = true`
+- `setup_token_when_multi_user` — `ants_setup_token` is required when `ants_multi_user = true`
 
 ### Notes
 
-- `openmgr_encryption_key` is always required — the server exits without it.
+- `ants_encryption_key` is always required — the server exits without it.
 - All sensitive variables are marked `sensitive = true` in Terraform so their values are redacted from plan output.
 
 When adding new env vars that contain secrets, always mark the Terraform variable as `sensitive = true` and conditionally inject it (don't pass empty strings to the container).
@@ -99,8 +99,8 @@ terraform plan            # requires AWS credentials + a terraform.tfvars
 - **NLB name length** — AWS limits NLB names to 32 characters. The name is `${project_name}-${environment}-nlb`, so long project names will fail. Same limit applies to target group names.
 - **NLB security model** — NLBs do not use security groups; traffic passes directly to targets with client source IPs preserved. The ECS security group must allow inbound on the container port from `0.0.0.0/0`. Do not attempt to restrict ingress to an LB security group — NLBs don't have one.
 - **IAM policy ARN** — the execution role uses `arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy` (note the double colon — no account ID, it's an AWS-managed policy).
-- **Health check path** — hardcoded to `/api/beta/health` (both in the NLB target group HTTP health check and the container health check). If the OpenMgr server changes this endpoint, both must be updated.
+- **Health check path** — hardcoded to `/api/beta/health` (both in the NLB target group HTTP health check and the container health check). If the Ants server changes this endpoint, both must be updated.
 - **Container port** — defaults to `6647` matching the Dockerfile's `EXPOSE`. Changing `container_port` variable is fine but the Docker image must also listen on that port.
 - **ECR repository deletion** — `force_delete` is `false` on the ECR repo, so `terraform destroy` will fail if the repo still contains images. Users must manually delete images first, or set `force_delete = true`.
 - **`enable_https` must use input variables only** — `local.enable_https` is derived from `var.certificate_arn` and `var.domain_name` (not from resource attributes) because it's used in `count` expressions. Terraform requires counts to be known at plan time. Do not make it depend on resource outputs like `aws_acm_certificate.this[0].arn`.
-- **Sensitive variables** — `openmgr_encryption_key`, `openmgr_secret`, and `openmgr_setup_token` are all `sensitive = true`. Terraform will redact them from CLI output but they are passed as plain-text environment variables in the task definition. For production, consider using AWS Secrets Manager with `secrets` instead of `environment` in the container definition.
+- **Sensitive variables** — `ants_encryption_key`, `ants_secret`, and `ants_setup_token` are all `sensitive = true`. Terraform will redact them from CLI output but they are passed as plain-text environment variables in the task definition. For production, consider using AWS Secrets Manager with `secrets` instead of `environment` in the container definition.

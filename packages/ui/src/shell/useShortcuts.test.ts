@@ -517,7 +517,7 @@ describe('useShortcuts', () => {
       renderHook(() => useShortcuts(), { wrapper });
 
       act(() => {
-        deeplinkHandler!('openmgr://');
+        deeplinkHandler!('ants://');
       });
 
       expect(useUIStore.getState().view).toBe('home');

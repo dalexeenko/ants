@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # =============================================================================
-# Deploy OpenMgr server to AWS ECS
+# Deploy Ants server to AWS ECS
 # =============================================================================
 #
 # Runs the full deployment pipeline:
@@ -19,7 +19,7 @@
 #   ./dev/scripts/deploy-aws-ecs.sh [options]
 #
 # Options:
-#   -t, --tag TAG              Image tag (default: openmgr/server:latest)
+#   -t, --tag TAG              Image tag (default: ants/server:latest)
 #   --no-build                 Skip building the Docker image (use existing local image)
 #   --skip-terraform           Skip terraform apply step
 #   --skip-push                Skip ECR push step (just refresh ECS)
@@ -42,7 +42,7 @@
 #   ./dev/scripts/deploy-aws-ecs.sh --no-build --skip-terraform --skip-push
 #
 #   # Deploy a specific image tag
-#   ./dev/scripts/deploy-aws-ecs.sh --tag openmgr/server:v1.2.3
+#   ./dev/scripts/deploy-aws-ecs.sh --tag ants/server:v1.2.3
 #
 #   # Review terraform plan before applying
 #   ./dev/scripts/deploy-aws-ecs.sh --interactive
@@ -56,7 +56,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 
-LOCAL_IMAGE_TAG="openmgr/server:latest"
+LOCAL_IMAGE_TAG="ants/server:latest"
 TERRAFORM_DIR="${REPO_ROOT}/aws/terraform"
 SKIP_BUILD=false
 SKIP_TERRAFORM=false
@@ -342,7 +342,7 @@ if [[ "$SKIP_ECS" == false ]]; then
     if [[ "$ROLLOUT_STATE" == "FAILED" ]]; then
       echo ""
       echo "Error: Deployment $DEPLOYMENT_ID failed." >&2
-      echo "Check logs: aws logs tail /ecs/openmgr-production --region $AWS_REGION --since 10m" >&2
+      echo "Check logs: aws logs tail /ecs/ants-production --region $AWS_REGION --since 10m" >&2
       exit 1
     fi
 

@@ -3,7 +3,7 @@
  * Maestro MCP Server
  *
  * A Model Context Protocol server that wraps Maestro CLI and simulator
- * management commands, enabling AI agents to interact with the OpenMgr
+ * management commands, enabling AI agents to interact with the Ants
  * React Native mobile app on iOS Simulator and Android Emulator.
  *
  * Usage:
@@ -166,7 +166,7 @@ const TOOLS = [
   {
     name: 'mobile_install_app',
     description:
-      'Build and install the OpenMgr app on the running simulator/emulator using Expo.',
+      'Build and install the Ants app on the running simulator/emulator using Expo.',
     inputSchema: {
       type: 'object' as const,
       properties: {
@@ -185,7 +185,7 @@ const TOOLS = [
   },
   {
     name: 'mobile_launch_app',
-    description: 'Launch the OpenMgr app on the running simulator/emulator.',
+    description: 'Launch the Ants app on the running simulator/emulator.',
     inputSchema: {
       type: 'object' as const,
       properties: {},
@@ -193,7 +193,7 @@ const TOOLS = [
   },
   {
     name: 'mobile_stop_app',
-    description: 'Force stop the OpenMgr app.',
+    description: 'Force stop the Ants app.',
     inputSchema: {
       type: 'object' as const,
       properties: {},
@@ -208,7 +208,7 @@ const TOOLS = [
       properties: {
         id: {
           type: 'string',
-          description: 'testID of the element to tap (e.g., "openmgr-drawer-toggle")',
+          description: 'testID of the element to tap (e.g., "ants-drawer-toggle")',
         },
         text: {
           type: 'string',

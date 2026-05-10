@@ -43,10 +43,10 @@ vi.mock('./agent-auth.js', () => ({
   })),
 }));
 
-// OpenMgrAgentClient – we replace the real HTTP client with a controllable stub
+// AntsAgentClient – we replace the real HTTP client with a controllable stub
 const mockIsHealthy = vi.fn();
-vi.mock('./openmgr-agent-client.js', () => ({
-  OpenMgrAgentClient: vi.fn().mockImplementation(() => ({
+vi.mock('./ants-agent-client.js', () => ({
+  AntsAgentClient: vi.fn().mockImplementation(() => ({
     isHealthy: mockIsHealthy,
   })),
 }));
@@ -82,7 +82,7 @@ vi.mock('./mock-agent-client.js', async () => {
 });
 
 // Now import after mocks are in place
-import { OpenMgrAgentManager, type IAgentClient } from './openmgr-agent-manager.js';
+import { AntsAgentManager, type IAgentClient } from './ants-agent-manager.js';
 import { pathExists as _pathExists } from '../utils/fs.js';
 const mockPathExists = vi.mocked(_pathExists);
 
@@ -97,8 +97,8 @@ function makeConfig(overrides: Partial<ServerConfig> = {}): ServerConfig {
     encryptionKey: Buffer.from('a'.repeat(32)).toString('base64'),
     port: 6647,
     host: '127.0.0.1',
-    dataDir: '/tmp/openmgr-test',
-    workspacesDir: '/tmp/openmgr-workspaces',
+    dataDir: '/tmp/ants-test',
+    workspacesDir: '/tmp/ants-workspaces',
     autoInstallAgent: false,
     mockAgent: false,
     corsOrigins: [],
@@ -131,8 +131,8 @@ function makeFakeProcess(pid = 12345): ChildProcess {
 // Tests
 // ---------------------------------------------------------------------------
 
-describe('OpenMgrAgentManager', () => {
-  let manager: OpenMgrAgentManager;
+describe('AntsAgentManager', () => {
+  let manager: AntsAgentManager;
 
   beforeEach(() => {
     vi.useFakeTimers({ shouldAdvanceTime: true });
@@ -148,7 +148,7 @@ describe('OpenMgrAgentManager', () => {
     // Reset the pathExists mock
     mockPathExists.mockReset().mockResolvedValue(false);
 
-    manager = new OpenMgrAgentManager(makeConfig());
+    manager = new AntsAgentManager(makeConfig());
   });
 
   afterEach(() => {
@@ -160,14 +160,14 @@ describe('OpenMgrAgentManager', () => {
   // =========================================================================
   describe('construction and configuration', () => {
     it('should construct with only a config', () => {
-      const m = new OpenMgrAgentManager(makeConfig());
-      expect(m).toBeInstanceOf(OpenMgrAgentManager);
+      const m = new AntsAgentManager(makeConfig());
+      expect(m).toBeInstanceOf(AntsAgentManager);
     });
 
     it('should accept optional apiKeyManager', () => {
       const apiKeyMgr = { getAllEnvVars: vi.fn().mockResolvedValue({}) } as any;
-      const m = new OpenMgrAgentManager(makeConfig(), apiKeyMgr);
-      expect(m).toBeInstanceOf(OpenMgrAgentManager);
+      const m = new AntsAgentManager(makeConfig(), apiKeyMgr);
+      expect(m).toBeInstanceOf(AntsAgentManager);
     });
 
     it('should start with no running servers', () => {
@@ -180,25 +180,25 @@ describe('OpenMgrAgentManager', () => {
   // =========================================================================
   describe('getAgentPath', () => {
     it('should return configured agentPath when set', async () => {
-      const m = new OpenMgrAgentManager(makeConfig({ agentPath: '/usr/local/bin/openmgr-agent' }));
-      expect(await m.getAgentPath()).toBe('/usr/local/bin/openmgr-agent');
+      const m = new AntsAgentManager(makeConfig({ agentPath: '/usr/local/bin/ants-agent' }));
+      expect(await m.getAgentPath()).toBe('/usr/local/bin/ants-agent');
     });
 
     it('should fall back to local development path if it exists', async () => {
       mockPathExists.mockResolvedValue(true);
-      const m = new OpenMgrAgentManager(makeConfig());
+      const m = new AntsAgentManager(makeConfig());
       const path = await m.getAgentPath();
       expect(path).toContain('node');
       expect(path).toContain('bin.js');
     });
 
-    it('should fall back to global which openmgr-agent', async () => {
+    it('should fall back to global which ants-agent', async () => {
       mockPathExists.mockResolvedValue(false);
       mockExecFile.mockImplementation((_cmd: string, _args: string[], cb: (err: Error | null, result: { stdout: string; stderr: string }) => void) => {
-        cb(null, { stdout: '/usr/local/bin/openmgr-agent\n', stderr: '' });
+        cb(null, { stdout: '/usr/local/bin/ants-agent\n', stderr: '' });
       });
-      const m = new OpenMgrAgentManager(makeConfig());
-      expect(await m.getAgentPath()).toBe('/usr/local/bin/openmgr-agent');
+      const m = new AntsAgentManager(makeConfig());
+      expect(await m.getAgentPath()).toBe('/usr/local/bin/ants-agent');
     });
 
     it('should try npm global root as last resort', async () => {
@@ -218,10 +218,10 @@ describe('OpenMgrAgentManager', () => {
           cb(null, { stdout: '/usr/lib/node_modules\n', stderr: '' }); // npm root -g
         }
       });
-      const m = new OpenMgrAgentManager(makeConfig());
+      const m = new AntsAgentManager(makeConfig());
       const path = await m.getAgentPath();
       expect(path).toContain('node');
-      expect(path).toContain('@openmgr');
+      expect(path).toContain('@ants');
     });
 
     it('should throw when agent is not found anywhere', async () => {
@@ -229,8 +229,8 @@ describe('OpenMgrAgentManager', () => {
       mockExecFile.mockImplementation((_cmd: string, _args: string[], cb: (err: Error | null, result: { stdout: string; stderr: string }) => void) => {
         cb(new Error('not found'), { stdout: '', stderr: '' });
       });
-      const m = new OpenMgrAgentManager(makeConfig());
-      await expect(m.getAgentPath()).rejects.toThrow('OpenMgr Agent not found');
+      const m = new AntsAgentManager(makeConfig());
+      await expect(m.getAgentPath()).rejects.toThrow('Ants Agent not found');
     });
 
     it('should check both monorepo paths before falling back to global', async () => {
@@ -239,7 +239,7 @@ describe('OpenMgrAgentManager', () => {
         pathExistsCalls++;
         return pathExistsCalls === 2; // packages/agent/dist/bin.js
       });
-      const m = new OpenMgrAgentManager(makeConfig());
+      const m = new AntsAgentManager(makeConfig());
       const path = await m.getAgentPath();
       expect(path).toContain('node');
       expect(path).toContain('bin.js');
@@ -252,7 +252,7 @@ describe('OpenMgrAgentManager', () => {
   // =========================================================================
   describe('isInstalled', () => {
     it('should return true when agent path resolves', async () => {
-      const m = new OpenMgrAgentManager(makeConfig({ agentPath: '/some/path' }));
+      const m = new AntsAgentManager(makeConfig({ agentPath: '/some/path' }));
       expect(await m.isInstalled()).toBe(true);
     });
 
@@ -261,14 +261,14 @@ describe('OpenMgrAgentManager', () => {
       mockExecFile.mockImplementation((_cmd: string, _args: string[], cb: (err: Error | null, result: { stdout: string; stderr: string }) => void) => {
         cb(new Error('nope'), { stdout: '', stderr: '' });
       });
-      const m = new OpenMgrAgentManager(makeConfig());
+      const m = new AntsAgentManager(makeConfig());
       expect(await m.isInstalled()).toBe(false);
     });
   });
 
   describe('getVersion', () => {
     it('should return version string', async () => {
-      const m = new OpenMgrAgentManager(makeConfig({ agentPath: '/agent' }));
+      const m = new AntsAgentManager(makeConfig({ agentPath: '/agent' }));
       mockExecFile.mockImplementation((_cmd: string, _args: string[], cb: (err: Error | null, result: { stdout: string; stderr: string }) => void) => {
         cb(null, { stdout: '1.2.3\n', stderr: '' });
       });
@@ -280,7 +280,7 @@ describe('OpenMgrAgentManager', () => {
       mockExecFile.mockImplementation((_cmd: string, _args: string[], cb: (err: Error | null, result: { stdout: string; stderr: string }) => void) => {
         cb(new Error('fail'), { stdout: '', stderr: '' });
       });
-      const m = new OpenMgrAgentManager(makeConfig());
+      const m = new AntsAgentManager(makeConfig());
       expect(await m.getVersion()).toBe('unknown');
     });
   });
@@ -290,7 +290,7 @@ describe('OpenMgrAgentManager', () => {
   // =========================================================================
   describe('port allocation', () => {
     it('should allocate ports starting from AGENT_PORT_RANGE_START', async () => {
-      const m = new OpenMgrAgentManager(makeConfig({ agentPath: '/agent' }));
+      const m = new AntsAgentManager(makeConfig({ agentPath: '/agent' }));
       // We access getAvailablePort indirectly via startServer.
       // Instead, test the observable outcome: two sequential startServer
       // calls produce different ports.
@@ -324,7 +324,7 @@ describe('OpenMgrAgentManager', () => {
     beforeEach(() => {
       proc = makeFakeProcess(9999);
       mockSpawn.mockReturnValue(proc);
-      manager = new OpenMgrAgentManager(makeConfig({ agentPath: '/agent' }));
+      manager = new AntsAgentManager(makeConfig({ agentPath: '/agent' }));
     });
 
     it('should spawn a child process and wait until healthy', async () => {
@@ -385,7 +385,7 @@ describe('OpenMgrAgentManager', () => {
 
       const error = await promise;
       expect(error).toBeInstanceOf(Error);
-      expect(error.message).toContain('Failed to start OpenMgr Agent server');
+      expect(error.message).toContain('Failed to start Ants Agent server');
       expect((proc as any).kill).toHaveBeenCalled();
       expect(manager.isServerRunning('/workspace/bar')).toBe(false);
     });
@@ -433,7 +433,7 @@ describe('OpenMgrAgentManager', () => {
 
       expect(mockWriteFile).toHaveBeenCalledTimes(1);
       const [filePath, content] = mockWriteFile.mock.calls[0];
-      expect(filePath).toContain('.openmgr.json');
+      expect(filePath).toContain('.ants.json');
       const parsed = JSON.parse(content);
       expect(parsed.provider).toBe('anthropic');
       expect(parsed.model).toBe('claude-sonnet-4-20250514');
@@ -449,7 +449,7 @@ describe('OpenMgrAgentManager', () => {
         getOAuthCredentials: vi.fn().mockResolvedValue(undefined),
       } as any;
 
-      const m = new OpenMgrAgentManager(makeConfig({ agentPath: '/agent' }), apiKeyMgr);
+      const m = new AntsAgentManager(makeConfig({ agentPath: '/agent' }), apiKeyMgr);
       mockIsHealthy.mockResolvedValueOnce(true);
       mockSpawn.mockReturnValue(makeFakeProcess());
 
@@ -479,7 +479,7 @@ describe('OpenMgrAgentManager', () => {
     it('should kill process and remove server entry', async () => {
       const proc = makeFakeProcess();
       mockSpawn.mockReturnValue(proc);
-      manager = new OpenMgrAgentManager(makeConfig({ agentPath: '/agent' }));
+      manager = new AntsAgentManager(makeConfig({ agentPath: '/agent' }));
       mockIsHealthy.mockResolvedValueOnce(true);
 
       await manager.startServer('/workspace/stop');
@@ -503,7 +503,7 @@ describe('OpenMgrAgentManager', () => {
       const proc1 = makeFakeProcess(111);
       const proc2 = makeFakeProcess(222);
       mockSpawn.mockReturnValueOnce(proc1).mockReturnValueOnce(proc2);
-      manager = new OpenMgrAgentManager(makeConfig({ agentPath: '/agent' }));
+      manager = new AntsAgentManager(makeConfig({ agentPath: '/agent' }));
 
       mockIsHealthy
         .mockResolvedValueOnce(true)   // first start
@@ -524,7 +524,7 @@ describe('OpenMgrAgentManager', () => {
     it('should return existing healthy client', async () => {
       const proc = makeFakeProcess();
       mockSpawn.mockReturnValue(proc);
-      manager = new OpenMgrAgentManager(makeConfig({ agentPath: '/agent' }));
+      manager = new AntsAgentManager(makeConfig({ agentPath: '/agent' }));
       mockIsHealthy
         .mockResolvedValueOnce(true)   // startServer health
         .mockResolvedValueOnce(true);  // ensureServerRunning health
@@ -537,7 +537,7 @@ describe('OpenMgrAgentManager', () => {
     it('should start a new server when none exists', async () => {
       const proc = makeFakeProcess();
       mockSpawn.mockReturnValue(proc);
-      manager = new OpenMgrAgentManager(makeConfig({ agentPath: '/agent' }));
+      manager = new AntsAgentManager(makeConfig({ agentPath: '/agent' }));
       mockIsHealthy.mockResolvedValueOnce(true); // startup health check
 
       const client = await manager.ensureServerRunning('/workspace/new');
@@ -546,7 +546,7 @@ describe('OpenMgrAgentManager', () => {
     });
 
     it('should use MockAgentClient when mockAgent is true', async () => {
-      const m = new OpenMgrAgentManager(makeConfig({ mockAgent: true }));
+      const m = new AntsAgentManager(makeConfig({ mockAgent: true }));
       const client = await m.ensureServerRunning('/workspace/mock');
       expect(await client.isHealthy()).toBe(true);
       expect(mockSpawn).not.toHaveBeenCalled();
@@ -556,7 +556,7 @@ describe('OpenMgrAgentManager', () => {
       const proc1 = makeFakeProcess(111);
       const proc2 = makeFakeProcess(222);
       mockSpawn.mockReturnValueOnce(proc1).mockReturnValueOnce(proc2);
-      manager = new OpenMgrAgentManager(makeConfig({ agentPath: '/agent' }));
+      manager = new AntsAgentManager(makeConfig({ agentPath: '/agent' }));
 
       // First start
       mockIsHealthy.mockResolvedValueOnce(true);
@@ -583,7 +583,7 @@ describe('OpenMgrAgentManager', () => {
         procs.push(p);
         return p;
       });
-      manager = new OpenMgrAgentManager(makeConfig({ agentPath: '/agent' }));
+      manager = new AntsAgentManager(makeConfig({ agentPath: '/agent' }));
 
       mockIsHealthy
         .mockResolvedValueOnce(true)
@@ -615,9 +615,9 @@ describe('OpenMgrAgentManager', () => {
         spawnCount++;
         return makeFakeProcess(spawnCount * 100);
       });
-      manager = new OpenMgrAgentManager(makeConfig({ agentPath: '/agent' }));
+      manager = new AntsAgentManager(makeConfig({ agentPath: '/agent' }));
 
-      // pathExists returns false = no .openmgr.json files (readAgentConfig)
+      // pathExists returns false = no .ants.json files (readAgentConfig)
       mockPathExists.mockResolvedValue(false);
 
       mockIsHealthy
@@ -643,7 +643,7 @@ describe('OpenMgrAgentManager', () => {
 
     it('should report failed restarts', async () => {
       mockSpawn.mockImplementation(() => makeFakeProcess());
-      manager = new OpenMgrAgentManager(makeConfig({ agentPath: '/agent' }));
+      manager = new AntsAgentManager(makeConfig({ agentPath: '/agent' }));
 
       mockPathExists.mockResolvedValue(false);
       mockIsHealthy.mockResolvedValueOnce(true);
@@ -680,7 +680,7 @@ describe('OpenMgrAgentManager', () => {
 
       expect(mockWriteFile).toHaveBeenCalledTimes(1);
       const [filePath, content] = mockWriteFile.mock.calls[0];
-      expect(filePath).toContain('.openmgr.json');
+      expect(filePath).toContain('.ants.json');
       const parsed = JSON.parse(content);
       expect(parsed.provider).toBe('anthropic');
       expect(parsed.model).toBe('claude-sonnet-4-20250514');
@@ -731,7 +731,7 @@ describe('OpenMgrAgentManager', () => {
     it('should return the client for a running server', async () => {
       const proc = makeFakeProcess();
       mockSpawn.mockReturnValue(proc);
-      manager = new OpenMgrAgentManager(makeConfig({ agentPath: '/agent' }));
+      manager = new AntsAgentManager(makeConfig({ agentPath: '/agent' }));
       mockIsHealthy.mockResolvedValueOnce(true);
       await manager.startServer('/workspace/client');
       expect(manager.getClient('/workspace/client')).toBeDefined();
@@ -746,7 +746,7 @@ describe('OpenMgrAgentManager', () => {
     it('should return port for a running server', async () => {
       const proc = makeFakeProcess();
       mockSpawn.mockReturnValue(proc);
-      manager = new OpenMgrAgentManager(makeConfig({ agentPath: '/agent' }));
+      manager = new AntsAgentManager(makeConfig({ agentPath: '/agent' }));
       mockIsHealthy.mockResolvedValueOnce(true);
       await manager.startServer('/workspace/port');
       expect(manager.getServerPort('/workspace/port')).toBe(AGENT_PORT_RANGE_START);
@@ -796,7 +796,7 @@ describe('OpenMgrAgentManager', () => {
     let client: IAgentClient;
 
     beforeEach(async () => {
-      const m = new OpenMgrAgentManager(makeConfig({ mockAgent: true }));
+      const m = new AntsAgentManager(makeConfig({ mockAgent: true }));
       client = await m.ensureServerRunning('/workspace/iface');
     });
 
@@ -848,14 +848,14 @@ describe('OpenMgrAgentManager', () => {
   // =========================================================================
   describe('mock mode stop behavior', () => {
     it('should not throw when stopping a mock server', async () => {
-      const m = new OpenMgrAgentManager(makeConfig({ mockAgent: true }));
+      const m = new AntsAgentManager(makeConfig({ mockAgent: true }));
       await m.ensureServerRunning('/workspace/mockstop');
       await expect(m.stopServer('/workspace/mockstop')).resolves.toBeUndefined();
       expect(m.isServerRunning('/workspace/mockstop')).toBe(false);
     });
 
     it('mock server port should be 0', async () => {
-      const m = new OpenMgrAgentManager(makeConfig({ mockAgent: true }));
+      const m = new AntsAgentManager(makeConfig({ mockAgent: true }));
       await m.ensureServerRunning('/workspace/mockport');
       expect(m.getServerPort('/workspace/mockport')).toBe(0);
     });

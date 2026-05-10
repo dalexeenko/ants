@@ -1,7 +1,7 @@
 /**
  * Cookie-based auth provider for the server web UI.
  *
- * Checks for an `openmgr_session` cookie, validates it via WebSessionService,
+ * Checks for an `ants_session` cookie, validates it via WebSessionService,
  * and resolves the associated user.  Returns `null` when no cookie is present
  * so that downstream providers (Bearer, CF Access) can still authenticate.
  */
@@ -14,7 +14,7 @@ import { createLogger } from '../utils/logger.js';
 
 const log = createLogger('auth:cookie');
 
-const SESSION_COOKIE = 'openmgr_session';
+const SESSION_COOKIE = 'ants_session';
 
 /** Callback that resolves a userId to a full AuthUser (minus passwordHash). */
 export type UserLookup = (userId: string) => AuthUser | null | Promise<AuthUser | null>;

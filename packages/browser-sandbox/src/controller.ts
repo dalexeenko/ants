@@ -21,7 +21,7 @@ import type {
   TypeOptions,
   BrowserEvent,
   ScreencastOptions,
-} from "@openmgr/agent-browser-core";
+} from "@ants/agent-browser-core";
 
 /** Setup event for tracking installation progress */
 export interface SetupEvent {
@@ -184,7 +184,7 @@ async function ensureBrowsersInstalled(onSetupEvent?: (event: SetupEvent) => voi
  *
  * @example
  * ```typescript
- * import { SandboxBrowserController } from "@openmgr/agent-browser-sandbox";
+ * import { SandboxBrowserController } from "@ants/agent-browser-sandbox";
  *
  * const controller = new SandboxBrowserController({
  *   headless: false,
@@ -777,7 +777,7 @@ export class SandboxBrowserController implements BrowserController {
  *
  * @example
  * ```typescript
- * import { createSandboxController } from "@openmgr/agent-browser-sandbox";
+ * import { createSandboxController } from "@ants/agent-browser-sandbox";
  *
  * const controller = createSandboxController({
  *   headless: false,

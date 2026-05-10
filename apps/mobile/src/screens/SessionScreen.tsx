@@ -23,7 +23,7 @@ import {
   type SubagentInfo,
   createLogger,
   type Project,
-} from '@openmgr/ui';
+} from '@ants/ui';
 import { ChatScreen } from './ChatScreen';
 import { MorePanel, type MoreTabEntry } from './MorePanel';
 
@@ -198,7 +198,7 @@ export function SessionScreen({
   // -------------------------------------------------------------------
 
   return (
-    <View testID="openmgr-session-screen" style={[styles.container, { backgroundColor: colors.bg.secondary }]}>
+    <View testID="ants-session-screen" style={[styles.container, { backgroundColor: colors.bg.secondary }]}>
       {/* Main content area */}
       <View style={[styles.mainArea, { backgroundColor: colors.bg.primary }]}>
         {/* Header */}

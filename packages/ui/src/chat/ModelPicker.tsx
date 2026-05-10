@@ -110,7 +110,7 @@ export function ModelPicker({ bridge, projectId, sessionId }: ModelPickerProps) 
           isOverridden && { borderWidth: 1, borderColor: colors.primary },
         ]}
         onPress={() => setShowPicker(true)}
-        testID="openmgr-model-picker"
+        testID="ants-model-picker"
       >
         <Text
           style={[
@@ -130,7 +130,7 @@ export function ModelPicker({ bridge, projectId, sessionId }: ModelPickerProps) 
         animationType="slide"
         onRequestClose={() => setShowPicker(false)}
       >
-        <SafeAreaView style={[styles.modalContainer, { backgroundColor: colors.bg.primary }]} testID="openmgr-model-picker-dropdown">
+        <SafeAreaView style={[styles.modalContainer, { backgroundColor: colors.bg.primary }]} testID="ants-model-picker-dropdown">
           {/* Header */}
           <View style={[styles.modalHeader, { borderBottomColor: colors.border.light }]}>
             <Pressable onPress={() => setShowPicker(false)}>

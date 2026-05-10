@@ -48,4 +48,4 @@ done
 # Upload all files to the release. --clobber overwrites if re-running.
 gh release upload "$VERSION" "${FILES[@]}" --clobber
 
-echo "==> Done. Assets uploaded to https://github.com/openmgr/openmgr/releases/tag/${VERSION}"
+echo "==> Done. Assets uploaded to https://github.com/ants/ants/releases/tag/${VERSION}"

@@ -93,7 +93,7 @@ export function ProjectSection({
       <View style={[styles.headerActions, { opacity: (isTouchDevice || isHovered) ? 1 : 0 }]}>
         {onProjectSettings && (
           <IconButton
-            testID="openmgr-project-settings"
+            testID="ants-project-settings"
             icon="more"
             size="sm"
             variant="ghost"
@@ -105,7 +105,7 @@ export function ProjectSection({
         )}
         {onNewWorktreeSession && project.isGitRepo && project.worktreeEnabled && (
           <IconButton
-            testID="openmgr-project-new-worktree-session"
+            testID="ants-project-new-worktree-session"
             icon="gitBranch"
             size="sm"
             variant="ghost"
@@ -116,7 +116,7 @@ export function ProjectSection({
           />
         )}
         <IconButton
-          testID="openmgr-project-new-session"
+          testID="ants-project-new-session"
           icon="plus"
           size="sm"
           variant="ghost"
@@ -130,7 +130,7 @@ export function ProjectSection({
   );
 
   return (
-    <View testID={`openmgr-project-section-${project.id}`} style={styles.section}>
+    <View testID={`ants-project-section-${project.id}`} style={styles.section}>
       {headerContent}
 
       {expanded ? (

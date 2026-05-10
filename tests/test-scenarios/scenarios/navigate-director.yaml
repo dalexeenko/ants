@@ -5,7 +5,7 @@ steps:
   # Desktop: click the director icon in the icon rail
   - tap:
       desktop: true
-      testId: openmgr-icon-rail-director
+      testId: ants-icon-rail-director
   - assertVisible:
       desktop: true
       testId: director-sidebar
@@ -13,10 +13,10 @@ steps:
   # Mobile: open drawer and tap Director
   - tap:
       mobile: true
-      testId: openmgr-drawer-toggle
+      testId: ants-drawer-toggle
   - tap:
       mobile: true
-      testId: openmgr-drawer-director
+      testId: ants-drawer-director
   - assertVisible:
       mobile: true
-      testId: openmgr-screen-director
+      testId: ants-screen-director

@@ -2,7 +2,7 @@
  * Integration test to verify core systems work together.
  *
  * NOTE: Provider-specific tests (export smoke tests, concrete provider creation)
- * live in @openmgr/agent-providers to avoid a cyclic dependency (core -> providers -> core).
+ * live in @ants/agent-providers to avoid a cyclic dependency (core -> providers -> core).
  * This file tests core's ProviderRegistry and plugin system using mock providers.
  */
 import { describe, it, expect, vi, afterEach } from "vitest";
@@ -35,7 +35,7 @@ function createMockLLMProvider(name: string): LLMProvider {
   } as unknown as LLMProvider;
 }
 
-/** Build a mock plugin that registers several providers, similar to @openmgr/agent-providers. */
+/** Build a mock plugin that registers several providers, similar to @ants/agent-providers. */
 function createMockProvidersPlugin() {
   const providerNames = ["mock-anthropic", "mock-openai", "mock-google"];
   const providers: ProviderDefinition[] = providerNames.map((name) => ({

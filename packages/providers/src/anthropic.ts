@@ -5,7 +5,7 @@
  * which works cross-platform (Node.js, Electron, React Native).
  */
 
-import type { LLMProvider, LLMStreamOptions, LLMStreamResult, AuthConfig } from "@openmgr/agent-core";
+import type { LLMProvider, LLMStreamOptions, LLMStreamResult, AuthConfig } from "@ants/agent-core";
 import { AnthropicClient, type AnthropicAuth, type AnthropicClientOptions } from "./anthropic-client.js";
 
 export interface AnthropicProviderOptions {

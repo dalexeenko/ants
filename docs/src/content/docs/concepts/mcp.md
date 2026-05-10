@@ -1,11 +1,11 @@
 ---
 title: MCP Integration
-description: Model Context Protocol (MCP) support — connecting to MCP servers and using OpenMgr as an MCP server.
+description: Model Context Protocol (MCP) support — connecting to MCP servers and using Ants as an MCP server.
 sidebar:
   order: 5
 ---
 
-OpenMgr supports the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) for extending agent capabilities and integrating with external tools.
+Ants supports the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) for extending agent capabilities and integrating with external tools.
 
 ## What is MCP?
 
@@ -21,9 +21,9 @@ Agents can connect to external MCP servers to gain access to additional tools an
 
 This allows you to extend agent capabilities without modifying the agent code — just connect an MCP server that provides the tools you need.
 
-## OpenMgr as an MCP Server
+## Ants as an MCP Server
 
-The OpenMgr server can also act as an MCP server itself via the `openmgr-server-mcp` binary. This allows external tools and editors (like VS Code, Cursor, etc.) to connect to OpenMgr and use its capabilities.
+The Ants server can also act as an MCP server itself via the `ants-server-mcp` binary. This allows external tools and editors (like VS Code, Cursor, etc.) to connect to Ants and use its capabilities.
 
 ## Plugin System
 

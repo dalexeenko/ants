@@ -67,12 +67,12 @@ describe('Terminal Routes', () => {
 
   beforeEach(async () => {
     // Create temporary test directory with random suffix to avoid conflicts
-    testDir = join(tmpdir(), `openmgr-test-${Date.now()}-${Math.random().toString(36).substring(7)}`);
+    testDir = join(tmpdir(), `ants-test-${Date.now()}-${Math.random().toString(36).substring(7)}`);
     mkdirSync(testDir, { recursive: true });
 
     // Set up test environment
-    process.env.OPENMGR_ENCRYPTION_KEY = 'KbxyC4RoGDtvvE03/h/YyZgK/SjuA3XK6y8Ceyjv1A4=';
-    process.env.OPENMGR_DATA_DIR = join(testDir, 'data');
+    process.env.ANTS_ENCRYPTION_KEY = 'KbxyC4RoGDtvvE03/h/YyZgK/SjuA3XK6y8Ceyjv1A4=';
+    process.env.ANTS_DATA_DIR = join(testDir, 'data');
 
     const config = loadConfig();
     dbService = new DatabaseService({ dataDir: config.dataDir });

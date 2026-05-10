@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from "vitest";
 import { worktreePlugin } from "../plugin.js";
-import type { AgentInterface } from "@openmgr/agent-core";
+import type { AgentInterface } from "@ants/agent-core";
 import type { CommandExecutor, WorktreeFilesystem } from "../types.js";
 import { WorktreeManager } from "../manager.js";
 
@@ -38,7 +38,7 @@ function createMockFilesystem(): WorktreeFilesystem {
 describe("worktreePlugin", () => {
   it("should create a plugin with correct name and version", () => {
     const plugin = worktreePlugin();
-    expect(plugin.name).toBe("@openmgr/agent-worktree");
+    expect(plugin.name).toBe("@ants/agent-worktree");
     expect(plugin.version).toBe("0.1.0");
   });
 

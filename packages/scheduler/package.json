@@ -1,7 +1,7 @@
 {
-  "name": "@openmgr/agent-scheduler",
+  "name": "@ants/agent-scheduler",
   "version": "0.1.0",
-  "description": "Generic task scheduler with cron support for @openmgr/agent",
+  "description": "Generic task scheduler with cron support for @ants/agent",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

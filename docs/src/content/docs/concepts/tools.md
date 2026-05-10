@@ -9,7 +9,7 @@ Tools are capabilities that agents can use to interact with the world — readin
 
 ## Built-in Tools
 
-OpenMgr includes several tool packages:
+Ants includes several tool packages:
 
 ### Platform-Agnostic Tools (`packages/tools/`)
 

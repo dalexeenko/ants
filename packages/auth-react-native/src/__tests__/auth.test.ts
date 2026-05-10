@@ -64,7 +64,7 @@ describe("SecureTokenStore", () => {
         expiresAt: 1700000000000,
       });
       expect(mockStore.getItemAsync).toHaveBeenCalledWith(
-        "openmgr_oauth_tokens"
+        "ants_oauth_tokens"
       );
     });
 
@@ -96,7 +96,7 @@ describe("SecureTokenStore", () => {
       await tokenStore.saveTokens(tokens);
 
       expect(mockStore.setItemAsync).toHaveBeenCalledWith(
-        "openmgr_oauth_tokens",
+        "ants_oauth_tokens",
         JSON.stringify({
           accessToken: "access-123",
           refreshToken: "refresh-456",
@@ -113,7 +113,7 @@ describe("SecureTokenStore", () => {
       await tokenStore.clearTokens();
 
       expect(mockStore.deleteItemAsync).toHaveBeenCalledWith(
-        "openmgr_oauth_tokens"
+        "ants_oauth_tokens"
       );
     });
 
@@ -232,7 +232,7 @@ describe("createManualOAuthHandler", () => {
       await handler.logout();
 
       expect(mockStore.deleteItemAsync).toHaveBeenCalledWith(
-        "openmgr_oauth_tokens"
+        "ants_oauth_tokens"
       );
     });
   });

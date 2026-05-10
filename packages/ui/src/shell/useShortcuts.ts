@@ -164,7 +164,7 @@ export function useShortcuts() {
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
                 code: route.code,
-                redirect_uri: 'openmgr://auth/callback',
+                redirect_uri: 'ants://auth/callback',
               }),
             });
             if (!tokenRes.ok) {
@@ -231,7 +231,7 @@ export function useShortcuts() {
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
                 code: route.code,
-                redirect_uri: 'openmgr://connect',
+                redirect_uri: 'ants://connect',
               }),
             });
             log.info('Deeplink connect: token exchange response status=', tokenRes.status);

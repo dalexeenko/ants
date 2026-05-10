@@ -6,7 +6,7 @@
  * we test the path manipulation logic directly.
  */
 
-import type { FilesystemProvider, DirectoryEntry } from '@openmgr/ui';
+import type { FilesystemProvider, DirectoryEntry } from '@ants/ui';
 
 /**
  * Create a mock filesystem provider that mimics the LocalFilesystemProvider

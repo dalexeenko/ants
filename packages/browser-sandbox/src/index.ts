@@ -1,5 +1,5 @@
 /**
- * @openmgr/agent-browser-sandbox
+ * @ants/agent-browser-sandbox
  *
  * Sandbox browser controller using Playwright with bundled Chromium.
  * Creates isolated browser sessions without access to user's credentials or data.
@@ -9,8 +9,8 @@
  * ## Usage
  *
  * ```typescript
- * import { createSandboxController, createSandboxBrowserPlugin } from "@openmgr/agent-browser-sandbox";
- * import { createAgent } from "@openmgr/agent-core";
+ * import { createSandboxController, createSandboxBrowserPlugin } from "@ants/agent-browser-sandbox";
+ * import { createAgent } from "@ants/agent-core";
  *
  * // Create the controller - uses Playwright's bundled Chromium
  * const controller = createSandboxController({ headless: false });
@@ -37,9 +37,9 @@ export type {
   BrowserCreateOptions,
   BrowserControllerOptions,
   BrowserEvent,
-} from "@openmgr/agent-browser-core";
+} from "@ants/agent-browser-core";
 
 export {
   createSandboxBrowserPlugin,
   sandboxBrowserTools,
-} from "@openmgr/agent-browser-core";
+} from "@ants/agent-browser-core";

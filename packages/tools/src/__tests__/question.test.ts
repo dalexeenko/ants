@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { questionTool } from '../question.js';
-import type { ToolContext, AgentEvent, QuestionResponse } from '@openmgr/agent-core';
+import type { ToolContext, AgentEvent, QuestionResponse } from '@ants/agent-core';
 
 // Mock agent with question resolver infrastructure
 function createMockAgent() {

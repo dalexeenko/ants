@@ -1,10 +1,10 @@
 # Slack Integration Setup Guide
 
-This guide walks you through setting up Slack integration with OpenMgr, allowing you to interact with your agents via Slack mentions and direct messages.
+This guide walks you through setting up Slack integration with Ants, allowing you to interact with your agents via Slack mentions and direct messages.
 
 ## Prerequisites
 
-- OpenMgr server running and accessible from the internet (see [Exposing Your Server](#exposing-your-server))
+- Ants server running and accessible from the internet (see [Exposing Your Server](#exposing-your-server))
 - A Slack workspace where you have permission to create apps
 
 ## Step 1: Create a Slack App
@@ -12,7 +12,7 @@ This guide walks you through setting up Slack integration with OpenMgr, allowing
 1. Go to [https://api.slack.com/apps](https://api.slack.com/apps)
 2. Click **Create New App**
 3. Choose **From scratch**
-4. Enter an app name (e.g., "OpenMgr Agent")
+4. Enter an app name (e.g., "Ants Agent")
 5. Select your workspace
 6. Click **Create App**
 
@@ -73,14 +73,14 @@ This guide walks you through setting up Slack integration with OpenMgr, allowing
 4. Click the "..." menu and select **Copy member ID**
    - This looks like `U0XXXXXXXX`
 
-## Step 7: Configure OpenMgr
+## Step 7: Configure Ants
 
 ### Via API
 
 ```bash
 # Create the Slack channel
 curl -X POST http://localhost:6647/channels \
-  -H "Authorization: Bearer $OPENMGR_TOKEN" \
+  -H "Authorization: Bearer $ANTS_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
     "type": "slack",
@@ -98,7 +98,7 @@ curl -X POST http://localhost:6647/channels \
 
 # Note the channel ID from the response, then create a binding
 curl -X POST http://localhost:6647/channels/{channel_id}/bindings \
-  -H "Authorization: Bearer $OPENMGR_TOKEN" \
+  -H "Authorization: Bearer $ANTS_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
     "projectId": "your-project-id",
@@ -114,7 +114,7 @@ curl -X POST http://localhost:6647/channels/{channel_id}/bindings \
 
 ### Via App UI
 
-1. Navigate to **Channels** in the OpenMgr app
+1. Navigate to **Channels** in the Ants app
 2. Click **Add Channel**
 3. Select **Slack** as the channel type
 4. Enter your credentials and configuration
@@ -129,7 +129,7 @@ curl -X POST http://localhost:6647/channels/{channel_id}/bindings \
 
 2. Or @mention the bot in a channel:
    ```
-   @OpenMgr Agent what can you help me with?
+   @Ants Agent what can you help me with?
    ```
 
 3. The bot should respond within a few seconds
@@ -157,13 +157,13 @@ ngrok http 6647
 brew install cloudflare/cloudflare/cloudflared
 
 # Create a tunnel
-cloudflared tunnel create openmgr
+cloudflared tunnel create ants
 
 # Route traffic
-cloudflared tunnel route dns openmgr openmgr.yourdomain.com
+cloudflared tunnel route dns ants ants.yourdomain.com
 
 # Run the tunnel
-cloudflared tunnel run openmgr
+cloudflared tunnel run ants
 ```
 
 ### Option 3: Reverse Proxy (Production)
@@ -172,7 +172,7 @@ If your server is on a VPS or cloud instance, configure nginx or Caddy:
 
 **Caddy (automatic HTTPS):**
 ```
-openmgr.yourdomain.com {
+ants.yourdomain.com {
     reverse_proxy localhost:6647
 }
 ```
@@ -181,7 +181,7 @@ openmgr.yourdomain.com {
 ```nginx
 server {
     listen 443 ssl;
-    server_name openmgr.yourdomain.com;
+    server_name ants.yourdomain.com;
     
     ssl_certificate /path/to/cert.pem;
     ssl_certificate_key /path/to/key.pem;

@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /**
- * OpenMgr Agent CLI Entry Point
+ * Ants Agent CLI Entry Point
  *
- * This simply re-exports the CLI from @openmgr/agent-cli
+ * This simply re-exports the CLI from @ants/agent-cli
  */
 
-import "@openmgr/agent-cli/bin";
+import "@ants/agent-cli/bin";

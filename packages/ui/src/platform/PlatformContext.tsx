@@ -1,7 +1,7 @@
 /**
  * PlatformContext — React context for platform-specific capabilities.
  *
- * Components in `@openmgr/ui` that need platform-specific behavior (native
+ * Components in `@ants/ui` that need platform-specific behavior (native
  * file dialogs, keyboard shortcuts via main process, deeplinks, embedded
  * browser views, etc.) consume this context. Each host app (desktop, web,
  * mobile) provides its own adapter implementation.
@@ -77,7 +77,7 @@ export interface PlatformAdapter {
   // ── Deeplinks ───────────────────────────────────────────────────────
 
   /**
-   * Register a handler for deeplink URLs (e.g. openmgr://...).
+   * Register a handler for deeplink URLs (e.g. ants://...).
    * Returns an unsubscribe function.
    */
   onDeeplink?: (callback: (url: string) => void) => () => void;
@@ -101,14 +101,14 @@ export interface PlatformAdapter {
   // ── Screenshot URL resolution ────────────────────────────────────────
 
   /**
-   * Resolve a screenshot file path (relative to .openmgr/) to a displayable
+   * Resolve a screenshot file path (relative to .ants/) to a displayable
    * URL. Each platform resolves differently:
-   * - Desktop: openmgr-screenshot://<projectId>/<path>
+   * - Desktop: ants-screenshot://<projectId>/<path>
    * - Web: /api/beta/projects/<projectId>/<path>
    * - Mobile: file:// URL via the filesystem adapter
    *
    * @param projectId The project that owns the screenshot
-   * @param path Relative path from .openmgr/ (e.g. "screenshots/abc.png")
+   * @param path Relative path from .ants/ (e.g. "screenshots/abc.png")
    * @returns A URL the renderer can use as an image src
    */
   resolveScreenshotUrl?: (projectId: string, path: string) => string;

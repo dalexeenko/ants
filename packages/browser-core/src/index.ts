@@ -1,7 +1,7 @@
 /**
- * @openmgr/agent-browser-core
+ * @ants/agent-browser-core
  *
- * Core browser controller types and tools for OpenMgr Agent.
+ * Core browser controller types and tools for Ants Agent.
  * This package provides the shared interface that platform-specific
  * browser packages implement.
  *
@@ -10,14 +10,14 @@
  * The sandbox browser (`browser_*` tools) provides:
  * - Isolated browser with no user credentials
  * - Use for automated tasks, scraping, testing
- * - Package: `@openmgr/agent-browser-sandbox`
+ * - Package: `@ants/agent-browser-sandbox`
  *
  * ## Usage
  *
  * ```typescript
  * import { chromium } from "playwright-core";
- * import { createSandboxBrowserPlugin } from "@openmgr/agent-browser-core";
- * import { createSandboxController } from "@openmgr/agent-browser-sandbox";
+ * import { createSandboxBrowserPlugin } from "@ants/agent-browser-core";
+ * import { createSandboxController } from "@ants/agent-browser-sandbox";
  *
  * const controller = createSandboxController(chromium);
  * await agent.use(createSandboxBrowserPlugin(controller));

@@ -1,7 +1,7 @@
 {
-  "name": "@openmgr/agent-memory",
+  "name": "@ants/agent-memory",
   "version": "0.1.0",
-  "description": "Semantic memory with local embeddings for @openmgr/agent",
+  "description": "Semantic memory with local embeddings for @ants/agent",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -25,7 +25,7 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@openmgr/agent-core": "workspace:*",
+    "@ants/agent-core": "workspace:*",
     "@huggingface/transformers": "^3.8.1",
     "better-sqlite3": "^12.6.2",
     "zod": "^3.23.0"
@@ -37,7 +37,7 @@
     "vitest": "^4.0.0"
   },
   "keywords": [
-    "openmgr",
+    "ants",
     "agent",
     "memory",
     "embeddings",
@@ -46,7 +46,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/openmgr/agent.git",
+    "url": "git+https://github.com/ants/agent.git",
     "directory": "packages/memory"
   }
 }

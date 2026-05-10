@@ -2,8 +2,8 @@ import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { createInMemoryDatabase, SessionManager } from "../index.js";
 import type { NodeDatabaseConnection } from "../index.js";
 import { storagePlugin } from "../plugin.js";
-import type { AgentInterface } from "@openmgr/agent-core";
-import type { Message } from "@openmgr/agent-core";
+import type { AgentInterface } from "@ants/agent-core";
+import type { Message } from "@ants/agent-core";
 
 /**
  * Create a minimal mock AgentInterface that satisfies the storage plugin.

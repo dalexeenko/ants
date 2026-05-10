@@ -69,8 +69,8 @@ export function LoginPage() {
         <h1>Sign In</h1>
         <p className="subtitle">
           {isConnect
-            ? 'Sign in to authorize the OpenMgr app'
-            : 'Sign in to your OpenMgr server'}
+            ? 'Sign in to authorize the Ants app'
+            : 'Sign in to your Ants server'}
         </p>
 
         {error && (

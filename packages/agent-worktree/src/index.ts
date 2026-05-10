@@ -1,7 +1,7 @@
 /**
- * @openmgr/agent-worktree
+ * @ants/agent-worktree
  * 
- * Git worktree support for @openmgr/agent.
+ * Git worktree support for @ants/agent.
  * 
  * This package provides two levels of worktree management:
  * 
@@ -18,7 +18,7 @@
  * @example
  * ```ts
  * // Server/Desktop: use ProjectWorktreeManager directly
- * import { ProjectWorktreeManager } from "@openmgr/agent-worktree";
+ * import { ProjectWorktreeManager } from "@ants/agent-worktree";
  * 
  * const manager = new ProjectWorktreeManager(executor, filesystem, logger);
  * const wt = await manager.createWorktree("/path/to/project");
@@ -28,7 +28,7 @@
  * @example
  * ```ts
  * // Agent: use the plugin
- * import { worktreePlugin } from "@openmgr/agent-worktree";
+ * import { worktreePlugin } from "@ants/agent-worktree";
  * 
  * const agent = await createAgent({ ... });
  * await agent.use(worktreePlugin());

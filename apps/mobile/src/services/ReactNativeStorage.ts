@@ -10,17 +10,17 @@
 
 import * as SecureStore from 'expo-secure-store';
 import * as Crypto from 'expo-crypto';
-import type { PlatformStorage } from '@openmgr/ui';
-import type { AuthStatus, ApiKeyInfo, OAuthInitResult } from '@openmgr/ui';
-import { createLogger } from '@openmgr/ui';
-import { createManualOAuthHandler, type OAuthTokens } from '@openmgr/agent-auth-react-native';
+import type { PlatformStorage } from '@ants/ui';
+import type { AuthStatus, ApiKeyInfo, OAuthInitResult } from '@ants/ui';
+import { createLogger } from '@ants/ui';
+import { createManualOAuthHandler, type OAuthTokens } from '@ants/agent-auth-react-native';
 
 const log = createLogger('ReactNativeStorage');
 
 // Storage keys
 const STORAGE_KEYS = {
-  API_KEY_PREFIX: 'openmgr_api_key_',
-  PROJECTS_DIRECTORY: 'openmgr_projects_directory',
+  API_KEY_PREFIX: 'ants_api_key_',
+  PROJECTS_DIRECTORY: 'ants_projects_directory',
 } as const;
 
 /**

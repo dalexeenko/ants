@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { defineTool, type SkillManagerInterface } from "@openmgr/agent-core";
+import { defineTool, type SkillManagerInterface } from "@ants/agent-core";
 
 /**
  * Skill tool - loads detailed instructions for a specific skill

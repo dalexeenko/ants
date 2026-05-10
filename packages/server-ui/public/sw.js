@@ -1,9 +1,9 @@
 /**
- * OpenMgr Service Worker
+ * Ants Service Worker
  *
- * Handles push notifications from the OpenMgr server and displays them as
+ * Handles push notifications from the Ants server and displays them as
  * native browser notifications. Clicking a notification opens the app via
- * its deep-link URL (openmgr://) or falls back to the server web UI.
+ * its deep-link URL (ants://) or falls back to the server web UI.
  */
 
 /* eslint-env serviceworker */
@@ -40,10 +40,10 @@ self.addEventListener('push', (event) => {
     payload = event.data.json();
   } catch {
     // If the payload isn't valid JSON, show a generic notification
-    payload = { title: 'OpenMgr', body: event.data.text() };
+    payload = { title: 'Ants', body: event.data.text() };
   }
 
-  const title = payload.title || 'OpenMgr';
+  const title = payload.title || 'Ants';
   const options = {
     body: payload.body || '',
     icon: payload.icon || '/assets/icon-192.png',
@@ -70,7 +70,7 @@ self.addEventListener('notificationclick', (event) => {
   const action = event.action; // Which action button was clicked (if any)
 
   // Determine the URL to open.
-  // The deeplink is an openmgr:// URL that the OS will route to the native app
+  // The deeplink is an ants:// URL that the OS will route to the native app
   // (desktop or mobile). This is how self-hosted servers deliver push
   // notifications without Apple/Google push credentials — the browser acts as
   // a relay, and the deep link opens the installed app.

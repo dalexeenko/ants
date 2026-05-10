@@ -1,9 +1,9 @@
 ---
 title: Quickstart
-description: Go from zero to a running OpenMgr server in under 5 minutes.
+description: Go from zero to a running Ants server in under 5 minutes.
 ---
 
-Get OpenMgr running locally and create your first AI coding project.
+Get Ants running locally and create your first AI coding project.
 
 ## Prerequisites
 
@@ -16,16 +16,16 @@ Check your Node version with `node --version`. We recommend Node 22 for the best
 
 ## Start the Server
 
-The fastest way to run OpenMgr:
+The fastest way to run Ants:
 
 ```bash
-npx @openmgr/server
+npx @ants/server
 ```
 
 This downloads and starts the server on `http://localhost:6647`. On first startup, the server prints a **bearer token** to the console — save this, you'll need it to authenticate.
 
 :::note
-The bearer token is auto-generated on first run. Set `OPENMGR_SECRET` to use a stable token across restarts. See [Configuration](/getting-started/configuration/) for details.
+The bearer token is auto-generated on first run. Set `ANTS_SECRET` to use a stable token across restarts. See [Configuration](/getting-started/configuration/) for details.
 :::
 
 ## Open the Web UI
@@ -100,4 +100,4 @@ The agent will use the configured LLM to generate code, create files, and execut
 - [Installation](/getting-started/installation/) — All install methods (global, Docker, from source)
 - [Configuration](/getting-started/configuration/) — Environment variables and settings reference
 - [Docker Deployment](/guides/docker/) — Run with Docker and Docker Compose
-- [Architecture](/concepts/architecture/) — Understand how OpenMgr works under the hood
+- [Architecture](/concepts/architecture/) — Understand how Ants works under the hood

@@ -1,6 +1,6 @@
 import type { Command } from "commander";
 import chalk from "chalk";
-import { getDbPath, closeDb, runMigrations } from "@openmgr/agent-storage";
+import { getDbPath, closeDb, runMigrations } from "@ants/agent-storage";
 
 export function registerDbCommands(program: Command): void {
   const dbCmd = program
