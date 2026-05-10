@@ -134,9 +134,87 @@ packages/
   database/        → SQLite via Drizzle ORM
   memory/          → semantic memory with local embeddings
   storage/         → session and artifact persistence
+  verifiers/       → reward functions for RL evaluation (see below)
 
   ui/              → shared React chat UI
   cli/             → command-line interface
+
+tests/
+  agent-task-tests/   → episode harness + example tasks (see below)
+```
+
+## RL with Verifiable Rewards
+
+Ants includes a lightweight framework for evaluating agent behavior with verifiable reward signals — the same principle used in RLVR training: the agent acts, the environment checks the outcome, a scalar reward is returned.
+
+### How it fits into the agent loop
+
+```mermaid
+flowchart LR
+    subgraph Episode["Episode (one task run)"]
+        SETUP[Task Setup\ninitial broken state]
+        AGENT[Agent Runner\nLLM or stub]
+        VERIFY[Verifiers\nreward functions]
+        REWARD[Reward Score\n0.0 – 1.0]
+    end
+
+    SETUP -->|isolated temp workspace| AGENT
+    AGENT -->|modifies files| VERIFY
+    VERIFY --> REWARD
+```
+
+The harness is intentionally LLM-agnostic: `AgentRunner` is just `(prompt, workspacePath) => Promise<void>`. Swap in a real agent, a fine-tuned model, or a deterministic stub — the verifiers don't care.
+
+### Verifiers (`packages/verifiers`)
+
+Pure functions. Each takes a workspace path, checks one thing, returns a score.
+
+| Verifier | What it checks |
+|---|---|
+| `fileExists(path)` | file was created |
+| `fileContains(path, pattern)` | file contains a string or regex |
+| `scriptOutputs(path, expected)` | `node script.js` stdout matches expected |
+| `typescriptCompiles(path)` | `tsc --noEmit` exits clean |
+| `allPass(verifiers[])` | all must pass — score is the mean |
+| `anyPass(verifiers[])` | at least one must pass — score is the max |
+
+All return `{ name, score: 0–1, passed, detail }`. The `detail` field is the debugging surface — it tells you exactly why a reward was 0.5 instead of 1.
+
+### Task harness (`tests/agent-task-tests`)
+
+```
+src/
+  types.ts      AgentRunner, Task, EpisodeResult
+  harness.ts    runEpisode() — setup → run → verify → cleanup
+
+tasks/
+  fix-bug.ts       fix an add() that subtracts instead of adding
+  add-function.ts  add a missing multiply() function
+
+tests/
+  harness.test.ts  7 tests: reward=0, reward=0.5, reward=1 cases
+```
+
+`runEpisode(task, runner)` creates an isolated temp directory, calls `task.setup()` to write the broken initial state, runs the agent, evaluates all verifiers, and cleans up. The result is an `EpisodeResult`:
+
+```ts
+{
+  taskId: string
+  reward: number        // mean score across all verifiers
+  passed: boolean       // true only when every verifier passes
+  verifierResults: VerifierResult[]
+  durationMs: number
+}
+```
+
+### Partial credit
+
+Verifiers compose naturally into partial rewards. A task with two verifiers — `scriptOutputs` and `fileContains` — scores 0.5 if the agent produces the right output but via a different code path than expected. This matters for training: you want a gradient, not just binary pass/fail.
+
+```
+reward=0    agent does nothing         both verifiers fail
+reward=0.5  agent fixes the logic      scriptOutputs passes, fileContains fails
+reward=1    agent fixes correctly      both verifiers pass
 ```
 
 ## Comparison
