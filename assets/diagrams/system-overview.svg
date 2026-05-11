@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1800" height="620" viewBox="0 0 1800 620"
+     xmlns="http://www.w3.org/2000/svg"
+     font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <filter id="shadow" x="-8%" y="-8%" width="116%" height="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#0F172A" flood-opacity="0.07"/>
+    </filter>
+    <marker id="arr" viewBox="0 0 12 10" refX="10" refY="5"
+            markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 1.5 L10 5 L0 8.5Z" fill="var(--arrow)"/>
+    </marker>
+    <style>
+      :root {
+        --bg-card: #ffffff;
+        --bg-group: #EEF0F5;
+        --border-card: #CBD5E1;
+        --border-divider: #E2E8F0;
+        --text-primary: #1E293B;
+        --text-secondary: #64748B;
+        --text-caption: #94A3B8;
+        --arrow: #94A3B8;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg-card: #1C2128;
+          --bg-group: #161B22;
+          --border-card: #30363D;
+          --border-divider: #30363D;
+          --text-primary: #E6EDF3;
+          --text-secondary: #8B949E;
+          --text-caption: #6E7681;
+          --arrow: #6E7681;
+        }
+      }
+    </style>
+  </defs>
+
+  <!-- Title -->
+  <text x="900" y="46" font-size="21" font-weight="700" fill="var(--text-primary)"
+        text-anchor="middle" letter-spacing="-0.3px">Ants System Overview</text>
+  <text x="900" y="70" font-size="13" fill="var(--text-secondary)" text-anchor="middle">
+    Interfaces → Director → Colony → Workers → Shared Infrastructure
+  </text>
+
+  <!-- ── INTERFACES group ── x=40, y=100, w=320, h=240 -->
+  <rect x="40" y="95" width="320" height="248" rx="16" fill="var(--bg-group)"/>
+  <text x="56" y="92" font-size="10" fill="var(--text-caption)" font-weight="600" letter-spacing="0.08em">INTERFACES</text>
+
+  <!-- CLI -->
+  <rect x="60" y="110" width="130" height="80" rx="12"
+        fill="var(--bg-card)" stroke="var(--border-card)" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="125" y="145" font-size="13.5" font-weight="700" fill="var(--text-primary)" text-anchor="middle">CLI</text>
+  <line x1="74" y1="154" x2="176" y2="154" stroke="var(--border-divider)" stroke-width="1"/>
+  <text x="125" y="172" font-size="11" fill="var(--text-secondary)" text-anchor="middle"
+        font-family="'SF Mono','Fira Code',ui-monospace,monospace">command line</text>
+
+  <!-- Desktop App -->
+  <rect x="210" y="110" width="130" height="80" rx="12"
+        fill="var(--bg-card)" stroke="var(--border-card)" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="275" y="141" font-size="13.5" font-weight="700" fill="var(--text-primary)" text-anchor="middle">Desktop App</text>
+  <line x1="224" y1="151" x2="326" y2="151" stroke="var(--border-divider)" stroke-width="1"/>
+  <text x="275" y="166" font-size="11" fill="var(--text-secondary)" text-anchor="middle"
+        font-family="'SF Mono','Fira Code',ui-monospace,monospace">Electron</text>
+
+  <!-- Mobile App -->
+  <rect x="60" y="210" width="130" height="80" rx="12"
+        fill="var(--bg-card)" stroke="var(--border-card)" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="125" y="241" font-size="13.5" font-weight="700" fill="var(--text-primary)" text-anchor="middle">Mobile App</text>
+  <line x1="74" y1="251" x2="176" y2="251" stroke="var(--border-divider)" stroke-width="1"/>
+  <text x="125" y="267" font-size="11" fill="var(--text-secondary)" text-anchor="middle"
+        font-family="'SF Mono','Fira Code',ui-monospace,monospace">React Native</text>
+
+  <!-- HTTP / WS API -->
+  <rect x="210" y="210" width="130" height="80" rx="12"
+        fill="var(--bg-card)" stroke="var(--border-card)" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="275" y="241" font-size="13.5" font-weight="700" fill="var(--text-primary)" text-anchor="middle">HTTP API</text>
+  <line x1="224" y1="251" x2="326" y2="251" stroke="var(--border-divider)" stroke-width="1"/>
+  <text x="275" y="267" font-size="11" fill="var(--text-secondary)" text-anchor="middle"
+        font-family="'SF Mono','Fira Code',ui-monospace,monospace">WebSocket</text>
+
+  <!-- ── Arrow: Interfaces → Director ── -->
+  <line x1="362" y1="219" x2="422" y2="219"
+        stroke="var(--arrow)" stroke-width="1.8" marker-end="url(#arr)"/>
+
+  <!-- ── DIRECTOR group ── x=424, y=100, w=310, h=248 -->
+  <rect x="424" y="95" width="310" height="248" rx="16" fill="var(--bg-group)"/>
+  <text x="440" y="92" font-size="10" fill="var(--text-caption)" font-weight="600" letter-spacing="0.08em">DIRECTOR AGENT (ORCHESTRATOR)</text>
+
+  <!-- Agent Loop -->
+  <rect x="444" y="110" width="270" height="72" rx="12"
+        fill="#EEF2FF" stroke="#C7D2FE" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="579" y="141" font-size="13.5" font-weight="700" fill="#3730A3" text-anchor="middle">Agent Loop</text>
+  <line x1="458" y1="151" x2="700" y2="151" stroke="#C7D2FE" stroke-width="1"/>
+  <text x="579" y="168" font-size="11" fill="#4338CA" text-anchor="middle"
+        font-family="'SF Mono','Fira Code',ui-monospace,monospace">core · plan · decide</text>
+
+  <!-- Scheduler -->
+  <rect x="444" y="198" width="125" height="72" rx="12"
+        fill="var(--bg-card)" stroke="var(--border-card)" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="506" y="228" font-size="13.5" font-weight="700" fill="var(--text-primary)" text-anchor="middle">Scheduler</text>
+  <line x1="458" y1="238" x2="555" y2="238" stroke="var(--border-divider)" stroke-width="1"/>
+  <text x="506" y="254" font-size="11" fill="var(--text-secondary)" text-anchor="middle"
+        font-family="'SF Mono','Fira Code',ui-monospace,monospace">cron · triggers</text>
+
+  <!-- Task Dispatcher -->
+  <rect x="585" y="198" width="129" height="72" rx="12"
+        fill="var(--bg-card)" stroke="var(--border-card)" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="649" y="225" font-size="13.5" font-weight="700" fill="var(--text-primary)" text-anchor="middle">Dispatcher</text>
+  <line x1="599" y1="235" x2="700" y2="235" stroke="var(--border-divider)" stroke-width="1"/>
+  <text x="649" y="252" font-size="11" fill="var(--text-secondary)" text-anchor="middle"
+        font-family="'SF Mono','Fira Code',ui-monospace,monospace">task dispatch</text>
+
+  <!-- Loop → Dispatcher arrow -->
+  <line x1="649" y1="182" x2="649" y2="196"
+        stroke="var(--arrow)" stroke-width="1.5" marker-end="url(#arr)"/>
+  <!-- Scheduler → Dispatcher arrow -->
+  <line x1="571" y1="234" x2="583" y2="234"
+        stroke="var(--arrow)" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- ── Arrow: Director → Colony ── -->
+  <line x1="736" y1="235" x2="796" y2="235"
+        stroke="var(--arrow)" stroke-width="1.8" marker-end="url(#arr)"/>
+
+  <!-- ── COLONY group ── x=798, y=100, w=270, h=248 -->
+  <rect x="798" y="95" width="270" height="248" rx="16" fill="var(--bg-group)"/>
+  <text x="814" y="92" font-size="10" fill="var(--text-caption)" font-weight="600" letter-spacing="0.08em">WORKER COLONY (PARALLEL SESSIONS)</text>
+
+  <!-- Worker 1 -->
+  <rect x="818" y="110" width="110" height="66" rx="12"
+        fill="var(--bg-card)" stroke="var(--border-card)" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="873" y="140" font-size="13" font-weight="700" fill="var(--text-primary)" text-anchor="middle">Worker 1</text>
+  <line x1="832" y1="149" x2="914" y2="149" stroke="var(--border-divider)" stroke-width="1"/>
+  <text x="873" y="164" font-size="10.5" fill="var(--text-secondary)" text-anchor="middle"
+        font-family="'SF Mono','Fira Code',ui-monospace,monospace">agent session</text>
+
+  <!-- Worker 2 -->
+  <rect x="940" y="110" width="110" height="66" rx="12"
+        fill="var(--bg-card)" stroke="var(--border-card)" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="995" y="140" font-size="13" font-weight="700" fill="var(--text-primary)" text-anchor="middle">Worker 2</text>
+  <line x1="954" y1="149" x2="1036" y2="149" stroke="var(--border-divider)" stroke-width="1"/>
+  <text x="995" y="164" font-size="10.5" fill="var(--text-secondary)" text-anchor="middle"
+        font-family="'SF Mono','Fira Code',ui-monospace,monospace">agent session</text>
+
+  <!-- Worker 3 -->
+  <rect x="818" y="192" width="110" height="66" rx="12"
+        fill="var(--bg-card)" stroke="var(--border-card)" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="873" y="222" font-size="13" font-weight="700" fill="var(--text-primary)" text-anchor="middle">Worker 3</text>
+  <line x1="832" y1="231" x2="914" y2="231" stroke="var(--border-divider)" stroke-width="1"/>
+  <text x="873" y="247" font-size="10.5" fill="var(--text-secondary)" text-anchor="middle"
+        font-family="'SF Mono','Fira Code',ui-monospace,monospace">agent session</text>
+
+  <!-- Worker N -->
+  <rect x="940" y="192" width="110" height="66" rx="12"
+        fill="var(--bg-card)" stroke="var(--border-card)" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="995" y="222" font-size="13" font-weight="700" fill="var(--text-primary)" text-anchor="middle">Worker N</text>
+  <line x1="954" y1="231" x2="1036" y2="231" stroke="var(--border-divider)" stroke-width="1"/>
+  <text x="995" y="247" font-size="10.5" fill="var(--text-secondary)" text-anchor="middle"
+        font-family="'SF Mono','Fira Code',ui-monospace,monospace">agent session</text>
+
+  <!-- ── Arrow: Colony → PerWorker ── -->
+  <line x1="1070" y1="219" x2="1130" y2="219"
+        stroke="var(--arrow)" stroke-width="1.8" marker-end="url(#arr)"/>
+
+  <!-- ── PER-WORKER group ── x=1132, y=95, w=340, h=310 -->
+  <rect x="1132" y="95" width="340" height="310" rx="16" fill="var(--bg-group)"/>
+  <text x="1148" y="92" font-size="10" fill="var(--text-caption)" font-weight="600" letter-spacing="0.08em">EACH WORKER HAS</text>
+
+  <!-- LLM -->
+  <rect x="1152" y="110" width="140" height="72" rx="12"
+        fill="#FDF2F8" stroke="#F9A8D4" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="1222" y="141" font-size="13.5" font-weight="700" fill="#9D174D" text-anchor="middle">LLM</text>
+  <line x1="1166" y1="151" x2="1278" y2="151" stroke="#F9A8D4" stroke-width="1"/>
+  <text x="1222" y="168" font-size="11" fill="#BE185D" text-anchor="middle"
+        font-family="'SF Mono','Fira Code',ui-monospace,monospace">Claude · GPT · Gemini</text>
+
+  <!-- Tools -->
+  <rect x="1312" y="110" width="140" height="72" rx="12"
+        fill="var(--bg-card)" stroke="var(--border-card)" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="1382" y="141" font-size="13.5" font-weight="700" fill="var(--text-primary)" text-anchor="middle">Tools</text>
+  <line x1="1326" y1="151" x2="1438" y2="151" stroke="var(--border-divider)" stroke-width="1"/>
+  <text x="1382" y="168" font-size="11" fill="var(--text-secondary)" text-anchor="middle"
+        font-family="'SF Mono','Fira Code',ui-monospace,monospace">bash · read · edit</text>
+
+  <!-- Browser -->
+  <rect x="1152" y="200" width="140" height="72" rx="12"
+        fill="var(--bg-card)" stroke="var(--border-card)" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="1222" y="231" font-size="13.5" font-weight="700" fill="var(--text-primary)" text-anchor="middle">Browser</text>
+  <line x1="1166" y1="241" x2="1278" y2="241" stroke="var(--border-divider)" stroke-width="1"/>
+  <text x="1222" y="258" font-size="11" fill="var(--text-secondary)" text-anchor="middle"
+        font-family="'SF Mono','Fira Code',ui-monospace,monospace">headless control</text>
+
+  <!-- LSP -->
+  <rect x="1312" y="200" width="140" height="72" rx="12"
+        fill="var(--bg-card)" stroke="var(--border-card)" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="1382" y="231" font-size="13.5" font-weight="700" fill="var(--text-primary)" text-anchor="middle">LSP</text>
+  <line x1="1326" y1="241" x2="1438" y2="241" stroke="var(--border-divider)" stroke-width="1"/>
+  <text x="1382" y="258" font-size="11" fill="var(--text-secondary)" text-anchor="middle"
+        font-family="'SF Mono','Fira Code',ui-monospace,monospace">code intelligence</text>
+
+  <!-- MCP Plugins -->
+  <rect x="1152" y="290" width="300" height="72" rx="12"
+        fill="var(--bg-card)" stroke="var(--border-card)" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="1302" y="321" font-size="13.5" font-weight="700" fill="var(--text-primary)" text-anchor="middle">MCP Plugins</text>
+  <line x1="1166" y1="331" x2="1438" y2="331" stroke="var(--border-divider)" stroke-width="1"/>
+  <text x="1302" y="348" font-size="11" fill="var(--text-secondary)" text-anchor="middle"
+        font-family="'SF Mono','Fira Code',ui-monospace,monospace">external tools · extensions</text>
+
+  <!-- ── Arrow: PerWorker → Shared ── -->
+  <line x1="1474" y1="275" x2="1534" y2="275"
+        stroke="var(--arrow)" stroke-width="1.8" marker-end="url(#arr)"/>
+
+  <!-- ── SHARED group ── x=1536, y=95, w=224, h=310 -->
+  <rect x="1536" y="95" width="224" height="310" rx="16" fill="var(--bg-group)"/>
+  <text x="1552" y="92" font-size="10" fill="var(--text-caption)" font-weight="600" letter-spacing="0.08em">SHARED INFRASTRUCTURE</text>
+
+  <!-- SQLite -->
+  <rect x="1556" y="110" width="184" height="84" rx="12"
+        fill="#F0FDF4" stroke="#86EFAC" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="1648" y="142" font-size="13.5" font-weight="700" fill="#166534" text-anchor="middle">SQLite</text>
+  <line x1="1570" y1="152" x2="1726" y2="152" stroke="#86EFAC" stroke-width="1"/>
+  <text x="1648" y="170" font-size="11" fill="#15803D" text-anchor="middle"
+        font-family="'SF Mono','Fira Code',ui-monospace,monospace">conversations · stats</text>
+  <text x="1648" y="185" font-size="11" fill="#15803D" text-anchor="middle"
+        font-family="'SF Mono','Fira Code',ui-monospace,monospace">settings</text>
+
+  <!-- Semantic Memory -->
+  <rect x="1556" y="212" width="184" height="72" rx="12"
+        fill="var(--bg-card)" stroke="var(--border-card)" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="1648" y="240" font-size="13" font-weight="700" fill="var(--text-primary)" text-anchor="middle">Semantic Memory</text>
+  <line x1="1570" y1="250" x2="1726" y2="250" stroke="var(--border-divider)" stroke-width="1"/>
+  <text x="1648" y="268" font-size="11" fill="var(--text-secondary)" text-anchor="middle"
+        font-family="'SF Mono','Fira Code',ui-monospace,monospace">local embeddings</text>
+
+  <!-- Session Storage -->
+  <rect x="1556" y="302" width="184" height="72" rx="12"
+        fill="var(--bg-card)" stroke="var(--border-card)" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="1648" y="330" font-size="13" font-weight="700" fill="var(--text-primary)" text-anchor="middle">Session Storage</text>
+  <line x1="1570" y1="340" x2="1726" y2="340" stroke="var(--border-divider)" stroke-width="1"/>
+  <text x="1648" y="358" font-size="11" fill="var(--text-secondary)" text-anchor="middle"
+        font-family="'SF Mono','Fira Code',ui-monospace,monospace">worktrees · artifacts</text>
+
+  <!-- ── Flow label ── -->
+  <text x="900" y="580" font-size="12" fill="var(--text-caption)" text-anchor="middle" letter-spacing="0.02em">
+    All workers share the same infrastructure — conversations, memory, and workspace storage are centralized
+  </text>
+</svg>
