@@ -6,15 +6,15 @@ The key insight from Ramp's writeup: the bottleneck in AI coding isn't the LLM, 
 
 ## System Overview
 
-![System Overview](docs/diagrams/system-overview.svg)
+![System Overview](assets/diagrams/system-overview.svg)
 
 ## How a Task Flows
 
-![Task Flow](docs/diagrams/task-flow.svg)
+![Task Flow](assets/diagrams/task-flow.svg)
 
 ## Deployment Modes
 
-![Deployment Modes](docs/diagrams/deployment-modes.svg)
+![Deployment Modes](assets/diagrams/deployment-modes.svg)
 
 ## Package Map
 
@@ -159,7 +159,7 @@ Ants includes a lightweight framework for evaluating agent behavior with verifia
 
 ### How it fits into the agent loop
 
-![RL Rewards](docs/diagrams/rl-rewards.svg)
+![RL Rewards](assets/diagrams/rl-rewards.svg)
 
 The harness is intentionally LLM-agnostic: `AgentRunner` is just `(prompt, workspacePath) => Promise<void>`. Swap in a real agent, a fine-tuned model, or a deterministic stub — the verifiers don't care.
 
