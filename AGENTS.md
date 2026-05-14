@@ -180,7 +180,7 @@ MCP servers extend what agents can do beyond the built-in tool suite. They are c
 
 Via API:
 ```bash
-POST /api/projects/:id/mcp-servers
+POST /api/beta/projects/:projectId/mcp/servers
 {
   "name": "filesystem",
   "config": {

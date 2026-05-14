@@ -26,6 +26,7 @@
     "compose:up:lite:detached": "ANTS_SERVER_VERSION=$(git rev-parse --short HEAD) docker compose -f apps/server/docker-compose.yml -f apps/server/docker-compose.lite.yml up --build -d",
     "compose:down": "docker compose -f apps/server/docker-compose.yml down",
     "compose:logs": "docker compose -f apps/server/docker-compose.yml logs -f",
+    "demo:api": "bash scripts/demo-api-tour.sh",
     "release": "bash scripts/release.sh",
     "release:electron": "bash scripts/build-electron.sh",
     "release:docker": "bash scripts/build-docker.sh",

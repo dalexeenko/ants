@@ -29,15 +29,17 @@ docker run -p 6647:6647 \
   ants/server
 ```
 
-### Option 4: Docker Compose
+With default **single-user** settings, the server prints an `ANTS_SECRET` bearer token at startup (also saved under `ANTS_DATA_DIR`). Use it for API calls; try `pnpm demo:api` from the monorepo root after `pnpm dev:server`.
+
+### Option 4: Docker Compose (this monorepo)
+
+From the repository root (after `git clone https://github.com/dalexeenko/ants.git` and `cd ants`):
 
 ```bash
-git clone https://github.com/ants/server.git
-cd server
-docker compose up
+pnpm compose:up:detached
 ```
 
-On startup, the server prints a bearer token to the console. Use this token to authenticate with the [Ants App](https://github.com/ants/app) or API calls.
+The bundled `apps/server/docker-compose.yml` enables **multi-user** mode (`ANTS_MULTI_USER=true`) and does **not** use a single-user bearer token. Create the first admin with `POST /api/beta/setup` (see `GET /api/beta/setup/status`). For local single-user dev with a printed secret, use `pnpm dev:server` from the monorepo root instead.
 
 ## Configuration
 

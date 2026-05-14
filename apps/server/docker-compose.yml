@@ -31,7 +31,7 @@ services:
       - ANTS_WORKSPACES_DIR=/workspaces
       # Multi-user mode — incompatible with ANTS_SECRET
       - ANTS_MULTI_USER=true
-      # Token required to create the first admin account (POST /api/users/setup)
+      # Token required for initial admin (POST /api/beta/setup with setupToken in JSON body)
       # DO NOT use this value in production
       - ANTS_SETUP_TOKEN=dev-setup-token-do-not-use-in-production
       # Encryption key for API keys (32-byte base64 - DO NOT use in production)
