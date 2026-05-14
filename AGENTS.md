@@ -249,6 +249,16 @@ ANTS_ENCRYPTION_KEY=$(openssl rand -base64 32) ANTS_HOST=0.0.0.0 ANTS_WEB_APP=tr
 - The server prints an auto-generated `ANTS_SECRET` bearer token to stdout on startup. The full token is saved to `~/.config/ants-server/config.json`.
 - API routes are at `/api/beta/*` (not `/api/*`). The root `/api/*` prefix is caught by the SPA.
 
+### Authenticating with the web UI
+
+In single-user mode (the default), the web UI shows "No authentication methods configured" on the login page. To authenticate, exchange the bearer token for a session cookie by navigating to:
+
+```
+http://127.0.0.1:6647/api/beta/auth/session?token=<ANTS_SECRET>&redirect=/settings
+```
+
+The `ANTS_SECRET` value is printed at startup and saved to `~/.config/ants-server/config.json`. This sets an `ants_session` cookie and redirects to the authenticated UI.
+
 ### Key dev workflow notes
 
 - After `pnpm install`, the CLI bin symlinks will warn about missing `dist/` files — this is expected and resolves after `pnpm build`.
