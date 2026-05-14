@@ -10,6 +10,7 @@
  */
 
 import { Hono } from 'hono';
+import type { Context } from 'hono';
 import type { ServerConfig } from '../config.js';
 import type { Services } from '../services/container.js';
 import {
@@ -63,6 +64,7 @@ import { join, dirname, extname } from 'path';
 import { fileURLToPath } from 'url';
 import { pathExists } from '../utils/fs.js';
 import { createLogger } from '../utils/logger.js';
+import { hasValidWebUiSession } from '../utils/web-app-session-gate.js';
 
 const log = createLogger('routes');
 
@@ -354,10 +356,9 @@ export function registerRoutes(
       });
 
       const appIndexHtml = readFileSync(join(appDistDir, 'index.html'), 'utf-8');
-      const serveAppIndex = async (c: any) => {
+      const serveAppIndex = async (c: Context) => {
         try {
-          const cookie = c.req.header('cookie');
-          if (!cookie) {
+          if (!hasValidWebUiSession(c, webSessionService)) {
             return c.redirect('/login?redirect=' + encodeURIComponent('/app/'));
           }
           return c.html(appIndexHtml);
