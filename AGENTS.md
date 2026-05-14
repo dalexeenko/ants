@@ -232,3 +232,26 @@ Skills live in `packages/skills-loader/skills/<name>/SKILL.md`. The frontmatter 
 - **Build before run**: Source changes to any `@ants/*` package require `pnpm build` + server restart before taking effect.
 - **Server tsconfig**: Do not extend `tsconfig.base.json` in `apps/server` — the base enables `noUncheckedIndexedAccess` and `verbatimModuleSyntax` which surface many pre-existing errors.
 - **UI colors**: Never hardcode hex values in components. Use design tokens from `packages/ui/src/styles/tokens.ts`.
+
+---
+
+## Cursor Cloud specific instructions
+
+### Starting the dev server
+
+```bash
+ANTS_ENCRYPTION_KEY=$(openssl rand -base64 32) ANTS_HOST=0.0.0.0 ANTS_WEB_APP=true pnpm dev:server
+```
+
+- `ANTS_ENCRYPTION_KEY` is **required** — the server exits immediately without it. Generate a fresh key each session.
+- `ANTS_HOST=0.0.0.0` binds to all interfaces (needed for browser access from the Desktop pane).
+- `ANTS_WEB_APP=true` serves the web UI at `/` (built from `@ants/server-ui`).
+- The server prints an auto-generated `ANTS_SECRET` bearer token to stdout on startup. The full token is saved to `~/.config/ants-server/config.json`.
+- API routes are at `/api/beta/*` (not `/api/*`). The root `/api/*` prefix is caught by the SPA.
+
+### Key dev workflow notes
+
+- After `pnpm install`, the CLI bin symlinks will warn about missing `dist/` files — this is expected and resolves after `pnpm build`.
+- `pnpm dev:server` uses `tsx watch` for hot-reload of server source, but changes to `@ants/*` packages still require `pnpm build` to recompile their `dist/` output.
+- Lint (`pnpm lint`) runs ESLint on `apps/server`, `packages/server-ui`, and `packages/ui`. Warnings are expected (104 in `@ants/ui`) but zero errors.
+- Tests (`pnpm test`) runs 67 Turbo tasks covering ~2,900+ tests across all packages. All pass on a clean build.
