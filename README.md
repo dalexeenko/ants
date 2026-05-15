@@ -1,6 +1,6 @@
 # ants
 
-An open-source AI agent platform. Each project is an isolated environment with its own AI conversation, sandboxed container, tool suite, and persistent state — running in parallel, on your own infrastructure.
+An open-source AI agent platform inspired by [openmgr](https://github.com/openmgr/openmgr). Each project is an isolated environment with its own AI conversation, sandboxed container, tool suite, and persistent state — running in parallel, on your own infrastructure.
 
 Think of it as the self-hostable version of [Ramp Inspect](https://builders.ramp.com/post/why-we-built-our-background-agent), Stripe Minions, and Shopify River.
 
