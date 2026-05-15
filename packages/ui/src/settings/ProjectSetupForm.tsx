@@ -24,6 +24,7 @@ import { spacing, borderRadius } from '../styles/tokens';
 import type { AgentBridge, RemoteServerConfig, Project } from '../agent/types';
 import { TemplateSelector, type TemplateInfo } from './TemplateSelector';
 import { createLogger } from '../utils/logger';
+import { usePlatform } from '../platform';
 
 const log = createLogger('ProjectSetupForm');
 
@@ -102,10 +103,14 @@ export function ProjectSetupForm({
   scrollable = true,
 }: ProjectSetupFormProps) {
   const { colors } = useTheme();
+  const { platform } = usePlatform();
+  // The web bundle has no in-browser agent runtime, so "Local" projects
+  // can't work there — only remote (server-hosted) ones are valid.
+  const allowLocal = platform !== 'web';
 
   // Form state
   const [projectName, setProjectName] = useState('');
-  const [selectedProvider, setSelectedProvider] = useState<'local' | string>('local');
+  const [selectedProvider, setSelectedProvider] = useState<'local' | string>(allowLocal ? 'local' : '');
   const [projectPath, setProjectPath] = useState('');
   const [useDefaultDirectory, setUseDefaultDirectory] = useState(true);
   const [createSubfolder, setCreateSubfolder] = useState(false);
@@ -127,6 +132,9 @@ export function ProjectSetupForm({
     try {
       const servers = await bridge.listRemoteServers();
       setRemoteServers(servers);
+      if (!allowLocal && servers.length > 0) {
+        setSelectedProvider((current) => (current === 'local' || current === '' ? servers[0].id : current));
+      }
     } catch (e) {
       log.error('Failed to load remote servers:', e);
     }
@@ -190,10 +198,12 @@ export function ProjectSetupForm({
 
   const canCreate =
     !creating &&
+    !!selectedProvider &&
     (selectedProvider !== 'local' || useDefaultDirectory || !!projectPath);
 
   const getProviderDisplayName = () => {
     if (selectedProvider === 'local') return 'Local';
+    if (!selectedProvider) return 'Select a server…';
     const server = remoteServers.find((s) => s.id === selectedProvider);
     return server?.name || 'Remote Server';
   };
@@ -404,21 +414,23 @@ export function ProjectSetupForm({
               },
             ]}
           >
-            <Pressable
-              style={[
-                styles.dropdownItem,
-                { borderBottomColor: colors.border.light },
-                selectedProvider === 'local' && {
-                  backgroundColor: colors.bg.tertiary,
-                },
-              ]}
-              onPress={() => handleSelectProvider('local')}
-            >
-              <Text>Local</Text>
-              {selectedProvider === 'local' && (
-                <Icon name="check" size={16} color={colors.primary} />
-              )}
-            </Pressable>
+            {allowLocal && (
+              <Pressable
+                style={[
+                  styles.dropdownItem,
+                  { borderBottomColor: colors.border.light },
+                  selectedProvider === 'local' && {
+                    backgroundColor: colors.bg.tertiary,
+                  },
+                ]}
+                onPress={() => handleSelectProvider('local')}
+              >
+                <Text>Local</Text>
+                {selectedProvider === 'local' && (
+                  <Icon name="check" size={16} color={colors.primary} />
+                )}
+              </Pressable>
+            )}
 
             {remoteServers.map((server) => (
               <Pressable

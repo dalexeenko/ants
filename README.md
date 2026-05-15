@@ -125,9 +125,29 @@ pnpm dev:desktop
 
 ### Run the Server
 
+Create `apps/server/.env`:
+
+```bash
+cat > apps/server/.env <<EOF
+ANTS_ENCRYPTION_KEY=$(openssl rand -base64 32)
+ANTS_SECRET=devsecret
+ANTS_WEB_APP=true
+EOF
+```
+
+Start it:
+
 ```bash
 pnpm dev:server
 ```
+
+Open the web app — this URL exchanges the bearer token for a session cookie, then drops you into the UI at `/app/`:
+
+```bash
+open "http://127.0.0.1:6647/api/beta/auth/session?token=devsecret&redirect=/app/"
+```
+
+![Ants web app](./assets/web-app-screenshot.png)
 
 ### Run with Docker
 
