@@ -509,6 +509,19 @@ export function createBridgeCore(config: BridgeCoreConfig): AgentBridge {
 
   const emitRemoteEvent = (projectId: string, event: AgentEvent) => {
     onEvent(projectId, event);
+    // Also fan out to any subscribeToProject() listeners. Desktop wires onEvent
+    // to forward via IPC to the renderer's listener; web bridges leave onEvent
+    // as a no-op and rely on this in-process dispatch instead.
+    const subscribers = bridgeState.remoteEventSubscribers.get(projectId);
+    if (subscribers) {
+      for (const cb of subscribers) {
+        try {
+          cb(event);
+        } catch {
+          // ignore subscriber errors so one bad listener doesn't block the rest
+        }
+      }
+    }
   };
 
   const getRemoteServerForProject = (projectId: string): RemoteServerConfig | null => {
