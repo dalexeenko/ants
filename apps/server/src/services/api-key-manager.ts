@@ -548,4 +548,20 @@ export class ApiKeyManager {
 
     return result;
   }
+
+  /**
+   * Returns true if any provider has usable credentials — a stored API key,
+   * a stored OAuth refresh token, or the corresponding env var present in
+   * `process.env` (which agents inherit from the server process).
+   */
+  async hasAnyProviderCredentials(): Promise<boolean> {
+    const status = await this.listApiKeys();
+    if (status.providers.some(p => p.isConfigured)) return true;
+    for (const provider of status.providers) {
+      for (const field of provider.fields) {
+        if (field.required && process.env[field.envVar]) return true;
+      }
+    }
+    return false;
+  }
 }

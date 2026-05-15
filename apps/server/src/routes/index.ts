@@ -270,7 +270,7 @@ export function registerRoutes(
   apiApp.route('/projects', createFileRoutes(projectManager));
   apiApp.route('/projects', createTaskRoutes(taskScheduler));
   apiApp.route('/projects', createSessionRoutes(projectManager));
-  apiApp.route('/projects', createSessionStreamingRoutes(projectManager, approvalManager, pushService));
+  apiApp.route('/projects', createSessionStreamingRoutes(projectManager, approvalManager, pushService, apiKeyManager));
   apiApp.route('/projects', createToolsRoutes(projectManager));
   apiApp.route('/projects', createPluginRoutes(projectManager, pluginRegistry));
   apiApp.route('/projects', createAgentTypeRoutes(projectManager));

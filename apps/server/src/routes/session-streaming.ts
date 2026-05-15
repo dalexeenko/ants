@@ -3,6 +3,7 @@ import { HTTPException } from 'hono/http-exception';
 import type { ProjectManager } from '../services/project-manager.js';
 import type { ApprovalManager } from '../services/approval-manager.js';
 import type { PushNotificationService } from '../services/push-notification.js';
+import type { ApiKeyManager } from '../services/api-key-manager.js';
 import type { AuthUser } from '../auth/provider.js';
 import { getErrorMessage } from '../utils/errors.js';
 import { SessionEventBuffer } from '../services/session-event-buffer.js';
@@ -24,6 +25,7 @@ export function createSessionStreamingRoutes(
   projectManager: ProjectManager,
   approvalManager: ApprovalManager,
   pushService?: PushNotificationService,
+  apiKeyManager?: ApiKeyManager,
 ) {
   const app = new Hono();
 
@@ -204,6 +206,19 @@ export function createSessionStreamingRoutes(
 
     try {
       const body = await parseBody(c, PromptSchema);
+
+      // Pre-flight: make sure at least one LLM provider has credentials.
+      // Without this, the agent boots fine but silently hangs on the first
+      // LLM call, leaving the chat stuck on "Thinking…".
+      if (apiKeyManager) {
+        const hasCreds = await apiKeyManager.hasAnyProviderCredentials();
+        if (!hasCreds) {
+          const msg = 'No LLM provider credentials configured. Add an API key in Settings → Authentication, or set ANTHROPIC_API_KEY (or another provider env var) before starting the server.';
+          log.warn(`#${requestId} ${msg}`);
+          eventBuffer.errorSession(sessionId, msg);
+          return c.json({ error: msg, code: 'NO_PROVIDER' }, 400);
+        }
+      }
 
       // Get the project
       const project = await projectManager.getProject(projectId);

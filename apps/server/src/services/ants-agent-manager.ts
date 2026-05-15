@@ -379,6 +379,22 @@ export class AntsAgentManager {
       log.debug(`Found API key credentials`);
     }
 
+    const knownProviderEnvVars = [
+      'ANTHROPIC_API_KEY', 'ANTHROPIC_OAUTH_TOKENS',
+      'OPENAI_API_KEY', 'GOOGLE_API_KEY', 'OPENROUTER_API_KEY',
+      'GROQ_API_KEY', 'XAI_API_KEY',
+    ];
+    const hasAnyKey = knownProviderEnvVars.some(
+      (k) => apiKeyEnv[k] || anthropicOAuthEnv[k] || process.env[k],
+    );
+    if (!hasAnyKey) {
+      log.warn(
+        'No LLM provider credentials found — the agent will hang on the first model call. ' +
+        'Set ANTHROPIC_API_KEY (or another provider env var) before starting the server, ' +
+        'or add a key via Settings → Authentication in the web app.',
+      );
+    }
+
     return { ...apiKeyEnv, ...anthropicOAuthEnv };
   }
 
