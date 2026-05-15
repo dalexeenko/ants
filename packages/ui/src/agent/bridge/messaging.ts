@@ -873,7 +873,14 @@ export function createMessagingMethods(deps: BridgeDeps): MessagingMethods {
 
             if (!response.ok) {
               const errorText = await response.text();
-              throw new Error(`Failed to send message: ${response.status} - ${errorText}`);
+              let friendly = errorText;
+              try {
+                const parsed = JSON.parse(errorText) as { error?: string };
+                if (parsed?.error) friendly = parsed.error;
+              } catch {
+                // not JSON, use raw text
+              }
+              throw new Error(friendly);
             }
 
             updateServerLastSeen(server.id);
