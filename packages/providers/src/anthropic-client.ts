@@ -221,11 +221,19 @@ function convertMessages(messages: LLMMessage[]): AnthropicMessage[] {
 }
 
 function convertTools(tools: LLMTool[]): AnthropicTool[] {
-  return tools.map((tool) => ({
-    name: tool.name,
-    description: tool.description,
-    input_schema: zodToJsonSchema(tool.parameters, { target: "openApi3" }),
-  }));
+  return tools.map((tool) => {
+    // Anthropic requires JSON Schema (draft 2020-12). OpenAPI 3's `nullable: true`
+    // and other dialect quirks make Anthropic reject the request, so use the
+    // default JSON Schema output and drop the `$schema` meta-field which
+    // Anthropic doesn't want on a tool input_schema.
+    const schema = zodToJsonSchema(tool.parameters) as Record<string, unknown>;
+    delete schema.$schema;
+    return {
+      name: tool.name,
+      description: tool.description,
+      input_schema: schema,
+    };
+  });
 }
 
 // ============================================================================
