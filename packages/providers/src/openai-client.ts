@@ -260,17 +260,19 @@ export class OpenAIClient {
     // Create shared state for stream and response
     const state = {
       text: "",
-      toolCalls: new Map<number, { id: string; name: string; argumentsBuffer: string }>(),
+      pendingToolCalls: new Map<number, { id: string; name: string; argumentsBuffer: string }>(),
+      completedToolCalls: [] as ToolCall[],
       usage: { promptTokens: 0, completionTokens: 0, cacheReadInputTokens: 0 },
       done: false,
       error: null as Error | null,
     };
 
-    // Create the stream generator
+    // Create the stream generator. The caller iterates it (which populates
+    // state); the response promise just waits for state.done. A shared
+    // generator with two consumers interleaves .next() calls so each chunk
+    // goes to only one side, dropping deltas/tool calls for the other.
     const streamGenerator = this.createStreamGenerator(response, options.abortSignal, state);
-
-    // Create the response promise
-    const responsePromise = this.createResponsePromise(streamGenerator, state);
+    const responsePromise = this.createResponsePromise(state);
 
     return {
       stream: streamGenerator,
@@ -283,7 +285,8 @@ export class OpenAIClient {
     signal: AbortSignal | undefined,
     state: {
       text: string;
-      toolCalls: Map<number, { id: string; name: string; argumentsBuffer: string }>;
+      pendingToolCalls: Map<number, { id: string; name: string; argumentsBuffer: string }>;
+      completedToolCalls: ToolCall[];
       usage: { promptTokens: number; completionTokens: number; cacheReadInputTokens: number };
       done: boolean;
       error: Error | null;
@@ -323,15 +326,15 @@ export class OpenAIClient {
           // Tool calls
           if (delta.tool_calls) {
             for (const tc of delta.tool_calls) {
-              let toolCall = state.toolCalls.get(tc.index);
-              
+              let toolCall = state.pendingToolCalls.get(tc.index);
+
               if (!toolCall) {
                 toolCall = {
                   id: tc.id || "",
                   name: tc.function?.name || "",
                   argumentsBuffer: "",
                 };
-                state.toolCalls.set(tc.index, toolCall);
+                state.pendingToolCalls.set(tc.index, toolCall);
               }
 
               if (tc.id) toolCall.id = tc.id;
@@ -344,7 +347,7 @@ export class OpenAIClient {
 
           // If finish_reason is set, emit completed tool calls
           if (choice.finish_reason === "tool_calls" || choice.finish_reason === "stop") {
-            for (const [, tc] of state.toolCalls) {
+            for (const [, tc] of state.pendingToolCalls) {
               if (tc.id && tc.name) {
                 let args: Record<string, unknown> = {};
                 try {
@@ -352,17 +355,16 @@ export class OpenAIClient {
                 } catch {
                   // Keep empty args if JSON parsing fails
                 }
-                yield {
-                  type: "tool_call",
-                  toolCall: {
-                    id: tc.id,
-                    name: tc.name,
-                    arguments: args,
-                  },
+                const completed: ToolCall = {
+                  id: tc.id,
+                  name: tc.name,
+                  arguments: args,
                 };
+                state.completedToolCalls.push(completed);
+                yield { type: "tool_call", toolCall: completed };
               }
             }
-            state.toolCalls.clear();
+            state.pendingToolCalls.clear();
           }
         }
       }
@@ -375,22 +377,18 @@ export class OpenAIClient {
   }
 
   private async createResponsePromise(
-    stream: AsyncGenerator<LLMStreamChunk>,
     state: {
       text: string;
-      toolCalls: Map<number, { id: string; name: string; argumentsBuffer: string }>;
+      pendingToolCalls: Map<number, { id: string; name: string; argumentsBuffer: string }>;
+      completedToolCalls: ToolCall[];
       usage: { promptTokens: number; completionTokens: number; cacheReadInputTokens: number };
       done: boolean;
       error: Error | null;
     }
   ): Promise<LLMResponse> {
-    const toolCalls: ToolCall[] = [];
-
-    // Consume the stream to populate state
-    for await (const chunk of stream) {
-      if (chunk.type === "tool_call" && chunk.toolCall) {
-        toolCalls.push(chunk.toolCall);
-      }
+    // Wait for the caller to drain the stream (which sets state.done in finally).
+    while (!state.done) {
+      await new Promise((resolve) => setTimeout(resolve, 10));
     }
 
     if (state.error) {
@@ -399,7 +397,7 @@ export class OpenAIClient {
 
     return {
       content: state.text,
-      toolCalls,
+      toolCalls: state.completedToolCalls,
       usage: {
         promptTokens: state.usage.promptTokens,
         completionTokens: state.usage.completionTokens,

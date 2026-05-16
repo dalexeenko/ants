@@ -246,11 +246,12 @@ export class GoogleClient {
       error: null as Error | null,
     };
 
-    // Create the stream generator
+    // Create the stream generator. The caller iterates it (which populates
+    // state); the response promise just waits for state.done. A shared
+    // generator with two consumers interleaves .next() calls so each chunk
+    // goes to only one side, dropping deltas/tool calls for the other.
     const streamGenerator = this.createStreamGenerator(response, options.abortSignal, state);
-
-    // Create the response promise
-    const responsePromise = this.createResponsePromise(streamGenerator, state);
+    const responsePromise = this.createResponsePromise(state);
 
     return {
       stream: streamGenerator,
@@ -316,7 +317,6 @@ export class GoogleClient {
   }
 
   private async createResponsePromise(
-    stream: AsyncGenerator<LLMStreamChunk>,
     state: {
       text: string;
       toolCalls: ToolCall[];
@@ -325,10 +325,9 @@ export class GoogleClient {
       error: Error | null;
     }
   ): Promise<LLMResponse> {
-    // Consume the stream to populate state
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    for await (const _ of stream) {
-      // State is updated by the generator
+    // Wait for the caller to drain the stream (which sets state.done in finally).
+    while (!state.done) {
+      await new Promise((resolve) => setTimeout(resolve, 10));
     }
 
     if (state.error) {
