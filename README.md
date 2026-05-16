@@ -1,55 +1,55 @@
 # ants
 
-An open-source AI agent platform inspired by [openmgr](https://github.com/openmgr/openmgr). Each project is an isolated environment with its own AI conversation, sandboxed container, tool suite, and persistent state — running in parallel, on your own infrastructure.
+An open-source background agent platform inspired by [openmgr](https://github.com/openmgr/openmgr). Each project is an isolated environment with its own conversation, sandboxed container, a set of tools, skills, and persistent state — running in parallel on your own infrastructure.
 
-Think of it as the self-hostable version of [Ramp Inspect](https://builders.ramp.com/post/why-we-built-our-background-agent), Stripe Minions, and Shopify River.
+One can think of it as a self-hostable version of [Ramp Inspect](https://builders.ramp.com/post/why-we-built-our-background-agent), Stripe Minions or Shopify River.
 
 ## What is this?
 
-The bottleneck in AI coding isn't the LLM — it's the feedback loop. An agent that can write code *and then run tests, check logs, verify visually, and open a PR* is qualitatively different from a chat assistant. Ramp found that ~30% of their PRs now come from their internal agent after just a few months, with no forced adoption. Stripe and Shopify built the same pattern internally. Ants is the open-source version of all three — same architecture, your infra, any LLM.
+The bottleneck in coding these days isn't the model per se, it's closing the feedback loop. An agent that can write code and then run tests, check logs, verify visually, and open a PR is qualitatively different.
 
-Each **workspace** is a self-contained unit:
+Each workspace is a self-contained unit:
 
 | | What it is |
 |---|---|
-| **Conversation** | Persistent AI chat session — full history, context compaction, branching |
-| **Sandbox** | Docker container or git worktree — isolated execution environment |
+| **Conversation** | Persistent AI chat session: full history, context compaction, branching |
+| **Sandbox** | Docker container or git worktree: isolated execution environment |
 | **Tools** | bash, file read/write/edit, browser control, LSP, MCP plugins |
 | **State** | SQLite per project + semantic memory with local embeddings |
 
-A director agent sits at the top, breaking tasks into subtasks and dispatching them to a colony of parallel workers. Workers close the loop on their own: write code → run tests → check output → open PR, without waiting for a human in the middle.
+An orchestrator agent sits at the top, breaking tasks into subtasks and dispatching them to a set of parallel workers. Workers close the loop on their own: write code → run tests → check output → open PR, without waiting for a human in the middle.
 
-What makes ants different from the proprietary systems:
+What makes ants different from some other systems:
 
-- **You own the infra** — runs anywhere Docker runs, no Modal or proprietary cloud sandbox
-- **Any LLM** — Claude, GPT, Gemini, Groq, xAI, OpenRouter — not locked to one provider
-- **Every interface** — desktop app, mobile app, CLI, or HTTP API
-- **Extensible** — MCP plugins wire in Sentry, Datadog, Slack, GitHub, or anything else
+- **You own the infra:** runs anywhere Docker runs, no Modal or proprietary cloud sandboxes
+- **Any model:** Claude, GPT, Gemini, Groq, xAI, not locked to one provider
+- **Every interface:** mobile app, desktop app, CLI, HTTP API
+- **Extensible:** MCP plugins wire in Sentry, Datadog, Slack, Linear, GitHub, or anything else
 
 ## Tech Stack
 
-**Language:** TypeScript throughout — server, agent core, all tools, UI, mobile.
+**Language:** TypeScript throughout server, agent core, tools, UI, etc.
 
 **Monorepo:** pnpm workspaces + Turborepo — ~25 packages, build order handled automatically.
 
 | Layer | Technology |
 |---|---|
-| **Frontend** | React 19, Vite, custom design-token theme system (light/dark), Zustand state, xterm.js terminal, Lucide icons |
-| **Mobile** | React Native + Expo — shared component layer with the web UI via React Native Web |
+| **Frontend** | React 19, Vite, Zustand state, xterm.js terminal |
+| **Mobile** | React Native + Expo - shared component layer with the web UI via React Native Web |
 | **Desktop** | Electron + electron-vite — same React UI, native shell access |
 | **Backend** | [Hono](https://hono.dev) on Node.js — HTTP + WebSocket, node-pty for terminal sessions |
 | **Database** | SQLite via [Drizzle ORM](https://orm.drizzle.team) — one database per deployment, embedded, no separate server |
 | **Sandbox** | Docker containers (`packages/docker`) + git worktrees (`packages/agent-worktree`) — agents work in isolated branches or containers |
 | **Memory** | Local embeddings via ONNX Runtime — semantic search over conversation history, no external vector DB |
 | **Auth** | OAuth 2.0 (jose for JWT), keytar for secure credential storage, Anthropic OAuth support |
-| **Agent protocol** | [MCP](https://modelcontextprotocol.io) (Model Context Protocol) — plug in any MCP-compatible tool server |
+| **Agent protocol** | [MCP](https://modelcontextprotocol.io) — plug in any MCP-compatible tool server |
 | **Testing** | Vitest (unit + integration) + Playwright (E2E desktop + web) |
 
 ## How it works
 
 ```
 You submit a task
-  └── Director Agent plans and dispatches
+  └── Orchestrator Agent plans and dispatches
       ├── Worker 1: write the feature      ─┐
       ├── Worker 2: write the tests         ├── run in parallel, each in its own sandbox
       └── Worker 3: update the docs        ─┘
