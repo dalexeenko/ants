@@ -5,7 +5,7 @@
  * For React Native, pass expo/fetch as the fetch option.
  */
 
-import type { LLMProvider, LLMStreamOptions, LLMStreamResult, LLMStreamChunk, LLMResponse, ToolCall } from "@ants/agent-core";
+import type { LLMProvider, LLMStreamOptions, LLMStreamResult, LLMStreamChunk, LLMResponse, ToolCall, FinishReason } from "@ants/agent-core";
 import { type OAuthTokens, refreshAccessToken, shouldRefreshTokens } from "@ants/agent-auth-core";
 import { parseSSEStream } from "./sse.js";
 
@@ -49,6 +49,29 @@ interface AnthropicTool {
   description: string;
   input_schema: unknown;
   cache_control?: { type: "ephemeral" };
+}
+
+/**
+ * Map Anthropic stop_reason to normalized FinishReason. Duplicated from
+ * anthropic-client.ts to keep this OAuth provider self-contained.
+ */
+function mapAnthropicStopReason(reason: string | null | undefined): FinishReason | undefined {
+  if (!reason) return undefined;
+  switch (reason) {
+    case "end_turn":
+    case "stop_sequence":
+      return "stop";
+    case "tool_use":
+      return "tool_calls";
+    case "max_tokens":
+      return "max_tokens";
+    case "refusal":
+      return "refusal";
+    case "pause_turn":
+      return "pause_turn";
+    default:
+      return "error";
+  }
 }
 
 // ============================================================================
@@ -159,6 +182,7 @@ export class AnthropicOAuthProvider implements LLMProvider {
       toolCalls: [] as ToolCall[],
       currentToolCall: null as { id: string; name: string; jsonBuffer: string } | null,
       usage: { promptTokens: 0, completionTokens: 0, cacheCreationInputTokens: 0, cacheReadInputTokens: 0 },
+      finishReason: undefined as FinishReason | undefined,
       done: false,
       error: null as Error | null,
     };
@@ -179,6 +203,7 @@ export class AnthropicOAuthProvider implements LLMProvider {
       toolCalls: ToolCall[];
       currentToolCall: { id: string; name: string; jsonBuffer: string } | null;
       usage: { promptTokens: number; completionTokens: number; cacheCreationInputTokens: number; cacheReadInputTokens: number };
+      finishReason: FinishReason | undefined;
       done: boolean;
       error: Error | null;
     }
@@ -244,6 +269,9 @@ export class AnthropicOAuthProvider implements LLMProvider {
           if (usage) {
             state.usage.completionTokens = usage.output_tokens ?? 0;
           }
+          const delta = event.delta as Record<string, unknown> | undefined;
+          const stopReason = delta?.stop_reason as string | null | undefined;
+          state.finishReason = mapAnthropicStopReason(stopReason) ?? state.finishReason;
         } else if (type === "error") {
           const error = event.error as Record<string, string>;
           throw new Error(error?.message || "Unknown error");
@@ -262,6 +290,7 @@ export class AnthropicOAuthProvider implements LLMProvider {
       text: string;
       toolCalls: ToolCall[];
       usage: { promptTokens: number; completionTokens: number; cacheCreationInputTokens: number; cacheReadInputTokens: number };
+      finishReason: FinishReason | undefined;
       done: boolean;
       error: Error | null;
     }
@@ -279,6 +308,7 @@ export class AnthropicOAuthProvider implements LLMProvider {
     return {
       content: state.text,
       toolCalls: state.toolCalls,
+      finishReason: state.finishReason,
       usage: {
         promptTokens: state.usage.promptTokens,
         completionTokens: state.usage.completionTokens,

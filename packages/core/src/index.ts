@@ -5,6 +5,9 @@
  * skills, compaction, and slash commands.
  */
 
+// Errors
+export { IncompleteResponseError } from "./errors.js";
+
 // Main Agent class
 export { Agent, createAgent } from "./agent.js";
 export type { AgentOptions, AgentSessionContext } from "./agent.js";
@@ -49,6 +52,7 @@ export type {
   LLMStreamResult,
   LLMStreamChunk,
   LLMResponse,
+  FinishReason,
   ToolDefinition,
   ToolContext,
   ToolExecuteResult,
@@ -89,6 +93,7 @@ export {
   ToolResultSchema,
   SessionSchema,
   AgentEventSchema,
+  FinishReasonSchema,
   ImageSourceBase64Schema,
   ImageSourceUrlSchema,
   ImagePartSchema,

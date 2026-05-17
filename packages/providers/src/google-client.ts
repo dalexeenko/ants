@@ -10,6 +10,7 @@ import type {
   LLMResponse,
   ToolCall,
   ContentPart,
+  FinishReason,
 } from "@ants/agent-core";
 import { zodToJsonSchema } from "zod-to-json-schema";
 
@@ -87,6 +88,30 @@ interface GoogleStreamChunk {
     totalTokenCount?: number;
     cachedContentTokenCount?: number;
   };
+}
+
+/**
+ * Map Google finishReason to normalized FinishReason.
+ * Google values: STOP, MAX_TOKENS, SAFETY, RECITATION, LANGUAGE, OTHER, BLOCKLIST,
+ *   PROHIBITED_CONTENT, SPII, MALFORMED_FUNCTION_CALL, FINISH_REASON_UNSPECIFIED
+ * https://ai.google.dev/api/generate-content#FinishReason
+ */
+function normalizeGoogleFinishReason(reason: string | null | undefined): FinishReason | undefined {
+  if (!reason || reason === "FINISH_REASON_UNSPECIFIED") return undefined;
+  switch (reason) {
+    case "STOP":
+      return "stop";
+    case "MAX_TOKENS":
+      return "max_tokens";
+    case "SAFETY":
+    case "RECITATION":
+    case "BLOCKLIST":
+    case "PROHIBITED_CONTENT":
+    case "SPII":
+      return "content_filter";
+    default:
+      return "error";
+  }
 }
 
 // ============================================================================
@@ -242,6 +267,7 @@ export class GoogleClient {
       text: "",
       toolCalls: [] as ToolCall[],
       usage: { promptTokens: 0, completionTokens: 0, cacheReadInputTokens: 0 },
+      finishReason: undefined as FinishReason | undefined,
       done: false,
       error: null as Error | null,
     };
@@ -266,6 +292,7 @@ export class GoogleClient {
       text: string;
       toolCalls: ToolCall[];
       usage: { promptTokens: number; completionTokens: number; cacheReadInputTokens: number };
+      finishReason: FinishReason | undefined;
       done: boolean;
       error: Error | null;
     }
@@ -290,6 +317,9 @@ export class GoogleClient {
 
         // Process candidates
         for (const candidate of chunk.candidates ?? []) {
+          if (candidate.finishReason) {
+            state.finishReason = normalizeGoogleFinishReason(candidate.finishReason) ?? state.finishReason;
+          }
           for (const part of candidate.content?.parts ?? []) {
             if (part.text) {
               state.text += part.text;
@@ -321,6 +351,7 @@ export class GoogleClient {
       text: string;
       toolCalls: ToolCall[];
       usage: { promptTokens: number; completionTokens: number; cacheReadInputTokens: number };
+      finishReason: FinishReason | undefined;
       done: boolean;
       error: Error | null;
     }
@@ -334,9 +365,17 @@ export class GoogleClient {
       throw state.error;
     }
 
+    // Google reports finishReason: STOP even for tool-call turns. If we
+    // collected function calls, surface them as the canonical reason.
+    const finishReason: FinishReason | undefined =
+      state.toolCalls.length > 0 && state.finishReason === "stop"
+        ? "tool_calls"
+        : state.finishReason;
+
     return {
       content: state.text,
       toolCalls: state.toolCalls,
+      finishReason,
       usage: {
         promptTokens: state.usage.promptTokens,
         completionTokens: state.usage.completionTokens,

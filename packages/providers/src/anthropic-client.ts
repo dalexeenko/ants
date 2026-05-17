@@ -13,6 +13,7 @@ import type {
   LLMResponse,
   ToolCall,
   ContentPart,
+  FinishReason,
 } from "@ants/agent-core";
 import { withRetry, type RetryPolicy } from "@ants/agent-core";
 import { zodToJsonSchema } from "zod-to-json-schema";
@@ -143,8 +144,32 @@ interface ContentBlockStopEvent {
 
 interface MessageDeltaEvent {
   type: "message_delta";
-  delta: { stop_reason: string };
+  delta: { stop_reason: string | null };
   usage: { output_tokens: number };
+}
+
+/**
+ * Map Anthropic stop_reason to normalized FinishReason.
+ * Anthropic values: end_turn, tool_use, max_tokens, stop_sequence, refusal, pause_turn
+ * https://docs.anthropic.com/en/api/messages
+ */
+function normalizeAnthropicStopReason(reason: string | null | undefined): FinishReason | undefined {
+  if (!reason) return undefined;
+  switch (reason) {
+    case "end_turn":
+    case "stop_sequence":
+      return "stop";
+    case "tool_use":
+      return "tool_calls";
+    case "max_tokens":
+      return "max_tokens";
+    case "refusal":
+      return "refusal";
+    case "pause_turn":
+      return "pause_turn";
+    default:
+      return "error";
+  }
 }
 
 interface MessageStopEvent {
@@ -366,6 +391,7 @@ export class AnthropicClient {
       toolCalls: [] as ToolCall[],
       currentToolCall: null as { id: string; name: string; jsonBuffer: string } | null,
       usage: { promptTokens: 0, completionTokens: 0, cacheCreationInputTokens: 0, cacheReadInputTokens: 0 },
+      finishReason: undefined as FinishReason | undefined,
       done: false,
       error: null as Error | null,
     };
@@ -407,6 +433,7 @@ export class AnthropicClient {
       toolCalls: ToolCall[];
       currentToolCall: { id: string; name: string; jsonBuffer: string } | null;
       usage: { promptTokens: number; completionTokens: number; cacheCreationInputTokens: number; cacheReadInputTokens: number };
+      finishReason: FinishReason | undefined;
       done: boolean;
       error: Error | null;
     }
@@ -470,6 +497,7 @@ export class AnthropicClient {
 
           case "message_delta":
             state.usage.completionTokens = event.usage.output_tokens;
+            state.finishReason = normalizeAnthropicStopReason(event.delta.stop_reason) ?? state.finishReason;
             break;
 
           case "message_stop":
@@ -493,6 +521,7 @@ export class AnthropicClient {
       text: string;
       toolCalls: ToolCall[];
       usage: { promptTokens: number; completionTokens: number; cacheCreationInputTokens: number; cacheReadInputTokens: number };
+      finishReason: FinishReason | undefined;
       done: boolean;
       error: Error | null;
     }
@@ -509,6 +538,7 @@ export class AnthropicClient {
     return {
       content: state.text,
       toolCalls: state.toolCalls,
+      finishReason: state.finishReason,
       usage: {
         promptTokens: state.usage.promptTokens,
         completionTokens: state.usage.completionTokens,

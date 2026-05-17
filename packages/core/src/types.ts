@@ -24,12 +24,24 @@ export const ToolResultSchema = z.object({
 });
 export type ToolResult = z.infer<typeof ToolResultSchema>;
 
+export const FinishReasonSchema = z.enum([
+  "stop",
+  "tool_calls",
+  "max_tokens",
+  "content_filter",
+  "refusal",
+  "pause_turn",
+  "error",
+]);
+
 export const MessageSchema = z.object({
   id: z.string(),
   role: MessageRole,
   content: z.string(),
   toolCalls: z.array(ToolCallSchema).optional(),
   toolResults: z.array(ToolResultSchema).optional(),
+  /** Normalized reason the model stopped producing output (assistant messages only). */
+  finishReason: FinishReasonSchema.optional(),
   createdAt: z.number(),
 });
 export type Message = z.infer<typeof MessageSchema>;
@@ -105,6 +117,8 @@ export const AgentEventSchema = z.discriminatedUnion("type", [
     type: z.literal("message.complete"),
     messageId: z.string(),
     content: z.string(),
+    /** Normalized reason the model stopped producing output. */
+    finishReason: FinishReasonSchema.optional(),
     contextUsage: z.object({
       currentTokens: z.number(),
       maxTokens: z.number(),
@@ -363,9 +377,23 @@ export interface LLMStreamChunk {
   toolCall?: ToolCall;
 }
 
+/**
+ * Normalized finish reason across providers.
+ * - `stop`: model produced a natural end (Anthropic `end_turn`, OpenAI `stop`, Google `STOP`)
+ * - `tool_calls`: model paused to invoke tools (Anthropic `tool_use`, OpenAI `tool_calls`)
+ * - `max_tokens`: output token cap reached (Anthropic `max_tokens`, OpenAI `length`, Google `MAX_TOKENS`)
+ * - `content_filter`: provider safety filter triggered
+ * - `refusal`: model refused (Anthropic `refusal`)
+ * - `pause_turn`: long-running turn paused, can be resumed (Anthropic `pause_turn`)
+ * - `error`: provider returned an error finish reason
+ */
+export type FinishReason = z.infer<typeof FinishReasonSchema>;
+
 export interface LLMResponse {
   content: string;
   toolCalls: ToolCall[];
+  /** Normalized reason the model stopped producing output. */
+  finishReason?: FinishReason;
   usage?: {
     promptTokens: number;
     completionTokens: number;

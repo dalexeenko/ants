@@ -9,6 +9,7 @@ import { DEFAULT_SYSTEM_PROMPT } from "../types.js";
 import type {
   AgentConfig,
   AgentEvent,
+  FinishReason,
   Message,
   LLMProvider,
   LLMMessage,
@@ -16,6 +17,7 @@ import type {
   ToolCall,
   ToolResult,
 } from "../types.js";
+import { IncompleteResponseError } from "../errors.js";
 import type { UsageTracker } from "../usage/tracker.js";
 import { getModelLimit } from "../compaction/types.js";
 import { estimatePayloadTokens } from "../compaction/tokens.js";
@@ -153,7 +155,19 @@ export class PromptExecutor {
       await this.deps.pushMessage(assistantMessage);
 
       if (!assistantMessage.toolCalls?.length) {
-        return assistantMessage;
+        // No tools to execute. The turn is only "complete" if the model
+        // actually finished cleanly (end_turn / stop). For max_tokens,
+        // content_filter, refusal, pause_turn, error, etc., returning would
+        // silently treat a truncated/blocked response as success.
+        //
+        // Older providers (or test mocks) may not report a finishReason at
+        // all; preserve the legacy "no tools = done" behaviour in that case
+        // rather than break callers.
+        const reason = assistantMessage.finishReason;
+        if (reason === undefined || reason === "stop" || reason === "tool_calls") {
+          return assistantMessage;
+        }
+        throw new IncompleteResponseError(reason, assistantMessage.content);
       }
 
       const callSignature = assistantMessage.toolCalls
@@ -416,6 +430,7 @@ export class PromptExecutor {
 
     let content = "";
     const toolCalls: ToolCall[] = [];
+    let finishReason: FinishReason | undefined;
 
     for await (const chunk of stream) {
       if (chunk.type === "text" && chunk.text) {
@@ -446,6 +461,7 @@ export class PromptExecutor {
         });
       }
     }
+    finishReason = finalResponse.finishReason;
 
     // Record token usage (including cache token stats when available)
     if (finalResponse.usage) {
@@ -467,6 +483,7 @@ export class PromptExecutor {
       type: "message.complete",
       messageId,
       content,
+      finishReason,
       contextUsage: this.getContextUsage(),
     });
 
@@ -475,6 +492,7 @@ export class PromptExecutor {
       role: "assistant",
       content,
       toolCalls: toolCalls.length > 0 ? toolCalls : undefined,
+      finishReason,
       createdAt: Date.now(),
     };
   }

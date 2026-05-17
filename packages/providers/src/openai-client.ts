@@ -12,6 +12,7 @@ import type {
   LLMResponse,
   ToolCall,
   ContentPart,
+  FinishReason,
 } from "@ants/agent-core";
 import { zodToJsonSchema } from "zod-to-json-schema";
 
@@ -114,6 +115,28 @@ interface ChatCompletionChunk {
       cached_tokens?: number;
     };
   };
+}
+
+/**
+ * Map OpenAI finish_reason to normalized FinishReason.
+ * OpenAI values: stop, length, tool_calls, content_filter, function_call
+ * https://platform.openai.com/docs/api-reference/chat/streaming
+ */
+function normalizeOpenAIFinishReason(reason: string | null | undefined): FinishReason | undefined {
+  if (!reason) return undefined;
+  switch (reason) {
+    case "stop":
+      return "stop";
+    case "tool_calls":
+    case "function_call":
+      return "tool_calls";
+    case "length":
+      return "max_tokens";
+    case "content_filter":
+      return "content_filter";
+    default:
+      return "error";
+  }
 }
 
 // ============================================================================
@@ -263,6 +286,7 @@ export class OpenAIClient {
       pendingToolCalls: new Map<number, { id: string; name: string; argumentsBuffer: string }>(),
       completedToolCalls: [] as ToolCall[],
       usage: { promptTokens: 0, completionTokens: 0, cacheReadInputTokens: 0 },
+      finishReason: undefined as FinishReason | undefined,
       done: false,
       error: null as Error | null,
     };
@@ -288,6 +312,7 @@ export class OpenAIClient {
       pendingToolCalls: Map<number, { id: string; name: string; argumentsBuffer: string }>;
       completedToolCalls: ToolCall[];
       usage: { promptTokens: number; completionTokens: number; cacheReadInputTokens: number };
+      finishReason: FinishReason | undefined;
       done: boolean;
       error: Error | null;
     }
@@ -345,26 +370,32 @@ export class OpenAIClient {
             }
           }
 
-          // If finish_reason is set, emit completed tool calls
-          if (choice.finish_reason === "tool_calls" || choice.finish_reason === "stop") {
-            for (const [, tc] of state.pendingToolCalls) {
-              if (tc.id && tc.name) {
-                let args: Record<string, unknown> = {};
-                try {
-                  args = JSON.parse(tc.argumentsBuffer || "{}");
-                } catch {
-                  // Keep empty args if JSON parsing fails
+          // Record finish reason whenever the server emits one. Only flush
+          // pending tool calls on stop/tool_calls — for length/content_filter
+          // the tool call is mid-stream and the arg JSON is likely truncated,
+          // so emitting it would invent a malformed call.
+          if (choice.finish_reason) {
+            state.finishReason = normalizeOpenAIFinishReason(choice.finish_reason) ?? state.finishReason;
+            if (choice.finish_reason === "tool_calls" || choice.finish_reason === "stop") {
+              for (const [, tc] of state.pendingToolCalls) {
+                if (tc.id && tc.name) {
+                  let args: Record<string, unknown> = {};
+                  try {
+                    args = JSON.parse(tc.argumentsBuffer || "{}");
+                  } catch {
+                    // Keep empty args if JSON parsing fails
+                  }
+                  const completed: ToolCall = {
+                    id: tc.id,
+                    name: tc.name,
+                    arguments: args,
+                  };
+                  state.completedToolCalls.push(completed);
+                  yield { type: "tool_call", toolCall: completed };
                 }
-                const completed: ToolCall = {
-                  id: tc.id,
-                  name: tc.name,
-                  arguments: args,
-                };
-                state.completedToolCalls.push(completed);
-                yield { type: "tool_call", toolCall: completed };
               }
+              state.pendingToolCalls.clear();
             }
-            state.pendingToolCalls.clear();
           }
         }
       }
@@ -382,6 +413,7 @@ export class OpenAIClient {
       pendingToolCalls: Map<number, { id: string; name: string; argumentsBuffer: string }>;
       completedToolCalls: ToolCall[];
       usage: { promptTokens: number; completionTokens: number; cacheReadInputTokens: number };
+      finishReason: FinishReason | undefined;
       done: boolean;
       error: Error | null;
     }
@@ -398,6 +430,7 @@ export class OpenAIClient {
     return {
       content: state.text,
       toolCalls: state.completedToolCalls,
+      finishReason: state.finishReason,
       usage: {
         promptTokens: state.usage.promptTokens,
         completionTokens: state.usage.completionTokens,
