@@ -14,7 +14,41 @@ import type {
   ToolCall,
   ContentPart,
 } from "@ants/agent-core";
+import { withRetry, type RetryPolicy } from "@ants/agent-core";
 import { zodToJsonSchema } from "zod-to-json-schema";
+
+// Pre-stream retry: only retry the initial fetch (before any response bytes
+// have arrived). Once Anthropic has streamed back even one chunk, we've been
+// billed for the call and a retry would double-charge and produce divergent
+// output, so the agent loop handles mid-stream failures separately.
+const PRE_STREAM_RETRY_POLICY: RetryPolicy = {
+  maxRetries: 2,
+  initialDelayMs: 1000,
+  maxDelayMs: 10000,
+  backoffMultiplier: 3,
+  jitterFactor: 0.2,
+};
+
+/**
+ * Node's `fetch` throws `TypeError: fetch failed` and stuffs the real cause
+ * (ENOTFOUND, ECONNREFUSED, ETIMEDOUT, certificate errors, etc.) onto
+ * `.cause`. Walk the chain so users — and `isTransientError` in the retry
+ * helper — see something actionable instead of "fetch failed".
+ */
+function unwrapFetchError(err: unknown): Error {
+  if (!(err instanceof Error)) return new Error(String(err));
+  let current: unknown = err;
+  let bottom: Error = err;
+  // Walk up to 5 levels of cause chain
+  for (let i = 0; i < 5 && current instanceof Error; i++) {
+    bottom = current;
+    current = (current as { cause?: unknown }).cause;
+  }
+  if (bottom === err) return err;
+  const merged = new Error(`${err.message}: ${bottom.message}`);
+  (merged as { cause?: unknown }).cause = err;
+  return merged;
+}
 
 // ============================================================================
 // Types
@@ -294,12 +328,37 @@ export class AnthropicClient {
       throw new Error("No valid authentication provided");
     }
 
-    const response = await this.fetchFn(`${this.baseUrl}/v1/messages`, {
-      method: "POST",
-      headers,
-      body: JSON.stringify(requestBody),
-      signal: options.abortSignal,
-    });
+    // Pre-stream retry: transient network failures (DNS hiccup, ECONNRESET)
+    // and Anthropic 5xx/429 retry transparently. Auth and validation errors
+    // (4xx other than 429) fail fast — retrying won't help.
+    const response = await withRetry(
+      async () => {
+        let res: Response;
+        try {
+          res = await this.fetchFn(`${this.baseUrl}/v1/messages`, {
+            method: "POST",
+            headers,
+            body: JSON.stringify(requestBody),
+            signal: options.abortSignal,
+          });
+        } catch (err) {
+          throw unwrapFetchError(err);
+        }
+        if (!res.ok) {
+          // Read the body so the error message is actionable. The stream
+          // generator never gets a chance to surface API errors otherwise.
+          // `isTransientError` keys off the status substring: 429/5xx retry,
+          // 4xx auth/validation falls through to the caller immediately.
+          const body = await res.text().catch(() => "");
+          throw new Error(
+            `Anthropic API ${res.status} ${res.statusText}${body ? `: ${body.slice(0, 500)}` : ""}`,
+          );
+        }
+        return res;
+      },
+      PRE_STREAM_RETRY_POLICY,
+      options.abortSignal,
+    );
 
     // Create shared state for stream and response
     const state = {
