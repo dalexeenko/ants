@@ -94,15 +94,24 @@ export const DEFAULT_CIRCUIT_BREAKER_CONFIG: CircuitBreakerConfig = {
 export function isTransientError(error: Error): boolean {
   const message = error.message.toLowerCase();
 
-  // Network errors
+  // Network errors. Includes the most common Node.js libuv/dns error codes
+  // we see in the wild: ENOTFOUND (DNS failed to resolve), EAI_AGAIN (DNS
+  // transient failure), ECONNRESET, ECONNREFUSED, ETIMEDOUT, EPIPE,
+  // EHOSTUNREACH, ENETUNREACH, and the undici wrappers around them.
   if (
     message.includes("econnreset") ||
     message.includes("econnrefused") ||
     message.includes("etimedout") ||
     message.includes("epipe") ||
+    message.includes("enotfound") ||
+    message.includes("eai_again") ||
+    message.includes("ehostunreach") ||
+    message.includes("enetunreach") ||
+    message.includes("getaddrinfo") ||
     message.includes("network") ||
     message.includes("socket hang up") ||
-    message.includes("dns")
+    message.includes("dns") ||
+    message.includes("fetch failed")
   ) {
     return true;
   }
