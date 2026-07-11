@@ -289,6 +289,20 @@ export function createSessionStreamingRoutes(
             const { done, value } = await reader.read();
             
             if (done) {
+              const sessionInfo = eventBuffer.getSessionInfo(sessionId);
+              if (sessionInfo.status === 'error') {
+                if (pushService) {
+                  pushService.notifyAgentError(
+                    projectId,
+                    sessionInfo.error ?? 'Agent stream error',
+                    sessionId
+                  ).catch((e) => {
+                    log.warn('Failed to send agent error push notification:', e);
+                  });
+                }
+                return;
+              }
+
               eventBuffer.completeSession(sessionId, assistantMessage);
               // Send push notification for session completion
               if (pushService) {

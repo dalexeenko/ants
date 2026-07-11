@@ -238,6 +238,18 @@ describe('SessionEventBuffer', () => {
       // Session still exists because it has a subscriber
       expect(buffer.getSessionInfo('s1').status).toBe('completed');
     });
+
+    it('does not overwrite an error event when the stream later completes', () => {
+      buffer.startSession('s1');
+      buffer.pushEvent('s1', 'error', { error: 'Provider failed' });
+
+      buffer.completeSession('s1', 'partial response');
+
+      const info = buffer.getSessionInfo('s1');
+      expect(info.status).toBe('error');
+      expect(info.error).toBe('Provider failed');
+      expect(info.finalMessage).toBeUndefined();
+    });
   });
 
   describe('errorSession', () => {
