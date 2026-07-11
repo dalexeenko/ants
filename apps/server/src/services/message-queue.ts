@@ -3,7 +3,7 @@
  */
 
 import { v4 as uuidv4 } from 'uuid';
-import { eq, and, or, lt, asc } from 'drizzle-orm';
+import { eq, and, or, lt, asc, isNull } from 'drizzle-orm';
 import type { DrizzleDB } from '../db/index.js';
 import { channelMessageQueue } from '../db/schema.js';
 import type {
@@ -156,17 +156,25 @@ export class MessageQueueService {
 
     const row = rows[0];
 
-    // Mark as processing
+    // Mark as processing and record when this attempt started. Stuck recovery
+    // must be based on processing time, not how long the message sat pending.
+    const processingStartedAt = new Date();
     this.db
       .update(channelMessageQueue)
       .set({
         status: 'processing',
         attempts: row.attempts + 1,
+        processedAt: processingStartedAt,
       })
       .where(eq(channelMessageQueue.id, row.id))
       .run();
 
-    return this.rowToMessage({ ...row, status: 'processing', attempts: row.attempts + 1 });
+    return this.rowToMessage({
+      ...row,
+      status: 'processing',
+      attempts: row.attempts + 1,
+      processedAt: processingStartedAt,
+    });
   }
 
   /**
@@ -195,16 +203,23 @@ export class MessageQueueService {
     const messages: QueuedMessage[] = [];
 
     for (const row of rows) {
+      const processingStartedAt = new Date();
       this.db
         .update(channelMessageQueue)
         .set({
           status: 'processing',
           attempts: row.attempts + 1,
+          processedAt: processingStartedAt,
         })
         .where(eq(channelMessageQueue.id, row.id))
         .run();
 
-      messages.push(this.rowToMessage({ ...row, status: 'processing', attempts: row.attempts + 1 }));
+      messages.push(this.rowToMessage({
+        ...row,
+        status: 'processing',
+        attempts: row.attempts + 1,
+        processedAt: processingStartedAt,
+      }));
     }
 
     return messages;
@@ -389,14 +404,18 @@ export class MessageQueueService {
   private recoverStuckMessages(): void {
     const cutoff = new Date(Date.now() - this.processingTimeoutMs);
 
-    // Find processing messages that started before cutoff
+    // Find messages that have been processing since before cutoff. Older rows
+    // may not have processedAt populated, so fall back to createdAt for them.
     const stuckRows = this.db
       .select()
       .from(channelMessageQueue)
       .where(
         and(
           eq(channelMessageQueue.status, 'processing'),
-          lt(channelMessageQueue.createdAt, cutoff)
+          or(
+            lt(channelMessageQueue.processedAt, cutoff),
+            and(isNull(channelMessageQueue.processedAt), lt(channelMessageQueue.createdAt, cutoff))
+          )
         )
       )
       .all();
