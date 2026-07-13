@@ -106,6 +106,10 @@ export class SessionEventBuffer {
         // Don't let one subscriber's error affect others
       }
     }
+
+    if (type === 'error') {
+      this.errorSession(sessionId, getErrorMessage(data));
+    }
   }
 
   /**
@@ -115,9 +119,9 @@ export class SessionEventBuffer {
     const session = this.sessions.get(sessionId);
     if (!session) return;
 
-    // If already aborted, don't overwrite — the abort was user-initiated
-    // and the stream completing after abort doesn't change that.
-    if (session.status === 'aborted') return;
+    // If already aborted or errored, don't overwrite the terminal state when
+    // the upstream stream eventually closes.
+    if (session.status === 'aborted' || session.status === 'error') return;
 
     session.status = 'completed';
     session.completedAt = Date.now();
@@ -270,4 +274,13 @@ export class SessionEventBuffer {
     }
     this.sessions.clear();
   }
+}
+
+function getErrorMessage(data: unknown): string {
+  if (data && typeof data === 'object') {
+    const record = data as Record<string, unknown>;
+    if (typeof record.error === 'string') return record.error;
+    if (typeof record.message === 'string') return record.message;
+  }
+  return 'Agent stream error';
 }
