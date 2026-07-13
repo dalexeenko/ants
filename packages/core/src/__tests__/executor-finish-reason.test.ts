@@ -145,6 +145,19 @@ describe("PromptExecutor finishReason handling", () => {
     }
   });
 
+  it("does not persist partial assistant messages before throwing", async () => {
+    const provider = createMockProvider([
+      { content: "partial plan...", finishReason: "max_tokens" },
+    ]);
+    const pushMessage = vi.fn();
+    const executor = new PromptExecutor(
+      createDeps({ getProvider: () => provider, pushMessage })
+    );
+
+    await expect(executor.runAgentLoop()).rejects.toBeInstanceOf(IncompleteResponseError);
+    expect(pushMessage).not.toHaveBeenCalled();
+  });
+
   it("throws IncompleteResponseError when finishReason is 'content_filter'", async () => {
     const provider = createMockProvider([
       { content: "", finishReason: "content_filter" },
@@ -180,6 +193,25 @@ describe("PromptExecutor finishReason handling", () => {
     expect(executeTools).toHaveBeenCalledTimes(1);
     expect(result.content).toBe("done after tool");
     expect(result.finishReason).toBe("stop");
+  });
+
+  it("does not persist or execute tool calls from incomplete responses", async () => {
+    const provider = createMockProvider([
+      {
+        content: "",
+        finishReason: "max_tokens",
+        toolCalls: [{ id: "tc1", name: "write_file", arguments: { path: "a.txt" } }],
+      },
+    ]);
+    const pushMessage = vi.fn();
+    const executeTools = vi.fn().mockResolvedValue([]);
+    const executor = new PromptExecutor(
+      createDeps({ getProvider: () => provider, pushMessage, executeTools })
+    );
+
+    await expect(executor.runAgentLoop()).rejects.toBeInstanceOf(IncompleteResponseError);
+    expect(pushMessage).not.toHaveBeenCalled();
+    expect(executeTools).not.toHaveBeenCalled();
   });
 
   it("emits message.complete event carrying finishReason", async () => {
