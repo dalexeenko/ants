@@ -4,6 +4,7 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { CompactionEngine, COMPACTION_SUMMARY_PREFIX } from "../compaction/engine.js";
 import { DEFAULT_COMPACTION_CONFIG, getModelLimit } from "../compaction/types.js";
+import { IncompleteResponseError } from "../errors.js";
 import type { Message, LLMProvider, LLMStreamResult, LLMStreamOptions } from "../types.js";
 
 function msg(id: string, role: "user" | "assistant", content: string, extras?: Partial<Message>): Message {
@@ -521,6 +522,40 @@ describe("CompactionEngine", () => {
       const messages = generateMessages(6);
       const result = await engine.compact(messages);
       expect(result.summary).toBe("Reconciled final content");
+    });
+
+    it("should reject incomplete summary responses", async () => {
+      const truncatedProvider: LLMProvider = {
+        async stream(): Promise<LLMStreamResult> {
+          return {
+            stream: {
+              [Symbol.asyncIterator]() {
+                let done = false;
+                return {
+                  async next() {
+                    if (!done) {
+                      done = true;
+                      return { value: { type: "text" as const, text: "Partial summary" }, done: false };
+                    }
+                    return { value: undefined, done: true };
+                  },
+                };
+              },
+            },
+            response: Promise.resolve({
+              content: "Partial summary",
+              toolCalls: [],
+              finishReason: "max_tokens",
+              usage: { promptTokens: 100, completionTokens: 50, totalTokens: 150 },
+            }),
+          };
+        },
+      };
+
+      const engine = new CompactionEngine(truncatedProvider, "test-model");
+      const messages = generateMessages(6);
+
+      await expect(engine.compact(messages)).rejects.toBeInstanceOf(IncompleteResponseError);
     });
 
     it("should skip non-text chunks in onDelta", async () => {

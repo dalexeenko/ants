@@ -775,6 +775,25 @@ describe("PromptExecutor context overflow protection", () => {
       expect(runCompaction).not.toHaveBeenCalled();
     });
 
+    it("should not compact on generic resource exhausted quota errors", async () => {
+      const provider: LLMProvider = {
+        async stream(): Promise<LLMStreamResult> {
+          throw new Error("RESOURCE_EXHAUSTED: quota exceeded for generate requests per minute");
+        },
+      };
+
+      const runCompaction = vi.fn();
+      const deps = createDeps({
+        getProvider: () => provider,
+        runCompaction,
+      });
+
+      const executor = new PromptExecutor(deps);
+      await expect(executor.runAgentLoop()).rejects.toThrow("RESOURCE_EXHAUSTED");
+
+      expect(runCompaction).not.toHaveBeenCalled();
+    });
+
     it("should handle compaction failure during reactive recovery", async () => {
       let callCount = 0;
       const provider: LLMProvider = {
