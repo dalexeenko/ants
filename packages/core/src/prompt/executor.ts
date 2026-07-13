@@ -84,7 +84,6 @@ function isContextLengthError(error: unknown): boolean {
     lower.includes("maximum context length") ||
     // Google
     lower.includes("input token limit") ||
-    lower.includes("resource_exhausted") ||
     // Generic patterns
     lower.includes("too many tokens") ||
     lower.includes("token limit exceeded") ||

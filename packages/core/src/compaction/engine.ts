@@ -3,6 +3,7 @@ import type { Message, LLMProvider } from "../types.js";
 import type { CompactionConfig, CompactionResult, CompactionStats } from "./types.js";
 import { DEFAULT_COMPACTION_CONFIG, getModelLimit } from "./types.js";
 import { estimateTokens, estimateConversationTokens } from "./tokens.js";
+import { IncompleteResponseError } from "../errors.js";
 
 export const COMPACTION_SUMMARY_PREFIX = "[Conversation Summary]";
 
@@ -134,6 +135,14 @@ export class CompactionEngine {
 
     // Await the final response to ensure usage stats are available
     const finalResponse = await response;
+    const reason = finalResponse.finishReason;
+    if (reason !== undefined && reason !== "stop") {
+      throw new IncompleteResponseError(
+        reason,
+        summary,
+        "Compaction summary was incomplete; refusing to replace conversation history with a partial summary."
+      );
+    }
     // Prefer the final content if it differs (e.g. provider reconciled)
     if (finalResponse.content && finalResponse.content !== summary) {
       summary = finalResponse.content;
