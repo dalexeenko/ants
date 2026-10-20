@@ -22,7 +22,7 @@
     "clean": "rm -rf dist coverage"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.25.2",
+    "@modelcontextprotocol/sdk": "^1.32.0",
     "@ants/agent-core": "workspace:*"
   },
   "devDependencies": {
