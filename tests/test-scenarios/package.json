@@ -9,10 +9,10 @@
     "generate:check": "npx tsx src/generate.ts --check"
   },
   "devDependencies": {
-    "@types/node": "^20.0.0",
-    "js-yaml": "^4.1.0",
     "@types/js-yaml": "^4.0.9",
-    "tsx": "^4.19.0",
-    "typescript": "^5.3.3"
+    "@types/node": "^20.19.43",
+    "js-yaml": "^4.3.2",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3"
   }
 }

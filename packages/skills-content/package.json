@@ -18,12 +18,16 @@
     "test:watch": "vitest",
     "clean": "rm -rf dist"
   },
-  "dependencies": {},
   "devDependencies": {
-    "typescript": "^5.6.0",
-    "vitest": "^4.0.18"
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.12"
   },
-  "keywords": ["ants", "agent", "skills", "content"],
+  "keywords": [
+    "ants",
+    "agent",
+    "skills",
+    "content"
+  ],
   "license": "MIT",
   "repository": {
     "type": "git",

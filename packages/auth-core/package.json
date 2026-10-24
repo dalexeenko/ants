@@ -18,12 +18,17 @@
     "test:watch": "vitest",
     "clean": "rm -rf dist"
   },
-  "dependencies": {},
   "devDependencies": {
-    "typescript": "^5.6.0",
-    "vitest": "^4.0.18"
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.12"
   },
-  "keywords": ["ants", "agent", "auth", "oauth", "react-native"],
+  "keywords": [
+    "ants",
+    "agent",
+    "auth",
+    "oauth",
+    "react-native"
+  ],
   "license": "MIT",
   "repository": {
     "type": "git",

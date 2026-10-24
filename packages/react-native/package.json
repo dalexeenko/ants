@@ -19,15 +19,15 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@ants/agent-core": "workspace:*",
-    "@ants/agent-providers": "workspace:*",
-    "@ants/agent-database-core": "workspace:*",
-    "@ants/agent-database-react-native": "workspace:*",
     "@ants/agent-auth-core": "workspace:*",
     "@ants/agent-auth-react-native": "workspace:*",
-    "@ants/agent-tools": "workspace:*",
+    "@ants/agent-core": "workspace:*",
+    "@ants/agent-database-core": "workspace:*",
+    "@ants/agent-database-react-native": "workspace:*",
+    "@ants/agent-providers": "workspace:*",
     "@ants/agent-storage": "workspace:*",
-    "zod": "^3.23.0"
+    "@ants/agent-tools": "workspace:*",
+    "zod": "^3.25.76"
   },
   "peerDependencies": {
     "drizzle-orm": "^0.45.1",
@@ -58,11 +58,18 @@
     }
   },
   "devDependencies": {
-    "drizzle-orm": "^0.45.1",
-    "typescript": "^5.6.0",
-    "vitest": "^4.0.18"
+    "drizzle-orm": "^0.45.4",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.12"
   },
-  "keywords": ["ants", "agent", "react-native", "expo", "ai", "anthropic"],
+  "keywords": [
+    "ants",
+    "agent",
+    "react-native",
+    "expo",
+    "ai",
+    "anthropic"
+  ],
   "license": "MIT",
   "repository": {
     "type": "git",

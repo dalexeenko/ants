@@ -42,14 +42,21 @@
     }
   },
   "devDependencies": {
-    "expo-auth-session": "^6.0.3",
-    "expo-crypto": "^14.1.0",
-    "expo-secure-store": "^14.0.1",
-    "expo-web-browser": "^14.0.2",
-    "typescript": "^5.6.0",
-    "vitest": "^4.0.18"
+    "expo-auth-session": "^6.2.1",
+    "expo-crypto": "^14.1.5",
+    "expo-secure-store": "^14.2.4",
+    "expo-web-browser": "^14.2.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.12"
   },
-  "keywords": ["ants", "agent", "auth", "oauth", "react-native", "expo"],
+  "keywords": [
+    "ants",
+    "agent",
+    "auth",
+    "oauth",
+    "react-native",
+    "expo"
+  ],
   "license": "MIT",
   "repository": {
     "type": "git",

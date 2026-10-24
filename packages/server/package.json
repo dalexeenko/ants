@@ -23,17 +23,17 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@ants/agent-core": "workspace:*",
     "@ants/agent-browser-core": "workspace:*",
+    "@ants/agent-core": "workspace:*",
     "@ants/agent-storage": "workspace:*",
-    "hono": "^4.7.11",
-    "ws": "^8.18.0"
+    "hono": "^4.13.13",
+    "ws": "^8.22.0"
   },
   "devDependencies": {
-    "@hono/node-server": "^1.14.2",
-    "@types/ws": "^8.5.10",
-    "typescript": "^5.8.3",
-    "vitest": "^4.0.0"
+    "@hono/node-server": "^1.19.17",
+    "@types/ws": "^8.18.2",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.12"
   },
   "keywords": [
     "ants",

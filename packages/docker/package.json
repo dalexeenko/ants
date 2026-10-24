@@ -22,11 +22,10 @@
     "test:coverage": "vitest run --coverage",
     "clean": "rm -rf dist"
   },
-  "dependencies": {},
   "devDependencies": {
-    "@types/node": "^20.0.0",
-    "typescript": "^5.8.3",
-    "vitest": "^4.0.0"
+    "@types/node": "^20.19.43",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.12"
   },
   "keywords": [
     "ants",

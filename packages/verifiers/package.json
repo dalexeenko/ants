@@ -21,12 +21,12 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "execa": "^8.0.0"
+    "execa": "^8.0.1"
   },
   "devDependencies": {
-    "@types/node": "^22.0.0",
-    "typescript": "^5.6.0",
-    "vitest": "^4.0.0"
+    "@types/node": "^22.20.5",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.12"
   },
   "engines": {
     "node": ">=20.0.0"
