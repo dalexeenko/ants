@@ -24,12 +24,12 @@
   },
   "dependencies": {
     "@ants/agent-core": "workspace:*",
-    "eventemitter3": "^5.0.1"
+    "eventemitter3": "^5.0.4"
   },
   "devDependencies": {
-    "@types/node": "^22.19.7",
-    "typescript": "^5.8.3",
-    "vitest": "^4.0.0"
+    "@types/node": "^22.20.5",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.12"
   },
   "keywords": [
     "ants",
