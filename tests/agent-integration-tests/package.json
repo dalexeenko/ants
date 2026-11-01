@@ -18,7 +18,7 @@
     "@ants/agent-storage": "workspace:*",
     "@ants/agent-memory": "workspace:*",
     "@ants/agent-cli": "workspace:*",
-    "zod": "^3.23.0"
+    "zod": "^4.6.6"
   },
   "devDependencies": {
     "@types/node": "^22.19.7",
