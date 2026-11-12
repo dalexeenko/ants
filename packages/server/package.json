@@ -30,7 +30,7 @@
     "ws": "^8.18.0"
   },
   "devDependencies": {
-    "@hono/node-server": "^1.14.2",
+    "@hono/node-server": "^2.1.6",
     "@types/ws": "^8.5.10",
     "typescript": "^5.8.3",
     "vitest": "^4.0.0"
